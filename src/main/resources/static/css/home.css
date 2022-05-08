@@ -1,0 +1,180 @@
+@charset "UTF-8";
+/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ메인 CSSㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+.mainpad{
+    padding-left:380px;
+    padding-right:380px;
+}
+.mainIcon{
+    font-size:40px;
+    width:120px;
+}
+.mainMidnav{
+    justify-content : center;
+}
+.midBtn{
+    padding-right:40px;
+    padding-left:40px;
+    font-size: 20px;
+}
+.mainText{
+    padding-top: 80px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 77px;
+    text-align: center;
+    color: #000000;
+}
+.mainSubText{
+    top: 130px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 44px;
+    text-align: center;
+
+    color: #000000;
+}
+.mainImg{
+    border-radius: 30px;
+}
+.txt_box{
+    height: 40vw;
+    text-align: center; /*센터 맞춤 속성*/
+    line-height: 40vw; /*센터 맞춤 속성*/
+}
+
+.txt{
+    display: inline-block; /*센터 맞춤 속성*/
+    vertical-align: middle; /*센터 맞춤 속성*/
+    line-height: normal; /*센터 맞춤 속성*/
+    font-size: 24px;
+}
+.main_box{
+    height: 32vw;
+    text-align: center; /*센터 맞춤 속성*/
+
+}
+
+.main{
+    height: 430px;
+    width: 720px;
+    outline : solid;
+    border-radius: 30px;
+    display: inline-block; /*센터 맞춤 속성*/
+    vertical-align: middle; /*센터 맞춤 속성*/
+    line-height: normal; /*센터 맞춤 속성*/
+}
+.mainMenuImg{
+    border-radius: 0px 30px 30px 0px;
+    float: right;
+}
+.mainMenuImg2{
+    border-radius: 30px 0px 0px 30px;
+    float: left;
+}
+.subDiv{
+    margin-top: 3vw;
+    display: inline-block; /*센터 맞춤 속성*/
+    align-items: center;
+    justify-content : center;
+}
+.subTextName{
+    font-size: 40px;
+   font-weight: 530;
+}
+.subTextSub{
+    font-size: 20px;
+
+}
+.subTextSub2{
+    font-size: 15px;
+
+}
+
+/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ로그인 CSSㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+.container2 {
+    width: 350px;
+    height: 380px;
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    background-color: #fff;
+    border: 1px solid #DBDBDB;
+}
+img.logo_instagram {
+    align-self: center;
+    width: 175px;
+    margin: 35px 0;
+}
+.input_login {
+    width: 270px;
+    height: 40px;
+    margin: 3px auto;
+    padding: 0 10px;
+    display: block;
+    background-color: #fafafa;
+    border: 1px solid #DBDBDB;
+    border-radius: 3px;
+    font-size: 14px;
+}
+.input_login::placeholder {
+    font-size: 12px;
+    color: #8e8e8e;
+}
+.input_login:focus {
+    border: 1px solid #8a8a8a;
+    outline: none;
+}
+#btn_login {
+    width: 268px;
+    height: 30px;
+    margin: 13px auto;
+    background-color: #0095f6;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+}
+#btn_login:disabled {
+    background-color: #B9DFFC;
+}
+#btn_login:disabled:hover {
+    cursor: default;
+}
+#btn_login:enabled:hover {
+    cursor: pointer;
+}
+#btn_login:focus {
+    outline: none;
+}
+a {
+    cursor: default;
+}
+.button_forgot {
+    color : #00366B;
+    align-self: center;
+    font-size: 12px;
+    margin-top: 70px;
+}
+.button_forgot:hover {
+    cursor: pointer;
+}
+* {
+    box-sizing: border-box;
+    font-family: 'helvetica neue', 'Apple SD Gothic Neo', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #fafafa;
+    padding: 0;
+    margin: 0;
+}
+p, span {
+    font-size: 14px;
+}
