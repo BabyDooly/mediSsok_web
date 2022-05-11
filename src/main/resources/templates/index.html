@@ -1,17 +1,18 @@
 <!DOCTYPE html>
+
+<!-- 타임리프 사용 -->
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
+    <title>메인 페이지</title>
 
-    </style>
+    <!-- bootstrap, custom css 링크 -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/home.css" rel="stylesheet">
 </head>
-<body>
 
+<body>
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
     <div class="container-fluid mainpad">
         <a class="navbar-brand mainIcon" href="/">
@@ -24,10 +25,10 @@
         <div class="collapse navbar-collapse mainMidnav">
             <ul class="navbar-nav">
                 <li class="nav-item midBtn">
-                    <a class="nav-link" aria-current="page" href="#">내 알약</a>
+                    <a class="nav-link" aria-current="page" href="/myMediCase">내 알약</a>
                 </li>
                 <li class="nav-item midBtn">
-                    <a class="nav-link" href="#">복용 현황</a>
+                    <a class="nav-link" href="/myMedi_stat">복용 현황</a>
                 </li>
                 <li class="nav-item midBtn">
                     <a class="nav-link" href="#">알약 검색</a>
@@ -35,7 +36,6 @@
                 <li class="nav-item midBtn">
                     <a class="nav-link" href="#">알람 설정</a>
                 </li>
-
             </ul>
         </div>
         <a class="navbar-brand" href="/login">
@@ -46,9 +46,11 @@
 
 <p class="mainText">약   쏙</p>
 <p class="mainSubText">약과 나의 약속, 시간에 맞춰 쏙</p>
+
 <div class="text-center">
     <img src="image/mainImg.png" class="mainImg" alt="...">
 </div>
+
 <div class="txt_box">
     <div class="txt">
         어머니, 어제는 약 잘 챙겨 드셨어요?<br>
@@ -66,6 +68,7 @@
         저와의 중요한 약속. 걱정마세요😆<br>
     </div>
 </div>
+
 <div class="main_box">
     <div class="main">
         <img src="image/main_menu_img.png" class ="mainMenuImg" alt="...">
@@ -81,6 +84,7 @@
         </div>
     </div>
 </div>
+
 <div class="main_box">
     <div class="main">
         <img src="image/main_menu_img.png" class ="mainMenuImg2" alt="...">
@@ -96,21 +100,7 @@
         </div>
     </div>
 </div>
-<div class="main_box">
-    <div class="main">
-        <img src="image/main_menu_img.png" class ="mainMenuImg2" alt="...">
-        <div class="subDiv">
-            <p class="subTextName">약쏙 사용설명서</p><br>
-            <p class="subTextSub">User's Guide</p><br>
-            <p>가나다라마바사 가나다라마바사 가나다<br>
-                사용설명서 어쩌구 저쩌구<br>
-                이러쿵 저러쿵 궁시렁 궁시렁<br>
-                동해물과 백두산 이러쿵 저러쿵 가나다<br>
-                몰라 몰라 사용 설명서 페이지 몰라</p><br><br><br><br>
-            <p>#약쏙 #사용설명서</p>
-        </div>
-    </div>
-</div>
+
 <div class="main_box">
     <div class="main">
         <img src="image/main_menu_img.png" class ="mainMenuImg" alt="...">
@@ -126,6 +116,24 @@
         </div>
     </div>
 </div>
+
+<div class="main_box">
+    <div class="main">
+        <img src="image/main_menu_img.png" class ="mainMenuImg2" alt="...">
+        <div class="subDiv">
+            <p class="subTextName">약쏙 사용설명서</p><br>
+            <p class="subTextSub">User's Guide</p><br>
+            <p>가나다라마바사 가나다라마바사 가나다<br>
+                사용설명서 어쩌구 저쩌구<br>
+                이러쿵 저러쿵 궁시렁 궁시렁<br>
+                동해물과 백두산 이러쿵 저러쿵 가나다<br>
+                몰라 몰라 사용 설명서 페이지 몰라</p><br><br><br><br>
+            <p>#약쏙 #사용설명서</p>
+        </div>
+    </div>
+</div>
+
+<!-- bootstrp js 링크 -->
 <script src="js/bootstrap.min.js"></script>
 
 </body>

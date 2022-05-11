@@ -1,4 +1,4 @@
-package mediSsok.mediSsokspring;
+package mediSsok.mediSsokspring.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
