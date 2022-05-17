@@ -207,6 +207,7 @@ p, span {
     font-size: 20px;
     font-weight: 600;
 }
+
 .myPageIndiv{
     height: 400px;
     width: 580px;
@@ -218,7 +219,13 @@ p, span {
 .myPageInText{
     font-size: 18px;
 }
-
+.myPageIndiv2{
+    height: 400px;
+    width: 580px;
+    margin: 0 auto;
+    vertical-align: middle; /*센터 맞춤 속성*/
+    line-height: normal; /*센터 맞춤 속성*/
+}
 
 
 
