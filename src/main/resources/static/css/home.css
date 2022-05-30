@@ -9,6 +9,16 @@
     font-size:40px;
     width:120px;
 }
+.mainCon{/* 사진크기 900x600 */
+    width: 1200px;
+    margin: auto;
+    border-width: 1px;
+    outline: solid;
+    position: relative;
+    border: solid #dee2e6;
+    border-width: 1px 0 0;
+
+}
 .mainMidnav{
     justify-content : center;
 }
@@ -243,6 +253,3 @@ p, span {
     width: 150px;
     height: 150px;
 }
-
-
-
