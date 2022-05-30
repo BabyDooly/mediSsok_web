@@ -234,9 +234,17 @@ p, span {
     line-height: normal; /*센터 맞춤 속성*/
 }
 .myPageIndiv3{
-    height: 400px;
+    height: 270px;
     width: 580px;
     margin: 0 auto;
+    vertical-align: middle; /*센터 맞춤 속성*/
+    line-height: normal; /*센터 맞춤 속성*/
+}
+.myPageIndiv4{
+    height: 270px;
+    width: 580px;
+    margin: 0 auto;
+    margin-top: 50px;
     vertical-align: middle; /*센터 맞춤 속성*/
     line-height: normal; /*센터 맞춤 속성*/
 }
@@ -252,4 +260,10 @@ p, span {
 .myPageImage{
     width: 150px;
     height: 150px;
+}
+.myPageLastBtn{
+    align-content: center;
+}
+.myPageToastText{
+    font-size:24px;
 }
