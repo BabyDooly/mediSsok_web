@@ -261,6 +261,14 @@ p, span {
     width: 150px;
     height: 150px;
 }
+.myPagebtnImage2{
+    width: 50px;
+    height: 50px;
+}
+.myPageBtnImage{
+    background: #f8f9fa;
+    border: 0;
+}
 .myPageLastBtn{
     align-content: center;
 }
