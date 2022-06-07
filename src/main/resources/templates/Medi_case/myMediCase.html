@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html>
+<!-- 타임리프 사용 -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>내 약통</title>
+    <!-- bootstrap, custom css 링크 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/home.css" rel="stylesheet">
 </head>
 <body>
-<h1>내 약통 페이지 아직 구현 안했음</h1>
+<div th:replace="navbar/navBar :: navBar"/>
+<p class="mainText">내 약통</p>
+<p class="mainSubText">나만의 약통, 한눈에 쏙</p>
+
+<!-- bootstrp js 링크 -->
+<script src="js/bootstrap.min.js"></script>
+
 </body>
 </html>
