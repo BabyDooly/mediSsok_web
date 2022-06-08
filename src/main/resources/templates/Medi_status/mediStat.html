@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- 타임리프 사용 -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>복용현황</title>
+    <!-- bootstrap, custom css 링크 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/home.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="navbar/navBar :: navBar"/>
+<p class="mainText">복용현황</p>
+<p class="mainSubText">우리 가족 다같이, 건강하게 쏙</p>
+<div class="mediStatDiv">
+    <img src="/image/human-icon1.png" class="rounded myPageImage" alt="...">
+    <img src="/image/human-icon1.png" class="rounded myPageImage" alt="...">
+    <img src="/image/human-icon1.png" class="rounded myPageImage" alt="...">
+    <button type="button" class="myPageBtnImage " id="img_btn"><img class="myPagebtnImage2" src="image/plusbutton.png"></button>
+</div>
+<!-- bootstrp js 링크 -->
+<script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>
