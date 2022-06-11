@@ -409,3 +409,7 @@ p, span {
 .sec_cal .cal_wrap .day.disable {
     color: #ddd;
 }
+
+.t{
+    vertical-align: middle;
+}
