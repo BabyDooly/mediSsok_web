@@ -290,14 +290,21 @@ p, span {
 }
 /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ mediStat CSS ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 .mediStatDiv{
-    width: 1060px;
+    width: 1260px;
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 10px;
     vertical-align: middle; /*센터 맞춤 속성*/
     line-height: normal; /*센터 맞춤 속성*/
     text-align: center;
 }
-/* section calendar */
+.mediCalDiv{
+    height: 800px;
+    width: 1260px;
+    margin: 0 auto;
+    border: 1px solid #000000;
+
+}
+/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ calendar CSS ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 
 .sec_cal {
     width: 1060px;
