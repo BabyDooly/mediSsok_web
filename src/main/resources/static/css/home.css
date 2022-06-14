@@ -242,7 +242,54 @@ p, span {
         line-height: 2.5rem;
     }
 }
+/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ mediBell CSS ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+.mediBellDiv{
+    width: 1060px;
+    height: 1200px;
+    margin: 0 auto;
+    vertical-align: middle; /*센터 맞춤 속성*/
+    line-height: normal; /*센터 맞춤 속성*/
+    text-align: center;
+    overflow: hidden;
+    border: 1px solid black;
+}
+.portfolio2 .portfolio-item2 {
+    cursor: pointer;
+    position: relative;
+    display: block;
+    max-width: 25rem;
+    overflow: hidden;
+}
+.portfolio2 .portfolio-item2 .portfolio-item2-caption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.2s ease-in-out;
+    opacity: 0;
+    background-color: rgba(26, 188, 156, 0.9);
+}
+.portfolio2 .portfolio-item2 .portfolio-item2-caption:hover {
+    opacity: 1;
+}
+.portfolio2 .portfolio-item2 .portfolio-item2-caption .portfolio-item2-caption-content {
+    font-size: 1.5rem;
+}
 
+.portfolio-modal2 .btn-close {
+    color: #1abc9c;
+    font-size: 2rem;
+    padding: 1rem;
+}
+.portfolio-modal2 .portfolio-modal2-title {
+    font-size: 2.25rem;
+    line-height: 2rem;
+}
+@media (min-width: 992px) {
+    .portfolio-modal2 .portfolio-modal2-title {
+        font-size: 3rem;
+        line-height: 2.5rem;
+    }
+}
 /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ myPage CSS ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 .myPageText{
     padding-top: 80px;

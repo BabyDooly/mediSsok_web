@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MemberController {
     private MemberService memberService;
 
+    // test 알람설정 만드는중
     @GetMapping("/test")
-    public String test() {
+    public String test(){
         return "/test/tes";
     }
 
@@ -79,6 +80,9 @@ public class MemberController {
         return "/Medi_status/mediStat";
     }
 
+    // 알람 설정
+    @GetMapping("/medi/bell")
+    public String dispBell() { return "/Medi_bell/mediBell";}
 
     // 내 약통
     @GetMapping("/medi/medicase")
