@@ -6,16 +6,23 @@
     <meta charset="UTF-8">
     <title>내 약통</title>
     <!-- bootstrap, custom css 링크 -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/home.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/home.css" rel="stylesheet">
 </head>
 <body>
 <div th:replace="navbar/navBar :: navBar"/>
 <p class="mainText">내 약통</p>
 <p class="mainSubText">자주 먹는 약 정보, 내 약통에 쏙</p>
 
+<!-- 임시로 넣은 테스트 계정 닉네임 확인용-->
+<br><br>
+<h3 th:align="center">현재 접속하신 계정의 닉네임은 </h3>
+<!-- 테스트 용으로 넣은 닉네임 불러오기-->
+<h3 th:align="center" sec:authentication="name"></h3>
+<h1>gdsfsasdfasddddfsdfd</h1>
+
 <!-- bootstrp js 링크 -->
-<script src="js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 
 </body>
 </html>
