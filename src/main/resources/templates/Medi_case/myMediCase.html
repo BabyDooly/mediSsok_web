@@ -5,24 +5,334 @@
 <head>
     <meta charset="UTF-8">
     <title>내 약통</title>
+
     <!-- bootstrap, custom css 링크 -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/home.css" rel="stylesheet">
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css"/>
 </head>
 <body>
 <div th:replace="navbar/navBar :: navBar"/>
 <p class="mainText">내 약통</p>
 <p class="mainSubText">자주 먹는 약 정보, 내 약통에 쏙</p>
+<!--
+    임시로 넣은 테스트 계정 닉네임 확인용
+    <br><br>
+    <h3 th:align="center">현재 접속하신 계정의 닉네임은 </h3>
+    테스트 용으로 넣은 닉네임 불러오기
+    <h3 th:align="center" sec:authentication="name"></h3>
+-->
+<div class="myMediCaseDiv">
+    <section class="page-section portfolio" id="portfolio">
+    <div class="row justify-content-center" style="padding-top: 500px; width: 900px;margin: 0 auto">
+        <!-- Portfolio Item 1-->
+        <div class="col-md-6 col-lg-4 mb-5">
+            <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                    <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img class="img-fluid" src="/image/mediCase/capsule-icon.png" alt="..."/>
+            </div>
+        </div>
+        <!-- Portfolio Item 2-->
+        <div class="col-md-6 col-lg-4 mb-5">
+            <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
+                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                    <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img class="img-fluid" src="/image/mediCase/heart-beat-icon.png" alt="..."/>
+            </div>
+        </div>
+        <!-- Portfolio Item 3-->
+        <div class="col-md-6 col-lg-4 mb-5">
+            <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
+                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                    <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img class="img-fluid" src="/image/mediCase/tablets-icon.png" alt="..."/>
+            </div>
+        </div>
+        <!-- Portfolio Item 4-->
+        <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+            <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
+                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                    <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img class="img-fluid" src="/image/mediCase/drops-icon.png" alt="..."/>
+            </div>
+        </div>
+        <!-- Portfolio Item 5-->
+        <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
+            <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
+                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                    <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img class="img-fluid" src="/image/mediCase/thermameter-icon.png" alt="..."/>
+            </div>
+        </div>
+        <!-- Portfolio Item 6-->
+        <div class="col-md-6 col-lg-4">
+            <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
+                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                    <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img class="img-fluid" src="/image/mediCase/lungs-icon.png" alt="..."/>
+            </div>
+        </div>
+    </div>
+    </section>
 
-<!-- 임시로 넣은 테스트 계정 닉네임 확인용-->
-<br><br>
-<h3 th:align="center">현재 접속하신 계정의 닉네임은 </h3>
-<!-- 테스트 용으로 넣은 닉네임 불러오기-->
-<h3 th:align="center" sec:authentication="name"></h3>
-<h1>gdsfsasdfasddddfsdfd</h1>
+<!-- Portfolio Modal 1-->
+<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">상비약 </h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="/image/mediCase/capsule-icon.png" alt="..."/>
+                            <!-- Portfolio Modal - Text-->
+                            <h3>상비약 : 래피콜 데이앤나잇 연질캡슐<br></h3>
+                            <p class="mb-4">효능 및 효과 : 감기의 제증상(여러증상)(콧물, 코막힘, 재채기, 인후(목구멍)통, 기침, 가래, <br>오한(춥고 떨리는 증상)
+                            , 발열, 두통, 관절통, 근육통)의 완화<br>용법 용량 : (주간)15세 이상 및 성인 : 1일 2회, 1회 2캡슐 식후 30분 복용 (야간) 주간용을 복용한지 6시간 경과 후 다음 용량을 복용하십시오.
+                            15세 이상 및 성인 :1일 1회, 1회 2캡슐 식후 30분에 복용</p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                창 닫기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio Modal 2-->
+<div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">심장약</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="/image/mediCase/heart-beat-icon.png" alt="..."/>
+                            <!-- Portfolio Modal - Text-->
+                            <h3>처방약 : 나도가드정 외 3정<br></h3>
+                            <p class="mb-4">1. 고혈압 : 성인 나도롤로서 1일 40㎎으로 경구투여하여 최적반응이 나타날 때까지 1주일 간격으로 점차 증량한다. 환자의 상태에 따라 1일 최대 240㎎까지 투여할 수 있다.<br>
+                                2. 협심증 : 이 약으로서 1일 40㎎으로 시작하여 최적반응이나 과도의 서맥이 나타날 때까지 1주일 간격으로 점차 증량한다. 환자의 상태에 따라 1일 최대 160㎎까지 투여할 수 있다.<br>
+                                3. 빈맥성부정맥 : 이 약으로서 1일 40㎎으로 시작하여 1주일 간격으로 점차 증량하여 1일 최대 160㎎까지 증량할 수 있다. 서맥이 나타나면 1일 40㎎으로 감량한다.<br>
+                                4. 편두통의 예방 : 이 약으로서 1일 40㎎으로 시작하여 최적반응이 나타날 때까지 점차 40㎎씩 증량한다. 보통 유지용량은 1일 80-160㎎이다. 최대용량에서 4-6주 후에도 만족할 만한 반응이 얻어지지 않으면 이 치료법은 점차 중지한다.<br>
+                                5. 갑상선중독증 : 이 약으로서 1일 80-160㎎을 투여하며 대부분의 환자는 1일 160㎎을 투여한다.
+                                연령, 증상에 따라 적절히 증감한다.</p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                창 닫기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio Modal 3-->
+<div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal3"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">감기약</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="/image/mediCase/tablets-icon.png" alt="..."/>
+                            <!-- Portfolio Modal - Text-->
+                            <h3>처방약 : 가네카정 외 3정<br></h3>
+                            <p class="mb-4">효능 및 효과 :(정제)(시럽제)코감기, 알레르기 및 혈관운동성 코염에 의한 다음 증상의 완화 : 재채기, 콧물, 코막힘, 눈물<br>
+                                (캡슐제)코감기, 알레르기 및 혈관운동성 코염에 의한 다음 증상의 완화 : 재채기, 콧물, 코막힘<br>
+                                (정제)성인 : 1회 1정, 소아(12 〜 14세) : 1회 1/2정 1일 3회 식후에 복용한다.<br>
+                                (캡슐제)성인 : 1회 1캅셀, 소아(12 〜 14세) : 1회 1/2캅셀 1일 3회 식후에 복용한다.
+                            </p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                창 닫기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio Modal 4-->
+<div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" aria-labelledby="portfolioModal4"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">상비감기약</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="/image/mediCase/drops-icon.png" alt="..."/>
+                            <!-- Portfolio Modal - Text-->
+                            <h3>상비약 : 지르텍<br></h3>
+                            <p class="mb-4">효능 및 효과 :계절성 및 다년성 알레르기성 비염, 알레르기성 결막염, 만성 특발성 두드러기, 피부가려움증, 습진, 피부염(하이드로코티손 외용제와 병용)(정제에 한함)<br>
+                                1. 성인 및 6세 이상의 소아 : 세티리진염산염으로서 1일 1회 10mg 취침 전에 경구 투여한다.<br>
+                                2. 이상반응에 민감한 환자의 경우는 5mg씩을 아침, 저녁에 분할 투여한다.<br>
+                                3. 연령, 증상에 따라 적절히 증감한다.<br>
+                            </p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                창 닫기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio Modal 5-->
+<div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" aria-labelledby="portfolioModal5"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">두통약</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="/image/mediCase/thermameter-icon.png" alt="..."/>
+                            <!-- Portfolio Modal - Text-->
+                            <h3>처방약 : 가이펜캡슐 외 4정<br></h3>
+                            <p class="mb-4">효능 및 효과 :긴장성 두통및 혈관성 두통(편두통)<br>
+                                1. 긴장성 두통 : 보통성인 4시간마다 1~2캅셀을 복용. 1일 8캅셀을 초과하지 말 것.<br>
+                                2. 편두통 : 보통성인 1회 2캅셀을 복용하고, 이후 증상이 개선될 때까지 매시간마다 1캅셀씩 복용. 12 시간동안 5캅셀을 초과하지 않도록 할 것.
+                            </p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                창 닫기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio Modal 6-->
+<div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" aria-labelledby="portfolioModal6"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">폐렴약</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="/image/mediCase/lungs-icon.png" alt="..."/>
+                            <!-- Portfolio Modal - Text-->
+                            <h3>처방약 : 경보세파클러캡슐 외 4정<br></h3>
+                            <p class="mb-4">효능 및 효과 : 중이염, 폐렴, 인후두염, 편도염, 기관지염, 신우신염, 방광염, 임균성 요도염, 부스럼, 옹종, 모낭염 등<br>
+                                성인 : 1회 250mg을 8시간마다 경구 투여한다. 중증감염증(폐렴 등)과 감수성이 낮은 감염증의 경우 2배로 증량 투여 가능<br>
+                                소아 : 1일 체중 Kg당 20mg을 8시간마다 분할 투여한다. 중증감염증, 중이염 및 감수성이 낮은 감염의 경우에는 1일 체중 Kg당 40mg을 투여할 수 있으며 최대 용량은 1일 1g이다.
+                            </p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                창 닫기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+</div>
+</div>
 <!-- bootstrp js 링크 -->
 <script src="/js/bootstrap.min.js"></script>
-
 </body>
 </html>

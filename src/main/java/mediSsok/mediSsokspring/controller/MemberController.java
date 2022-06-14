@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MemberController {
     private MemberService memberService;
 
+    @GetMapping("/test")
+    public String test() {
+        return "/test/tes";
+    }
+
     // 메인 페이지
     @GetMapping("/")
     public String index() {
