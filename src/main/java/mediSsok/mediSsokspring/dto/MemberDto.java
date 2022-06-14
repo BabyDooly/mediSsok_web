@@ -17,6 +17,7 @@ public class MemberDto {
     private String phoneNum;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
+    private String passwordConfirm;
 
     public MemberEntity toEntity(){
         return MemberEntity.builder()

@@ -36,16 +36,19 @@
             </div>
         </div>
         <br>
-
         <div class="row g-3 align-items-center">
             <div class="col-auto">
-                <label for="nameText" class="col-form-label">닉네임</label>
+                <label class="col-form-label">닉네임</label>
             </div>
             <div class="col-md-9">
+                <!--
                 <input type="text" id="nameText" class="form-control" placeholder="닉네임" disabled>
+                -->
+                <div class="col-md-9" align="left">
+                    <label sec:authentication="name" class="col-form-label"></label>
+                </div>
             </div>
-        </div>
-        <br>
+            <br>
 
         <div class="row g-3 align-items-center">
             <div class="col-auto">
