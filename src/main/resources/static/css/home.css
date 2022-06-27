@@ -389,6 +389,13 @@ p, span {
     vertical-align: middle; /*센터 맞춤 속성*/
     line-height: normal; /*센터 맞춤 속성*/
 }
+.tesDiv{
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: middle; /*센터 맞춤 속성*/
+    line-height: normal; /*센터 맞춤 속성*/
+}
 /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ mediStat CSS ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 .mediStatDiv{
     width: 1260px;
