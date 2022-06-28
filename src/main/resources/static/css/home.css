@@ -209,7 +209,6 @@ p, span {
     position: relative;
     display: block;
     max-width: 25rem;
-    border-radius: 50%;
     overflow: hidden;
 }
 .portfolio .portfolio-item .portfolio-item-caption {
@@ -218,6 +217,7 @@ p, span {
     left: 0;
     transition: all 0.2s ease-in-out;
     opacity: 0;
+    border-radius: 70%;
     background-color: rgba(26, 188, 156, 0.9);
 }
 .portfolio .portfolio-item .portfolio-item-caption:hover {
