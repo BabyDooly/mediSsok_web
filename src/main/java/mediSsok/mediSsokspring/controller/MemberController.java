@@ -18,6 +18,9 @@ public class MemberController {
         return "/test/tes";
     }
 
+    @GetMapping("/tt")
+    public String tt(){return "/test/tt";}
+
     // 메인 페이지
     @GetMapping("/")
     public String index() {
