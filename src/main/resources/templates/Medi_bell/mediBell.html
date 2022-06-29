@@ -5,317 +5,324 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>알람 설정</title>
-
+    <title>myPage</title>
     <!-- bootstrap, custom css 링크 -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/home.css" rel="stylesheet">
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
-          type="text/css"/>
+
+    <!-- Custom fonts for this template-->
+    <!-- fontawesome-free 파일 설치해서 넣었는데 적용안됨, 그래서 직접 링크함-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+
+    <style type="text/css">
+        .btn {
+
+            display: inline-block;
+            padding: 10px;
+            position: relative;
+            text-align: center;
+            transition: background 600ms ease, color 600ms ease;
+        }
+        input[type=radio].toggle {
+            display: none;
+        }
+        input[type=radio].toggle + label {
+            cursor: pointer;
+            text-align: center;
+            width: 199px;
+        }
+        input[type=radio].toggle + label:hover {
+            background: none;
+            color: #000000;
+        }
+        input[type=radio].toggle + label:after {
+            background: #6F6FFF;
+            content: "";
+            height: 100%;
+            position: absolute;
+            top: 0;
+            transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
+            width: 100%;
+            z-index: -1;
+        }
+        input[type=radio].toggle.toggle-left + label {
+            border-right: 0;
+        }
+        input[type=radio].toggle.toggle-left + label:after {
+            left: 100%;
+        }
+        input[type=radio].toggle.toggle-right + label {
+            margin-left: -5px;
+        }
+        input[type=radio].toggle.toggle-right + label:after {
+            left: -100%;
+        }
+        input[type=radio].toggle:checked + label {
+            cursor: default;
+            color: #fff;
+            transition: color 200ms;
+        }
+        input[type=radio].toggle:checked + label:after {
+            left: 0;
+        }
+
+    </style>
 </head>
 
 <body>
 <div th:replace="navbar/navBar :: navBar"/>
-<p class="mainText">알람 설정</p>
-<p class="mainSubText">약 먹는 시간을 알려주세요</p>
+<p class="mainText">테스트 페이지입니다.</p>
+<p class="mainSubText">알람설정 페이지 만드는중.</p>
+<div class="mediSearchDiv" >
+    <table id="belltable" class="table table-bordered border-secondary" style="width: 401px;float: left;">
+        <thead>
+        <tr></tr>
+        </thead>
+        <tbody>
+        <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+        <tr>
+            <th class="table-active" valign="middle">
+                <div>
+                    <div>
+                        <i class="fas fa-stopwatch fa-aw fa-3x" style="position: absolute"></i>
+                    </div>
+                    <div>
+                        <span style="font-size: 30px; position: absolute">&nbsp&nbsp&nbsp&nbsp&nbsp아침 식후 30분</span>
+                    </div>
+                    <div style="text-align: right">
+                        <button style="background: none;border: none" onclick="bellbtn()">
+                            <img style="width: 50px;height: 50px" id="img1" src="/image/mediBell/nonebell.png"/>
+                        </button>
 
-<div class="mediBellDiv">
-    <section class="page-section portfolio2" id="portfolio2">
-        <div class="row justify-content-center" style="padding-top :50px;margin: 0 auto">
-            <!-- Portfolio Item 1-->
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="portfolio-item2 mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
-                    <div class="portfolio-item2-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item2-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
-                        </div>
                     </div>
-                    <img class="img-fluid" src="/image/mediBell/bell1.png" alt="..."/>
                 </div>
-            </div>
-            <!-- Portfolio Item 2-->
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="portfolio-item2 mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
-                    <div class="portfolio-item2-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item2-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img class="img-fluid" src="/image/mediBell/bell2.png" alt="..."/>
-                </div>
-            </div>
-            <!-- Portfolio Item 3-->
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="portfolio-item2 mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
-                    <div class="portfolio-item2-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item2-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img class="img-fluid" src="/image/mediBell/bell3.png" alt="..."/>
-                </div>
-            </div>
-            <!-- Portfolio Item 4-->
-            <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
-                <div class="portfolio-item2 mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
-                    <div class="portfolio-item2-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item2-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img class="img-fluid" src="/image/mediBell/bell4.png" alt="..."/>
-                </div>
-            </div>
-            <!-- Portfolio Item 5-->
-            <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
-                <div class="portfolio-item2 mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
-                    <div class="portfolio-item2-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item2-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img class="img-fluid" src="/image/mediBell/bell5.png" alt="..."/>
-                </div>
-            </div>
-            <!-- Portfolio Item 6-->
-            <div class="col-md-6 col-lg-4">
-                <div class="portfolio-item2 mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
-                    <div class="portfolio-item2-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item2-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img class="img-fluid" src="/image/mediBell/bell6.png" alt="..."/>
-                </div>
-            </div>
-            <!-- Portfolio Item 7-->
-            <div class="col-md-6 col-lg-4">
-                <div class="portfolio-item2 mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal7">
-                    <div class="portfolio-item2-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item2-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img class="img-fluid" src="/image/mediBell/plusbtn.png" alt="..."/>
-                </div>
-            </div>
-        </div>
-    </section>
+            </th>
+        </tr>
+        <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+        <tr>
+            <th class="table" valign="middle">감기약<br>혈압약</th>
+        </tr>
+        <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+        <tr>
+            <th class="table-active" valign="middle" style="padding: 0px">
+                <input id="toggle-on1" class="toggle toggle-left" name="toggle1" value="false" type="radio" checked>
+                <label for="toggle-on1" class="btn">안 먹었어요</label>
+                <input id="toggle-off1" class="toggle toggle-right" name="toggle1" value="true" type="radio">
+                <label for="toggle-off1" class="btn">먹었어요</label>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
-    <!-- Portfolio Modal 1-->
-    <div class="portfolio-modal2 modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal2-title text-secondary text-uppercase mb-0">2022-06-12</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image-->
-                                <img class="img-fluid rounded mb-5" src="/image/mediBell/bell1.png" alt="..."/>
-                                <!-- Portfolio Modal - Text-->
-                                <h3><br></h3>
-                                <p class="mb-4"></p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="fas fa-xmark fa-fw"></i>
-                                    창 닫기
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Portfolio Modal 2-->
-    <div class="portfolio-modal2 modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal2-title text-secondary text-uppercase mb-0">2022-06-12</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image-->
-                                <img class="img-fluid rounded mb-5" src="/image/mediBell/bell2.png" alt="..."/>
-                                <!-- Portfolio Modal - Text-->
-                                <h3><br></h3>
-                                <p class="mb-4"></p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="fas fa-xmark fa-fw"></i>
-                                    창 닫기
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Portfolio Modal 3-->
-    <div class="portfolio-modal2 modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal3"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal2-title text-secondary text-uppercase mb-0">2022-06-12</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image-->
-                                <img class="img-fluid rounded mb-5" src="/image/mediBell/bell3.png" alt="..."/>
-                                <!-- Portfolio Modal - Text-->
-                                <h3><br></h3>
-                                <p class="mb-4">
-                                </p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="fas fa-xmark fa-fw"></i>
-                                    창 닫기
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Portfolio Modal 4-->
-    <div class="portfolio-modal2 modal fade" id="portfolioModal4" tabindex="-1" aria-labelledby="portfolioModal4"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal2-title text-secondary text-uppercase mb-0">2022-06-13</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image-->
-                                <img class="img-fluid rounded mb-5" src="/image/mediBell/bell4.png" alt="..."/>
-                                <!-- Portfolio Modal - Text-->
-                                <h3><br></h3>
-                                <p class="mb-4"><br>
-                                </p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="fas fa-xmark fa-fw"></i>
-                                    창 닫기
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Portfolio Modal 5-->
-    <div class="portfolio-modal2 modal fade" id="portfolioModal5" tabindex="-1" aria-labelledby="portfolioModal5"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal2-title text-secondary text-uppercase mb-0">2022-06-13</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image-->
-                                <img class="img-fluid rounded mb-5" src="/image/mediBell/bell5.png" alt="..."/>
-                                <!-- Portfolio Modal - Text-->
-                                <h3><br></h3>
-                                <p class="mb-4">
-                                </p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="fas fa-xmark fa-fw"></i>
-                                    창 닫기
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Portfolio Modal 6-->
-    <div class="portfolio-modal2 modal fade" id="portfolioModal6" tabindex="-1" aria-labelledby="portfolioModal6"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal2-title text-secondary text-uppercase mb-0">2022-06-13</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image-->
-                                <img class="img-fluid rounded mb-5" src="/image/mediBell/bell6.png" alt="..."/>
-                                <!-- Portfolio Modal - Text-->
-                                <h3><br></h3>
-                                <p class="mb-4">
-                                </p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="fas fa-xmark fa-fw"></i>
-                                    창 닫기
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
+<button onclick="plusbtn">
+    <div>
+        <div data-bs-toggle="modal" data-bs-target="#plusbtn">
+            <div class="d-flex align-items-center justify-content-center h-100 w-100">
+            </div>
+            <img class="img-fluid" src="/image/plusbutton.png" alt="..."/>
+        </div>
+    </div>
+</button>
+<button onclick="minusbtn">
+    <div>
+        <div data-bs-toggle="modal" data-bs-target="#minusbtn">
+            <div class="d-flex align-items-center justify-content-center h-100 w-100">
+            </div>
+            <img class="img-fluid" src="/image/minus.png" alt="..."/>
+        </div>
+    </div>
+</button>
+</div>
+
+<!-- plusBtn -->
+<div class="portfolio-modal modal fade" id="plusbtn" tabindex="-1" aria-labelledby="plusbtn"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h1 class="text-secondary text-uppercase mb-0">알람 추가하기</h1>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <!--<img class="img-fluid rounded mb-5" src="/image/mediCase/capsule-icon.png" alt="..."/>-->
+                            <!-- Portfolio Modal - Text-->
+                            <br>
+                            <div class="myPageIndiv2">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="medicase" class="col-form-label" style="padding-right: 3em">약통선택</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select id="medicase" class="form-select" aria-label="약통 선택하기">
+                                            <option selected value="">약통 선택하기</option>
+                                            <option value="감기약">감기약</option>
+                                            <option value="혈압약">혈압약</option>
+                                            <option value="두통약">두통약</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="startday" class="col-form-label">시작일&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="datetime-local" id="startday" class="form-control" placeholder="2022-06-24">
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="reday" class="col-form-label" style="padding-right: 1em">주기&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="reday" class="form-control" placeholder="주기">
+                                    </div>
+                                    <div class="col-auto">
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+
+
+                            <button id="addbtn" onclick="addbtn()" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                                추가
+                            </button>
+                            <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                                취소
+                            </button>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- minusBtn -->
+<div class="portfolio-modal modal fade" id="minusbtn" tabindex="-1" aria-labelledby="minusbtn"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h1 class="text-secondary text-uppercase mb-0">알람 삭제하기</h1>
+                            <br>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <!--<img class="img-fluid rounded mb-5" src="/image/mediCase/capsule-icon.png" alt="..."/>-->
+                            <!-- Portfolio Modal - Text-->
+
+                            <div class="myPageIndiv2">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="medicase1" class="col-form-label" style="padding-right: 3em">약통선택</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="medicase1" class="form-control" placeholder="약통 선택하기">
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="startday1" class="col-form-label">시작일&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="startday1" class="form-control" placeholder="2022-06-24">
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="reday1" class="col-form-label" style="padding-right: 1em">주기&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="reday1" class="form-control" placeholder="주기">
+                                    </div>
+                                    <div class="col-auto">
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                            <button id="delbtn" onclick="delbtn()" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                                삭제
+                            </button>
+                            <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                                취소
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- bootstrp js 링크 -->
 <script src="/js/bootstrap.min.js"></script>
+<script>
+    function updateDiv(){
+        window.location.reload();
+    }
+    var count = 1;
+    function bellbtn(){
+        var img1=document.getElementById("img1");
+        if(count%2==1){
+            img1.src="/image/mediBell/nonebell.png";
+        }
+        else{
+            img1.src="/image/mediBell/blackbell.png";
+        }
+        count++;
+    }
+    function addbtn(){
+        const newDiv = document.createElement('div');
+        const medicaseAdd = document.getElementById('medicase').value;
+        const dateAdd = document.getElementById('startday').value;
+        const redayAdd = document.getElementById('reday').value;
+
+        newDiv.setAttribute("id","divv");
+        newDiv.setAttribute("class","tesDiv")
+        newDiv.innerText=medicaseAdd;
+        newDiv.innerText+=dateAdd;
+        newDiv.innerText+=redayAdd;
+
+        const newText = document.createTextNode('');
+        newDiv.appendChild(newText);
+        document.body.appendChild(newDiv);
+    }
+    function delbtn(){
+        const div = document.getElementById('divv');
+        div.remove();
+    }
+</script>
 </body>
 </html>
