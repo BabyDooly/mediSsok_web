@@ -19,13 +19,14 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
+@AllArgsConstructor     //생성자 제작
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private MemberService memberService;
     private DataSource dataSource;
 
+    // 암호화 빈 생성
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -36,14 +37,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**");
     }
 
+    // 권환
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        // RememberMe
+        // 토큰 세션 유지
         http.rememberMe()
                 .userDetailsService(userDetailsService())
                 .tokenRepository(tokenRepository());
-        
+
         http.authorizeRequests()
                 // 페이지 권한 설정
                 //.antMatchers("/admin/**").hasRole("ADMIN")
@@ -60,22 +62,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.logoutSuccessUrl("/user/logout/result")
                 .invalidateHttpSession(true)
                 .and()
+                .csrf().disable()
                 // 403 예외처리 핸들링
                 .exceptionHandling().accessDeniedPage("/user/denied");
-
-
     }
 
+    // 토큰 새션
     @Bean
     public PersistentTokenRepository tokenRepository() {
         JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
         jdbcTokenRepository.setDataSource(dataSource);
 
         return jdbcTokenRepository;
-    }
-    
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
     }
 }

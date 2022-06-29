@@ -1,16 +1,18 @@
 package mediSsok.mediSsokspring.controller;
 
-import lombok.AllArgsConstructor;
-import mediSsok.mediSsokspring.dto.MemberDto;
+import lombok.RequiredArgsConstructor;
+import mediSsok.mediSsokspring.dto.MemberResponseDto;
 import mediSsok.mediSsokspring.service.MemberService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+@RequiredArgsConstructor    //final 필드 생성자 생성
 @Controller
-@AllArgsConstructor
-public class MemberController {
-    private MemberService memberService;
+public class IndexController {
+    private final MemberService memberService;
 
     // test 알람설정 만드는중
     @GetMapping("/test")
@@ -48,17 +50,11 @@ public class MemberController {
         return "/login/login";
     }
 
-    // 회원가입 처리
-    @PostMapping("/user/signup")
-    public String execSignup(MemberDto memberDto) {
-        memberService.joinUser(memberDto);
-
-        return "redirect:/user/login";
-    }
-
     // 마이페이지
-    @GetMapping("/user/mypage")
-    public String dispMypage() {
+    @GetMapping("/user/mypage/{id}")
+    public String dispMypage(@PathVariable Long id, Model model) {
+        MemberResponseDto dto = memberService.findById(id);
+        model.addAttribute("member", dto);
         return "/myPage/myPage";
     }
 
