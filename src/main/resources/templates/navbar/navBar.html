@@ -14,7 +14,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse mainMidnav">
+            <div class="collapse navbar-collapse mainMidnav" sec:authorize="isAuthenticated()">
                 <ul class="navbar-nav">
                     <li class="nav-item midBtn">
                         <a class="nav-link" aria-current="page" th:href="@{/medi/medicase}">내 약통</a>
@@ -30,11 +30,14 @@
                     </li>
                 </ul>
             </div>
-            <a class="navbar-brand" th:href="@{/user/mypage}">
+            <a class="navbar-brand" th:href="@{/user/mypage}" sec:authorize="isAuthenticated()">
                 <img src="/image/human-icon.png"  alt="" width="50" height="50">
             </a>
-            <a class="navbar-brand" th:href="@{/}">
+            <a class="navbar-brand" th:href="@{/user/logout}" sec:authorize="isAuthenticated()">
                 <input type="button" value="로그아웃" class="btn btn-secondary btn-user btn-block">
+            </a>
+            <a class="navbar-brand" th:href="@{/user/login}" sec:authorize="!isAuthenticated()">
+                <input type="button" value="로그인" class="btn btn-secondary btn-user btn-block">
             </a>
         </div>
     </nav>

@@ -31,22 +31,10 @@ public class IndexController {
         return "/index";
     }
 
-    // 회원가입 페이지
-    @GetMapping("/user/signup")
-    public String dispSignup() {
-        return "/login/register";
-    }
-
     // 비밀번호 찾기 페이지
     @GetMapping("/user/forgot")
     public String dispForgot() {
         return "/login/forgot-password";
-    }
-
-    // 로그인 페이지
-    @GetMapping("/user/login")
-    public String dispLogin() {
-        return "/login/login";
     }
 
     // 약 검색

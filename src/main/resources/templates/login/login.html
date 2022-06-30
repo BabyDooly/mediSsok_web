@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="utf-8">
@@ -25,7 +24,7 @@
 
 <body class="bg-gradient-primary">
 <div th:replace="/navbar/navBar2 :: navBar2"/>
-<form action="/user/login" method="post">
+<form action="/user/loginProc" method="post">
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -52,6 +51,9 @@
                                             <input type="password" class="form-control form-control-user"
                                                    id="exampleInputPassword" maxlength="15"name = "password" placeholder="비밀번호">
                                         </div>
+                                        <span th:if="${exception}">
+                                            <p id="valid" style="font-size: 15px" class="alert alert-danger" th:text="${exception}"></p>
+                                        </span>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="rememberMe" name="remember-me">

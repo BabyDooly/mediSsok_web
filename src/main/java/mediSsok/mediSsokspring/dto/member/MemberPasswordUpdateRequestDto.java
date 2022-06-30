@@ -9,7 +9,6 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class MemberPasswordUpdateRequestDto {
-
     private String password;
 
     @Builder

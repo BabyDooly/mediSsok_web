@@ -3,10 +3,7 @@ package mediSsok.mediSsokspring.service;
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.domain.entity.Member;
 import mediSsok.mediSsokspring.domain.repository.MemberRepository;
-import mediSsok.mediSsokspring.dto.member.MemberAlarmUpdateRequestDto;
-import mediSsok.mediSsokspring.dto.member.MemberResponseDto;
-import mediSsok.mediSsokspring.dto.member.MemberSaveResponseDto;
-import mediSsok.mediSsokspring.dto.member.MemberUserUpdateRequestDto;
+import mediSsok.mediSsokspring.dto.member.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -48,16 +45,16 @@ public class MemberService implements UserDetailsService {
 
 
     // 비밀번호 변경
-//    @Transactional
-//    public Long passwordUpdate(Long id, MemberUpdateRequestDto requestDto){
-//        Member entity = memberRepository.findById(id)
-//                // 아이디가 없을때
-//                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id = " + id));
-//
+    @Transactional
+    public Long passwordUpdate(Long id, MemberPasswordUpdateRequestDto requestDto){
+        Member entity = memberRepository.findById(id)
+                // 아이디가 없을때
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id = " + id));
+
 //        entity.update(requestDto.getNickname(), requestDto.getPhone());
-//
-//        return id;
-//    }
+
+        return id;
+    }
 
     // 알림 설정
     @Transactional
