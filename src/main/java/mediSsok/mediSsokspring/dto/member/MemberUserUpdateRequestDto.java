@@ -1,4 +1,4 @@
-package mediSsok.mediSsokspring.dto;
+package mediSsok.mediSsokspring.dto.member;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -8,12 +8,12 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class MemberUpdateRequestDto {
+public class MemberUserUpdateRequestDto {
     private String nickname;
-    private String phoneNum;
+    private String phone;
     @Builder
-    public MemberUpdateRequestDto(String nickname, String phoneNum) {
+    public MemberUserUpdateRequestDto(String nickname, String phone) {
         this.nickname = nickname;
-        this.phoneNum = phoneNum;
+        this.phone = phone;
     }
 }

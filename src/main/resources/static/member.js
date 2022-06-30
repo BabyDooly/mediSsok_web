@@ -2,30 +2,65 @@ var main = {
     init : function () {
         var _this = this;
         $('#btn-update').on('click', function () {
-            _this.update();
+            _this.userUpdate();
         });
+
+        var _this = this;
+        $('#liveToastBtn').on('click', function () {
+            _this.alarmUpdate();
+        });
+
+
     },
 
-    update : function () {
+    userUpdate : function () {
         var data = {
             nickname: $('#nameText').val(),
-            phoneNum: $('#callText').val()
+            phone: $('#callText').val()
         };
-
-        var id = 1;
 
         $.ajax({
             type: 'POST',
-            url: '/api/v1/posts/'+id,
+            url: '/api/member/user',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
             alert('정보가 수정되었습니다.');
-            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+
+    alarmUpdate : function () {
+        var data = {
+            vibration: $('#vibrationCheckbox').is(':checked'),
+            pushAlarms: $('#pushAlarmCheckbox').is(':checked'),
+            locationAlarms: $('#locationAlarmsCheckbox').is(':checked'),
+            replenishAlarms: $('#replenishAlarmsCheckbox').is(':checked')
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/member/alarm',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            var toastTrigger = document.getElementById('liveToastBtn')
+            var toastLiveExample = document.getElementById('liveToast')
+            if (toastTrigger) {
+                toastTrigger.addEventListener('click', function () {
+                    var toast = new bootstrap.Toast(toastLiveExample)
+
+                    toast.show()
+                    setTimeout(function(){window.location.href="/";}, 3000);
+                })
+            }
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
     },
 };
 main.init();
+

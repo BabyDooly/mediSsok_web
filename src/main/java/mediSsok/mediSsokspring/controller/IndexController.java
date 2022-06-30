@@ -1,13 +1,9 @@
 package mediSsok.mediSsokspring.controller;
 
 import lombok.RequiredArgsConstructor;
-import mediSsok.mediSsokspring.dto.MemberResponseDto;
 import mediSsok.mediSsokspring.service.MemberService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @RequiredArgsConstructor    //final 필드 생성자 생성
 @Controller
@@ -51,14 +47,6 @@ public class IndexController {
     @GetMapping("/user/login")
     public String dispLogin() {
         return "/login/login";
-    }
-
-    // 마이페이지
-    @GetMapping("/user/mypage/{id}")
-    public String dispMypage(@PathVariable Long id, Model model) {
-        MemberResponseDto dto = memberService.findById(id);
-        model.addAttribute("member", dto);
-        return "/myPage/myPage";
     }
 
     // 약 검색

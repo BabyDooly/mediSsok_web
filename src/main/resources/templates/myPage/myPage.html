@@ -25,7 +25,7 @@
                 <label for="emailText" class="col-form-label">이메일</label>
             </div>
             <div class="col-md-9">
-                <input type="text" id="emailText" class="form-control" placeholder="test2@naver.com"  th:value="${member.getEmail()}" disabled>
+                <input type="text" id="emailText" class="form-control" placeholder="test2@naver.com" th:value="${member.getEmail()}" disabled>
             </div>
         </div>
         <br>
@@ -48,7 +48,7 @@
                 <label for="callText" class="col-form-label">연락처</label>
             </div>
             <div class="col-md-9">
-                <input type="text" id="callText" class="form-control" placeholder="010-1234-5678" th:value="${member.getPhoneNum()}">
+                <input type="text" id="callText" class="form-control" placeholder="010-1234-5678" th:value="${member.getPhone()}">
             </div>
         </div>
         <br>
@@ -71,13 +71,14 @@
                 <span>
                     <button id="btn-update" type="button" class="btn btn-primary">변경</button>
                 </span>
-                <br>
             </div>
         </div>
     </div>
     </div>
+    <br>
     <hr class="myPageHr">
     <p class="myPageHead">&nbsp&nbsp 패스워드 변경</p>
+    <br>
     <div class="myPageIndiv2">
         <div class="row g-3 align-items-center">
             <div class="col-auto">
@@ -112,9 +113,8 @@
                 </span>
             </div>
         </div>
-        <br>
     </div>
-
+    <br>
     <hr class="myPageHr">
     <p class="myPageHead">&nbsp&nbsp친구 설정</p>
     <div class="myPageBox">
@@ -126,26 +126,27 @@
 
     <hr class="myPageHr">
     <p class="myPageHead">&nbsp&nbsp알림 설정</p>
+    <br>
     <div class="myPageIndiv3">
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="s1" checked>
-            <label class="form-check-label" for="s1">진동 모드</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="vibrationCheckbox" th:field="*{member.vibration}">
+            <label class="form-check-label" for="vibrationCheckbox">진동 모드</label>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="s2" checked>
-            <label class="form-check-label" for="s2">푸쉬 알림</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="pushAlarmCheckbox" th:field="*{member.pushAlarms}">
+            <label class="form-check-label" for="pushAlarmCheckbox">푸쉬 알림</label>
         </div>
         <div class=" form-check form-switch">
-            <input class="form-check-input " type="checkbox" role="switch" id="s3">
-            <label class="form-check-label " for="s3">위치 알림</label>
+            <input class="form-check-input " type="checkbox" role="switch" id="locationAlarmsCheckbox" th:field="*{member.locationAlarms}">
+            <label class="form-check-label " for="locationAlarmsCheckbox">위치 알림</label>
         </div>
         <div class=" form-check form-switch">
             <input class="form-check-input " type="checkbox" role="switch" id="s4">
             <label class="form-check-label " for="s4">출근 시 알림</label>
         </div>
         <div class=" form-check form-switch">
-            <input class="form-check-input " type="checkbox" role="switch" id="s5">
-            <label class="form-check-label " for="s5">보충 약 알림</label>
+            <input class="form-check-input " type="checkbox" role="switch" id="replenishAlarmsCheckbox" th:field="*{member.replenishAlarms}">
+            <label class="form-check-label " for="replenishAlarmsCheckbox">보충 약 알림</label>
         </div>
     </div>
 
@@ -178,18 +179,5 @@
 
 <!-- bootstrp js 링크 -->
 <script src="/js/bootstrap.min.js"></script>
-<script>
-    var toastTrigger = document.getElementById('liveToastBtn')
-    var toastLiveExample = document.getElementById('liveToast')
-    if (toastTrigger) {
-        toastTrigger.addEventListener('click', function () {
-            var toast = new bootstrap.Toast(toastLiveExample)
-
-            toast.show()
-            setTimeout(function(){window.location.href="/";}, 3000);
-        })
-    }
-
-</script>
 </body>
 </html>

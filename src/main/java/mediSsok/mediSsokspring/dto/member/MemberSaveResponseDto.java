@@ -1,4 +1,4 @@
-package mediSsok.mediSsokspring.dto;
+package mediSsok.mediSsokspring.dto.member;
 
 
 import lombok.*;
@@ -12,14 +12,14 @@ public class MemberSaveResponseDto {
     private String email;
     private String password;
     private String nickname;
-    private String phoneNum;
+    private String phone;
 
     @Builder
     public MemberSaveResponseDto(Member entity) {
         this.email = entity.getEmail();
         this.password = entity.getPassword();
         this.nickname = entity.getNickname();
-        this.phoneNum = entity.getPhoneNum();
+        this.phone = entity.getPhone();
     }
 
     public Member toEntity(){
@@ -27,7 +27,7 @@ public class MemberSaveResponseDto {
                 .email(email)
                 .password(password)
                 .nickname(nickname)
-                .phoneNum(phoneNum)
+                .phone(phone)
                 .build();
     }
 }
