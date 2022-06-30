@@ -22,6 +22,7 @@
 </head>
 
 <body class="bg-gradient-primary">
+<div th:replace="/navbar/navBar2 :: navBar2"/>
 <form action="/user/signup" method="post">
     <div class="container">
 
@@ -63,13 +64,7 @@
                                     </div>
                                 </div>
                                 <input type="submit" value="가입하기" class="btn btn-primary btn-user btn-block">
-                                <hr>
-                                <a href="/" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Google 계정으로 로그인
-                                </a>
-                                <a href="/" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Facebook 계정으로 로그인
-                                </a>
+
                             </form>
                             <hr>
                             <div class="text-center">
