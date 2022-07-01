@@ -86,6 +86,7 @@ var editEvent = function (event, element, view) {
                 //...
             },
             success: function (response) {
+                alert(editColor.val());
                 alert('수정되었습니다.')
             }
         });

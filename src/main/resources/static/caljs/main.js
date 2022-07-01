@@ -15,11 +15,15 @@ var calendar = $('#calendar').fullCalendar({
     weekNumbers: false,
     selectable: false, // 날짜 드래그 다중선택
     weekNumberCalculation: "ISO",
-    eventLimit: true, // 셀크기 보다 많은 이벤트가 등록되면 + 로 표기됨
+    defaultView:'month',
+    eventLimit: 2, // 뒤에 숫자보다 셀이 많으면 +추가로 뜸
     views: {
-        month: {eventLimit: 1} // 한 날짜에 최대 이벤트 1개, 나머지는 + 처리됨
+        month: {
+            eventLimit: 2,
+        },
     },
     eventLimitClick: 'popover', //+된거 눌렀을때 popover
+    eventLimitText:'개',
     navLinks: false, // 달력상의 날짜를 클릭할 수 있는지
     defaultDate: moment('2022-06'), //실제 사용시 현재 날짜로 수정
     timeFormat: 'HH:mm',
@@ -48,9 +52,6 @@ var calendar = $('#calendar').fullCalendar({
             columnFormat: ''
         }
     },
-
-
-
 
     /* ****************
      *  일정 받아옴
