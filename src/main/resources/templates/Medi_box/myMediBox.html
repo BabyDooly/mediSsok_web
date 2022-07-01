@@ -86,12 +86,20 @@
                             <img id="mediImg2" style="background: #ffa8a8;border-radius: 70%;overflow: hidden" class="img-fluid" src="/image/mediCase/tes.png" alt="..."/>
                             <!-- Portfolio Modal - Text-->
                             <h3>메모 : 감기걸릴때 먹는약<br></h3>
-                            <h4>약1 : 감기약<br>약2 : 두통약</h4>>
+                            <h4>약1 : 감기약<br>약2 : 두통약</h4>
                             <h4>남은 약 : 27일치</h4>
+
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <div data-bs-toggle="modal" data-bs-target="#editbtn">
+                                <i class="fas fa-omark fa-fw"></i>
+                                수정
+                                </div>
+                            </button>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                창 닫기
+                                삭제
                             </button>
+
                         </div>
                     </div>
                 </div>
@@ -171,6 +179,11 @@
                                             <button onclick="addRow()" style="background: none;border: none">
                                                 <img class="img-fluid" style="width: 30px;height: 30px" src="/image/plusbutton.png" alt="..."/>
                                             </button>
+
+                                            <button onclick="delRow()" style="background: none;border: none">
+                                                <img class="img-fluid" style="width: 30px;height: 30px" src="/image/minus.png" alt="..."/>
+                                            </button>
+
                                         </div>
                                         <div class="col-auto">
 
@@ -181,10 +194,37 @@
 
                                     <div class="row g-3 align-items-center">
                                         <div class="col-auto">
-                                            <label for="intdate" class="col-form-label" style="padding-right: 1em">여분의 약&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                            <label class="col-form-label" style="padding-right: 1em">여분의 약&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
                                         </div>
-                                        <div class="col-md-9">
-                                            <input type="text" id="intdate" class="form-control" placeholder="3일">
+                                        <div class="col-md-3">
+                                            <!--<input type="text" id="intdate" class="form-control" placeholder="3일">-->
+                                            <select class="form-select" aria-label="Default select example" id="dayselect" onchange="Change()">
+                                                <option value="0" selected>선택 없음</option>
+                                                <option value="1">갯수</option>
+                                                <option value="2">일</option>
+                                                <option value="3">주</option>
+                                                <option value="4">월</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div>
+                                                <div class='ctrl' id="d1" style="visibility: hidden">
+                                                    <div class='ctrl__button ctrl__button--decrement'>&ndash;</div>
+                                                    <div class='ctrl__counter'>
+                                                        <input class='ctrl__counter-input' maxlength='10' type='text' value='0'>
+                                                        <div class='ctrl__counter-num'>0</div>
+                                                    </div>
+                                                    <div class='ctrl__button ctrl__button--increment'>+</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <select class="form-select" aria-label="Default select example" id="d2" style="visibility: hidden">
+                                                <option value="0" selected>횟수</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
                                         </div>
                                         <div class="col-auto">
                                         </div>
@@ -278,16 +318,129 @@
         </div>
     </div>
 </div>
+<!-- editBtn -->
+<div class="modal fade" id="editbtn" tabindex="-1" aria-labelledby="editbtn"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h1 class="text-secondary text-uppercase mb-0">약통 수정하기</h1>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <!--<img class="img-fluid rounded mb-5" src="/image/mediCase/capsule-icon.png" alt="..."/>-->
+                            <!-- Portfolio Modal - Text-->
+                            <br>
+                            <div>
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="editmedicase" class="col-form-label" style="padding-right: 3em">약통 이름</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="editmedicase" class="form-control" placeholder="약통 이름">
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="editmemo" class="col-form-label">메모&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="editmemo" class="form-control" placeholder="메모">
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="editcaseCol" class="col-form-label" style="padding-right: 1em">약통 색상&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="color" id="editcaseCol" class="form-control" placeholder="색상" value="#ffa8a8" style="width: 150px;height: 70px">
+                                    </div>
+                                    <div class="col-auto">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="medi" class="col-form-label" style="padding-right: 1em">약 추가 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <table class="table border-secondary">
+                                            <tbody id="editmediTbody">
+                                            <tr>
+                                                <td> <input type="text" id="editmedi" class="form-control" placeholder="무슨약"></td>
+                                            </tr>
+
+                                            </tbody>
+
+                                        </table>
+                                        <button onclick="addRow()" style="background: none;border: none">
+                                            <img class="img-fluid" style="width: 30px;height: 30px" src="/image/plusbutton.png" alt="..."/>
+                                        </button>
+
+                                        <button onclick="delRow()" style="background: none;border: none">
+                                            <img class="img-fluid" style="width: 30px;height: 30px" src="/image/minus.png" alt="..."/>
+                                        </button>
+
+                                    </div>
+                                    <div class="col-auto">
+
+                                    </div>
+
+                                </div>
+                                <hr>
+
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label class="col-form-label" style="padding-right: 1em">여분의 약&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="editintdate" class="form-control" placeholder="3일">
+                                    </div>
+                                    <div class="col-auto">
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br><br><br><br><br><br><br><br>
+                            <button id="editsubmit" onclick="editbtn()" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                                수정
+                            </button>
+                            <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                                취소
+                            </button>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 <!-- bootstrp js 링크 -->
 <script src="/js/bootstrap.min.js"></script>
 
 <script>
-
+    var my_mediTbody = document.getElementById('mediTbody');
     var cnt=1;
     function addRow(){
         if(cnt<7){
-            var my_mediTbody = document.getElementById('mediTbody');
+
             var row = my_mediTbody.insertRow(my_mediTbody.rows.length);
             var cell1 = row.insertCell(0);
             cell1.innerHTML="<input type=\"text\" id=\"medi"+cnt+"\" class=\"form-control\" placeholder=\"무슨약\">";
@@ -296,8 +449,14 @@
         else{
         }
     }
-    var mediArr = [];
+    function delRow(){
+        if(cnt>1){
+            var row = my_mediTbody.deleteRow(0);
+            cnt-=1;
+        }
+    }
     var i;
+    var mediArr = [];
     function addbtn(){
         var backTag = document.getElementById('mediImg');
         var backTag2 = document.getElementById('mediImg2');
@@ -307,10 +466,9 @@
         const memoAdd = document.getElementById('memo').value;
         const colAdd = document.getElementById('caseCol').value;
         const mediAdd = document.getElementById('medi').value;
-            for( i = 1;i<cnt;i++){
-                mediArr[i-1] = document.getElementById('medi'+i).value;
-            }
-
+        for( i = 1;i<cnt;i++){
+            mediArr[i-1] = document.getElementById('medi'+i).value;
+        }
         const intAdd = document.getElementById('intdate').value;
 
         newCase.setAttribute("id","caseDiv");
@@ -319,9 +477,9 @@
         newCase.innerText+=memoAdd;
         newCase.innerText+=colAdd;
         newCase.innerText+=mediAdd;
-            for(var i=1;i<cnt;i++){
-                newCase.innerText+=mediArr[i-1];
-            }
+        for(var i=1;i<cnt;i++){
+            newCase.innerText+=mediArr[i-1];
+        }
         newCase.innerText+=intAdd;
 
         const newText = document.createTextNode('');
@@ -335,6 +493,102 @@
         const div = document.getElementById('caseDiv');
         div.remove();
     }
+
+    (function() {
+        'use strict';
+        function ctrls() {
+            var _this = this;
+            this.counter = 0;
+            this.els = {
+                decrement: document.querySelector('.ctrl__button--decrement'),
+                counter: {
+                    container: document.querySelector('.ctrl__counter'),
+                    num: document.querySelector('.ctrl__counter-num'),
+                    input: document.querySelector('.ctrl__counter-input')
+                },
+                increment: document.querySelector('.ctrl__button--increment')
+            };
+            this.decrement = function() {
+                var counter = _this.getCounter();
+                var nextCounter = (_this.counter > 0) ? --counter : counter;
+                _this.setCounter(nextCounter);
+            };
+            this.increment = function() {
+                var counter = _this.getCounter();
+                var nextCounter = (counter < 9999999999) ? ++counter : counter;
+                _this.setCounter(nextCounter);
+            };
+            this.getCounter = function() {
+                return _this.counter;
+            };
+            this.setCounter = function(nextCounter) {
+                _this.counter = nextCounter;
+            };
+            this.debounce = function(callback) {
+                setTimeout(callback, 100);
+            };
+            this.render = function(hideClassName, visibleClassName) {
+                _this.els.counter.num.classList.add(hideClassName);
+                setTimeout(function() {
+                    _this.els.counter.num.innerText = _this.getCounter();
+                    _this.els.counter.input.value = _this.getCounter();
+                    _this.els.counter.num.classList.add(visibleClassName);
+                }, 100);
+                setTimeout(function() {
+                    _this.els.counter.num.classList.remove(hideClassName);
+                    _this.els.counter.num.classList.remove(visibleClassName);
+                }, 200);
+            };
+            this.ready = function() {
+                _this.els.decrement.addEventListener('click', function() {
+                    _this.debounce(function() {
+                        _this.decrement();
+                        _this.render('is-decrement-hide', 'is-decrement-visible');
+                    });
+                });
+                _this.els.increment.addEventListener('click', function() {
+                    _this.debounce(function() {
+                        _this.increment();
+                        _this.render('is-increment-hide', 'is-increment-visible');
+                    });
+                });
+                _this.els.counter.input.addEventListener('input', function(e) {
+                    var parseValue = parseInt(e.target.value);
+                    if (!isNaN(parseValue) && parseValue >= 0) {
+                        _this.setCounter(parseValue);
+                        _this.render();
+                    }
+                });
+                _this.els.counter.input.addEventListener('focus', function(e) {
+                    _this.els.counter.container.classList.add('is-input');
+                });
+                _this.els.counter.input.addEventListener('blur', function(e) {
+                    _this.els.counter.container.classList.remove('is-input');
+                    _this.render();
+                });
+            };
+        };
+        // init
+        var controls = new ctrls();
+        document.addEventListener('DOMContentLoaded', controls.ready);
+    })();
+
+    function Change(){
+        var key = dayselect.value;
+        if(key==0){
+            document.all["d1"].style.visibility="hidden";
+            document.all["d2"].style.visibility="hidden";
+        }
+        else if(key==1){
+            document.all["d1"].style.visibility="visible";
+            document.all["d2"].style.visibility="hidden";
+        }
+        else{
+            document.all["d1"].style.visibility="visible";
+            document.all["d2"].style.visibility="visible";
+        }
+    }
+
 </script>
 
 </body>
