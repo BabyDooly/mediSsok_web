@@ -1,16 +1,18 @@
 package mediSsok.mediSsokspring.controller;
 
 import lombok.RequiredArgsConstructor;
-import mediSsok.mediSsokspring.dto.member.MemberAlarmUpdateRequestDto;
-import mediSsok.mediSsokspring.dto.member.MemberResponseDto;
-import mediSsok.mediSsokspring.dto.member.MemberSaveResponseDto;
-import mediSsok.mediSsokspring.dto.member.MemberUserUpdateRequestDto;
+import mediSsok.mediSsokspring.dto.member.*;
 import mediSsok.mediSsokspring.service.MemberService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor    //final 필드 생성자 생성
@@ -23,11 +25,26 @@ public class MemberApiController {
         return "/login/register";
     }
 
-    // 회원가입
-    @PostMapping("/user/signup")
-    public String Signup(MemberSaveResponseDto memberDto) {
-        memberService.save(memberDto);
+    // 회원가입 로직검사(POST)
+    @PostMapping("/user/signupProc")
+    public String Signup(@Valid MemberSaveResponseDto memberDto, Errors errors , Model model) {
 
+//
+//        if (errors.hasErrors()) {
+//            // 회원가입 실패시 입력 데이터 값을 유지
+//            model.addAttribute("memberDto", memberDto);
+//
+//            // 유효성 통과 못한 필드와 메시지를 핸들링
+//            Map<String, String> validatorResult = memberService.validateHandling(errors);
+//            for (String key : validatorResult.keySet()) {
+//                model.addAttribute(key, validatorResult.get(key));
+//            }
+//
+//            // 회원가입 페이지로 다시 리턴
+//            return "/user/signup";
+//        }
+        // 성공하면 로그인페이지로
+        memberService.save(memberDto);
         return "redirect:/user/login";
     }
 

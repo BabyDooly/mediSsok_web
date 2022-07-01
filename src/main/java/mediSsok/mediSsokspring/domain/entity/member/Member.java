@@ -1,19 +1,18 @@
-package mediSsok.mediSsokspring.domain.entity;
+package mediSsok.mediSsokspring.domain.entity.member;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mediSsok.mediSsokspring.domain.BaseTimeEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)  // 기본 생성자 자동 추가
 @Getter
 @Entity
 @Table(name = "member")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)  // 기본 생성자 자동 추가
 public class Member extends BaseTimeEntity {
     @Id
     @Column(name = "member_id")
@@ -56,11 +55,18 @@ public class Member extends BaseTimeEntity {
     private Boolean replenishAlarms = true;
 
     @Builder
-    public Member(String email, String password, String nickname, String phone) {
+    public Member(Long id, String email, String password, String nickname, String phone, String location, Boolean vibration, Boolean pushAlarms, Boolean locationAlarms, Date workAlarms, Boolean replenishAlarms) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
         this.phone = phone;
+        this.location = location;
+        this.vibration = vibration;
+        this.pushAlarms = pushAlarms;
+        this.locationAlarms = locationAlarms;
+        this.workAlarms = workAlarms;
+        this.replenishAlarms = replenishAlarms;
     }
 
     // 개인정보 변경

@@ -2,7 +2,7 @@ package mediSsok.mediSsokspring.dto.member;
 
 
 import lombok.*;
-import mediSsok.mediSsokspring.domain.entity.Member;
+import mediSsok.mediSsokspring.domain.entity.member.Member;
 @Getter
 @Setter
 @ToString

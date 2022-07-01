@@ -1,4 +1,4 @@
-package mediSsok.mediSsokspring.domain.entity;
+package mediSsok.mediSsokspring.domain.entity.member;
 
 import lombok.Getter;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
