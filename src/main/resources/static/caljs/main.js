@@ -13,7 +13,7 @@ var calendar = $('#calendar').fullCalendar({
     displayEventEnd: true,
     firstDay: 0, //월요일이 먼저 오게 하려면 1
     weekNumbers: false,
-    selectable: false, // 날짜 드래그 다중선택
+    selectable: true, // 날짜 드래그 다중선택
     weekNumberCalculation: "ISO",
     defaultView:'month',
     eventLimit: 2, // 뒤에 숫자보다 셀이 많으면 +추가로 뜸
