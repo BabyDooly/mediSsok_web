@@ -14,11 +14,8 @@ import mediSsok.mediSsokspring.domain.entity.member.Member;
 @NoArgsConstructor
 public class MedicineBoxReadResponseDto {
     private String name;
-
     private String memo;
-
     private String color;
-
     private int count;
 
     public MedicineBoxReadResponseDto(MedicineBox entity) {

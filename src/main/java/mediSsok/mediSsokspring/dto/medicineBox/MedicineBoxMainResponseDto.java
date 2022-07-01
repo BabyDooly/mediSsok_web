@@ -14,9 +14,7 @@ import mediSsok.mediSsokspring.domain.entity.member.Member;
 @NoArgsConstructor
 public class MedicineBoxMainResponseDto {
     private String name;
-
     private String color;
-
     private long member;
 
     public MedicineBoxMainResponseDto(MedicineBox entity) {

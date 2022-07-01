@@ -13,14 +13,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class MedicineBoxSaveResponseDto {
     private String name;
-
     private String memo;
-
     private String color;
-
     private int count;
-
-    private Long member;
+    private String member;
 
     public MedicineBox toEntity(){
         return MedicineBox.builder()
@@ -28,7 +24,7 @@ public class MedicineBoxSaveResponseDto {
                 .color(color)
                 .memo(memo)
                 .count(count)
-                .member(Member.builder().id(member).build())
+                .member(Member.builder().email(member).build())
                 .build();
     }
 }

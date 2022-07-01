@@ -10,13 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor    //final 필드 생성자 생성
-public class MemberApiController {
+public class MemberController {
     private final MemberService memberService;
 
     // 회원가입 페이지(GET)

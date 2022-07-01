@@ -9,13 +9,15 @@ import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineList;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 public class MedicineListSaveResponseDto {
     private String name;
-
     private Long medicineBox;
 
     public MedicineList toEntity(){

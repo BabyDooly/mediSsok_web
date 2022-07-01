@@ -8,6 +8,8 @@ import mediSsok.mediSsokspring.domain.BaseTimeEntity;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)  // 기본 생성자 자동 추가
 @Getter
@@ -40,6 +42,12 @@ public class MedicineBox extends BaseTimeEntity {
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
+    // 약 리스트트
+    @OneToMany(mappedBy = "medicineBox")
+    List<MedicineList> medicineLists = new ArrayList<>();
+
+
+    //mappedby
     @Builder
 
     public MedicineBox(Long id, String name, String memo, String color, int count, Member member) {
