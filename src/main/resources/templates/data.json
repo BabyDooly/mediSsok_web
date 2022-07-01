@@ -1,79 +1,79 @@
 [{
     "_id": 1,
-    "title": "거래처 미팅",
-    "description": "Lorem ipsum dolor sit incid idunt ut Lorem ipsum sit.",
+    "title": "두통약",
+    "description": "머리 아플 때 먹는 약",
     "start": "2022-07-07T09:30",
     "backgroundColor": "#D25565",
     "textColor": "#ffffff",
     "allDay": false
   }, {
     "_id": 2,
-    "title": "치과예약",
-    "description": "Lorem ipsum dolor sit incid idunt ut Lorem ipsum sit.",
+    "title": "혈압약",
+    "description": "계속 챙겨먹는 혈압 약",
   "start": "2022-07-07T09:30",
     "backgroundColor": "#D25565",
     "textColor": "#ffffff",
     "allDay": false
   }, {
     "_id": 3,
-    "title": "철수 생일",
-    "description": "Lorem ipsum dolor sit incid idunt ut Lorem ipsum sit.",
+    "title": "긴장약",
+    "description": "긴장이 많이 될 때 먹는 약",
   "start": "2022-07-07T09:30",
     "backgroundColor": "#D25565",
     "textColor": "#ffffff",
     "allDay": false
   }, {
     "_id": 4,
-    "title": "멜론 만기",
-    "description": "Lorem ipsum dolor sit incid idunt ut Lorem ipsum sit.",
+    "title": "간 약",
+    "description": "간이 안좋을 때 먹는 약",
   "start": "2022-07-07T09:30",
     "backgroundColor": "#D25565",
     "textColor": "#ffffff",
     "allDay": false
   }, {
     "_id": 5,
-    "title": "청약 입금",
-    "description": "Lorem ipsum dolor sit incid idunt ut Lorem ipsum sit.",
+    "title": "비타민",
+    "description": "늘 챙겨먹는 비타민",
   "start": "2022-07-07T09:30",
     "backgroundColor": "#D25565",
     "textColor": "#ffffff",
     "allDay": false
   }, {
     "_id": 6,
-    "title": "카드값 납부",
-    "description": "Lorem ipsum dolor sit incid idunt ut Lorem ipsum sit.",
+    "title": "감기약",
+    "description": "감기 걸렸을 때 먹는 약",
     "start": "2022-07-13",
     "backgroundColor": "#D25565",
     "textColor": "#ffffff",
     "allDay": false
   }, {
     "_id": 7,
-    "title": "휴가",
-    "description": "Lorem ipsum dolor sit incid idunt ut Lorem ipsum sit.",
+    "title": "종합약",
+    "description": "다 아플 때 먹는 약",
     "start": "2022-07-08",
     "backgroundColor": "#D25565",
     "textColor": "#ffffff",
     "allDay": false
   },{
     "_id": 8,
-    "title": "세차예약",
-    "description": "Lorem ipsum dolor sit incid idunt ut Lorem ipsum sit.",
+    "title": "두통약",
+    "description": "머리 아플 때 먹는 약",
     "start": "2022-07-09T09:00",
     "backgroundColor": "#D25565",
     "textColor": "#ffffff",
     "allDay": false
   },{
     "_id": 9,
-    "title": "출장",
-    "description": "Lorem ipsum dolor sit incid idunt ut Lorem ipsum sit.",
+    "title": "감기약",
+    "description": "감기 걸렸을 때 먹는 약",
     "start": "2022-07-10",
     "backgroundColor": "#D25565",
     "textColor": "#ffffff",
     "allDay": false
   },{
     "_id": 10,
-    "title": "접수 기간",
-    "description": "Lorem ipsum dolor sit incid idunt ut Lorem ipsum sit.",
+    "title": "종합약",
+    "description": "다 아플 때 먹는 약",
     "start": "2022-07-11",
     "backgroundColor": "#D25565",
     "textColor": "#ffffff",
@@ -81,7 +81,7 @@
   },{
   "_id": 11,
   "title": "먹었나요",
-  "description": "Lorem ipsum dolor sit incid idunt ut Lorem ipsum sit.",
+  "description": "약을 먹었나요?",
   "start": "2022-07-12",
   "backgroundColor": "#D25565",
   "textColor": "#ffffff",

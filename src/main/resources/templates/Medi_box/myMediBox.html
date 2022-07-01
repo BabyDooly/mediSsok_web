@@ -32,12 +32,12 @@
     <div class="row justify-content-center" style="padding-top: 400px; width: 900px;margin: 0 auto">
         <!-- Portfolio Item 1-->
         <div class="col-md-6 col-lg-4 " style="height: 350px;margin-bottom: 20px;" th:each="mediBox: ${mediBoxs}">
-            <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+            <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1" style="border-radius: 70%">
                 <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                     <div class="portfolio-item-caption-content text-center text-white"><i class="fa fa-search fa-3x"></i>
                     </div>
                 </div>
-                <img id="mediImg" style="border-radius: 70%;" th:style="'background:' + ${mediBox.getColor()}"  class="img-fluid" src="/image/mediCase/tes.png" alt="..."/>
+                <img id="mediImg" style="border-radius: 70%;" th:style="'background:' + ${mediBox.getColor()}+ ';border-radius:70%'"  class="img-fluid" src="/image/mediCase/tes.png" alt="..."/>
             </div>
             <hr>
                 <h1 th:text="${mediBox.getName()}"></h1>
@@ -53,15 +53,7 @@
             </div>
         </div>
     </button>
-    <button onclick="minusbtn">
-        <div>
-            <div data-bs-toggle="modal" data-bs-target="#minusbtn">
-                <div class="d-flex align-items-center justify-content-center h-100 w-100">
-                </div>
-                <img class="img-fluid" src="/image/minus.png" alt="..."/>
-            </div>
-        </div>
-    </button>
+
 
 <!-- Portfolio Modal 1-->
 <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1"
