@@ -23,15 +23,15 @@ public class MedicineList extends BaseTimeEntity {
     @Column(name = "medlist_name", length = 20, nullable = false)
     private String name;
 
-    // 약통 ID(MedicineBox)
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "medbox_id", nullable = false)
-    private MedicineBox medicineBox;
+//    // 약통 ID(MedicineBox)
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "medbox_id", nullable = false)
+//    private MedicineBox medicineBox;
 
     @Builder
     public MedicineList(Long id, String name, MedicineBox medicineBox) {
         this.id = id;
         this.name = name;
-        this.medicineBox = medicineBox;
+//        this.medicineBox = medicineBox;
     }
 }

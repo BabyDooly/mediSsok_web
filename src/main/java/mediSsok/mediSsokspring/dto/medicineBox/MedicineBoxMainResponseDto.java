@@ -15,11 +15,11 @@ import mediSsok.mediSsokspring.domain.entity.member.Member;
 public class MedicineBoxMainResponseDto {
     private String name;
     private String color;
-    private long member;
+//    private long member;
 
     public MedicineBoxMainResponseDto(MedicineBox entity) {
         this.name = entity.getName();
         this.color = entity.getColor();
-        this.member = entity.getMember().getId();
+//        this.member = entity.getMember().getId();
     }
 }

@@ -1,6 +1,7 @@
 package mediSsok.mediSsokspring.service;
 
 import lombok.RequiredArgsConstructor;
+import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineBoxRepository;
 import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineListRepository;
 import mediSsok.mediSsokspring.dto.medicineBox.*;
@@ -26,8 +27,8 @@ public class MedicineBoxService {
 
     // 약통 리스트
     @Transactional(readOnly=true)
-    public List<MedicineBoxMainResponseDto> findAll(Pageable pageable){
-        return medicineBoxRepository.findAll(pageable)
+    public List<MedicineBoxMainResponseDto> findAll(){
+        return medicineBoxRepository.findAll()
                 .stream()
                 .map(MedicineBoxMainResponseDto::new)
                 .collect(Collectors.toList());
@@ -50,16 +51,16 @@ public class MedicineBoxService {
 
     /*---- 약리스트 ----*/
     // 저장
-    public Long save(final MedicineListSaveResponseDto dto) {
-        return medicineListRepository.save(dto.toEntity()).getId();
-    }
+//    public Long save(final MedicineListSaveResponseDto dto) {
+//        return medicineListRepository.save(dto.toEntity()).getId();
+//    }
 
-    // 약 리스트
-    @Transactional(readOnly = true)
-    public List<MedicineListReadResponseDto> findByid(final long medBoxId) {
-        return medicineListRepository.findAll()
-                .stream()
-                .filter(MedicineList -> (MedicineList.getMedicineBox().getId() == medBoxId))
-                .map(MedicineListReadResponseDto::new).collect(Collectors.toList());
-    }
+//    // 약 리스트
+//    @Transactional(readOnly = true)
+//    public List<MedicineListReadResponseDto> findByid(final long medBoxId) {
+//        return medicineListRepository.findAll()
+//                .stream()
+//                .filter(MedicineList -> (MedicineList.getMedicineBox().getId() == medBoxId))
+//                .map(MedicineListReadResponseDto::new).collect(Collectors.toList());
+//    }
 }

@@ -37,25 +37,23 @@ public class MedicineBox extends BaseTimeEntity {
     @Column(name = "medbox_count", length = 10)
     private int count;
 
-    // 사용자 ID(Member)
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
+//    // 사용자 ID(Member)
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "member_id", nullable = false)
+//    private Member member;
 
-    // 약 리스트트
-    @OneToMany(mappedBy = "medicineBox")
-    List<MedicineList> medicineLists = new ArrayList<>();
+//    // 약 리스트트
+//    @OneToMany(mappedBy = "medicineBox")
+//    List<MedicineList> medicineLists = new ArrayList<>();
 
 
-    //mappedby
     @Builder
-
-    public MedicineBox(Long id, String name, String memo, String color, int count, Member member) {
+    public MedicineBox(Long id, String name, String memo, String color, int count) {
         this.id = id;
         this.name = name;
         this.memo = memo;
         this.color = color;
         this.count = count;
-        this.member = member;
+//        this.member = member;
     }
 }
