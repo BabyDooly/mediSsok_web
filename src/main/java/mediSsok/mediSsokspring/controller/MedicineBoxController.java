@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
@@ -23,12 +25,11 @@ public class MedicineBoxController {
         return "/Medi_box/myMediBox";
     }
 
-    @PostMapping("/write")
-    public String save(MedicineBoxSaveResponseDto dto, @AuthenticationPrincipal UserDetails userDetails, RedirectAttributes model) {
+    @PostMapping("/api/medi/add")
+    @ResponseBody
+    public Long add(@RequestBody MedicineBoxSaveResponseDto dto, @AuthenticationPrincipal UserDetails userDetails) {
         dto.setMember(userDetails.getUsername());
-        model.addAttribute("mediBox", medicineBoxService.save(dto));
 
-        return "redirect:/medi/medibox";
+        return medicineBoxService.save(dto);
     }
-
 }

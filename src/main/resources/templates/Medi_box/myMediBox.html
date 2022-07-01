@@ -163,7 +163,7 @@
         </div>
     </div>
 </div>
-    <!-- plusBtn -->
+<!-- 추가하기 -->
     <div class="modal fade" id="plusbtn" tabindex="-1" aria-labelledby="plusbtn"
          aria-hidden="true">
         <div class="modal-dialog modal-xl">
@@ -267,7 +267,7 @@
                                                 <div class='ctrl' id="d1" style="visibility: hidden">
                                                     <div class='ctrl__button ctrl__button--decrement'>&ndash;</div>
                                                     <div class='ctrl__counter'>
-                                                        <input class='ctrl__counter-input' maxlength='10' type='text' value='0'>
+                                                        <input class='ctrl__counter-input' maxlength='10' type='text' value='0' id="mediCount">
                                                         <div class='ctrl__counter-num'>0</div>
                                                     </div>
                                                     <div class='ctrl__button ctrl__button--increment'>+</div>
@@ -287,15 +287,12 @@
                                     </div>
                                 </div>
                                 <br><br><br><br><br><br><br><br><br>
-                                <button id="addbtn" onclick="addbtn()" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                                <button id="btn-add" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
                                     추가
                                 </button>
                                 <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
                                     취소
                                 </button>
-
-
-
                             </div>
                         </div>
                     </div>
@@ -471,10 +468,10 @@
                                 </div>
                             </div>
                             <br><br><br><br><br><br><br><br><br>
-                            <button id="editsubmit" onclick="editbtn()" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                            <button id="editsubmit" onclick="editbtn()" class="btn btn-primary"  style="width: 90px">
                                 수정
                             </button>
-                            <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                            <button class="btn btn-primary" style="width: 90px">
                                 취소
                             </button>
 
@@ -490,6 +487,8 @@
 </div>
 <!-- bootstrp js 링크 -->
 <script src="/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/mediBox.js"></script>
 
 <script>
     var my_mediTbody = document.getElementById('mediTbody');
@@ -513,38 +512,41 @@
     }
     var i;
     var mediArr = [];
-    function addbtn(){
-        var backTag = document.getElementById('mediImg');
-        var backTag2 = document.getElementById('mediImg2');
-        var textTag = document.getElementById('mediText');
-        const newCase = document.createElement('div');
-        const medicaseAdd = document.getElementById('medicase').value;
-        const memoAdd = document.getElementById('memo').value;
-        const colAdd = document.getElementById('caseCol').value;
-        const mediAdd = document.getElementById('medi').value;
-        for( i = 1;i<cnt;i++){
-            mediArr[i-1] = document.getElementById('medi'+i).value;
-        }
-        const intAdd = document.getElementById('intdate').value;
 
-        newCase.setAttribute("id","caseDiv");
-        newCase.setAttribute("class","tesDiv");
-        newCase.innerText=medicaseAdd;
-        newCase.innerText+=memoAdd;
-        newCase.innerText+=colAdd;
-        newCase.innerText+=mediAdd;
-        for(var i=1;i<cnt;i++){
-            newCase.innerText+=mediArr[i-1];
-        }
-        newCase.innerText+=intAdd;
-
-        const newText = document.createTextNode('');
-        newCase.appendChild(newText);
-        document.body.appendChild(newCase);
-
-        backTag.style.backgroundColor=colAdd;
-        backTag2.style.backgroundColor=colAdd;
+    function addbtn1(){
+        // var backTag = document.getElementById('mediImg');
+        // var backTag2 = document.getElementById('mediImg2');
+        // var textTag = document.getElementById('mediText');
+        // const newCase = document.createElement('div');
+        // const medicaseAdd = document.getElementById('medicase').value;
+        // const memoAdd = document.getElementById('memo').value;
+        // const colAdd = document.getElementById('caseCol').value;
+        // const mediAdd = document.getElementById('medi').value;
+        // for( i = 1;i<cnt;i++){
+        //     mediArr[i-1] = document.getElementById('medi'+i).value;
+        // }
+        // const intAdd = document.getElementById('intdate').value;
+        //
+        // newCase.setAttribute("id","caseDiv");
+        // newCase.setAttribute("class","tesDiv");
+        // newCase.innerText=medicaseAdd;
+        // newCase.innerText+=memoAdd;
+        // newCase.innerText+=colAdd;
+        // newCase.innerText+=mediAdd;
+        // for(var i=1;i<cnt;i++){
+        //     newCase.innerText+=mediArr[i-1];
+        // }
+        // newCase.innerText+=intAdd;
+        //
+        // const newText = document.createTextNode('');
+        // newCase.appendChild(newText);
+        // document.body.appendChild(newCase);
+        //
+        // backTag.style.backgroundColor=colAdd;
+        // backTag2.style.backgroundColor=colAdd;
     }
+
+
     function delbtn(){
         const div = document.getElementById('caseDiv');
         div.remove();
@@ -646,6 +648,8 @@
     }
 
 </script>
+
+
 
 </body>
 </html>
