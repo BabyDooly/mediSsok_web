@@ -22,6 +22,7 @@ import java.util.*;
 public class MemberService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
+    //* 테스트
     // 회원가입
     @Transactional
     public String save(MemberSaveResponseDto memberDto) {
