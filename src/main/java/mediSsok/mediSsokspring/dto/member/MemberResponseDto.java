@@ -3,15 +3,24 @@ package mediSsok.mediSsokspring.dto.member;
 
 import lombok.*;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 public class MemberResponseDto {
-    private Long id;
+
+
     private String email;
     private String password;
     private String nickname;
+
+
+    private Long id;
     private String phone;
     private Boolean vibration;
     private Boolean pushAlarms;

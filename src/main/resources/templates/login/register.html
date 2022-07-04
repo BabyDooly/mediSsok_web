@@ -23,7 +23,7 @@
 
 <body class="bg-gradient-primary">
 <div th:replace="/navbar/navBar2 :: navBar2"/>
-<form action="/user/signupProc" method="post" modelAttribute="memberDto">
+<form th:action="@{/user/signupProc}" method="post" modelAttribute="memberDto">
     <div class="container">
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
@@ -41,6 +41,7 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="exampleInputEmail"
                                            maxlength="20" name="email" placeholder="이메일 주소">
+                                    <span th:text="${valid_email}"></span>
 <!--                                    <span th:if="${valid_email}">-->
 <!--                                           <p id="valid" th:text="${valid_email}"></p>-->
 <!--                                    </span>-->
@@ -50,13 +51,15 @@
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
                                                id="exampleInputPassword" maxlength="15" name = "password" placeholder="비밀번호">
+                                        <span th:text="${valid_password}"></span>
                                     </div>
 <!--                                    <span th:if="${valid_email}">-->
 <!--                                           <p id="valid" th:text="${valid_email}"></p>-->
 <!--                                    </span>-->
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                               id="exampleRepeatPassword" maxlength="15" name = "passwordConfirm"placeholder="비밀번호 재입력">
+                                               id="exampleRepeatPassword" maxlength="15" name = "confirm_Password"placeholder="비밀번호 재입력">
+                                        <span th:text="${valid_confirm_Password}"></span>
                                     </div>
                                 </div>
 
@@ -64,6 +67,7 @@
                                     <div class="col-sm-12 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="nickname"
                                                maxlength="6" name="nickname" placeholder="닉네임">
+                                        <span th:text="${valid_nickname}"></span>
                                     </div>
                                 </div>
 
