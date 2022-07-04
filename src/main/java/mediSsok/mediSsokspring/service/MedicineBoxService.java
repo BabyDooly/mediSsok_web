@@ -2,6 +2,7 @@ package mediSsok.mediSsokspring.service;
 
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
+import mediSsok.mediSsokspring.domain.entity.member.Member;
 import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineBoxRepository;
 import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineListRepository;
 import mediSsok.mediSsokspring.dto.medicineBox.*;
@@ -21,7 +22,8 @@ public class MedicineBoxService {
     /*---- 약통 ----*/
     // 저장
     @Transactional
-    public Long save(MedicineBoxSaveResponseDto dto) {
+    public Long create(MedicineBoxSaveResponseDto dto, Member member) {
+
         return medicineBoxRepository.save(dto.toEntity()).getId();
     }
 

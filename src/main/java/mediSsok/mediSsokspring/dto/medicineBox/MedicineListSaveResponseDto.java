@@ -17,13 +17,13 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 public class MedicineListSaveResponseDto {
-    private String name;
-    private Long medicineBox;
-
-    public MedicineList toEntity(){
-        return MedicineList.builder()
-                .name(name)
-                .medicineBox(MedicineBox.builder().id(medicineBox).build())
-                .build();
-    }
+//    private String name;
+//    private Long medicineBox;
+//
+//    public MedicineList toEntity(){
+//        return MedicineList.builder()
+//                .name(name)
+//                .medicineBox(MedicineBox.builder().id(medicineBox).build())
+//                .build();
+//    }
 }

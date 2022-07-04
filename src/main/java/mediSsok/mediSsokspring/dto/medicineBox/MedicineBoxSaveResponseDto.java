@@ -16,7 +16,7 @@ public class MedicineBoxSaveResponseDto {
     private String memo;
     private String color;
     private int count;
-//    private String member;
+    private Member member;
 
     public MedicineBox toEntity(){
         return MedicineBox.builder()
@@ -24,7 +24,7 @@ public class MedicineBoxSaveResponseDto {
                 .color(color)
                 .memo(memo)
                 .count(count)
-//                .member(Member.builder().email(member).build())
+                .member(member)
                 .build();
     }
 }

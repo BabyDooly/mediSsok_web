@@ -1,6 +1,7 @@
 package mediSsok.mediSsokspring.controller;
 
 import lombok.RequiredArgsConstructor;
+import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxSaveResponseDto;
 import mediSsok.mediSsokspring.service.MedicineBoxService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -29,9 +30,8 @@ public class MedicineBoxController {
 
     @PostMapping("/api/medi/add")
     @ResponseBody
-    public Long save(@RequestBody MedicineBoxSaveResponseDto dto, @AuthenticationPrincipal UserDetails userDetails) {
-//        dto.setMember(userDetails.getUsername());
-        System.out.println(dto);
-        return medicineBoxService.save(dto);
+    public Long save(@RequestBody MedicineBoxSaveResponseDto dto, @AuthenticationPrincipal CustomUserDetails userDetails) {
+        dto.setMember(userDetails.getMember());
+        return medicineBoxService.create(dto, userDetails.getMember());
     }
 }

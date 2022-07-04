@@ -1,6 +1,8 @@
 package mediSsok.mediSsokspring.service;
 
 import lombok.RequiredArgsConstructor;
+import mediSsok.mediSsokspring.config.CustomUserDetails;
+import mediSsok.mediSsokspring.config.auth.dto.SessionUser;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
 import mediSsok.mediSsokspring.domain.repository.member.MemberRepository;
 import mediSsok.mediSsokspring.dto.member.*;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Service
@@ -22,10 +25,12 @@ import java.util.*;
 public class MemberService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
+    private final HttpSession session;
+
     // 회원가입
     @Transactional
     public String save(MemberSaveResponseDto memberDto) {
-        // 비밀번호 암호화
+        // 비밀번호 암호화후 저장
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
         return memberRepository.save(memberDto.toEntity()).getEmail();
@@ -97,13 +102,16 @@ public class MemberService implements UserDetailsService {
         return new MemberResponseDto(entity);
     }
 
-    // 로그인(암호화)
+    // useremail이 DB에 있는지 확인
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-        Optional<Member> userEntityWrapper = memberRepository.findByEmail(userEmail);
-        Member entity = userEntityWrapper.get();
-        List<GrantedAuthority> authorities = new ArrayList<>();
+        Member member = memberRepository.findByEmail(userEmail)
+                .orElseThrow(() ->  new UsernameNotFoundException("해당 사용자가 존재하지 않습니다. email = " + userEmail));
 
-        return new User(entity.getEmail(), entity.getPassword(), authorities);
+        // 세션 저장
+        session.setAttribute("member", new SessionUser(member));
+
+        // 시큐리티 세션에 유저 정보 저장
+        return new CustomUserDetails(member);
     }
 }

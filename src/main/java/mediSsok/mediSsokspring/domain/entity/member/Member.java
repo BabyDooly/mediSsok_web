@@ -5,9 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mediSsok.mediSsokspring.domain.BaseTimeEntity;
+import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)  // 기본 생성자 자동 추가
 @Getter
@@ -31,9 +34,6 @@ public class Member extends BaseTimeEntity {
     @Column(name = "member_phone", length = 30, nullable = false)
     private String phone;
 
-    @Column(name = "member_location", length = 100)
-    private String location;
-
     // 진동모드
     @Column(name = "member_vibration_mode", nullable = false)
     private Boolean vibration = false;
@@ -53,6 +53,10 @@ public class Member extends BaseTimeEntity {
     // 보충알림
     @Column(name = "member_replenish_alarm", nullable = false)
     private Boolean replenishAlarms = true;
+
+    // 약통 리스트
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<MedicineBox> medicineLists = new ArrayList<>();
 
     @Builder
     public Member(String email, String password, String nickname, String phone) {
