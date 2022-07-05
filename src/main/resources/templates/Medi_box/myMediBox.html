@@ -15,8 +15,10 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
           type="text/css"/>
+
 </head>
 <body>
+
 <div th:replace="navbar/navBar :: navBar"/>
 <p class="mainText">내 약통</p>
 <p class="mainSubText">자주 먹는 약 정보, 내 약통에 쏙</p>
@@ -28,79 +30,88 @@
     <h3 th:align="center" sec:authentication="name"></h3>
 -->
 <div class="myMediCaseDiv">
-    <section class="portfolio-item page-section portfolio" id="portfolio">
-    <div class="row justify-content-center" style="padding-top: 400px; width: 900px;margin: 0 auto">
-        <!-- Portfolio Item 1-->
-        <div class="col-md-6 col-lg-4 " style="height: 350px;margin-bottom: 20px;" th:each="mediBox: ${mediBoxs}">
-            <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1" style="border-radius: 70%">
-                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                    <div class="portfolio-item-caption-content text-center text-white"><i class="fa fa-search fa-3x"></i>
-                    </div>
-                </div>
-                <img id="mediImg" style="border-radius: 70%;" th:style="'background:' + ${mediBox.getColor()}+ ';border-radius:70%'"  class="img-fluid" src="/image/mediCase/tes.png" alt="..."/>
-            </div>
-            <hr>
-                <h1 th:text="${mediBox.getName()}"></h1>
-        </div>
-    </div>
-    </section>
-    <button onclick="plusbtn">
+    <button onclick="plusbtn" style="margin-top: 80px; border: 0px;background: #ffffff;width: 100px;height: 100px;overflow: auto;background: none">
         <div>
             <div data-bs-toggle="modal" data-bs-target="#plusbtn">
                 <div class="d-flex align-items-center justify-content-center h-100 w-100">
                 </div>
-                <img class="img-fluid" src="/image/plusbutton.png" alt="..."/>
+                <img class="img-fluid" src="/image/plusbutton2.jpg" alt="..."/>
             </div>
         </div>
     </button>
-
-
-<!-- Portfolio Modal 1-->
-<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1"
-     aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+    <section class="portfolio-item page-section portfolio" id="portfolio" style="height: 950px">
+        <div class="row justify-content-center" style="padding-top: 220px; width: 900px;margin: 0 auto">
+            <!-- Portfolio Item 1-->
+            <div class="col-md-6 col-lg-4 " style="height: 350px;margin-bottom: 20px;" th:each="mediBox: ${mediBoxs}">
+                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1" style="border-radius: 70%">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i class="fa fa-search fa-3x"></i>
+                        </div>
+                    </div>
+                    <img id="mediImg" style="border-radius: 70%;" th:style="'background:' + ${mediBox.getColor()}+ ';border-radius:70%'"  class="img-fluid" src="/image/mediCase/tes.png" alt="..."/>
+                </div>
+                <hr>
+                <h1 th:text="${mediBox.getName()}"></h1>
             </div>
-            <div class="modal-body text-center pb-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">상비약 </h2>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-icon"></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <!-- Portfolio Modal - Image-->
-                            <img id="mediImg2" style="background: #ffa8a8;border-radius: 70%;overflow: hidden" class="img-fluid" src="/image/mediCase/tes.png" alt="..."/>
-                            <!-- Portfolio Modal - Text-->
-                            <h3>메모 : 감기걸릴때 먹는약<br></h3>
-                            <h4>약1 : 감기약<br>약2 : 두통약</h4>
-                            <h4>남은 약 : 27일치</h4>
+        </div>
 
-                            <button class="btn btn-primary" data-bs-dismiss="modal">
-                                <div data-bs-toggle="modal" data-bs-target="#editbtn">
-                                <i class="fas fa-omark fa-fw"></i>
-                                수정
+    </section>
+    <!--<button onclick="minusbtn">
+        <div>
+            <div data-bs-toggle="modal" data-bs-target="#minusbtn">
+                <div class="d-flex align-items-center justify-content-center h-100 w-100">
+                </div>
+                <img class="img-fluid" src="/image/minus.png" alt="..."/>
+            </div>
+        </div>
+    </button>-->
+
+    <!-- Portfolio Modal 1-->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1"
+         aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Portfolio Modal - Title-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">상비약 </h2>
+                                <!-- Icon Divider-->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"></div>
+                                    <div class="divider-custom-line"></div>
                                 </div>
-                            </button>
-                            <button class="btn btn-primary" data-bs-dismiss="modal">
-                                <i class="fas fa-xmark fa-fw"></i>
-                                삭제
-                            </button>
+                                <!-- Portfolio Modal - Image-->
+                                <img id="mediImg2" style="background: #ffa8a8;border-radius: 70%;overflow: hidden" class="img-fluid" src="/image/mediCase/tes.png" alt="..."/>
+                                <!-- Portfolio Modal - Text-->
+                                <h3>메모 : 감기걸릴때 먹는약<br></h3>
+                                <h4>약1 : 감기약<br>약2 : 두통약</h4>
+                                <h4>남은 약 : 27일치</h4>
 
+                                <button class="btn btn-primary" data-bs-dismiss="modal">
+                                    <div data-bs-toggle="modal" data-bs-target="#editbtn">
+                                        <i class="fas fa-omark fa-fw"></i>
+                                        수정
+                                    </div>
+                                </button>
+                                <button class="btn btn-primary" data-bs-dismiss="modal">
+                                    <i class="fas fa-xmark fa-fw"></i>
+                                    삭제
+                                </button>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- 추가하기 -->
+    <!-- 추가하기 -->
     <div class="modal fade" id="plusbtn" tabindex="-1" aria-labelledby="plusbtn"
          aria-hidden="true">
         <div class="modal-dialog modal-xl">
@@ -213,7 +224,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <select class="form-select" aria-label="Default select example" id="d2" style="visibility: hidden">
-                                                <option value="0" selected>횟수</option>
+                                                <option value="0" selected>하루 몇번</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -308,6 +319,7 @@
         </div>
     </div>
 </div>
+
 <!-- editBtn -->
 <div class="modal fade" id="editbtn" tabindex="-1" aria-labelledby="editbtn"
      aria-hidden="true">
@@ -426,6 +438,10 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/mediBox.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+<script src="/vendor/js/jquery.twbsPagination.js" type="text/javascript"></script>
+
 
 <script>
     var my_mediTbody = document.getElementById('mediTbody');
@@ -585,7 +601,19 @@
     }
 
 </script>
-
+<script type="text/javascript">
+    $(function () {
+        window.pagObj = $('#pagination').twbsPagination({
+            totalPages: 20,
+            visiblePages: 5,
+            onPageClick: function (event, page) {
+                console.info(page + ' (from options)');
+            }
+        }).on('page', function (event, page) {
+            console.info(page + ' (from event listening)');
+        });
+    });
+</script>
 
 
 </body>
