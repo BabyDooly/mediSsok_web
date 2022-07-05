@@ -58,7 +58,7 @@
 <!--                                    </span>-->
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                               id="exampleRepeatPassword" maxlength="15" name = "confirm_Password"placeholder="비밀번호 재입력">
+                                               id="confirm_Password" maxlength="15" name="confirm_Password" placeholder="비밀번호 재입력">
                                         <span th:text="${valid_confirm_Password}"></span>
                                     </div>
                                 </div>
@@ -77,6 +77,9 @@
                                                maxlength="11" name="phone" placeholder="전화번호">
                                     </div>
                                 </div>
+                                <span>
+                                    <p id="valid" th:text="${error}" class="alert alert-danger"></p>
+                                </span>
                                 <input type="submit" value="가입하기" class="btn btn-primary btn-user btn-block">
                             </form>
                             <hr>

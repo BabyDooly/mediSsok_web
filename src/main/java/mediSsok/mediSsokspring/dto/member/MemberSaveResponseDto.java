@@ -7,6 +7,7 @@ import mediSsok.mediSsokspring.domain.entity.member.Member;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.websocket.OnMessage;
 
 @Getter
 @Setter
