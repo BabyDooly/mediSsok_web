@@ -12,14 +12,18 @@ import mediSsok.mediSsokspring.domain.entity.member.Member;
 @Setter
 @ToString
 @NoArgsConstructor
-public class MedicineBoxMainResponseDto {
+public class MedicineBoxUpdateResponseDto {
     private String name;
+    private String memo;
     private String color;
-    private long member;
+    private int count;
 
-    public MedicineBoxMainResponseDto(MedicineBox entity) {
-        this.name = entity.getName();
-        this.color = entity.getColor();
-        this.member = entity.getMember().getId();
+    public MedicineBox toEntity(){
+        return MedicineBox.builder()
+                .name(name)
+                .color(color)
+                .memo(memo)
+                .count(count)
+                .build();
     }
 }

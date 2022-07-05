@@ -10,18 +10,21 @@ import mediSsok.mediSsokspring.domain.entity.member.Member;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
-public class MedicineBoxReadResponseDto {
+public class MedicineBoxResponseDto {
+    private long id;
     private String name;
     private String memo;
     private String color;
     private int count;
+    private String email;
 
-    public MedicineBoxReadResponseDto(MedicineBox entity) {
+    public MedicineBoxResponseDto(MedicineBox entity) {
+        this.id = entity.getId();
         this.name = entity.getName();
         this.memo = entity.getMemo();
         this.color = entity.getColor();
         this.count = entity.getCount();
+        this.email = entity.getMember().getEmail();
     }
 }

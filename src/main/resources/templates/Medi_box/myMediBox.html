@@ -18,31 +18,32 @@
 </head>
 <body>
 <div th:replace="navbar/navBar :: navBar"/>
-<p class="mainText">내 약통</p>
+
+
+<!--메인 페이지-->
+<p class="mainText" th:text="${member} + '님의 약통'"></p>
 <p class="mainSubText">자주 먹는 약 정보, 내 약통에 쏙</p>
-<!--
-    임시로 넣은 테스트 계정 닉네임 확인용
-    <br><br>
-    <h3 th:align="center">현재 접속하신 계정의 닉네임은 </h3>
-    테스트 용으로 넣은 닉네임 불러오기
-    <h3 th:align="center" sec:authentication="name"></h3>
--->
+
 <div class="myMediCaseDiv">
     <section class="portfolio-item page-section portfolio" id="portfolio">
-    <div class="row justify-content-center" style="padding-top: 400px; width: 900px;margin: 0 auto">
-        <!-- Portfolio Item 1-->
-        <div class="col-md-6 col-lg-4 " style="height: 350px;margin-bottom: 20px;" th:each="mediBox: ${mediBoxs}">
-            <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1" style="border-radius: 70%">
-                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                    <div class="portfolio-item-caption-content text-center text-white"><i class="fa fa-search fa-3x"></i>
+        <div class="row justify-content-center" style="padding-top: 400px; width: 900px;margin: 0 auto">
+            <!-- Portfolio Item 1-->
+            <div class="col-md-6 col-lg-4 " style="height: 350px; margin-bottom: 20px;" th:each="mediBox: ${mediBoxs}">
+                <div class="portfolio-item mx-auto mediBox"
+                     style="border-radius: 70%" th:id="${mediBox.getId()}">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i
+                                class="fa fa-search fa-3x"></i>
+                        </div>
                     </div>
+                    <img id="mediImg" style="border-radius: 70%;"
+                         th:style="'background:' + ${mediBox.getColor()}+ ';border-radius:70%'" class="img-fluid"
+                         src="/image/mediCase/tes.png" alt="..."/>
                 </div>
-                <img id="mediImg" style="border-radius: 70%;" th:style="'background:' + ${mediBox.getColor()}+ ';border-radius:70%'"  class="img-fluid" src="/image/mediCase/tes.png" alt="..."/>
-            </div>
-            <hr>
+                <hr>
                 <h1 th:text="${mediBox.getName()}"></h1>
+            </div>
         </div>
-    </div>
     </section>
     <button onclick="plusbtn">
         <div>
@@ -53,9 +54,10 @@
             </div>
         </div>
     </button>
+</div>
 
 
-<!-- Portfolio Modal 1-->
+<!-- 약통 조회 -->
 <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1"
      aria-hidden="true">
     <div class="modal-dialog modal-xl">
@@ -67,28 +69,31 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">상비약 </h2>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-icon"></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <!-- Portfolio Modal - Image-->
-                            <img id="mediImg2" style="background: #ffa8a8;border-radius: 70%;overflow: hidden" class="img-fluid" src="/image/mediCase/tes.png" alt="..."/>
-                            <!-- Portfolio Modal - Text-->
-                            <h3>메모 : 감기걸릴때 먹는약<br></h3>
-                            <h4>약1 : 감기약<br>약2 : 두통약</h4>
-                            <h4>남은 약 : 27일치</h4>
+                            <!-- 약통 이름 -->
+                            <h2 class="portfolio-modal-title text-dark text-uppercase mb-0" id="mediName">약통 이름</h2>
+                            <br><br>
 
-                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                            <!-- 약통 이미지 -->
+                            <img id="mediImg2" style="background: #ffa8a8;border-radius: 70%;overflow: hidden"
+                                 class="img-fluid" src="/image/mediCase/tes.png" alt="..."/>
+                            <hr>
+
+                            <!-- 약통 텍스트-->
+                            <h3 style="display:inline">메모 : </h3> <h3 id="mediMemo" style="display:inline">약통 메모<br></h3>
+                            <br><br>
+                            <h4>약1 : 감기약<br>약2 : 두통약</h4>
+                            <br>
+
+                            <h4 style="display:inline">남은 약 개수 : </h4> <h4 id="mediCounts" style="display:inline">몇</h4><h4 style="display:inline">개</h4>
+                            <br><br>
+
+                            <button id="btn-update" class="btn btn-primary" data-bs-dismiss="modal">
                                 <div data-bs-toggle="modal" data-bs-target="#editbtn">
-                                <i class="fas fa-omark fa-fw"></i>
-                                수정
+                                    <i class="fas fa-omark fa-fw"></i>
+                                    수정
                                 </div>
                             </button>
-                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                            <button id="btn-delete" class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
                                 삭제
                             </button>
@@ -100,216 +105,10 @@
         </div>
     </div>
 </div>
-<!-- 추가하기 -->
-    <div class="modal fade" id="plusbtn" tabindex="-1" aria-labelledby="plusbtn"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h1 class="text-secondary text-uppercase mb-0">약통 추가하기</h1>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image-->
-                                <!--<img class="img-fluid rounded mb-5" src="/image/mediCase/capsule-icon.png" alt="..."/>-->
-                                <!-- Portfolio Modal - Text-->
-                                <br>
-                                <div>
-                                    <div class="row g-3 align-items-center">
-                                        <div class="col-auto">
-                                            <label for="medicase" class="col-form-label" style="padding-right: 3em">약통 이름</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <input type="text" id="medicase" class="form-control" placeholder="약통 이름">
-                                        </div>
-                                    </div>
-                                    <hr>
 
-                                    <div class="row g-3 align-items-center">
-                                        <div class="col-auto">
-                                            <label for="memo" class="col-form-label">메모&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <input type="text" id="memo" class="form-control" placeholder="메모">
-                                        </div>
-                                    </div>
-                                    <hr>
 
-                                    <div class="row g-3 align-items-center">
-                                        <div class="col-auto">
-                                            <label for="caseCol" class="col-form-label" style="padding-right: 1em">약통 색상&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <input type="color" id="caseCol" class="form-control" placeholder="색상" value="#ffa8a8" style="width: 150px;height: 70px">
-                                        </div>
-                                        <div class="col-auto">
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row g-3 align-items-center">
-                                        <div class="col-auto">
-                                            <label for="medi" class="col-form-label" style="padding-right: 1em">약 추가 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <table class="table border-secondary">
-                                                <tbody id="mediTbody">
-                                                <tr>
-                                                    <td> <input type="text" id="medi" class="form-control" placeholder="무슨약"></td>
-                                                </tr>
-
-                                                </tbody>
-
-                                            </table>
-                                            <button onclick="addRow()" style="background: none;border: none">
-                                                <img class="img-fluid" style="width: 30px;height: 30px" src="/image/plusbutton.png" alt="..."/>
-                                            </button>
-
-                                            <button onclick="delRow()" style="background: none;border: none">
-                                                <img class="img-fluid" style="width: 30px;height: 30px" src="/image/minus.png" alt="..."/>
-                                            </button>
-
-                                        </div>
-                                        <div class="col-auto">
-
-                                        </div>
-
-                                    </div>
-                                    <hr>
-
-                                    <div class="row g-3 align-items-center">
-                                        <div class="col-auto">
-                                            <label class="col-form-label" style="padding-right: 1em">여분의 약&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <!--<input type="text" id="intdate" class="form-control" placeholder="3일">-->
-                                            <select class="form-select" aria-label="Default select example" id="dayselect" onchange="Change()">
-                                                <option value="0" selected>선택 없음</option>
-                                                <option value="1">갯수</option>
-                                                <option value="2">일</option>
-                                                <option value="3">주</option>
-                                                <option value="4">월</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div>
-                                                <div class='ctrl' id="d1" style="visibility: hidden">
-                                                    <div class='ctrl__button ctrl__button--decrement'>&ndash;</div>
-                                                    <div class='ctrl__counter'>
-                                                        <input class='ctrl__counter-input' maxlength='10' type='text' value='0' id="mediCount">
-                                                        <div class='ctrl__counter-num'>0</div>
-                                                    </div>
-                                                    <div class='ctrl__button ctrl__button--increment'>+</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <select class="form-select" aria-label="Default select example" id="d2" style="visibility: hidden">
-                                                <option value="0" selected>횟수</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-auto">
-                                        </div>
-                                    </div>
-                                </div>
-                                <br><br><br><br><br><br><br><br><br>
-                                <button id="btn-add" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
-                                    추가
-                                </button>
-                                <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
-                                    취소
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- minusBtn -->
-    <div class="portfolio-modal modal fade" id="minusbtn" tabindex="-1" aria-labelledby="minusbtn"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h1 class="text-secondary text-uppercase mb-0">알람 삭제하기</h1>
-                                <br>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image-->
-                                <!--<img class="img-fluid rounded mb-5" src="/image/mediCase/capsule-icon.png" alt="..."/>-->
-                                <!-- Portfolio Modal - Text-->
-
-                                <div class="myPageIndiv2">
-                                    <div class="row g-3 align-items-center">
-                                        <div class="col-auto">
-                                            <label for="medicase1" class="col-form-label" style="padding-right: 3em">약통선택</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <input type="text" id="medicase1" class="form-control" placeholder="약통 선택하기">
-                                        </div>
-                                    </div>
-                                    <br>
-
-                                    <div class="row g-3 align-items-center">
-                                        <div class="col-auto">
-                                            <label for="startday1" class="col-form-label">시작일&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <input type="text" id="startday1" class="form-control" placeholder="2022-06-24">
-                                        </div>
-                                    </div>
-                                    <br>
-
-                                    <div class="row g-3 align-items-center">
-                                        <div class="col-auto">
-                                            <label for="reday1" class="col-form-label" style="padding-right: 1em">주기&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <input type="text" id="reday1" class="form-control" placeholder="주기">
-                                        </div>
-                                        <div class="col-auto">
-                                        </div>
-                                    </div>
-                                    <br>
-                                </div>
-                                <button id="delbtn" onclick="delbtn()" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
-                                    삭제
-                                </button>
-                                <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
-                                    취소
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- editBtn -->
-<div class="modal fade" id="editbtn" tabindex="-1" aria-labelledby="editbtn"
+<!-- 약통 추가 -->
+<div class="modal fade" id="plusbtn" tabindex="-1" aria-labelledby="plusbtn"
      aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -321,43 +120,43 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h1 class="text-secondary text-uppercase mb-0">약통 수정하기</h1>
+                            <h1 class="text-dark text-uppercase mb-0">약통 추가하기</h1>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
                                 <div class="divider-custom-line"></div>
                             </div>
-                            <!-- Portfolio Modal - Image-->
-                            <!--<img class="img-fluid rounded mb-5" src="/image/mediCase/capsule-icon.png" alt="..."/>-->
-                            <!-- Portfolio Modal - Text-->
                             <br>
                             <div>
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <label for="editmedicase" class="col-form-label" style="padding-right: 3em">약통 이름</label>
+                                        <label for="medicase" class="col-form-label" style="padding-right: 3em">약통
+                                            이름</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" id="editmedicase" class="form-control" placeholder="약통 이름">
+                                        <input type="text" id="medicase" class="form-control" placeholder="약통 이름">
                                     </div>
                                 </div>
                                 <hr>
 
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <label for="editmemo" class="col-form-label">메모&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                        <label for="memo" class="col-form-label">메모&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" id="editmemo" class="form-control" placeholder="메모">
+                                        <input type="text" id="memo" class="form-control" placeholder="메모">
                                     </div>
                                 </div>
                                 <hr>
 
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <label for="editcaseCol" class="col-form-label" style="padding-right: 1em">약통 색상&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                        <label for="caseCol" class="col-form-label" style="padding-right: 1em">약통
+                                            색상&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="color" id="editcaseCol" class="form-control" placeholder="색상" value="#ffa8a8" style="width: 150px;height: 70px">
+                                        <input type="color" id="caseCol" class="form-control" placeholder="색상"
+                                               value="#ffa8a8" style="width: 150px;height: 70px">
                                     </div>
                                     <div class="col-auto">
                                     </div>
@@ -365,24 +164,28 @@
                                 <hr>
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <label for="medi" class="col-form-label" style="padding-right: 1em">약 추가 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                        <label for="medi" class="col-form-label" style="padding-right: 1em">약 추가
+                                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
                                     </div>
                                     <div class="col-md-9">
                                         <table class="table border-secondary">
-                                            <tbody id="editmediTbody">
+                                            <tbody id="mediTbody">
                                             <tr>
-                                                <td> <input type="text" id="editmedi" class="form-control" placeholder="무슨약"></td>
+                                                <td><input type="text" id="medi" class="form-control" placeholder="무슨약">
+                                                </td>
                                             </tr>
 
                                             </tbody>
 
                                         </table>
                                         <button onclick="addRow()" style="background: none;border: none">
-                                            <img class="img-fluid" style="width: 30px;height: 30px" src="/image/plusbutton.png" alt="..."/>
+                                            <img class="img-fluid" style="width: 30px;height: 30px"
+                                                 src="/image/plusbutton.png" alt="..."/>
                                         </button>
 
                                         <button onclick="delRow()" style="background: none;border: none">
-                                            <img class="img-fluid" style="width: 30px;height: 30px" src="/image/minus.png" alt="..."/>
+                                            <img class="img-fluid" style="width: 30px;height: 30px"
+                                                 src="/image/minus.png" alt="..."/>
                                         </button>
 
                                     </div>
@@ -395,31 +198,172 @@
 
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <label class="col-form-label" style="padding-right: 1em">여분의 약&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                        <label class="col-form-label" style="padding-right: 1em">여분의
+                                            약&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
                                     </div>
-                                    <div class="col-md-9">
-                                        <input type="text" id="editintdate" class="form-control" placeholder="3일">
+                                    <div class="col-md-3">
+                                        <select class="form-select" aria-label="Default select example" id="dayselect"
+                                                onchange="Change(); Count();">
+                                            <option value="0" selected>선택 없음</option>
+                                            <option value="1">갯수</option>
+                                            <option value="2">일</option>
+                                            <option value="3">주</option>
+                                            <option value="4">월</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            <div class='ctrl' id="d1" style="visibility: hidden">
+                                                <div class='ctrl__button ctrl__button--decrement'>&ndash;</div>
+                                                <div class='ctrl__counter'>
+                                                    <input class='ctrl__counter-input' maxlength='10' type='text'
+                                                           value='0' id="mediCount" >
+                                                    <div class='ctrl__counter-num'>0</div>
+                                                </div>
+                                                <div class='ctrl__button ctrl__button--increment'>+</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-select" aria-label="Default select example" id="d2"
+                                                style="visibility: hidden" onchange="Count()">
+                                            <option value="0" selected>횟수</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
                                     </div>
                                     <div class="col-auto">
                                     </div>
                                 </div>
                             </div>
-                            <br><br><br><br><br><br><br><br><br>
-                            <button id="editsubmit" onclick="editbtn()" class="btn btn-primary"  style="width: 90px">
-                                수정
+                            <br>
+                            <h4 class="text-dark mb-0" id="count" style="display: inline" th:text="0"></h4><h4 style="display: inline">개</h4>
+                            <br><br><br><br>
+                            <button id="btn-add" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                                추가
                             </button>
-                            <button class="btn btn-primary" style="width: 90px">
+                            <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
                                 취소
                             </button>
-
-
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<!-- 약통 수정 -->
+<div class="modal fade" id="editbtn" tabindex="-1" aria-labelledby="editbtn"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- 타이틀 -->
+                            <h1 class="text-dark text-uppercase mb-0">약통 수정하기</h1>
+                            <br>
+                            <div>
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="editMediName" class="col-form-label" style="padding-right: 3em">약통
+                                            이름</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="editMediName" class="form-control" placeholder="약통 이름">
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="editMediMemo" class="col-form-label">메모&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="editMediMemo" class="form-control" placeholder="메모">
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="editcaseColor" class="col-form-label" style="padding-right: 1em">약통
+                                            색상&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="color" id="editcaseColor" class="form-control" placeholder="색상"
+                                               value="#ffa8a8" style="width: 150px;height: 70px">
+                                    </div>
+                                    <div class="col-auto">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="medi" class="col-form-label" style="padding-right: 1em">약 추가
+                                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <table class="table border-secondary">
+                                            <tbody id="editmediTbody">
+                                            <tr>
+                                                <td><input type="text" id="editmedi" class="form-control"
+                                                           placeholder="무슨약"></td>
+                                            </tr>
+
+                                            </tbody>
+
+                                        </table>
+                                        <button onclick="addRow()" style="background: none;border: none">
+                                            <img class="img-fluid" style="width: 30px;height: 30px"
+                                                 src="/image/plusbutton.png" alt="..."/>
+                                        </button>
+
+                                        <button onclick="delRow()" style="background: none;border: none">
+                                            <img class="img-fluid" style="width: 30px;height: 30px"
+                                                 src="/image/minus.png" alt="..."/>
+                                        </button>
+
+                                    </div>
+                                    <div class="col-auto">
+
+                                    </div>
+
+                                </div>
+                                <hr>
+
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label class="col-form-label" style="padding-right: 1em">여분의
+                                            약&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="editMediCounts" class="form-control" placeholder="3일">
+                                    </div>
+                                    <div class="col-auto">
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br><br><br><br><br><br><br><br>
+                            <button id="btn-edit" onclick="editbtn()" class="btn btn-primary" style="width: 90px">
+                                수정
+                            </button>
+                            <button class="btn btn-primary" style="width: 90px" data-bs-dismiss="modal">
+                                취소
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 </div>
 <!-- bootstrp js 링크 -->
@@ -429,68 +373,37 @@
 
 <script>
     var my_mediTbody = document.getElementById('mediTbody');
-    var cnt=1;
-    function addRow(){
-        if(cnt<7){
+    var cnt = 1;
+
+    function addRow() {
+        if (cnt < 7) {
 
             var row = my_mediTbody.insertRow(my_mediTbody.rows.length);
             var cell1 = row.insertCell(0);
-            cell1.innerHTML="<input type=\"text\" id=\"medi"+cnt+"\" class=\"form-control\" placeholder=\"무슨약\">";
-            cnt+=1;
-        }
-        else{
+            cell1.innerHTML = "<input type=\"text\" id=\"medi" + cnt + "\" class=\"form-control\" placeholder=\"무슨약\">";
+            cnt += 1;
+        } else {
         }
     }
-    function delRow(){
-        if(cnt>1){
+
+    function delRow() {
+        if (cnt > 1) {
             var row = my_mediTbody.deleteRow(0);
-            cnt-=1;
+            cnt -= 1;
         }
     }
+
     var i;
-    var mediArr = [];
-
-    function addbtn1(){
-        // var backTag = document.getElementById('mediImg');
-        // var backTag2 = document.getElementById('mediImg2');
-        // var textTag = document.getElementById('mediText');
-        // const newCase = document.createElement('div');
-        // const medicaseAdd = document.getElementById('medicase').value;
-        // const memoAdd = document.getElementById('memo').value;
-        // const colAdd = document.getElementById('caseCol').value;
-        // const mediAdd = document.getElementById('medi').value;
-        // for( i = 1;i<cnt;i++){
-        //     mediArr[i-1] = document.getElementById('medi'+i).value;
-        // }
-        // const intAdd = document.getElementById('intdate').value;
-        //
-        // newCase.setAttribute("id","caseDiv");
-        // newCase.setAttribute("class","tesDiv");
-        // newCase.innerText=medicaseAdd;
-        // newCase.innerText+=memoAdd;
-        // newCase.innerText+=colAdd;
-        // newCase.innerText+=mediAdd;
-        // for(var i=1;i<cnt;i++){
-        //     newCase.innerText+=mediArr[i-1];
-        // }
-        // newCase.innerText+=intAdd;
-        //
-        // const newText = document.createTextNode('');
-        // newCase.appendChild(newText);
-        // document.body.appendChild(newCase);
-        //
-        // backTag.style.backgroundColor=colAdd;
-        // backTag2.style.backgroundColor=colAdd;
-    }
 
 
-    function delbtn(){
+    function delbtn() {
         const div = document.getElementById('caseDiv');
         div.remove();
     }
 
-    (function() {
+    (function () {
         'use strict';
+
         function ctrls() {
             var _this = this;
             this.counter = 0;
@@ -503,63 +416,66 @@
                 },
                 increment: document.querySelector('.ctrl__button--increment')
             };
-            this.decrement = function() {
+            this.decrement = function () {
                 var counter = _this.getCounter();
                 var nextCounter = (_this.counter > 0) ? --counter : counter;
                 _this.setCounter(nextCounter);
             };
-            this.increment = function() {
+            this.increment = function () {
                 var counter = _this.getCounter();
                 var nextCounter = (counter < 9999999999) ? ++counter : counter;
                 _this.setCounter(nextCounter);
             };
-            this.getCounter = function() {
+            this.getCounter = function () {
                 return _this.counter;
             };
-            this.setCounter = function(nextCounter) {
+            this.setCounter = function (nextCounter) {
                 _this.counter = nextCounter;
             };
-            this.debounce = function(callback) {
+            this.debounce = function (callback) {
                 setTimeout(callback, 100);
             };
-            this.render = function(hideClassName, visibleClassName) {
+            this.render = function (hideClassName, visibleClassName) {
                 _this.els.counter.num.classList.add(hideClassName);
-                setTimeout(function() {
+                setTimeout(function () {
+                    Count();
                     _this.els.counter.num.innerText = _this.getCounter();
                     _this.els.counter.input.value = _this.getCounter();
                     _this.els.counter.num.classList.add(visibleClassName);
                 }, 100);
-                setTimeout(function() {
+                setTimeout(function () {
+                    Count();
                     _this.els.counter.num.classList.remove(hideClassName);
                     _this.els.counter.num.classList.remove(visibleClassName);
                 }, 200);
             };
-            this.ready = function() {
-                _this.els.decrement.addEventListener('click', function() {
-                    _this.debounce(function() {
+            this.ready = function () {
+                _this.els.decrement.addEventListener('click', function () {
+                    _this.debounce(function () {
                         _this.decrement();
                         _this.render('is-decrement-hide', 'is-decrement-visible');
                     });
                 });
-                _this.els.increment.addEventListener('click', function() {
-                    _this.debounce(function() {
+                _this.els.increment.addEventListener('click', function () {
+                    _this.debounce(function () {
                         _this.increment();
                         _this.render('is-increment-hide', 'is-increment-visible');
                     });
                 });
-                _this.els.counter.input.addEventListener('input', function(e) {
+                _this.els.counter.input.addEventListener('input', function (e) {
                     var parseValue = parseInt(e.target.value);
                     if (!isNaN(parseValue) && parseValue >= 0) {
                         _this.setCounter(parseValue);
                         _this.render();
                     }
                 });
-                _this.els.counter.input.addEventListener('focus', function(e) {
+                _this.els.counter.input.addEventListener('focus', function (e) {
                     _this.els.counter.container.classList.add('is-input');
                 });
-                _this.els.counter.input.addEventListener('blur', function(e) {
+                _this.els.counter.input.addEventListener('blur', function (e) {
                     _this.els.counter.container.classList.remove('is-input');
                     _this.render();
+                    Count();
                 });
             };
         };
@@ -568,24 +484,48 @@
         document.addEventListener('DOMContentLoaded', controls.ready);
     })();
 
-    function Change(){
-        var key = dayselect.value;
-        if(key==0){
-            document.all["d1"].style.visibility="hidden";
-            document.all["d2"].style.visibility="hidden";
-        }
-        else if(key==1){
-            document.all["d1"].style.visibility="visible";
-            document.all["d2"].style.visibility="hidden";
-        }
-        else{
-            document.all["d1"].style.visibility="visible";
-            document.all["d2"].style.visibility="visible";
+    function Change() {
+        var key = $('#dayselect').val();
+        if (key == 0) {
+            document.all["d1"].style.visibility = "hidden";
+            document.all["d2"].style.visibility = "hidden";
+        } else if (key == 1) {
+            document.all["d1"].style.visibility = "visible";
+            document.all["d2"].style.visibility = "hidden";
+        } else {
+            document.all["d1"].style.visibility = "visible";
+            document.all["d2"].style.visibility = "visible";
         }
     }
 
-</script>
+    function Count(){
+        var dayselect = $('#dayselect').val();
+        var daycount = $('#d2').val();
+        var count = $('#mediCount').val();
 
+        var result = 0;
+
+        // 갯수
+        if (dayselect == 1) {
+            result = count
+        }
+        // 일
+        else if (dayselect == 2) {
+            result = count * daycount;
+        }
+        // 주(7일)
+        else if (dayselect == 3){
+            result = 7 * count * daycount;
+        }
+        // 월(30일)
+        else if (dayselect == 4){
+            result = 30 * count * daycount;
+        }
+        console.log(result)
+        $('#count').text(result);
+    }
+
+</script>
 
 
 </body>

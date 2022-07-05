@@ -1,6 +1,7 @@
 package mediSsok.mediSsokspring.controller;
 
 import lombok.RequiredArgsConstructor;
+import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.dto.member.*;
 import mediSsok.mediSsokspring.service.MemberService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -58,7 +59,7 @@ public class MemberController {
 
     // 마이페이지
     @GetMapping("/user/mypage")
-    public String dispMypage(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+    public String dispMypage(@AuthenticationPrincipal CustomUserDetails userDetails, Model model) {
         MemberResponseDto dto = memberService.findByEmail(userDetails.getUsername());
         model.addAttribute("member", dto);
         return "/myPage/myPage";
@@ -66,21 +67,21 @@ public class MemberController {
 
     // 회원 조회
     @GetMapping("/api/member")
-    public MemberResponseDto findById(@AuthenticationPrincipal UserDetails userDetails){
+    public MemberResponseDto findById(@AuthenticationPrincipal CustomUserDetails userDetails){
         return memberService.findByEmail(userDetails.getUsername());
     }
 
     // 회원 수정(JSON)
     @PostMapping("/api/member/user")
     @ResponseBody
-    public Long userUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberUserUpdateRequestDto requestDto){
+    public Long userUpdate(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestBody MemberUserUpdateRequestDto requestDto){
         return memberService.userUpdate(userDetails.getUsername(), requestDto);
     }
 
     // 알람 수정(JSON)
     @PostMapping("/api/member/alarm")
     @ResponseBody
-    public Long alarmUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberAlarmUpdateRequestDto requestDto){
+    public Long alarmUpdate(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestBody MemberAlarmUpdateRequestDto requestDto){
         return memberService.alarmUpdate(userDetails.getUsername(), requestDto);
     }
 }

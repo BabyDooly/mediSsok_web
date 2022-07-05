@@ -2,7 +2,6 @@ package mediSsok.mediSsokspring.service;
 
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
-import mediSsok.mediSsokspring.domain.entity.member.Member;
 import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineBoxRepository;
 import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineListRepository;
 import mediSsok.mediSsokspring.dto.medicineBox.*;
@@ -20,29 +19,48 @@ public class MedicineBoxService {
     private final MedicineListRepository medicineListRepository;
 
     /*---- 약통 ----*/
-    // 저장
+    // 생성
     @Transactional
-    public Long create(MedicineBoxSaveResponseDto dto, Member member) {
-
-        return medicineBoxRepository.save(dto.toEntity()).getId();
+    public Long create(MedicineBoxSaveResponseDto responseDto) {
+        return medicineBoxRepository.save(responseDto.toEntity()).getId();
     }
 
     // 약통 리스트
     @Transactional(readOnly=true)
-    public List<MedicineBoxMainResponseDto> findAll(){
-        return medicineBoxRepository.findAll()
+    public List<MedicineBoxResponseDto> findByMemberId(long memberId){
+        return medicineBoxRepository.findByMemberId(memberId)
                 .stream()
-                .map(MedicineBoxMainResponseDto::new)
+                .map(MedicineBoxResponseDto::new)
                 .collect(Collectors.toList());
     }
 
-    // 아이디 찾기
-    @Transactional(readOnly=true)
-    public MedicineBoxReadResponseDto findById(long num){
-        return medicineBoxRepository
-                .findById(num)
-                .map(MedicineBoxReadResponseDto::new)
-                .get();
+    // 약통 조회
+    public MedicineBoxResponseDto findById (Long id){
+        MedicineBox entity = medicineBoxRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 약통이 없습니다. id = " + id));
+
+        return new MedicineBoxResponseDto(entity);
+    }
+
+    // 약통 수정
+    @Transactional
+    public Long update(Long id, MedicineBoxUpdateResponseDto responseDto){
+        MedicineBox medicineBox = medicineBoxRepository.findById(id)
+                // 아이디가 없을때
+                .orElseThrow(() -> new IllegalArgumentException("해당 약통이 없습니다. id = " + id));
+
+        medicineBox.update(responseDto.getName(), responseDto.getMemo(), responseDto.getColor(), responseDto.getCount());
+
+        return id;
+    }
+
+    // 약통 삭제
+    @Transactional
+    public void delete(Long id){
+        MedicineBox entity = medicineBoxRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 약통이 없습니다. id = " + id));
+
+        medicineBoxRepository.delete(entity);
     }
 
     // 페이지 카운터

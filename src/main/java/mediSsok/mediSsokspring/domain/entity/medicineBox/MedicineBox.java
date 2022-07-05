@@ -55,4 +55,11 @@ public class MedicineBox extends BaseTimeEntity {
         this.count = count;
         this.member = member;
     }
+
+    public void update(String name, String memo, String color, int count) {
+        this.name = name;
+        this.memo = memo;
+        this.color = color;
+        this.count = count;
+    }
 }
