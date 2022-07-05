@@ -202,8 +202,8 @@ p, span {
     line-height: normal; /*센터 맞춤 속성*/
     text-align: center;
     overflow: hidden;
-
 }
+
 .portfolio .portfolio-item {
     cursor: pointer;
     position: relative;

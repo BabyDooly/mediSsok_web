@@ -29,8 +29,8 @@ var editEvent = function (event, element, view) {
     editStart.val(event.start.format('YYYY-MM-DD HH:mm'));
     editType.val(event.type);
     editDesc.val(event.description);
-    editColor.val(event.backgroundColor).css('color', event.backgroundColor);
-
+    editColor.val(event.backgroundColor);
+    alert(event.backgroundColor);
     addBtnContainer.hide();
     modifyBtnContainer.show();
     eventModal.modal('show');
@@ -86,7 +86,9 @@ var editEvent = function (event, element, view) {
                 //...
             },
             success: function (response) {
-                alert('수정되었습니다.')
+                //alert($('#edit-color').val());
+                alert(editColor.val());
+                //alert('수정되었습니다.')
             }
         });
 
