@@ -25,6 +25,7 @@
 <!--메인 페이지-->
 <p class="mainText" th:text="${member} + '님의 약통'"></p>
 <p class="mainSubText">자주 먹는 약 정보, 내 약통에 쏙</p>
+<br>
 
 <div class="myMediCaseDiv">
     <button onclick="plusbtn" style="margin-top: 80px; border: 0px;background: #ffffff;width: 100px;height: 100px;overflow: auto;background: none">
@@ -52,7 +53,7 @@
                          src="/image/mediCase/tes.png" alt="..."/>
                 </div>
                 <hr>
-                <h1 th:text="${mediBox.getName()}"></h1>
+                <h2 th:text="${mediBox.getName()}"></h2>
             </div>
             <div class="pagination justify-content-center">
                 <a role="button" class="btn btn-lg" th:if="${hasPrev == true}" th:href="@{/medi/medibox(page=${previous})}" ><i class="fa-solid fa-square-caret-left fa-2x"></i></a>
@@ -217,7 +218,7 @@
                                             <option value="1">갯수</option>
                                             <option value="2">일</option>
                                             <option value="3">주</option>
-                                            <option value="4">월</option>
+                                            <option value="4">달</option>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
@@ -236,10 +237,10 @@
                                     <div class="col-md-3">
                                         <select class="form-select" aria-label="Default select example" id="d2"
                                                 style="visibility: hidden" onchange="Count()">
-                                            <option value="0" selected>횟수</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
+                                            <option value="0" selected>하루 몇번</option>
+                                            <option value="1">1번</option>
+                                            <option value="2">2번</option>
+                                            <option value="3">3번</option>
                                         </select>
                                     </div>
                                     <div class="col-auto">
@@ -352,15 +353,44 @@
                                         <label class="col-form-label" style="padding-right: 1em">여분의
                                             약&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
                                     </div>
-                                    <div class="col-md-9">
-                                        <input type="text" id="editMediCounts" class="form-control" placeholder="3일">
+                                    <div class="col-md-3">
+                                        <select class="form-select" aria-label="Default select example" id="editDayselect"
+                                                onchange="editChange(); editCount();">
+                                            <option value="0" selected>선택 없음</option>
+                                            <option value="1">갯수</option>
+                                            <option value="2">일</option>
+                                            <option value="3">주</option>
+                                            <option value="4">달</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            <div class='ctrl' id="editD1" style="visibility: hidden">
+                                                <span class="stepper">
+                                                  <button>–</button>
+                                                    <input type="number" id="stepper" value="5" min="0" max="100" step="2" readonly>
+                                                  <button>+</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-select" aria-label="Default select example" id="editD2"
+                                                style="visibility: hidden" onchange="editCount()">
+                                            <option value="0" selected>하루 몇번</option>
+                                            <option value="1">1번</option>
+                                            <option value="2">2번</option>
+                                            <option value="3">3번</option>
+                                        </select>
                                     </div>
                                     <div class="col-auto">
                                     </div>
                                 </div>
                             </div>
-                            <br><br><br><br><br><br><br><br><br>
-                            <button id="btn-edit" onclick="editbtn()" class="btn btn-primary" style="width: 90px">
+                            <br>
+                            <h4 class="text-dark mb-0" id="editCount" style="display: inline" th:text="0"></h4><h4 style="display: inline">개</h4>
+                            <br><br><br><br>
+                            <button id="btn-edit" class="btn btn-primary" style="width: 90px">
                                 수정
                             </button>
                             <button class="btn btn-primary" style="width: 90px" data-bs-dismiss="modal">
@@ -505,6 +535,7 @@
                     _this.els.counter.container.classList.remove('is-input');
                     _this.render();
                     Count();
+                    editCount();
                 });
             };
         };
@@ -513,6 +544,8 @@
         document.addEventListener('DOMContentLoaded', controls.ready);
     })();
 
+
+    // 추가
     function Change() {
         var key = $('#dayselect').val();
         if (key == 0) {
@@ -553,6 +586,83 @@
         console.log(result)
         $('#count').text(result);
     }
+
+    var inc = document.getElementsByClassName("stepper");
+    for (i = 0; i < inc.length; i++) {
+        var incI = inc[i].querySelector("input"),
+            id = incI.getAttribute("id"),
+            min = incI.getAttribute("min"),
+            max = incI.getAttribute("max"),
+            step = incI.getAttribute("step");
+        document
+            .getElementById(id)
+            .previousElementSibling.setAttribute(
+            "onclick",
+            "stepperInput('" + id + "', -" + step + ", " + min + ")"
+        );
+        document
+            .getElementById(id)
+            .nextElementSibling.setAttribute(
+            "onclick",
+            "stepperInput('" + id + "', " + step + ", " + max + ")"
+        );
+    }
+    function stepperInput(id, s, m) {
+        var el = document.getElementById(id);
+        if (s > 0) {
+            if (parseInt(el.value) < m) {
+                el.value = parseInt(el.value) + s;
+            }
+        } else {
+            if (parseInt(el.value) > m) {
+                el.value = parseInt(el.value) + s;
+            }
+        }
+    }
+
+
+    // 수정
+    function editChange() {
+        var key = $('#editDayselect').val();
+        if (key == 0) {
+            document.all["editD1"].style.visibility = "hidden";
+            document.all["editD2"].style.visibility = "hidden";
+        } else if (key == 1) {
+            document.all["editD1"].style.visibility = "visible";
+            document.all["editD2"].style.visibility = "hidden";
+        } else {
+            document.all["editD1"].style.visibility = "visible";
+            document.all["editD2"].style.visibility = "visible";
+        }
+    }
+
+    function editCount(){
+        var dayselect = $('#editDayselect').val();
+        var daycount = $('#editD2').val();
+        var count = $('#editMediCount').val();
+
+        var result = 0;
+
+        // 갯수
+        if (dayselect == 1) {
+            result = count
+        }
+        // 일
+        else if (dayselect == 2) {
+            result = count * daycount;
+        }
+        // 주(7일)
+        else if (dayselect == 3){
+            result = 7 * count * daycount;
+        }
+        // 월(30일)
+        else if (dayselect == 4){
+            result = 30 * count * daycount;
+        }
+        console.log(result)
+        $('#editCount').text(result);
+    }
+
 
 </script>
 

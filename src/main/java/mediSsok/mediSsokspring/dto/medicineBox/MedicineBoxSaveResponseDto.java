@@ -6,10 +6,10 @@ import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 public class MedicineBoxSaveResponseDto {
     private String name;

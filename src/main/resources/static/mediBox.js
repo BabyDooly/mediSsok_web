@@ -5,7 +5,10 @@ let mediBox = {
 
         // 약통 추가
         $('#btn-add').on('click', function () {
-            _this.add();
+            if (document.getElementById("medicase").value == "")
+                alert("약통 이름은 필수입니다.");
+            else
+                _this.add();
         });
 
         // 약통 조회

@@ -17,7 +17,6 @@ public class MedicineBoxUpdateResponseDto {
     private String memo;
     private String color;
     private int count;
-
     public MedicineBox toEntity(){
         return MedicineBox.builder()
                 .name(name)

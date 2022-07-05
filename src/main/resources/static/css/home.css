@@ -1,6 +1,41 @@
 @charset "UTF-8";
 /*ㅡㅡㅡㅡㅡㅡㅡㅡ CTRL + F 를 사용해서 원하는 페이지를 검색하세요 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ index CSS ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    height: auto;
+}
+.stepper {
+    border: 1px solid #eee;
+    display: inline-block;
+    overflow: visible;
+    height: 2.1em;
+    background: #fff;
+    padding: 1px;
+}
+.stepper input {
+    width: 3em;
+    height: 100%;
+    text-align: center;
+    border: 0;
+    background: transparent;
+    color: #000;
+}
+.stepper button {
+    width: 1.4em;
+    font-weight: 300;
+    height: 100%;
+    line-height: 0.1em;
+    font-size: 1.4em;
+    padding: 0.2em !important;
+    background: #eee;
+    color: #333;
+    border: none;
+}
+
+
 .mainpad{
     padding-left:380px;
     padding-right:380px;

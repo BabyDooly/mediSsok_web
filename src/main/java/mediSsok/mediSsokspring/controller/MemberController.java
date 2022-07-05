@@ -43,6 +43,7 @@ public class MemberController {
 //            return "/user/signup";
 //        }
         // 성공하면 로그인페이지로
+        System.out.println(memberDto);
         memberService.save(memberDto);
         return "redirect:/user/login";
     }
