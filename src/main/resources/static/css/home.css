@@ -16,7 +16,7 @@
     padding: 1px;
 }
 .stepper input {
-    width: 3em;
+    width: 69px;
     height: 100%;
     text-align: center;
     border: 0;
@@ -24,7 +24,7 @@
     color: #000;
 }
 .stepper button {
-    width: 1.4em;
+    width: 40px;
     font-weight: 300;
     height: 100%;
     line-height: 0.1em;
