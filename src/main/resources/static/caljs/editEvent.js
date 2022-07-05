@@ -30,10 +30,17 @@ var editEvent = function (event, element, view) {
     editType.val(event.type);
     editDesc.val(event.description);
     editColor.val(event.backgroundColor);
-    alert(event.backgroundColor);
     addBtnContainer.hide();
     modifyBtnContainer.show();
     eventModal.modal('show');
+
+    element2.value=editColor.val();
+    element2.style.backgroundColor=editColor.val();
+    if(element2.value=='#D25565'){
+        element2.innerText='안먹었어요';
+    }else{
+        element2.innerText='먹었어요';
+    }
 
     //업데이트 버튼 클릭시
     $('#updateEvent').unbind();
@@ -86,9 +93,7 @@ var editEvent = function (event, element, view) {
                 //...
             },
             success: function (response) {
-                //alert($('#edit-color').val());
-                alert(editColor.val());
-                //alert('수정되었습니다.')
+                alert('수정되었습니다.')
             }
         });
 

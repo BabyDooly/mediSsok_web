@@ -191,21 +191,21 @@
 
 <script>
     var event=Event;
-    const element = document.getElementById('edit-color')
+    const element2 = document.getElementById('edit-color')
     function tes(){
-        element.value=event.background.val();
-        element.style.backgroundColor=event.background.val();
+        element2.value=event.background.val();
+        element2.style.backgroundColor=event.background.val();
 
     }
     function test() {
         if ($('#edit-color').val() == '#D25565') {
-            element.value = '#2bad00';
-            element.style.backgroundColor = '#2bad00';
-            element.innerText = '먹었어요';
+            element2.value = '#2bad00';
+            element2.style.backgroundColor = '#2bad00';
+            element2.innerText = '먹었어요';
         } else {
-            element.value = '#D25565';
-            element.style.backgroundColor = '#D25565';
-            element.innerText = '안먹었어요';
+            element2.value = '#D25565';
+            element2.style.backgroundColor = '#D25565';
+            element2.innerText = '안먹었어요';
         }
     }
 </script>
