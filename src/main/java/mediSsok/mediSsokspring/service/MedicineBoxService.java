@@ -5,6 +5,7 @@ import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineBoxRepository;
 import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineListRepository;
 import mediSsok.mediSsokspring.dto.medicineBox.*;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,11 +28,8 @@ public class MedicineBoxService {
 
     // 약통 리스트
     @Transactional(readOnly=true)
-    public List<MedicineBoxResponseDto> findByMemberId(long memberId){
-        return medicineBoxRepository.findByMemberId(memberId)
-                .stream()
-                .map(MedicineBoxResponseDto::new)
-                .collect(Collectors.toList());
+    public Page<MedicineBoxResponseDto> findByMemberId(long memberId, Pageable pageable){
+        return medicineBoxRepository.findByMemberId(memberId, pageable);
     }
 
     // 약통 조회

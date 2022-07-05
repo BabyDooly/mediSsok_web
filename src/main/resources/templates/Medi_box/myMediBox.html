@@ -37,14 +37,14 @@
         </div>
     </button>
     <section class="portfolio-item page-section portfolio" id="portfolio">
-        <div class="row justify-content-center" style="padding-top: 400px; width: 900px;margin: 0 auto">
+        <div class="row justify-content-center" style="padding-top: 225px; width: 900px;margin: 0 auto">
             <!-- Portfolio Item 1-->
             <div class="col-md-6 col-lg-4 " style="height: 350px; margin-bottom: 20px;" th:each="mediBox: ${mediBoxs}">
                 <div class="portfolio-item mx-auto mediBox"
                      style="border-radius: 70%" th:id="${mediBox.getId()}">
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white"><i
-                                class="fa fa-search fa-3x"></i>
+                        <div class="portfolio-item-caption-content text-center text-white">
+                            <i class="fa fa-search fa-3x"></i>
                         </div>
                     </div>
                     <img id="mediImg" style="border-radius: 70%;"
@@ -54,18 +54,15 @@
                 <hr>
                 <h1 th:text="${mediBox.getName()}"></h1>
             </div>
+            <div class="pagination justify-content-center">
+                <a role="button" class="btn btn-lg" th:if="${hasPrev == true}" th:href="@{/medi/medibox(page=${previous})}" ><i class="fa-solid fa-square-caret-left fa-2x"></i></a>
+                <a role="button" class="btn btn-lg" th:if="${hasPrev == false}" href="" ><i class="fa-regular fa-square-caret-left fa-2x disabled"></i></a>
+                <a role="button" class="btn btn-lg" th:if="${hasNext == true}" th:href="@{/medi/medibox(page=${next})}"><i class="fa-solid fa-square-caret-right fa-2x"></i></a>
+                <a role="button" class="btn btn-lg" th:if="${hasNext == false}" href=""><i class="fa-regular fa-square-caret-right fa-2x disabled"></i></a>
+            </div>
+
         </div>
     </section>
-    <!--<button onclick="minusbtn">
-        <div>
-            <div data-bs-toggle="modal" data-bs-target="#minusbtn">
-                <div class="d-flex align-items-center justify-content-center h-100 w-100">
-                </div>
-                <img class="img-fluid" src="/image/minus.png" alt="..."/>
-            </div>
-        </div>
-    </button>
-    -->
 </div>
 
 
