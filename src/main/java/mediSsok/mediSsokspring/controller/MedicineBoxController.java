@@ -8,6 +8,10 @@ import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxSaveResponseDto;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxUpdateResponseDto;
 import mediSsok.mediSsokspring.service.MedicineBoxService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -25,9 +29,20 @@ public class MedicineBoxController {
 
     // 내 약통
     @GetMapping("/medi/medibox")
-    public String dispMedicase(Model model, @AuthenticationPrincipal CustomUserDetails userDetails) {
-        model.addAttribute("mediBoxs", medicineBoxService.findByMemberId(userDetails.getMember().getId()));
+    public String dispMedicase(Model model, @AuthenticationPrincipal CustomUserDetails userDetails,
+                               @PageableDefault(size = 6, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+
+        // 페이징 리스트
+        Page<MedicineBoxResponseDto> list = medicineBoxService.findByMemberId(userDetails.getMember().getId(), pageable);
+
         model.addAttribute("member", userDetails.getMember().getNickname());
+        model.addAttribute("mediBoxs", list);
+
+        // 페이징 처리
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("hasNext", list.hasNext());
+        model.addAttribute("hasPrev", list.hasPrevious());
         return "/Medi_box/myMediBox";
     }
 
