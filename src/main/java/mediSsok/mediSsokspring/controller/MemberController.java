@@ -1,22 +1,39 @@
 package mediSsok.mediSsokspring.controller;
 
 import lombok.RequiredArgsConstructor;
+import mediSsok.mediSsokspring.domain.repository.member.MemberRepository;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.dto.member.*;
 import mediSsok.mediSsokspring.service.MemberService;
+import org.aspectj.bridge.Message;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.lang.reflect.Member;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor    //final 필드 생성자 생성
 public class MemberController {
     private final MemberService memberService;
+    private final BCryptPasswordEncoder passwordEncoder;
+
+
+    private boolean validationLogin(MemberSaveResponseDto memberDto) {
+        if(!passwordEncoder.matches(memberDto.getPassword(), memberDto.getConfirm_Password())) {
+            return false;
+        }
+        return true;
+    }
+
 
     // 회원가입 페이지(GET)
     @GetMapping("/user/signup")
@@ -26,25 +43,44 @@ public class MemberController {
 
     // 회원가입 로직검사(POST)
     @PostMapping("/user/signupProc")
-    public String Signup(@Valid MemberSaveResponseDto memberDto, Errors errors , Model model) {
+    public String Signup(@Valid MemberSaveResponseDto memberDto, Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            // 회원가입 실패시, 입력 데이터를 유지
+            model.addAttribute("memberDto", memberDto);
 
-//
-//        if (errors.hasErrors()) {
-//            // 회원가입 실패시 입력 데이터 값을 유지
-//            model.addAttribute("memberDto", memberDto);
-//
-//            // 유효성 통과 못한 필드와 메시지를 핸들링
-//            Map<String, String> validatorResult = memberService.validateHandling(errors);
-//            for (String key : validatorResult.keySet()) {
-//                model.addAttribute(key, validatorResult.get(key));
-//            }
-//
-//            // 회원가입 페이지로 다시 리턴
-//            return "/user/signup";
-//        }
-        // 성공하면 로그인페이지로
+            // 유효성 통과 못한 필드와 메시지를 핸들링
+            Map<String, String> validatorResult = memberService.validateHandling(errors);
+            for (String key : validatorResult.keySet()) {
+                model.addAttribute(key, validatorResult.get(key));
+            }
+            // 회원가입 페이지로 다시 리턴
+            return "/login/register";
+        }
         System.out.println(memberDto);
-        memberService.save(memberDto);
+
+        String pw = memberDto.getPassword();
+        String pwconfirm = memberDto.getConfirm_Password();
+
+
+        System.out.println("password: " + pw);
+        System.out.println("PasswordConfirm: " + pwconfirm);
+
+
+        if(!pw.equals(pwconfirm)){
+            model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+            // 회원가입 페이지로 다시 리턴
+            return "/login/register";
+        } else {
+            memberService.save(memberDto);
+        }
+//        if(!validationLogin(memberDto)){
+//            model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+//            // 회원가입 페이지로 다시 리턴
+//            return "/login/register";
+//        } else{
+//            // 성공하면 로그인페이지로
+//            memberService.save(memberDto);
+//        }
         return "redirect:/user/login";
     }
 
@@ -60,7 +96,7 @@ public class MemberController {
 
     // 마이페이지
     @GetMapping("/user/mypage")
-    public String dispMypage(@AuthenticationPrincipal CustomUserDetails userDetails, Model model) {
+    public String dispMypage(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         MemberResponseDto dto = memberService.findByEmail(userDetails.getUsername());
         model.addAttribute("member", dto);
         return "/myPage/myPage";
@@ -68,21 +104,21 @@ public class MemberController {
 
     // 회원 조회
     @GetMapping("/api/member")
-    public MemberResponseDto findById(@AuthenticationPrincipal CustomUserDetails userDetails){
+    public MemberResponseDto findById(@AuthenticationPrincipal UserDetails userDetails){
         return memberService.findByEmail(userDetails.getUsername());
     }
 
     // 회원 수정(JSON)
     @PostMapping("/api/member/user")
     @ResponseBody
-    public Long userUpdate(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestBody MemberUserUpdateRequestDto requestDto){
+    public Long userUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberUserUpdateRequestDto requestDto){
         return memberService.userUpdate(userDetails.getUsername(), requestDto);
     }
 
     // 알람 수정(JSON)
     @PostMapping("/api/member/alarm")
     @ResponseBody
-    public Long alarmUpdate(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestBody MemberAlarmUpdateRequestDto requestDto){
+    public Long alarmUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberAlarmUpdateRequestDto requestDto){
         return memberService.alarmUpdate(userDetails.getUsername(), requestDto);
     }
 }

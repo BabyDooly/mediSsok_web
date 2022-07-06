@@ -114,4 +114,9 @@ public class MemberService implements UserDetailsService {
         // 시큐리티 세션에 유저 정보 저장
         return new CustomUserDetails(member);
     }
+
+    // 회원가입
+    public void signUp(MemberResponseDto userDto) {
+        // 회원 가입 비즈니스 로직 구현
+    }
 }
