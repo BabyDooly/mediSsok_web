@@ -34,8 +34,8 @@ let mediBox = {
             name: $('#medicase').val(),
             memo: $('#memo').val(),
             color: $('#caseCol').val(),
-            count: $('#count').val(),
-        };
+            count: $('#count').text(),
+        }
 
         $.ajax({
             type: 'POST',
@@ -71,7 +71,7 @@ let mediBox = {
 
             $('#editMediName').val(data['name'])
             $('#editMediMemo').val(data['memo'])
-            $('#editMediCounts').val(data['count'])
+            $('#editCount').text(data['count'])
             $('#editcaseColor').val(data['color'])
 
             $('#portfolioModal1').modal('show');
@@ -86,7 +86,7 @@ let mediBox = {
             name: $('#editMediName').val(),
             memo: $('#editMediMemo').val(),
             color: $('#editcaseColor').val(),
-            count: $('#editMediCounts').val(),
+            count: $('#editCount').text(),
         };
 
         $.ajax({

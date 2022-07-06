@@ -56,7 +56,7 @@ public class Member extends BaseTimeEntity {
 
     // 약통 리스트
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<MedicineBox> medicineLists = new ArrayList<>();
+    List<MedicineBox> MedicineBoxs = new ArrayList<>();
 
     @Builder
     public Member(String email, String password, String nickname, String phone) {

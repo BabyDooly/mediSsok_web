@@ -97,13 +97,11 @@
                             <h4 style="display:inline">남은 약 개수 : </h4> <h4 id="mediCounts" style="display:inline">몇</h4><h4 style="display:inline">개</h4>
                             <br><br>
 
-                            <button id="btn-update" class="btn btn-primary" data-bs-dismiss="modal">
-                                <div data-bs-toggle="modal" data-bs-target="#editbtn">
-                                    <i class="fa-solid fa-pen"></i>
-                                    수정
-                                </div>
+                            <button id="btn-update" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editbtn">
+                                <i class="fa-solid fa-pen"></i>
+                                수정
                             </button>
-                            <button id="btn-delete" class="btn btn-primary" data-bs-dismiss="modal">
+                            <button id="btn-delete" class="btn btn-primary" >
                                 <i class="fas fa-xmark fa-fw"></i>
                                 삭제
                             </button>
@@ -367,7 +365,7 @@
                                             <div id="editD1" style="visibility: hidden">
                                                 <span class="stepper">
                                                   <button>–</button>
-                                                    <input type="number" id="stepper" value="0" min="0" max="100" step="1" readonly>
+                                                    <input type="number" id="stepper" value="0" min="0" max="365" step="1" onchange="editCount();">
                                                   <button>+</button>
                                                 </span>
                                             </div>
@@ -596,13 +594,13 @@
             .getElementById(id)
             .previousElementSibling.setAttribute(
             "onclick",
-            "stepperInput('" + id + "', -" + step + ", " + min + ")"
+            "stepperInput('" + id + "', -" + step + ", " + min + ")",
         );
         document
             .getElementById(id)
             .nextElementSibling.setAttribute(
             "onclick",
-            "stepperInput('" + id + "', " + step + ", " + max + ")"
+            "stepperInput('" + id + "', " + step + ", " + max + ")",
         );
     }
     function stepperInput(id, s, m) {
@@ -616,6 +614,7 @@
                 el.value = parseInt(el.value) + s;
             }
         }
+        editCount();
     }
 
 
@@ -637,12 +636,16 @@
     function editCount(){
         var dayselect = $('#editDayselect').val();
         var daycount = $('#editD2').val();
-        var count = $('#editMediCount').val();
+        var count = $('#stepper').val();
 
         var result = 0;
 
         // 갯수
-        if (dayselect == 1) {
+        if (dayselect == 0) {
+            // result = count
+        }
+        // 갯수
+        else if (dayselect == 1) {
             result = count
         }
         // 일
