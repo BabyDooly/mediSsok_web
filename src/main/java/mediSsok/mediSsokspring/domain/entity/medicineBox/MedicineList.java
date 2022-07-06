@@ -34,4 +34,9 @@ public class MedicineList extends BaseTimeEntity {
         this.name = name;
         this.medicineBox = medicineBox;
     }
+
+    public MedicineList(String name) { this.name = name; }
+    public static MedicineList createList(String name) {
+        return new MedicineList(name);
+    }
 }

@@ -13,8 +13,8 @@ public class MemberAlarmUpdateRequestDto {
     private Boolean pushAlarms;
     private Boolean locationAlarms;
     private Boolean replenishAlarms;
-    @Builder
 
+    @Builder
     public MemberAlarmUpdateRequestDto(Boolean vibration, Boolean pushAlarms, Boolean locationAlarms, Boolean replenishAlarms) {
         this.vibration = vibration;
         this.pushAlarms = pushAlarms;

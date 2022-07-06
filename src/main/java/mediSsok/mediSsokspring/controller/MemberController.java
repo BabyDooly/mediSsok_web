@@ -27,12 +27,12 @@ public class MemberController {
     private final BCryptPasswordEncoder passwordEncoder;
 
 
-    private boolean validationLogin(MemberSaveResponseDto memberDto) {
-        if(!passwordEncoder.matches(memberDto.getPassword(), memberDto.getConfirm_Password())) {
-            return false;
-        }
-        return true;
-    }
+//    private boolean validationLogin(MemberSaveResponseDto memberDto) {
+//        if(!passwordEncoder.matches(memberDto.getPassword(), memberDto.getConfirm_Password())) {
+//            return false;
+//        }
+//        return true;
+//    }
 
 
     // 회원가입 페이지(GET)
@@ -45,9 +45,6 @@ public class MemberController {
     @PostMapping("/user/signupProc")
     public String Signup(@Valid MemberSaveResponseDto memberDto, Errors errors, Model model) {
         if (errors.hasErrors()) {
-            // 회원가입 실패시, 입력 데이터를 유지
-            model.addAttribute("memberDto", memberDto);
-
             // 유효성 통과 못한 필드와 메시지를 핸들링
             Map<String, String> validatorResult = memberService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
@@ -73,14 +70,6 @@ public class MemberController {
         } else {
             memberService.save(memberDto);
         }
-//        if(!validationLogin(memberDto)){
-//            model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
-//            // 회원가입 페이지로 다시 리턴
-//            return "/login/register";
-//        } else{
-//            // 성공하면 로그인페이지로
-//            memberService.save(memberDto);
-//        }
         return "redirect:/user/login";
     }
 

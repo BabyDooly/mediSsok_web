@@ -3,23 +3,16 @@ package mediSsok.mediSsokspring.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
-import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxRequestDto;
-import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
-import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxSaveResponseDto;
-import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxUpdateResponseDto;
+import mediSsok.mediSsokspring.dto.medicineBox.*;
 import mediSsok.mediSsokspring.service.MedicineBoxService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.security.Principal;
 
 @Slf4j
 @Controller
@@ -35,6 +28,7 @@ public class MedicineBoxController {
         // 페이징 리스트
         Page<MedicineBoxResponseDto> list = medicineBoxService.findByMemberId(userDetails.getMember().getId(), pageable);
 
+        // 약통, 맴버이름
         model.addAttribute("member", userDetails.getMember().getNickname());
         model.addAttribute("mediBoxs", list);
 
@@ -56,16 +50,22 @@ public class MedicineBoxController {
     // 약통 추가
     @PostMapping("/api/medi/add")
     @ResponseBody
-    public Long save(@RequestBody MedicineBoxSaveResponseDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
-        requestDto.setMember(userDetails.getMember());
+    public Long save(@RequestBody MedicineBoxSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
+//        System.out.println(requestDto);
+//
+//        for (MedicineList medicineList : requestDto.getMedicineLists()) {
+//            System.out.println(medicineList);
+//        }
+
+        requestDto.setMemberId(userDetails.getMember().getId());
         return medicineBoxService.create(requestDto);
     }
 
     // 약통 수정
     @PostMapping("/api/medi/update/{id}")
     @ResponseBody
-    public Long update(@PathVariable Long id, @RequestBody MedicineBoxUpdateResponseDto medicineBoxUpdateResponseDto){
-        return medicineBoxService.update(id, medicineBoxUpdateResponseDto);
+    public Long update(@PathVariable Long id, @RequestBody MedicineBoxUpdateRequestDto medicineBoxUpdateRequestDto){
+        return medicineBoxService.update(id, medicineBoxUpdateRequestDto);
     }
 
     // 게시물 삭제

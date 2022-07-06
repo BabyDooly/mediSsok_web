@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
+import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineList;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,7 +20,9 @@ public class MedicineBoxResponseDto {
     private String memo;
     private String color;
     private int count;
-    private String email;
+    private Long memberId;
+
+    private List<MedicineList> medicineLists;
 
     public MedicineBoxResponseDto(MedicineBox entity) {
         this.id = entity.getId();
@@ -25,6 +30,6 @@ public class MedicineBoxResponseDto {
         this.memo = entity.getMemo();
         this.color = entity.getColor();
         this.count = entity.getCount();
-        this.email = entity.getMember().getEmail();
+        this.memberId = entity.getMember().getId();
     }
 }

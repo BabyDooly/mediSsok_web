@@ -59,7 +59,8 @@ public class Member extends BaseTimeEntity {
     List<MedicineBox> MedicineBoxs = new ArrayList<>();
 
     @Builder
-    public Member(String email, String password, String nickname, String phone) {
+    public Member(Long id, String email, String password, String nickname, String phone) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.nickname = nickname;

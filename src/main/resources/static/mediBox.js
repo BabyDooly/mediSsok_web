@@ -30,12 +30,28 @@ let mediBox = {
 
     // 약통 추가
     add : function () {
+        // var ajsonArray = new Array();
+        // var ajson = new Object();
+        //
+        // for (let i = 0; i <= 7; i++) {
+        //     if ($('#medi' + i).val() != "" && document.getElementById('medi' + i) != undefined){
+        //         console.log($('#medi' + i).val());
+        //         ajson.listName = $('#medi' + i).val();
+        //         ajsonArray.push(ajson);
+        //     }
+        // }
+        //
+        // console.log(ajsonArray)
+
         let data = {
             name: $('#medicase').val(),
             memo: $('#memo').val(),
             color: $('#caseCol').val(),
             count: $('#count').text(),
+            // medicineLists: JSON.stringify(ajsonArray)
         }
+
+        console.log(data)
 
         $.ajax({
             type: 'POST',

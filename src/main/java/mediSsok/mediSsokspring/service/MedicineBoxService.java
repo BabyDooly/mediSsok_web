@@ -10,9 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor    //final 필드 생성자 생성
 public class MedicineBoxService {
@@ -22,13 +19,13 @@ public class MedicineBoxService {
     /*---- 약통 ----*/
     // 생성
     @Transactional
-    public Long create(MedicineBoxSaveResponseDto responseDto) {
+    public Long create(MedicineBoxSaveRequestDto responseDto) {
         return medicineBoxRepository.save(responseDto.toEntity()).getId();
     }
 
     // 약통 리스트
     @Transactional(readOnly=true)
-    public Page<MedicineBoxResponseDto> findByMemberId(long memberId, Pageable pageable){
+    public Page<MedicineBoxResponseDto> findByMemberId(Long memberId, Pageable pageable){
         return medicineBoxRepository.findByMemberId(memberId, pageable);
     }
 
@@ -42,7 +39,7 @@ public class MedicineBoxService {
 
     // 약통 수정
     @Transactional
-    public Long update(Long id, MedicineBoxUpdateResponseDto responseDto){
+    public Long update(Long id, MedicineBoxUpdateRequestDto responseDto){
         MedicineBox medicineBox = medicineBoxRepository.findById(id)
                 // 아이디가 없을때
                 .orElseThrow(() -> new IllegalArgumentException("해당 약통이 없습니다. id = " + id));

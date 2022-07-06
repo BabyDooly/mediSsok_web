@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface MedicineBoxRepository extends JpaRepository<MedicineBox, Long> {
 
-    Page<MedicineBoxResponseDto> findByMemberId(long userId, Pageable pageable);
+    Page<MedicineBoxResponseDto> findByMemberId(Long userEmail, Pageable pageable);
 
 }

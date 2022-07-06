@@ -6,21 +6,18 @@ import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineList;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class MedicineBoxSaveResponseDto {
+public class MedicineBoxSaveRequestDto {
     private String name;
     private String memo;
     private String color;
     private int count;
-
+    private Long memberId;
     private List<MedicineList> medicineLists;
-    private Member member;
 
     public MedicineBox toEntity(){
         return MedicineBox.builder()
@@ -28,7 +25,7 @@ public class MedicineBoxSaveResponseDto {
                 .color(color)
                 .memo(memo)
                 .count(count)
-                .member(member)
+                .member(Member.builder().id(memberId).build())
                 .medicineLists(medicineLists)
                 .build();
     }

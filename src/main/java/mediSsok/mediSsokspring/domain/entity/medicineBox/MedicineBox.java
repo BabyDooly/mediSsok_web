@@ -46,9 +46,6 @@ public class MedicineBox extends BaseTimeEntity {
     @OneToMany(mappedBy = "medicineBox",  cascade = CascadeType.ALL, orphanRemoval = true)
     List<MedicineList> medicineLists = new ArrayList<>();
 
-
-
-
     @Builder
     public MedicineBox(String name, String memo, String color, int count, Member member, List<MedicineList> medicineLists) {
         this.name = name;
@@ -66,4 +63,5 @@ public class MedicineBox extends BaseTimeEntity {
         this.color = color;
         this.count = count;
     }
+
 }
