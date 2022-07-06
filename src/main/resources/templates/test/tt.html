@@ -15,70 +15,13 @@
 
     <link rel="stylesheet" href="/css/calmain.css">
 
-    <style type="text/css">
-        .btn2 {
-            display: inline-block;
-            padding: 10px;
-            position: relative;
-            text-align: center;
-            border: 1px solid black;
-            margin-bottom: 5px;
-            transition: background 600ms ease, color 600ms ease;
-        }
-        input[type=radio].toggle {
-            display: none;
-        }
-        input[type=radio].toggle + label {
-            cursor: pointer;
-            text-align: center;
-            width: 32%;
-
-        }
-        input[type=radio].toggle + label:hover {
-            background: none;
-            color: #000000;
-        }
-        input[type=radio].toggle + label:after {
-            background: #6F6FFF;
-            content: "";
-            height: 100%;
-            position: absolute;
-            top: 0;
-            transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
-            width: 100%;
-            z-index: 0;
-        }
-        input[type=radio].toggle.toggle-left + label {
-            border-right: 0;
-        }
-        input[type=radio].toggle.toggle-left + label:after {
-            left: 100%;
-        }
-        input[type=radio].toggle.toggle-right + label {
-            margin-left: -5px;
-        }
-        input[type=radio].toggle.toggle-right + label:after {
-            left: -100%;
-        }
-        input[type=radio].toggle:checked + label {
-            cursor: default;
-            color: #fff;
-            transition: color 200ms;
-
-        }
-        input[type=radio].toggle:checked + label:after {
-            left: 0;
-
-        }
-
-    </style>
 </head>
 
 <body>
 <div class="container">
 
     <!-- 일자 클릭시 메뉴오픈 -->
-    <div id="contextMenu" class="dropdown clearfix" onclick="tes()">
+    <div id="contextMenu" class="dropdown clearfix">
         <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
             style="display:block;position:static;margin-bottom:5px;">
             <li><a tabindex="-1" href="#">카테고리1</a></li>
@@ -126,33 +69,10 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <label class="col-xs-4">복용여부</label>
-                            <!--<select class="inputModal" name="color" id="edit-color">
-                                <option value="#D25565" style="color:#D25565;">안먹었어요</option>
-                                <option value="#2bad00" style="color:#2bad00;">먹었어요</option>
-                            </select>-->
                             <button class="inputModal" type="button" name="color" onclick="test();" id="edit-color" value="#d25565" style="background: #d25565;color: #ffffff">안먹었어요</button>
                         </div>
                     </div>
                     <hr>
-                    <!--<div class="row"> 라디오 버튼으로 만들었는데 안됨
-                        <div class="col-xs-12">
-                            <label class="col-xs-4" for="edit-color">복용여부</label>
-
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons" name="color" id="edit-color">
-                                <label style="background: #D25565; color: #ffffff">
-                                    <input type="radio" id="a" name="jb-radio" value="#D25565"> 안먹었어요
-                                </label>
-                                <label  style="background: #2bad00; color: #ffffff">
-                                    <input type="radio" id="b" name="jb-radio" value="#2bad00" checked> 먹었어요
-                                </label>
-                            </div>
-
-                        </div>
-                    </div>-->
-
-
-
-
 
                     <div class="row">
                         <div class="col-xs-12">
@@ -190,13 +110,7 @@
 <script src="/caljs/etcSetting.js"></script>
 
 <script>
-    var event=Event;
     const element2 = document.getElementById('edit-color')
-    function tes(){
-        element2.value=event.background.val();
-        element2.style.backgroundColor=event.background.val();
-
-    }
     function test() {
         if ($('#edit-color').val() == '#D25565') {
             element2.value = '#2bad00';
