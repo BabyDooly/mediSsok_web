@@ -71,15 +71,14 @@
 
 <body>
 <div th:replace="navbar/navBar :: navBar"/>
-<p class="mainText">테스트 페이지입니다.</p>
-<p class="mainSubText">알람설정 페이지 만드는중.</p>
+<p class="mainText" th:text="${member} + '님의 알람'"></p>
+<p class="mainSubText">오늘도 잊지말고 꼭 드셔주세요.</p>
+
+<br>
+
 <div class="mediSearchDiv" >
     <table id="belltable" class="table table-bordered border-secondary" style="width: 401px;float: left;">
-        <thead>
-        <tr></tr>
-        </thead>
         <tbody>
-        <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <tr>
             <th class="table-active" valign="middle">
                 <div>
@@ -136,7 +135,7 @@
 </button>
 </div>
 
-<!-- plusBtn -->
+<!-- 알람 추가 -->
 <div class="portfolio-modal modal fade" id="plusbtn" tabindex="-1" aria-labelledby="plusbtn"
      aria-hidden="true">
     <div class="modal-dialog modal-xl">
@@ -148,16 +147,9 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h1 class="text-secondary text-uppercase mb-0">알람 추가하기</h1>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <!-- Portfolio Modal - Image-->
-                            <!--<img class="img-fluid rounded mb-5" src="/image/mediCase/capsule-icon.png" alt="..."/>-->
-                            <!-- Portfolio Modal - Text-->
+                            <!-- 타이틀 -->
+                            <h1 class="text-dark text-uppercase mb-0">알람 추가하기</h1>
+
                             <br>
                             <div class="myPageIndiv2">
                                 <div class="row g-3 align-items-center">
@@ -178,17 +170,27 @@
 
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <label for="startday" class="col-form-label">시작일&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                        <label for="startday" class="col-form-label" style="padding-right: 3.6em">시작일&nbsp</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="datetime-local" id="startday" class="form-control" placeholder="2022-06-24">
+                                        <input type="date" id="startday" class="form-control" placeholder="2022-06-24">
                                     </div>
                                 </div>
                                 <br>
 
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <label for="reday" class="col-form-label" style="padding-right: 1em">주기&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                        <label for="addTime" class="col-form-label" style="padding-right: 3em">알람시간</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="time" id="addTime" class="form-control">
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="reday" class="col-form-label" style="padding-right: 5em">주기</label>
                                     </div>
                                     <div class="col-md-9">
                                         <input type="text" id="reday" class="form-control" placeholder="주기">
@@ -198,7 +200,7 @@
                                 </div>
                                 <br>
                             </div>
-
+                            <br><br><br><br>
 
                             <button id="addbtn" onclick="addbtn()" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
                                 추가

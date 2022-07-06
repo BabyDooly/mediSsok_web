@@ -3,10 +3,12 @@ package mediSsok.mediSsokspring.dto.medicineBox;
 
 import lombok.*;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
+import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineList;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,6 +18,8 @@ public class MedicineBoxSaveResponseDto {
     private String memo;
     private String color;
     private int count;
+
+    private List<MedicineList> medicineLists;
     private Member member;
 
     public MedicineBox toEntity(){
@@ -25,6 +29,7 @@ public class MedicineBoxSaveResponseDto {
                 .memo(memo)
                 .count(count)
                 .member(member)
+                .medicineLists(medicineLists)
                 .build();
     }
 }
