@@ -23,18 +23,22 @@
             text-align: center;
             transition: background 600ms ease, color 600ms ease;
         }
+
         input[type=radio].toggle {
             display: none;
         }
+
         input[type=radio].toggle + label {
             cursor: pointer;
             text-align: center;
-            width: 199px;
+            width: 197px;
         }
+
         input[type=radio].toggle + label:hover {
             background: none;
             color: #000000;
         }
+
         input[type=radio].toggle + label:after {
             background: #6F6FFF;
             content: "";
@@ -45,27 +49,40 @@
             width: 100%;
             z-index: -1;
         }
+
         input[type=radio].toggle.toggle-left + label {
             border-right: 0;
         }
+
         input[type=radio].toggle.toggle-left + label:after {
             left: 100%;
         }
+
         input[type=radio].toggle.toggle-right + label {
             margin-left: -5px;
         }
+
         input[type=radio].toggle.toggle-right + label:after {
             left: -100%;
         }
+
         input[type=radio].toggle:checked + label {
             cursor: default;
             color: #fff;
             transition: color 200ms;
         }
+
         input[type=radio].toggle:checked + label:after {
             left: 0;
         }
 
+    </style>
+    <style>
+        .cbox{
+            width: 20px;
+            height: 20px;
+            border-color: #ffffff;
+        }
     </style>
 </head>
 
@@ -76,7 +93,7 @@
 
 <br>
 
-<div class="mediSearchDiv" >
+<div class="mediSearchDiv">
     <table id="belltable" class="table table-bordered border-secondary" style="width: 401px;float: left;">
         <tbody>
         <tr>
@@ -124,15 +141,6 @@
         </div>
     </div>
 </button>
-<button onclick="minusbtn">
-    <div>
-        <div data-bs-toggle="modal" data-bs-target="#minusbtn">
-            <div class="d-flex align-items-center justify-content-center h-100 w-100">
-            </div>
-            <img class="img-fluid" src="/image/minus.png" alt="..."/>
-        </div>
-    </div>
-</button>
 </div>
 
 <!-- 알람 추가 -->
@@ -151,66 +159,114 @@
                             <h1 class="text-dark text-uppercase mb-0">알람 추가하기</h1>
 
                             <br>
-                            <div class="myPageIndiv2">
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <label for="medicase" class="col-form-label" style="padding-right: 3em">약통선택</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <select id="medicase" class="form-select" aria-label="약통 선택하기">
-                                            <option selected value="">약통 선택하기</option>
-                                            <option value="감기약">감기약</option>
-                                            <option value="혈압약">혈압약</option>
-                                            <option value="두통약">두통약</option>
-                                        </select>
-
-                                    </div>
+                            <div class="row g-3 align-items-center">
+                                <div class="col-md-3">
+                                    <label for="medicase" class="col-form-label"
+                                           style="padding-right: 3em">약통선택</label>
                                 </div>
-                                <br>
+                                <div class="col-md-9">
+                                    <select id="medicase" class="form-select" aria-label="약통 선택하기">
+                                        <option selected value="">약통 선택하기</option>
+                                        <option value="감기약">감기약</option>
+                                        <option value="혈압약">혈압약</option>
+                                        <option value="두통약">두통약</option>
+                                    </select>
 
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <label for="startday" class="col-form-label" style="padding-right: 3.6em">시작일&nbsp</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="date" id="startday" class="form-control" placeholder="2022-06-24">
-                                    </div>
                                 </div>
-                                <br>
-
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <label for="addTime" class="col-form-label" style="padding-right: 3em">알람시간</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="time" id="addTime" class="form-control">
-                                    </div>
-                                </div>
-                                <br>
-
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <label for="reday" class="col-form-label" style="padding-right: 5em">주기</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" id="reday" class="form-control" placeholder="주기">
-                                    </div>
-                                    <div class="col-auto">
-                                    </div>
-                                </div>
-                                <br>
                             </div>
+                            <br>
+
+                            <div class="row g-3 align-items-center">
+                                <div class="col-md-3">
+                                    <label for="startday" class="col-form-label"
+                                           style="padding-right: 3.6em">시작일&nbsp</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="date" id="startday" class="form-control" placeholder="2022-06-24">
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row g-3 align-items-center">
+                                <div class="col-md-3">
+                                    <label for="addTime" class="col-form-label"
+                                           style="padding-right: 3em">알람시간</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="time" id="addTime" class="form-control">
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row g-3 align-items-center">
+                                <div class="col-md-3">
+                                    <label class="col-form-label" style="padding-right: 5em">주기</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select" aria-label="Default select example" id="selectdayBtn"
+                                            onchange="Change2();">
+                                        <option value="0" selected>선택 없음</option>
+                                        <option value="1">매일</option>
+                                        <option value="2">특정 요일</option>
+                                        <option value="3">일 간격</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <div id="sel1" style="visibility: hidden">
+                                                <span class="stepper2">
+                                                  <button>–</button>
+                                                    <input type="number" id="stepper" value="0" min="0" max="365"
+                                                           step="1" onchange="editCount2();">
+                                                  <button>+</button>
+                                                </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select" aria-label="Default select example" id="sel2"
+                                            style="visibility: hidden">
+                                        <option value="0" selected>일 간격</option>
+                                        <option value="1">1번</option>
+                                        <option value="2">2번</option>
+                                        <option value="3">3번</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                </div>
+                            </div>
+                            <div class="row g-3 align-items-center">
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-7">
+                                    <div id="sel3" style="font-size: 20px; visibility: hidden;">
+                                        &nbsp;<input type='checkbox' name='day' value='0' class="cbox" style="accent-color: red;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type='checkbox' name='day' value='1' class="cbox" style="accent-color: #d1721d;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type='checkbox' name='day' value='2' class="cbox" style="accent-color: #9a7928;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type='checkbox' name='day' value='3' class="cbox" style="accent-color: green;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type='checkbox' name='day' value='4' class="cbox" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type='checkbox' name='day' value='5' class="cbox" style="accent-color: darkblue;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type='checkbox' name='day' value='6' class="cbox" style="accent-color: purple;"/><br>
+                                        &nbsp;월&nbsp;&nbsp;&nbsp;&nbsp;
+                                        화&nbsp;&nbsp;&nbsp;&nbsp;
+                                        수&nbsp;&nbsp;&nbsp;&nbsp;
+                                        목&nbsp;&nbsp;&nbsp;&nbsp;
+                                        금&nbsp;&nbsp;&nbsp;&nbsp;
+                                        토&nbsp;&nbsp;&nbsp;&nbsp;
+                                        일
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
                             <br><br><br><br>
 
-                            <button id="addbtn" onclick="addbtn()" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                            <button id="addbtn" onclick="addbtn()" class="btn btn-primary" data-bs-dismiss="modal"
+                                    style="width: 90px">
                                 추가
                             </button>
                             <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
                                 취소
                             </button>
 
-
-
                         </div>
                     </div>
                 </div>
@@ -218,113 +274,102 @@
         </div>
     </div>
 </div>
-<!-- minusBtn -->
-<div class="portfolio-modal modal fade" id="minusbtn" tabindex="-1" aria-labelledby="minusbtn"
-     aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center pb-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h1 class="text-secondary text-uppercase mb-0">알람 삭제하기</h1>
-                            <br>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <!-- Portfolio Modal - Image-->
-                            <!--<img class="img-fluid rounded mb-5" src="/image/mediCase/capsule-icon.png" alt="..."/>-->
-                            <!-- Portfolio Modal - Text-->
 
-                            <div class="myPageIndiv2">
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <label for="medicase1" class="col-form-label" style="padding-right: 3em">약통선택</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" id="medicase1" class="form-control" placeholder="약통 선택하기">
-                                    </div>
-                                </div>
-                                <br>
-
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <label for="startday1" class="col-form-label">시작일&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" id="startday1" class="form-control" placeholder="2022-06-24">
-                                    </div>
-                                </div>
-                                <br>
-
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <label for="reday1" class="col-form-label" style="padding-right: 1em">주기&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" id="reday1" class="form-control" placeholder="주기">
-                                    </div>
-                                    <div class="col-auto">
-                                    </div>
-                                </div>
-                                <br>
-                            </div>
-                            <button id="delbtn" onclick="delbtn()" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
-                                삭제
-                            </button>
-                            <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
-                                취소
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- bootstrp js 링크 -->
 <script src="/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    function updateDiv(){
+    function updateDiv() {
         window.location.reload();
     }
+
     var count = 1;
-    function bellbtn(){
-        var img1=document.getElementById("img1");
-        if(count%2==1){
-            img1.src="/image/mediBell/nonebell.png";
-        }
-        else{
-            img1.src="/image/mediBell/blackbell.png";
+
+    function bellbtn() {
+        var img1 = document.getElementById("img1");
+        if (count % 2 == 1) {
+            img1.src = "/image/mediBell/nonebell.png";
+        } else {
+            img1.src = "/image/mediBell/blackbell.png";
         }
         count++;
     }
 
-    function addbtn(){
+    function addbtn() {
         const newDiv = document.createElement('div');
         const medicaseAdd = document.getElementById('medicase').value;
         const dateAdd = document.getElementById('startday').value;
         const redayAdd = document.getElementById('reday').value;
 
-        newDiv.setAttribute("id","divv");
-        newDiv.setAttribute("class","tesDiv")
-        newDiv.innerText=medicaseAdd;
-        newDiv.innerText+=dateAdd;
-        newDiv.innerText+=redayAdd;
+        newDiv.setAttribute("id", "divv");
+        newDiv.setAttribute("class", "tesDiv")
+        newDiv.innerText = medicaseAdd;
+        newDiv.innerText += dateAdd;
+        newDiv.innerText += redayAdd;
 
         const newText = document.createTextNode('');
         newDiv.appendChild(newText);
         document.body.appendChild(newDiv);
     }
-    function delbtn(){
+
+    function delbtn() {
         const div = document.getElementById('divv');
         div.remove();
+    }
+
+    function Change2() {
+        var key2 = $('#selectdayBtn').val();
+        if (key2 == 0) {
+            document.all["sel1"].style.visibility = "hidden";
+            document.all["sel2"].style.visibility = "hidden";
+            document.all["sel2"].style.visibility = "hidden";
+        } else if (key2 == 1) {
+            document.all["sel1"].style.visibility = "hidden";
+            document.all["sel2"].style.visibility = "hidden";
+            document.all["sel3"].style.visibility = "hidden";
+        } else if (key2 == 2) {
+            document.all["sel1"].style.visibility = "hidden";
+            document.all["sel2"].style.visibility = "hidden";
+            document.all["sel3"].style.visibility = "visible";
+        } else {
+            document.all["sel1"].style.visibility = "visible";
+            document.all["sel2"].style.visibility = "visible";
+            document.all["sel3"].style.visibility = "hidden";
+        }
+    }
+
+    var inc = document.getElementsByClassName("stepper2");
+    for (i = 0; i < inc.length; i++) {
+        var incI = inc[i].querySelector("input"),
+            id = incI.getAttribute("id"),
+            min = incI.getAttribute("min"),
+            max = incI.getAttribute("max"),
+            step = incI.getAttribute("step");
+        document
+            .getElementById(id)
+            .previousElementSibling.setAttribute(
+            "onclick",
+            "stepperInput('" + id + "', -" + step + ", " + min + ")"
+        );
+        document
+            .getElementById(id)
+            .nextElementSibling.setAttribute(
+            "onclick",
+            "stepperInput('" + id + "', " + step + ", " + max + ")"
+        );
+    }
+
+    function stepperInput(id, s, m) {
+        var el = document.getElementById(id);
+        if (s > 0) {
+            if (parseInt(el.value) < m) {
+                el.value = parseInt(el.value) + s;
+            }
+        } else {
+            if (parseInt(el.value) > m) {
+                el.value = parseInt(el.value) + s;
+            }
+        }
     }
 </script>
 </body>
