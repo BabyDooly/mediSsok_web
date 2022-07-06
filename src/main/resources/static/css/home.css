@@ -34,7 +34,33 @@
     color: #333;
     border: none;
 }
-
+.stepper2 {
+    border: 1px solid #eee;
+    display: inline-block;
+    overflow: visible;
+    height: 2.1em;
+    background: #fff;
+    padding: 1px;
+}
+.stepper2 input {
+    width: 69px;
+    height: 100%;
+    text-align: center;
+    border: 0;
+    background: transparent;
+    color: #000;
+}
+.stepper2 button {
+    width: 40px;
+    font-weight: 300;
+    height: 100%;
+    line-height: 0.1em;
+    font-size: 1.4em;
+    padding: 0.2em !important;
+    background: #eee;
+    color: #333;
+    border: none;
+}
 
 .mainpad{
     padding-left:380px;
@@ -624,7 +650,7 @@ increment-next {  from {
     width: 1260px;
     margin: 0 auto;
     border: 1px solid #000000;
-
+    margin-bottom: 200px;
 }
 /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ calendar CSS ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 
