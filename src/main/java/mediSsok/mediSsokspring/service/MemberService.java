@@ -1,13 +1,13 @@
 package mediSsok.mediSsokspring.service;
 
 import lombok.RequiredArgsConstructor;
+import mediSsok.mediSsokspring.Validation.CheckEmailValidator;
+import mediSsok.mediSsokspring.Validation.CheckNicknameValidator;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.config.auth.dto.SessionUser;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
 import mediSsok.mediSsokspring.domain.repository.member.MemberRepository;
 import mediSsok.mediSsokspring.dto.member.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -27,6 +29,7 @@ public class MemberService implements UserDetailsService {
 
     private final HttpSession session;
 
+
     // 회원가입
     @Transactional
     public String save(MemberSaveResponseDto memberDto) {
@@ -36,7 +39,7 @@ public class MemberService implements UserDetailsService {
         return memberRepository.save(memberDto.toEntity()).getEmail();
     }
 
-    // 회원가입 시, 유효성 체크
+    /* 회원가입 시, 유효성 및 중복 검사 */
     @Transactional(readOnly = true)
     public Map<String, String> validateHandling(Errors errors) {
         Map<String, String> validatorResult = new HashMap<>();

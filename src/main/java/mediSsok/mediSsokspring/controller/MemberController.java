@@ -1,6 +1,8 @@
 package mediSsok.mediSsokspring.controller;
 
 import lombok.RequiredArgsConstructor;
+import mediSsok.mediSsokspring.Validation.CheckEmailValidator;
+import mediSsok.mediSsokspring.Validation.CheckNicknameValidator;
 import mediSsok.mediSsokspring.domain.repository.member.MemberRepository;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.dto.member.*;
@@ -14,6 +16,7 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,13 +29,9 @@ public class MemberController {
     private final MemberService memberService;
     private final BCryptPasswordEncoder passwordEncoder;
 
-
-//    private boolean validationLogin(MemberSaveResponseDto memberDto) {
-//        if(!passwordEncoder.matches(memberDto.getPassword(), memberDto.getConfirm_Password())) {
-//            return false;
-//        }
-//        return true;
-//    }
+    // 회원가입시 중복및 유효성 검사 부분
+    private final CheckNicknameValidator checkNicknameValidator;
+    private final CheckEmailValidator checkEmailValidator;
 
 
     // 회원가입 페이지(GET)
@@ -109,5 +108,12 @@ public class MemberController {
     @ResponseBody
     public Long alarmUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberAlarmUpdateRequestDto requestDto){
         return memberService.alarmUpdate(userDetails.getUsername(), requestDto);
+    }
+
+    /* 커스텀 유효성 검증을 위해 추가 */
+    @InitBinder
+    public void validatorBinder(WebDataBinder binder) {
+        binder.addValidators(checkNicknameValidator);
+        binder.addValidators(checkEmailValidator);
     }
 }
