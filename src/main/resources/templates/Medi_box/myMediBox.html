@@ -57,14 +57,10 @@
                 <h2 th:text="${mediBox.getName()}"></h2>
             </div>
             <div class="pagination justify-content-center">
-                <a role="button" class="btn btn-lg" th:if="${hasPrev == true}"
-                   th:href="@{/medi/medibox(page=${previous})}"><i class="fa-solid fa-square-caret-left fa-2x"></i></a>
-                <a role="button" class="btn btn-lg" th:if="${hasPrev == false}" href=""><i
-                        class="fa-regular fa-square-caret-left fa-2x disabled"></i></a>
-                <a role="button" class="btn btn-lg" th:if="${hasNext == true}" th:href="@{/medi/medibox(page=${next})}"><i
-                        class="fa-solid fa-square-caret-right fa-2x"></i></a>
-                <a role="button" class="btn btn-lg" th:if="${hasNext == false}" href=""><i
-                        class="fa-regular fa-square-caret-right fa-2x disabled"></i></a>
+                <a role="button" class="btn btn-lg" th:if="${hasPrev == true}" th:href="@{/medi/medibox(page=${previous})}" ><i class="fa-solid fa-square-caret-left fa-2x"></i></a>
+                <a role="button" class="btn btn-lg" th:if="${hasPrev == false}" href="" ><i class="fa-regular fa-square-caret-left fa-2x disabled"></i></a>
+                <a role="button" class="btn btn-lg" th:if="${hasNext == false}" href=""><i class="fa-regular fa-square-caret-right fa-2x disabled"></i></a>
+                <a role="button" class="btn btn-lg" th:if="${hasNext == true}" th:href="@{/medi/medibox(page=${next})}"><i class="fa-solid fa-square-caret-right fa-2x"></i></a>
             </div>
 
         </div>

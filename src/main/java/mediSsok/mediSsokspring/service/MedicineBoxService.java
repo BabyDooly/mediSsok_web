@@ -6,9 +6,14 @@ import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineBoxReposito
 import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineListRepository;
 import mediSsok.mediSsokspring.dto.medicineBox.*;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor    //final 필드 생성자 생성
@@ -19,14 +24,29 @@ public class MedicineBoxService {
     /*---- 약통 ----*/
     // 생성
     @Transactional
-    public Long create(MedicineBoxSaveRequestDto responseDto) {
-        return medicineBoxRepository.save(responseDto.toEntity()).getId();
+    public Long create(MedicineBoxSaveRequestDto requestDto) {
+        return medicineBoxRepository.save(requestDto.toEntity()).getId();
     }
 
     // 약통 리스트
     @Transactional(readOnly=true)
     public Page<MedicineBoxResponseDto> findByMemberId(Long memberId, Pageable pageable){
-        return medicineBoxRepository.findByMemberId(memberId, pageable);
+        List<MedicineBoxResponseDto> dto = medicineBoxRepository.findByMemberId(memberId, pageable).stream()
+                .map(MedicineBoxResponseDto::new)
+                .collect(Collectors.toList());
+
+        int start = (int)pageable.getOffset();
+        int end = (start + pageable.getPageSize() > dto.size() ? dto.size() : (start + pageable.getPageSize()));
+
+        return new PageImpl<>(dto.subList(start,end), pageable, dto.size());
+    }
+
+    // 약통 리스트(페이징x)
+    @Transactional(readOnly=true)
+    public List<MedicineBoxResponseDto> findByMemberId (Long id){
+        return medicineBoxRepository.findByMemberId(id).stream()
+                .map(MedicineBoxResponseDto::new)
+                .collect(Collectors.toList());
     }
 
     // 약통 조회
@@ -39,12 +59,12 @@ public class MedicineBoxService {
 
     // 약통 수정
     @Transactional
-    public Long update(Long id, MedicineBoxUpdateRequestDto responseDto){
+    public Long update(Long id, MedicineBoxUpdateRequestDto requestDto){
         MedicineBox medicineBox = medicineBoxRepository.findById(id)
                 // 아이디가 없을때
                 .orElseThrow(() -> new IllegalArgumentException("해당 약통이 없습니다. id = " + id));
 
-        medicineBox.update(responseDto.getName(), responseDto.getMemo(), responseDto.getColor(), responseDto.getCount());
+        medicineBox.update(requestDto.getName(), requestDto.getMemo(), requestDto.getColor(), requestDto.getCount());
 
         return id;
     }

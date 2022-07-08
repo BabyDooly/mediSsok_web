@@ -6,8 +6,14 @@ import mediSsok.mediSsokspring.Validation.CheckNicknameValidator;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.config.auth.dto.SessionUser;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
+import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
 import mediSsok.mediSsokspring.domain.repository.member.MemberRepository;
+import mediSsok.mediSsokspring.domain.repository.schedule.ScheduleDateRepository;
 import mediSsok.mediSsokspring.dto.member.*;
+import mediSsok.mediSsokspring.dto.schedule.ScheduleRequestDto;
+import mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto;
+import mediSsok.mediSsokspring.dto.schedule.ScheduleSaveRequestDto;
+import mediSsok.mediSsokspring.dto.schedule.ScheduleUpdateRequestDto;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -123,3 +129,4 @@ public class MemberService implements UserDetailsService {
         // 회원 가입 비즈니스 로직 구현
     }
 }
+
