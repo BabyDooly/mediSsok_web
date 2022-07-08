@@ -80,4 +80,9 @@ public class Member extends BaseTimeEntity {
         this.locationAlarms = locationAlarms;
         this.replenishAlarms = replenishAlarms;
     }
+
+    /** 비밀번호 변경 메서드 **/
+    public void updatePassword(String password){
+        this.password = password;
+    }
 }

@@ -1,18 +1,15 @@
 package mediSsok.mediSsokspring.controller;
 
 import lombok.RequiredArgsConstructor;
+import mediSsok.mediSsokspring.Email.MailService;
+import mediSsok.mediSsokspring.Email.MailVo;
 import mediSsok.mediSsokspring.Validation.CheckEmailValidator;
 import mediSsok.mediSsokspring.Validation.CheckNicknameValidator;
-import mediSsok.mediSsokspring.domain.repository.member.MemberRepository;
-import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.dto.member.*;
 import mediSsok.mediSsokspring.service.MemberService;
-import org.aspectj.bridge.Message;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.lang.reflect.Member;
 import java.util.Map;
 
 @Controller
@@ -32,6 +28,7 @@ public class MemberController {
     // 회원가입시 중복및 유효성 검사 부분
     private final CheckNicknameValidator checkNicknameValidator;
     private final CheckEmailValidator checkEmailValidator;
+    private final MailService mailService;
 
 
     // 회원가입 페이지(GET)
@@ -115,5 +112,28 @@ public class MemberController {
     public void validatorBinder(WebDataBinder binder) {
         binder.addValidators(checkNicknameValidator);
         binder.addValidators(checkEmailValidator);
+    }
+
+    /** 이메일이 DB에 존재하는지 확인 **/
+    @GetMapping("/checkEmail")
+    public boolean checkEmail(@RequestParam("memberEmail") String memberEmail){
+        return mailService.checkEmail(memberEmail);
+    }
+
+    /** 비밀번호 찾기 - 임시 비밀번호 발급 **/
+    @PostMapping("/sendPwd")
+    public String sendPwdEmail(@RequestParam("memberEmail") String memberEmail) {
+
+        /** 임시 비밀번호 생성 **/
+        String tmpPassword = mailService.getTmpPassword();
+
+        /** 임시 비밀번호 저장 **/
+        mailService.updatePassword(tmpPassword, memberEmail);
+
+        /** 메일 생성 & 전송 **/
+        MailVo mail = mailService.createMail(tmpPassword, memberEmail);
+        mailService.sendMail(mail);
+
+        return "member/member-login";
     }
 }
