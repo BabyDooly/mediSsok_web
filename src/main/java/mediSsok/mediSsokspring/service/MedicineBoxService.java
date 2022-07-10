@@ -31,14 +31,7 @@ public class MedicineBoxService {
     // 약통 리스트
     @Transactional(readOnly=true)
     public Page<MedicineBoxResponseDto> findByMemberId(Long memberId, Pageable pageable){
-        List<MedicineBoxResponseDto> dto = medicineBoxRepository.findByMemberId(memberId, pageable).stream()
-                .map(MedicineBoxResponseDto::new)
-                .collect(Collectors.toList());
-
-        int start = (int)pageable.getOffset();
-        int end = (start + pageable.getPageSize() > dto.size() ? dto.size() : (start + pageable.getPageSize()));
-
-        return new PageImpl<>(dto.subList(start,end), pageable, dto.size());
+        return medicineBoxRepository.findByMemberId(memberId, pageable);
     }
 
     // 약통 리스트(페이징x)

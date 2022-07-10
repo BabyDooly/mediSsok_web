@@ -24,7 +24,7 @@ let mediBox = {
         });
     },
 
-    // 약통 추가
+    // 일정 추가
     add: function () {
         var day = $('#startday').val() + " " + $('#addTime').val();
 
@@ -59,6 +59,8 @@ let mediBox = {
                 cycle_result = $('#stepper').val() * 7;
             else if ($('#sel2').val() == "2")
                 cycle_result = $('#stepper').val() * 30;
+
+
         }
 
         let data = {

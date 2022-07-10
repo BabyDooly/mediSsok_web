@@ -11,6 +11,7 @@ import mediSsok.mediSsokspring.domain.entity.member.Member;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -27,10 +28,9 @@ public class ScheduleDate extends BaseTimeEntity {
     // 스케줄 시작 날짜
     @Column(name = "sche_startday")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-
     private Date startday;
 
-    // 스케줄 주기
+    // 스케줄 주기 (
     @Column(name = "sche_cycle", length = 20, nullable = false)
     private int cycle;
 

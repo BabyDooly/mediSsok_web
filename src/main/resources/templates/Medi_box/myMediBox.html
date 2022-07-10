@@ -365,7 +365,7 @@
                                     <div class="col-md-3">
                                         <select class="form-select" aria-label="Default select example"
                                                 id="editDayselect"
-                                                onchange="editChange(); editCount();">
+                                                onchange="editBellChange(); editCount();">
                                             <option value="0" selected>선택 없음</option>
                                             <option value="1">갯수</option>
                                             <option value="2">일</option>
@@ -414,9 +414,11 @@
     </div>
 </div>
 
-<!-- 일정 수정 -->
+<input type="hidden" value=""  id="hiddenId">
+
+<!-- 일정 조회 -->
 <div class="modal fade" id="timebtn" tabindex="-1" aria-labelledby="timebtn"
-     aria-hidden="true">
+     aria-hidden="true" >
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header border-0">
@@ -427,21 +429,19 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
                             <!-- 타이틀 -->
-                            <h1 class="text-dark text-uppercase mb-0">일정 수정</h1><br>
-                            <div class="row g-3 align-items-center">
-                                <div class="col-md-6">
+                            <h1 class="portfolio-modal-title text-dark text-uppercase mb-0">일정</h1><br><br>
+                            <div class="row g-3 align-items-center ">
+                                <div class="col-md-6" th:each="scheLists: ${scheList}">
                                     <table id="belltable" class="table table-bordered border-secondary"
-                                           style="width: 401px;float: left;">
+                                           style="width: 350px; float: left;">
                                         <tbody>
                                         <tr>
                                             <th class="table-active" valign="middle">
                                                 <div style="text-align: left">
                                                     <div>
                                                         <i class="fas fa-stopwatch fa-2x"
-                                                           style="line-height: 1.6;margin-left: 10px"></i>
-                                                        <span style="font-size: 20px; line-height: 1;margin-left: 10px">
-                                                            아침 식후 30분
-                                                        </span>
+                                                           style="margin-top: 2px;margin-left: 10px"></i>
+                                                        <span style="font-size: 19px; line-height: 2;margin-left: 20px" th:text="${scheLists.getTime()}"></span>
                                                     </div>
                                                 </div>
                                             </th>
@@ -451,33 +451,23 @@
                                             <th class="table" valign="middle"
                                                 style="font-size: 20px;padding: 10px;text-align: left">
                                                 <div class="row g-3 align-items-center">
-                                                    <div class="col-md-5">
-                                                        <label style="font-size: 30px">
+                                                    <div class="col-md-4">
+                                                        <label style="font-size: 20px; vertical-align:top;" >
                                                             시작일
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="addTime" class="form-control">
+                                                    <div class="col-md-8">
+                                                        <h4 type="text" id="addTime" th:text="${scheLists.getStartday()}" style="font-size: 18px" ></h4>
                                                     </div>
                                                 </div>
                                                 <div class="row g-3 align-items-center">
-                                                    <div class="col-md-5">
-                                                        <label style="font-size: 30px">
-                                                            알람시간
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="addTime2" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="row g-3 align-items-center">
-                                                    <div class="col-md-5">
-                                                        <label style="font-size: 30px">
+                                                    <div class="col-md-4">
+                                                        <label style="font-size: 20px" >
                                                             주기
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="addTime3" class="form-control">
+                                                    <div class="col-md-8">
+                                                        <h4 type="text" id="addTime3" style="font-size: 18px" th:text="${scheLists.getCycle()}"></h4>
                                                     </div>
                                                 </div>
                                             </th>
@@ -485,12 +475,12 @@
                                         <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
                                         <tr style="border-top: none">
                                             <th class="table" valign="middle" style="padding-bottom: 5px;">
-                                                <button id="btn-update1" class="btn btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#belleditbtn">
+                                                <button id="btn-update1" class="btn btn-primary scheduleUpdate" data-bs-toggle="modal"
+                                                        data-bs-target="#belleditbtn" th:value="${scheLists.getId()}">
                                                     <i class="fa-solid fa-pen"></i>
                                                     수정
                                                 </button>
-                                                <button id="btn-delete1" class="btn btn-danger">
+                                                <button id="btn-delete1" class="btn btn-danger scheduleDelete" th:value="${scheLists.getId()}">
                                                     <i class="fas fa-xmark fa-fw"></i>
                                                     삭제
                                                 </button>
@@ -499,9 +489,7 @@
                                         </tbody>
                                     </table>
                                 </div> <!-- 일정수정 안에 알람 한개 -->
-
                                 <!-- 알람 하나 더 늘리고 싶으면 여기 붙여넣으면됨-->
-
                             </div>
                         </div> <!-- 모달 창 안 가로 범위 -->
 
@@ -595,10 +583,9 @@
                                 <div class="col-md-3">
                                     <select class="form-select" aria-label="Default select example" id="editBel2"
                                             style="visibility: hidden">
-                                        <option value="0" selected>일 간격</option>
-                                        <option value="1">1번</option>
-                                        <option value="2">2번</option>
-                                        <option value="3">3번</option>
+                                        <option value="0" selected>일에 한번</option>
+                                        <option value="1">주에 한번</option>
+                                        <option value="2">개월에 한번</option>
                                     </select>
                                 </div>
                                 <div class="col-auto">
@@ -872,23 +859,17 @@
 
     // 수정
     function editBellChange() {
-        var key2 = $('#editselectdayBtn').val();
-        if (key2 == 0) {
-            document.all["editsel1"].style.visibility = "hidden";
-            document.all["editsel2"].style.visibility = "hidden";
-            document.all["editsel3"].style.visibility = "hidden";
-        } else if (key2 == 1) {
-            document.all["editsel1"].style.visibility = "hidden";
-            document.all["editsel2"].style.visibility = "hidden";
-            document.all["editsel3"].style.visibility = "hidden";
-        } else if (key2 == 2) {
-            document.all["editsel1"].style.visibility = "hidden";
-            document.all["editsel2"].style.visibility = "hidden";
-            document.all["editsel3"].style.visibility = "visible";
+        var key = $('#editDayselect').val();
+        console.log(key);
+        if (key == 0) {
+            document.all["editD1"].style.visibility = "hidden";
+            document.all["editD2"].style.visibility = "hidden";
+        } else if (key == 1) {
+            document.all["editD1"].style.visibility = "visible";
+            document.all["editD2"].style.visibility = "hidden";
         } else {
-            document.all["editsel1"].style.visibility = "visible";
-            document.all["editsel2"].style.visibility = "visible";
-            document.all["editsel3"].style.visibility = "hidden";
+            document.all["editD1"].style.visibility = "visible";
+            document.all["editD2"].style.visibility = "visible";
         }
     }
 

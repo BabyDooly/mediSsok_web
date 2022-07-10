@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.dto.medicineBox.*;
+import mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto;
 import mediSsok.mediSsokspring.service.MedicineBoxService;
+import mediSsok.mediSsokspring.service.ScheduleDateService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -14,11 +16,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor    //final 필드 생성자 생성
 public class MedicineBoxController {
     private final MedicineBoxService medicineBoxService;
+
+    private final ScheduleDateService scheduleDateService;
+
 
     // 내 약통
     @GetMapping("/medi/medibox")
@@ -26,26 +33,32 @@ public class MedicineBoxController {
                                @PageableDefault(size = 6, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 
         // 페이징 리스트
-        Page<MedicineBoxResponseDto> list = medicineBoxService.findByMemberId(userDetails.getMember().getId(), pageable);
+        Page<MedicineBoxResponseDto> pageList = medicineBoxService.findByMemberId(userDetails.getMember().getId(), pageable);
+
+        List<ScheduleResponseDto> scheduleList = scheduleDateService.findAll();
+
+        System.out.println("페이지" + pageList.getTotalPages());
 
         // 약통, 맴버이름
         model.addAttribute("member", userDetails.getMember().getNickname());
-        model.addAttribute("mediBoxs", list);
+        model.addAttribute("mediBoxs", pageList);
+        model.addAttribute("scheList", scheduleList);
 
         // 페이징 처리
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next", pageable.next().getPageNumber());
-        model.addAttribute("hasNext", list.hasNext());
-        model.addAttribute("hasPrev", list.hasPrevious());
+        model.addAttribute("hasNext", pageList.hasNext());
+        model.addAttribute("hasPrev", pageList.hasPrevious());
         return "/Medi_box/myMediBox";
     }
 
     // 약통 조회
     @PostMapping("/api/medi/get")
     @ResponseBody
-    public MedicineBoxResponseDto findById(@RequestBody MedicineBoxRequestDto requestDto){
+    public MedicineBoxResponseDto findById(@RequestBody MedicineBoxRequestDto requestDto) {
         return medicineBoxService.findById(requestDto.getMedicineBoxId());
     }
+
 
     // 약통 추가
     @PostMapping("/api/medi/add")

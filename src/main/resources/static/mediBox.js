@@ -2,6 +2,8 @@ let mediBox = {
     init : function () {
         let _this = this;
         let id;
+        let scheduleId;
+
 
         // 약통 추가
         $('#btn-add').on('click', function () {
@@ -25,6 +27,18 @@ let mediBox = {
         // 약통 삭제
         $('#btn-delete').on('click', function () {
             _this.delete(id);
+        });
+
+        // 스케줄 수정
+        $('.scheduleUpdate').on('click', function () {
+            scheduleId = $(this).attr("value");
+            // _this.scheduleUpdate(scheduleId);
+        });
+
+        // 스케줄 삭제
+        $('.scheduleDelete').on('click', function () {
+            scheduleId = $(this).attr("value");
+            _this.scheduleDelete(scheduleId);
         });
     },
 
@@ -132,7 +146,48 @@ let mediBox = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
+    },
+
+    // 스케줄 수정
+    scheduleUpdate : function (id) {
+        let data = {
+            name: $('#editMediName').val(),
+            memo: $('#editMediMemo').val(),
+            color: $('#editcaseColor').val(),
+            count: $('#editCount').text(),
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/medi/update/' + id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('약통이 수정되었습니다.');
+            window.location.href = '/medi/medibox'; // 글수정 성공 메인페이지 이동
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+
+    // 스케줄 삭제
+    scheduleDelete : function (id) {
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/medi/schedule/delete/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function() {
+            alert('스케줄이 삭제되었습니다.');
+            window.location.href = '/medi/medibox'; // 스케줄 삭제 성공시 메인페이지 이동
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
     }
 };
 mediBox.init();
 
+function gd(){
+
+}

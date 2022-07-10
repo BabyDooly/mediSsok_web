@@ -10,6 +10,7 @@ import mediSsok.mediSsokspring.dto.schedule.ScheduleRequestDto;
 import mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto;
 import mediSsok.mediSsokspring.dto.schedule.ScheduleSaveRequestDto;
 import mediSsok.mediSsokspring.dto.schedule.ScheduleUpdateRequestDto;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,17 +29,20 @@ public class ScheduleDateService {
         return scheduleDateRepository.save(responseDto.toEntity()).getId();
     }
 
-    // 스케줄 리스트
+    // 알림 리스트
     @Transactional(readOnly=true)
-    public List<ScheduleResponseDto>findByMedicineBoxID(Long medicineBoxID){
-        List<ScheduleResponseDto> content = scheduleDateRepository.findByMedicineBoxId(medicineBoxID).stream()
+    public List<ScheduleResponseDto> findByMedicineBoxId (Long id){
+        return scheduleDateRepository.findByMedicineBoxId(id).stream()
                 .map(ScheduleResponseDto::new)
                 .collect(Collectors.toList());
-
-        return content;
     }
 
-
+    // 스케줄 조회
+    public List<ScheduleResponseDto> findAll (){
+        return scheduleDateRepository.findAll(Sort.by(Sort.Direction.ASC, "startday")).stream()
+                .map(ScheduleResponseDto::new)
+                .collect(Collectors.toList());
+    }
 
     // 스케줄 조회
     public ScheduleResponseDto findById (Long id){
