@@ -49,7 +49,5 @@ public class IndexController {
         return "/Medi_status/mediStat";
     }
 
-    // 알람 설정
-    @GetMapping("/medi/bell")
-    public String dispBell() { return "/Medi_bell/mediBell";}
+
 }

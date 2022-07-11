@@ -82,12 +82,12 @@
 
 <body>
 <div th:replace="navbar/navBar :: navBar"/>
-<p class="mainText" th:text="${member} + '님의 알람'"></p>
+<p class="mainText" th:text="${member} + '님의 오늘 알람'"></p>
 <p class="mainSubText">오늘도 잊지말고 꼭 드셔주세요.</p>
 <div style="text-align: center">
     <button type="button" onclick="plusbtn" class="btn btn-secondary" style="width: 300px;height: 60px">
         <div>
-            <div data-bs-toggle="modal" data-bs-target="#plusbtn">
+            <div data-bs-toggle="modal" data-bs-target="#plusbtn" id="schedulePlus">
                 <i class="fas fa-plus fa-2x"></i>
             </div>
         </div>
@@ -171,10 +171,9 @@
                                 </div>
                                 <div class="col-md-9">
                                     <select id="medicase" class="form-select" aria-label="약통 선택하기">
-                                        <option selected value="">약통 선택하기</option>
-                                        <option value="감기약">감기약</option>
-                                        <option value="혈압약">혈압약</option>
-                                        <option value="두통약">두통약</option>
+                                        <option selected value="0">약통 선택하기</option>
+                                        <option th:each="med : ${mediBoxs}" th:value="${med.getId()}"
+                                        th:text="${med.getName()}">감기약</option>
                                     </select>
 
                                 </div>
@@ -220,7 +219,7 @@
                                     <div id="sel1" style="visibility: hidden">
                                                 <span class="stepper2">
                                                   <button>–</button>
-                                                    <input type="number" id="stepper" value="0" min="0" max="365"
+                                                    <input type="number" id="stepper" value="1" min="0" max="365"
                                                            step="1" onchange="editCount2();">
                                                   <button>+</button>
                                                 </span>
@@ -229,10 +228,9 @@
                                 <div class="col-md-3">
                                     <select class="form-select" aria-label="Default select example" id="sel2"
                                             style="visibility: hidden">
-                                        <option value="0" selected>일 간격</option>
-                                        <option value="1">1번</option>
-                                        <option value="2">2번</option>
-                                        <option value="3">3번</option>
+                                        <option value="0" selected>일에 한번</option>
+                                        <option value="1">주에 한번</option>
+                                        <option value="2">개월에 한번</option>
                                     </select>
                                 </div>
                                 <div class="col-auto">
@@ -243,18 +241,18 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div id="sel3" style="font-size: 20px; visibility: hidden;">
-                                        &nbsp;<input type='checkbox' name='day' value='0' class="cbox"
+                                        &nbsp;<input type='checkbox' id='addMon' value='0' class="cbox"
                                                      style="accent-color: red;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='day' value='1' class="cbox"
+                                        <input type='checkbox' id='addTue' value='1' class="cbox"
                                                style="accent-color: #d1721d;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='day' value='2' class="cbox"
+                                        <input type='checkbox' id='addWed' value='2' class="cbox"
                                                style="accent-color: #9a7928;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='day' value='3' class="cbox"
+                                        <input type='checkbox' id='addThu' value='3' class="cbox"
                                                style="accent-color: green;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='day' value='4' class="cbox"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='day' value='5' class="cbox"
+                                        <input type='checkbox' id='addFri' value='4' class="cbox"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type='checkbox' id='addSat' value='5' class="cbox"
                                                style="accent-color: darkblue;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='day' value='6' class="cbox"
+                                        <input type='checkbox' id='addSun' value='6' class="cbox"
                                                style="accent-color: purple;"/><br>
                                         &nbsp;월&nbsp;&nbsp;&nbsp;&nbsp;
                                         화&nbsp;&nbsp;&nbsp;&nbsp;
@@ -270,8 +268,7 @@
 
                             <br><br><br><br>
 
-                            <button id="addbtn" onclick="addbtn()" class="btn btn-primary" data-bs-dismiss="modal"
-                                    style="width: 90px">
+                            <button id="addbtn" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
                                 추가
                             </button>
                             <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
@@ -426,6 +423,8 @@
 <!-- bootstrp js 링크 -->
 <script src="/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/schedule.js"></script>
+
 <script>
     function updateDiv() {
         window.location.reload();
@@ -441,23 +440,6 @@
             img1.classList.replace('far','fas');
         }
         count++;
-    }
-
-    function addbtn() {
-        const newDiv = document.createElement('div');
-        const medicaseAdd = document.getElementById('medicase').value;
-        const dateAdd = document.getElementById('startday').value;
-        const redayAdd = document.getElementById('reday').value;
-
-        newDiv.setAttribute("id", "divv");
-        newDiv.setAttribute("class", "tesDiv")
-        newDiv.innerText = medicaseAdd;
-        newDiv.innerText += dateAdd;
-        newDiv.innerText += redayAdd;
-
-        const newText = document.createTextNode('');
-        newDiv.appendChild(newText);
-        document.body.appendChild(newDiv);
     }
 
     function delbtn() {

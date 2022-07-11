@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mediSsok.mediSsokspring.domain.BaseTimeEntity;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
+import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -56,7 +57,11 @@ public class Member extends BaseTimeEntity {
 
     // 약통 리스트
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<MedicineBox> MedicineBoxs = new ArrayList<>();
+    List<MedicineBox> medicineBoxs = new ArrayList<>();
+
+    // 스케줄 리스트
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<ScheduleDate> ScheduleDates = new ArrayList<>();
 
     @Builder
     public Member(Long id, String email, String password, String nickname, String phone) {
