@@ -16,8 +16,8 @@ public class IndexController {
         return "/test/tes";
     }
 
-    @GetMapping("/tt")
-    public String tt(){return "/test/tt";}
+    @GetMapping("/ttt")
+    public String tt(){return "/test/ttt";}
 
     // 메인 페이지
     @GetMapping("/")
@@ -43,14 +43,8 @@ public class IndexController {
         return "/Medi_search/mediSearch";
     }
 
-    // 캘린더
-    @GetMapping("/medi/calendar")
-    public String dispCalendar() {
-        return "/calendar/calendar";
-    }
-
     // 복용현황
-    @GetMapping("/medi/status")
+    @GetMapping("/status")
     public String dispStatus() {
         return "/Medi_status/mediStat";
     }

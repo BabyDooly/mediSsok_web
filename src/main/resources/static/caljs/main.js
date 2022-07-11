@@ -213,28 +213,6 @@ function getDisplayEventDate(event) {
     return displayEventDate;
 }
 
-function filtering(event) {
-    var show_username = true;
-    var show_type = true;
-
-    var username = $('input:checkbox.filter:checked').map(function () {
-        return $(this).val();
-    }).get();
-    var types = $('#type_filter').val();
-
-    show_username = username.indexOf(event.username) >= 0;
-
-    if (types && types.length > 0) {
-        if (types[0] == "all") {
-            show_type = true;
-        } else {
-            show_type = types.indexOf(event.type) >= 0;
-        }
-    }
-
-    return show_username && show_type;
-}
-
 function calDateWhenResize(event) {
 
     var newDates = {

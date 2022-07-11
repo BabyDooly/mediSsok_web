@@ -1,114 +1,210 @@
 <!DOCTYPE html>
 <!-- 타임리프 사용 -->
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>FullCalendar Example</title>
 
-    <link rel="stylesheet" href="/vendor/css/fullcalendar.min.css" />
+    <link rel="stylesheet" href="/vendor/css/fullcalendar.min.css"/>
     <link rel="stylesheet" href="/vendor/css/bootstrap.min.css">
-    <link rel="stylesheet" href='/vendor/css/select2.min.css' />
-    <link rel="stylesheet" href='/vendor/css/bootstrap-datetimepicker.min.css' />
+    <link rel="stylesheet" href="/vendor/css/select2.min.css"/>
+    <link rel="stylesheet" href="/vendor/css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600">
+
     <link rel="stylesheet" href="/css/calmain.css">
 
+    <style>
+        .mainText2 {
+            padding-top: 80px;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 900;
+            font-size: 64px;
+            line-height: 77px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .mainSubText {
+            top: 130px;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 36px;
+            line-height: 44px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .mediStatDiv {
+            width: 1260px;
+            margin: 0 auto;
+            margin-top: 10px;
+            vertical-align: middle; /*센터 맞춤 속성*/
+            line-height: normal; /*센터 맞춤 속성*/
+            text-align: center;
+        }
+
+        .btn-secondary {
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d
+        }
+
+        .btn-secondary:hover {
+            color: #fff;
+            background-color: #5c636a;
+            border-color: #565e64
+        }
+
+        .btn-check:focus + .btn-secondary, .btn-secondary:focus {
+            color: #fff;
+            background-color: #5c636a;
+            border-color: #565e64;
+            box-shadow: 0 0 0 .25rem rgba(130, 138, 145, .5)
+        }
+
+        .btn-check:active + .btn-secondary, .btn-check:checked + .btn-secondary, .btn-secondary.active, .btn-secondary:active, .show > .btn-secondary.dropdown-toggle {
+            color: #fff;
+            background-color: #565e64;
+            border-color: #51585e
+        }
+
+        .btn-check:active + .btn-secondary:focus, .btn-check:checked + .btn-secondary:focus, .btn-secondary.active:focus, .btn-secondary:active:focus, .show > .btn-secondary.dropdown-toggle:focus {
+            box-shadow: 0 0 0 .25rem rgba(130, 138, 145, .5)
+        }
+
+        .btn-secondary.disabled, .btn-secondary:disabled {
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d
+        }
+
+    </style>
 </head>
 
-<body>
-<div th:replace="navbar/navBar :: navBar"/>
-<p class="mainText">복용현황</p>
+<body style="padding: 0px;">
+
+<nav class="navbar navbar-inverse " style="height: 86px;margin-bottom: 0px;padding-top: 0.8rem;padding-bottom: 0.8rem;
+border: 0px;background: #212529">
+    <div class="container-fluid" style="padding-left: 380px;padding-right: 380px;height: 70px;align-items: center;
+    display: flex;flex-wrap: inherit;align-items: center;">
+        <a class="nav navbar-nav" style="padding-top:5px;padding-bottom:5px;font-size:40px; width:180px;white-space: nowrap;color: #fff;text-decoration: none;" th:href="@{/main}">
+            <img src="/image/mainMedi.png" alt="" width="50" height="50" class="d-inline-block align-text-top">
+            약 쏙
+        </a>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-right: 43px;">
+
+
+            <ul class="nav navbar-nav" style="margin-top: 0;flex-direction: row;">
+                <li><a th:href="@{/medi/medibox}" style="font-size: 20px;padding-left: 48px;padding-right: 48px">내 약통</a></li>
+                <li><a th:href="@{/status}" style="font-size: 20px;padding-left: 48px;padding-right: 48px">복용 현황</a></li>
+                <li><a th:href="@{/medi/search}" style="font-size: 20px;padding-left: 48px;padding-right: 48px">알약 검색</a></li>
+                <li><a th:href="@{/medi/bell}" style="font-size: 20px;padding-left: 48px;padding-right: 48px">오늘 알람</a></li>
+            </ul>
+
+
+
+        </div><!-- /.navbar-collapse -->
+        <ul class="nav navbar-nav navbar-right">
+            <a class="navbar-brand" th:href="@{/user/mypage}" sec:authorize="isAuthenticated()"
+               style="padding-top: 0px;padding-bottom: 0px">
+                <img src="/image/human-icon.png" alt="" width="50" height="50">
+            </a>
+            <a class="navbar-brand" th:href="@{/user/logout}" sec:authorize="isAuthenticated()"
+               style="padding-top: 0px;padding-bottom: 0px;">
+                <input type="button" value="로그아웃" class="btn btn-secondary btn-user btn-block">
+            </a>
+            <a class="navbar-brand" th:href="@{/user/login}" sec:authorize="!isAuthenticated()"
+               style="padding-top: 0px;padding-bottom: 0px;">
+                <input type="button" value="로그인" class="btn btn-secondary btn-user btn-block">
+            </a>
+        </ul>
+    </div><!-- /.container-fluid -->
+</nav>
+
+<p class="mainText2">복용현황</p>
 <p class="mainSubText">우리 가족 다같이, 건강하게 쏙</p>
 <div class="mediStatDiv">
     <img src="/image/human-icon1.png" class="rounded myPageImage" alt="...">
     <img src="/image/human-icon1.png" class="rounded myPageImage" alt="...">
     <img src="/image/human-icon1.png" class="rounded myPageImage" alt="...">
-    <button type="button" class="myPageBtnImage " id="img_btn"><img class="myPagebtnImage2" src="/image/plusbutton.png"></button>
+    <button type="button" class="myPageBtnImage " id="img_btn"><img class="myPagebtnImage2" src="/image/plusbutton.png">
+    </button>
 </div>
-<div class="mediCalDiv">
-    <div class="container">
+<div style="width: 1170px;padding-right: 15px;padding-left: 15px;margin-right: auto;margin-left: auto;">
+    <div id="wrapper">
+        <div id="loading"></div>
+        <div id="calendar"></div>
+    </div>
 
-        <!-- 일자 클릭시 메뉴오픈 -->
-        <div id="contextMenu" class="dropdown clearfix">
-            <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
-                style="display:block;position:static;margin-bottom:5px;">
-                <li><a tabindex="-1" href="#">카테고리1</a></li>
-                <li><a tabindex="-1" href="#">카테고리2</a></li>
-                <li><a tabindex="-1" href="#">카테고리3</a></li>
-                <li><a tabindex="-1" href="#">카테고리4</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="-2" href="#" data-role="close">Close</a></li>
-            </ul>
-        </div>
+    <!-- 일정 추가 MODAL -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
 
-        <div id="wrapper">
-            <div id="loading"></div>
-            <div id="calendar"></div>
-        </div>
-
-
-        <!-- 일정 추가 MODAL -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"></h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-title">일정명</label>
-                                <input class="inputModal" type="text" name="edit-title" id="edit-title"
-                                       required="required" />
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-start">시작</label>
-                                <input class="inputModal" type="text" name="edit-start" id="edit-start">
-                            </div>
-                        </div>
-                        <hr>
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4">복용여부</label>
-                                <button class="inputModal" type="button" name="color" onclick="test();" id="edit-color" value="#d25565" style="background: #d25565;color: #ffffff">안먹었어요</button>
-                            </div>
-                        </div>
-                        <hr>
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-desc">설명</label>
-                                <textarea rows="4" cols="50" class="inputModal" name="edit-desc"
-                                          id="edit-desc"></textarea>
-                            </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label class="col-xs-4" for="edit-title">일정명</label>
+                            <input class="inputModal" type="text" name="edit-title" id="edit-title"
+                                   required="required"/>
                         </div>
                     </div>
-                    <div class="modal-footer modalBtnContainer-addEvent">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-primary" id="save-event">저장</button>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label class="col-xs-4" for="edit-start">시작</label>
+                            <input class="inputModal" type="text" name="edit-start" id="edit-start">
+                        </div>
                     </div>
-                    <div class="modal-footer modalBtnContainer-modifyEvent">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                        <button type="button" class="btn btn-danger" id="deleteEvent">삭제</button>
-                        <button type="button" class="btn btn-primary" id="updateEvent">저장</button>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label class="col-xs-4">복용여부</label>
+                            <button class="inputModal" type="button" name="color" onclick="test();" id="edit-color"
+                                    value="#d25565" style="background: #d25565;color: #ffffff">안먹었어요
+                            </button>
+                        </div>
                     </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-    </div><!-- /.container -->
-</div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label class="col-xs-4" for="edit-desc">설명</label>
+                            <textarea rows="4" cols="50" class="inputModal" name="edit-desc"
+                                      id="edit-desc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer modalBtnContainer-addEvent">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary" id="save-event">저장</button>
+                </div>
+                <div class="modal-footer modalBtnContainer-modifyEvent">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-danger" id="deleteEvent">삭제</button>
+                    <button type="button" class="btn btn-primary" id="updateEvent">저장</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div><!-- /.container -->
 
 
 <!-- bootstrp js 링크 -->
-<script src="/js/bootstrap.min.js"></script>
+
 <!-- 캘린더 JS -->
 <script src="/vendor/js/jquery.min.js"></script>
 <script src="/vendor/js/bootstrap.min.js"></script>
@@ -124,6 +220,7 @@
 
 <script>
     const element2 = document.getElementById('edit-color')
+
     function test() {
         if ($('#edit-color').val() == '#D25565') {
             element2.value = '#2bad00';
