@@ -96,6 +96,7 @@ public class MemberService implements UserDetailsService {
     }
 
     // 이메일 조회
+    @Transactional
     public MemberResponseDto findByEmail (String userEmail){
         Member entity = memberRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. email = " + userEmail));
@@ -104,6 +105,7 @@ public class MemberService implements UserDetailsService {
     }
 
     // 아이디 조회
+    @Transactional
     public MemberResponseDto findById (long id){
         Member entity = memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id = " + id));

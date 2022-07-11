@@ -4,7 +4,6 @@ let mediBox = {
 
         // 일정 추가
         $('#addbtn').on('click', function () {
-            _this.add();
             if ($('#medicase').val() == "0")
                 alert("약통 선택은 필수입니다.");
             else if ($('#startday').val() == "")
@@ -18,9 +17,8 @@ let mediBox = {
             || $('#addSat').is(':checked') || $('#addSun').is(':checked')))
                 alert("요일 선택은 필수입니다.");
             else{
-
+                _this.add();
             }
-
         });
     },
 

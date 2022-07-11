@@ -21,18 +21,28 @@ public class ScheduleResponseDto {
     private Date date;
     private String startday;
     private String time;
-    private String cycle;
+    private String timeUpdate;
+    private int cycle;
+    private String cycleUpdate;
+
+    private int week;
+
     private Long memberId;
     private Long medicineBoxId;
+    private String medicineBoxName;
 
     public ScheduleResponseDto(ScheduleDate entity) {
         this.id = entity.getId();
         this.date = entity.getStartday();
         this.startday = entity.getStartday().toString().substring(0,10);
-        this.time = setTime(entity.getStartday().toString().substring(11,16));
-        this.cycle = cycleCheck(entity.getCycle(),entity.getWeek());
+        this.time = entity.getStartday().toString().substring(11);
+        this.timeUpdate = setTime(entity.getStartday().toString().substring(11,16));
+        this.cycle = entity.getCycle();
+        this.cycleUpdate = cycleCheck(entity.getCycle(),entity.getWeek());
+        this.week = entity.getWeek();
         this.memberId = entity.getMember().getId();
         this.medicineBoxId = entity.getMedicineBox().getId();
+        this.medicineBoxName = entity.getMedicineBox().getName();
     }
 
     public String setTime(String time) {

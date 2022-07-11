@@ -57,7 +57,7 @@ public class ScheduleDate extends BaseTimeEntity {
         this.medicineBox = medicineBox;
     }
 
-    public void update(Date startday, int cycle, int week) {
+    public void     update(Date startday, int cycle, int week) {
         this.startday = startday;
         this.cycle = cycle;
         this.week = week;

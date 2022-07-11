@@ -81,7 +81,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- 약통 이름 -->
-                            <h2 class="portfolio-modal-title text-dark text-uppercase mb-0" id="mediName">약통 이름</h2>
+                            <h2 class="portfolio-modal-title text-dark text-uppercase mb-0" id="mediName" style="font-weight: 800;">약통 이름</h2>
                             <br><br>
 
                             <!-- 약통 이미지 -->
@@ -137,7 +137,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h1 class="text-dark text-uppercase mb-0">약통 추가하기</h1>
+                            <h1 class="text-dark text-uppercase mb-0" style="font-weight: 600;">약통 추가하기</h1>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -286,7 +286,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- 타이틀 -->
-                            <h1 class="text-dark text-uppercase mb-0">약통 수정하기</h1>
+                            <h1 class="text-dark text-uppercase mb-0" style="font-weight: 600;">약통 수정하기</h1>
                             <br>
                             <div>
                                 <div class="row g-3 align-items-center">
@@ -414,7 +414,7 @@
     </div>
 </div>
 
-<input type="hidden" value=""  id="hiddenId">
+
 
 <!-- 일정 조회 -->
 <div class="modal fade" id="timebtn" tabindex="-1" aria-labelledby="timebtn"
@@ -429,8 +429,10 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
                             <!-- 타이틀 -->
-                            <h1 class="portfolio-modal-title text-dark text-uppercase mb-0">일정</h1><br><br>
-                            <div class="row g-3 align-items-center ">
+                            <h1 class="portfolio-modal-title text-dark text-uppercase mb-0" id="scheduleName" style="font-weight: 800;" >의 약통 일정</h1><br><br>
+                            <div>
+                            <div class="row g-3 align-items-center" >
+                                <input type="hidden" value="" id="hiddenId">
                                 <div class="col-md-6" th:each="scheLists: ${scheList}">
                                     <table id="belltable" class="table table-bordered border-secondary"
                                            style="width: 350px; float: left;">
@@ -441,7 +443,7 @@
                                                     <div>
                                                         <i class="fas fa-stopwatch fa-2x"
                                                            style="margin-top: 2px;margin-left: 10px"></i>
-                                                        <span style="font-size: 19px; line-height: 2;margin-left: 20px" th:text="${scheLists.getTime()}"></span>
+                                                        <span style="font-size: 19px; line-height: 2;margin-left: 20px" th:text="${scheLists.getTimeUpdate()}"></span>
                                                     </div>
                                                 </div>
                                             </th>
@@ -467,7 +469,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <h4 type="text" id="addTime3" style="font-size: 18px" th:text="${scheLists.getCycle()}"></h4>
+                                                        <h4 type="text" id="addTime3" style="font-size: 18px" th:text="${scheLists.getCycleUpdate()}"></h4>
                                                     </div>
                                                 </div>
                                             </th>
@@ -491,6 +493,7 @@
                                 </div> <!-- 일정수정 안에 알람 한개 -->
                                 <!-- 알람 하나 더 늘리고 싶으면 여기 붙여넣으면됨-->
                             </div>
+                            </div>
                         </div> <!-- 모달 창 안 가로 범위 -->
 
                     </div>
@@ -508,27 +511,24 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header border-0">
-                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button class="btn-close editcanclebtn" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center pb-5">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- 타이틀 -->
-                            <h1 class="text-dark text-uppercase mb-0">일정 수정하기</h1>
+                            <h1 class="text-dark text-uppercase mb-0" style="font-weight: 600;" >일정 수정하기</h1>
 
                             <br>
                             <div class="row g-3 align-items-center">
                                 <div class="col-md-3">
                                     <label for="editmedicase" class="col-form-label"
-                                           style="padding-right: 3em">약통선택</label>
+                                           style="padding-right: 5em">약통</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <select id="editmedicase" class="form-select" aria-label="약통 선택하기">
-                                        <option selected value="">약통 선택하기</option>
-                                        <option value="감기약">감기약</option>
-                                        <option value="혈압약">혈압약</option>
-                                        <option value="두통약">두통약</option>
+                                    <select class="form-select" aria-label="약통 선택하기" disabled>
+                                        <option id="editmedicase"></option>
                                     </select>
 
                                 </div>
@@ -574,7 +574,7 @@
                                     <div id="editBel1" style="visibility: hidden">
                                                 <span class="editstepper2">
                                                   <button>–</button>
-                                                    <input type="number" id="editstepper2" value="0" min="0" max="365"
+                                                    <input type="number" id="editstepper2" value="1" min="0" max="365"
                                                            step="1" onchange="editBellCount();">
                                                   <button>+</button>
                                                 </span>
@@ -596,18 +596,18 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div id="editBel3" style="font-size: 20px; visibility: hidden;">
-                                        &nbsp;<input type='checkbox' name='editday' value='0' class="cbox"
+                                        &nbsp;<input type='checkbox' id='editMon' name='editday' value='0' class="cbox"
                                                      style="accent-color: red;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='editday' value='1' class="cbox"
+                                        <input type='checkbox' id='editTue' name='editday' value='1' class="cbox"
                                                style="accent-color: #d1721d;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='editday' value='2' class="cbox"
+                                        <input type='checkbox' id='editWed' name='editday' value='2' class="cbox"
                                                style="accent-color: #9a7928;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='editday' value='3' class="cbox"
+                                        <input type='checkbox' id='editThu' name='editday' value='3' class="cbox"
                                                style="accent-color: green;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='editday' value='4' class="cbox"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='editday' value='5' class="cbox"
+                                        <input type='checkbox' id='editFri' name='editday' value='4' class="cbox"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type='checkbox' id='editSat' name='editday' value='5' class="cbox"
                                                style="accent-color: darkblue;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='editday' value='6' class="cbox"
+                                        <input type='checkbox' id='editSun' name='editday' value='6' class="cbox"
                                                style="accent-color: purple;"/><br>
                                         &nbsp;월&nbsp;&nbsp;&nbsp;&nbsp;
                                         화&nbsp;&nbsp;&nbsp;&nbsp;
@@ -623,11 +623,11 @@
 
                             <br><br><br><br>
 
-                            <button id="editaddbtn" onclick="editaddbtn()" class="btn btn-primary" data-bs-dismiss="modal"
+                            <button id="editaddbtn" class="btn btn-primary" data-bs-dismiss="modal"
                                     style="width: 90px">
                                 수정
                             </button>
-                            <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                            <button class="btn btn-primary editcanclebtn" data-bs-dismiss="modal" style="width: 90px">
                                 취소
                             </button>
 

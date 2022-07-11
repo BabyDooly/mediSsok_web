@@ -37,14 +37,16 @@ public class ScheduleDateService {
                 .collect(Collectors.toList());
     }
 
-    // 스케줄 조회
+    // 스케줄 전체 조회
+    @Transactional
     public List<ScheduleResponseDto> findAll (){
         return scheduleDateRepository.findAll(Sort.by(Sort.Direction.ASC, "startday")).stream()
                 .map(ScheduleResponseDto::new)
                 .collect(Collectors.toList());
     }
 
-    // 스케줄 조회
+    // 스케줄 아이디 조회
+    @Transactional
     public ScheduleResponseDto findById (Long id){
         ScheduleDate entity = scheduleDateRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("맴버 약통에 대한 스케줄이 없습니다. id = " + id));
@@ -56,7 +58,7 @@ public class ScheduleDateService {
     @Transactional
     public Long update(Long id, ScheduleUpdateRequestDto requestDto){
         ScheduleDate entity = scheduleDateRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 약통에 대한 스케줄이 없습니다. id = " + id));
+                .orElseThrow(() -> new IllegalArgumentException("스케줄이 없습니다. id = " + id));
 
         entity.update(requestDto.getStartday(), requestDto.getCycle(), requestDto.getWeek());
 
@@ -67,7 +69,7 @@ public class ScheduleDateService {
     @Transactional
     public void delete(Long id){
         ScheduleDate entity = scheduleDateRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 약통에 대한 스케줄이 없습니다. id = " + id));
+                .orElseThrow(() -> new IllegalArgumentException("스케줄이 없습니다. id = " + id));
 
         scheduleDateRepository.delete(entity);
     }

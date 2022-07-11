@@ -3,10 +3,14 @@ package mediSsok.mediSsokspring.controller;
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
+import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxRequestDto;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxSaveRequestDto;
+import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxUpdateRequestDto;
+import mediSsok.mediSsokspring.dto.schedule.ScheduleRequestDto;
 import mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto;
 import mediSsok.mediSsokspring.dto.schedule.ScheduleSaveRequestDto;
+import mediSsok.mediSsokspring.dto.schedule.ScheduleUpdateRequestDto;
 import mediSsok.mediSsokspring.service.MedicineBoxService;
 import mediSsok.mediSsokspring.service.MemberService;
 import mediSsok.mediSsokspring.service.ScheduleDateService;
@@ -48,6 +52,20 @@ public class ScheduleDateController {
     public Long save(@RequestBody ScheduleSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
         requestDto.setMemberId(userDetails.getMember().getId());
         return scheduleDateService.create(requestDto);
+    }
+
+    // 스케줄 조회
+    @PostMapping("/api/medi/schedule/get")
+    @ResponseBody
+    public ScheduleResponseDto findById(@RequestBody ScheduleRequestDto requestDto) {
+        return scheduleDateService.findById(requestDto.getScheduleId());
+    }
+
+    // 스케줄 수정
+    @PostMapping("/api/medi/schedule/update/{id}")
+    @ResponseBody
+    public Long update(@PathVariable Long id, @RequestBody ScheduleUpdateRequestDto scheduleUpdateRequestDto){
+        return scheduleDateService.update(id, scheduleUpdateRequestDto);
     }
 
     // 스케줄 삭제
