@@ -429,11 +429,24 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
                             <!-- 타이틀 -->
-                            <h1 class="portfolio-modal-title text-dark text-uppercase mb-0" id="scheduleName" style="font-weight: 800;" >의 약통 일정</h1><br><br>
+                            <h1 class="portfolio-modal-title text-dark text-uppercase mb-0" id="scheduleName" style="font-weight: 800;" >의 약통 일정</h1>
+                            <br>
+                            <div style="text-align: center">
+                                <button type="button" onclick="plusbtn" class="btn btn-secondary" style="width: 300px;height: 60px">
+                                    <div>
+                                        <div data-bs-toggle="modal" data-bs-target="#plusbtn" id="schedulePlus">
+                                            <i class="fas fa-plus fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                            <br>
                             <div>
-                            <div class="row g-3 align-items-center" >
+
+                            <div class="row g-3 align-items-center" style="justify-content: center;" >
+
                                 <input type="hidden" value="" id="hiddenId">
-                                <div class="col-md-6" th:each="scheLists: ${scheList}">
+                                <div class="col-md-5" th:each="scheLists: ${scheList}">
                                     <table id="belltable" class="table table-bordered border-secondary"
                                            style="width: 350px; float: left;">
                                         <tbody>
@@ -459,7 +472,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <h4 type="text" id="addTime" th:text="${scheLists.getStartday()}" style="font-size: 18px" ></h4>
+                                                        <h4 type="text" id="addTime" th:text="${scheLists.getStartday()}" style="font-size: 18px;margin-bottom: 0px" ></h4>
                                                     </div>
                                                 </div>
                                                 <div class="row g-3 align-items-center">
@@ -469,7 +482,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <h4 type="text" id="addTime3" style="font-size: 18px" th:text="${scheLists.getCycleUpdate()}"></h4>
+                                                        <h4 type="text" id="addTime3" style="font-size: 18px;margin-bottom: 0px" th:text="${scheLists.getCycleUpdate()}"></h4>
                                                     </div>
                                                 </div>
                                             </th>
@@ -478,11 +491,13 @@
                                         <tr style="border-top: none">
                                             <th class="table" valign="middle" style="padding-bottom: 5px;">
                                                 <button id="btn-update1" class="btn btn-primary scheduleUpdate" data-bs-toggle="modal"
-                                                        data-bs-target="#belleditbtn" th:value="${scheLists.getId()}">
+                                                        data-bs-target="#belleditbtn" th:value="${scheLists.getId()}"
+                                                style="width: 70px;height: 30px;font-size: 13px">
                                                     <i class="fa-solid fa-pen"></i>
                                                     수정
                                                 </button>
-                                                <button id="btn-delete1" class="btn btn-danger scheduleDelete" th:value="${scheLists.getId()}">
+                                                <button id="btn-delete1" class="btn btn-danger scheduleDelete" th:value="${scheLists.getId()}"
+                                                        style="width: 75px;height: 30px;font-size: 13px">
                                                     <i class="fas fa-xmark fa-fw"></i>
                                                     삭제
                                                 </button>
