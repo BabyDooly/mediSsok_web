@@ -119,6 +119,33 @@
     color: #333;
     border: none;
 }
+.bellstepper {
+    border: 1px solid #eee;
+    display: inline-block;
+    overflow: visible;
+    height: 2.1em;
+    background: #fff;
+    padding: 1px;
+}
+.bellstepper input {
+    width: 69px;
+    height: 100%;
+    text-align: center;
+    border: 0;
+    background: transparent;
+    color: #000;
+}
+.bellstepper button {
+    width: 40px;
+    font-weight: 300;
+    height: 100%;
+    line-height: 0.1em;
+    font-size: 1.4em;
+    padding: 0.2em !important;
+    background: #eee;
+    color: #333;
+    border: none;
+}
 .mainpad{
     padding-left:380px;
     padding-right:380px;
@@ -538,6 +565,14 @@ increment-next {  from {
     -webkit-transform: translateY(50px);
     transform: translateY(50px);
 }
+}
+.boxdiv{
+    width: 1148px;
+    height: 680px;
+    margin: 0 auto;
+
+    text-align: center;
+    vertical-align: middle;
 }
 /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ mediBell CSS ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 .mediBellDiv{

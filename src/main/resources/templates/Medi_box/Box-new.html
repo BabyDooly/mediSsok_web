@@ -2,7 +2,7 @@
 <!-- 타임리프 사용 -->
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-        lang="ko">
+      lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>내 약통</title>
@@ -19,257 +19,49 @@
 
 </head>
 <body>
-
 <div th:replace="navbar/navBar :: navBar"/>
+<div class="boxdiv" style="border: 1px solid #000000;margin-top: 60px;">
+    <!-- 약통 조회 -->
+    <div class="modal-body text-center pb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <!-- 약통 이름 -->
+                    <h2 class="portfolio-modal-title text-dark text-uppercase mb-0" id="mediName"
+                        style="font-weight: 800;">약통 이름</h2>
+                    <br><br>
 
+                    <!-- 약통 이미지 -->
+                    <img id="mediImg2" style="background: #ffa8a8;border-radius: 70%;overflow: hidden"
+                         class="img-fluid" src="/image/mediCase/tes.png" alt="..."/>
+                    <hr>
 
-<!--메인 페이지-->
-<p class="mainText" th:text="${member} + '님의 약통'"></p>
-<p class="mainSubText">자주 먹는 약 정보, 내 약통에 쏙</p>
-<br>
+                    <!-- 약통 텍스트-->
+                    <h3 style="display:inline">메모 : </h3>
+                    <h3 id="mediMemo" style="display:inline">약통 메모<br></h3>
+                    <br><br>
+                    <h4>약1 : 감기약<br>약2 : 두통약</h4>
+                    <br>
 
-<div class="myMediCaseDiv">
-    <button onclick="plusbtn"
-            style="margin-top: 80px; border: 0px;background: #ffffff;width: 100px;height: 100px;overflow: auto;background: none">
-        <div>
-            <div data-bs-toggle="modal" data-bs-target="#plusbtn">
-                <div class="d-flex align-items-center justify-content-center h-100 w-100">
-                </div>
-                <img class="img-fluid" src="/image/plusbutton2.jpg" alt="..."/>
-            </div>
-        </div>
-    </button>
-    <section class="portfolio-item page-section portfolio" id="portfolio">
-        <div class="row justify-content-center" style="padding-top: 225px; width: 900px;margin: 0 auto">
-            <!-- Portfolio Item 1-->
-            <div class="col-md-6 col-lg-4 " style="height: 350px; margin-bottom: 20px;" th:each="mediBox: ${mediBoxs}">
-                <div class="portfolio-item mx-auto mediBox"
-                     style="border-radius: 70%" th:id="${mediBox.getId()}" >
-                    <a th:href="@{/medi/medibox/box}">
-                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white">
-                            <i class="fa fa-search fa-3x"></i>
-                        </div>
-                    </div>
-                    </a>
-                    <img id="mediImg" style="border-radius: 70%;"
-                         th:style="'background:' + ${mediBox.getColor()}+ ';border-radius:70%'" class="img-fluid"
-                         src="/image/mediCase/tes.png" alt="..."/>
-                </div>
-                <hr>
-                <h2 th:text="${mediBox.getName()}"></h2>
-            </div>
-            <div class="pagination justify-content-center">
-                <a role="button" class="btn btn-lg" th:if="${hasPrev == true}" th:href="@{/medi/medibox(page=${previous})}" ><i class="fa-solid fa-square-caret-left fa-2x"></i></a>
-                <a role="button" class="btn btn-lg" th:if="${hasPrev == false}" href="" ><i class="fa-regular fa-square-caret-left fa-2x disabled"></i></a>
-                <a role="button" class="btn btn-lg" th:if="${hasNext == false}" href=""><i class="fa-regular fa-square-caret-right fa-2x disabled"></i></a>
-                <a role="button" class="btn btn-lg" th:if="${hasNext == true}" th:href="@{/medi/medibox(page=${next})}"><i class="fa-solid fa-square-caret-right fa-2x"></i></a>
-            </div>
+                    <h4 style="display:inline">남은 약 개수 : </h4> <h4 id="mediCounts" style="display:inline">몇</h4>
+                    <h4 style="display:inline">개</h4>
+                    <br><br>
 
-        </div>
-    </section>
-</div>
+                    <button id="btn-time" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#timebtn">
+                        <i class="far fa-clock fa-fw"></i>
+                        일정
+                    </button>
+                    <button id="btn-update" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#editbtn">
+                        <i class="fa-solid fa-pen"></i>
+                        수정
+                    </button>
+                    <button id="btn-delete" class="btn btn-danger">
+                        <i class="fas fa-xmark fa-fw"></i>
+                        삭제
+                    </button>
 
-
-<!-- 약통 조회 -->
-<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1"
-     aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center pb-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!-- 약통 이름 -->
-                            <h2 class="portfolio-modal-title text-dark text-uppercase mb-0" id="mediName" style="font-weight: 800;">약통 이름</h2>
-                            <br><br>
-
-                            <!-- 약통 이미지 -->
-                            <img id="mediImg2" style="background: #ffa8a8;border-radius: 70%;overflow: hidden"
-                                 class="img-fluid" src="/image/mediCase/tes.png" alt="..."/>
-                            <hr>
-
-                            <!-- 약통 텍스트-->
-                            <h3 style="display:inline">메모 : </h3>
-                            <h3 id="mediMemo" style="display:inline">약통 메모<br></h3>
-                            <br><br>
-                            <h4>약1 : 감기약<br>약2 : 두통약</h4>
-                            <br>
-
-                            <h4 style="display:inline">남은 약 개수 : </h4> <h4 id="mediCounts" style="display:inline">몇</h4>
-                            <h4 style="display:inline">개</h4>
-                            <br><br>
-
-                            <button id="btn-time" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#timebtn">
-                                <i class="far fa-clock fa-fw"></i>
-                                일정
-                            </button>
-                            <button id="btn-update" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#editbtn">
-                                <i class="fa-solid fa-pen"></i>
-                                수정
-                            </button>
-                            <button id="btn-delete" class="btn btn-danger">
-                                <i class="fas fa-xmark fa-fw"></i>
-                                삭제
-                            </button>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- 약통 추가 -->
-<div class="modal fade" id="plusbtn" tabindex="-1" aria-labelledby="plusbtn"
-     aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center pb-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h1 class="text-dark text-uppercase mb-0" style="font-weight: 600;">약통 추가하기</h1>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <br>
-                            <div>
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <label for="medicase" class="col-form-label" style="padding-right: 3em">약통
-                                            이름</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" id="medicase" class="form-control" placeholder="약통 이름">
-                                    </div>
-                                </div>
-                                <hr>
-
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <label for="memo" class="col-form-label">메모&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" id="memo" class="form-control" placeholder="메모">
-                                    </div>
-                                </div>
-                                <hr>
-
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <label for="caseCol" class="col-form-label" style="padding-right: 1em">약통
-                                            색상&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="color" id="caseCol" class="form-control" placeholder="색상"
-                                               value="#ffa8a8" style="width: 150px;height: 70px">
-                                    </div>
-                                    <div class="col-auto">
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <label class="col-form-label" style="padding-right: 1em">약 추가
-                                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <table class="table border-secondary">
-                                            <tbody id="mediTbody">
-                                            <tr>
-                                                <td><input type="text" id="medi0" class="form-control"
-                                                           placeholder="무슨약">
-                                                </td>
-                                            </tr>
-
-                                            </tbody>
-
-                                        </table>
-                                        <button onclick="addRow()" style="background: none;border: none">
-                                            <img class="img-fluid" style="width: 30px;height: 30px"
-                                                 src="/image/plusbutton.png" alt="..."/>
-                                        </button>
-
-                                        <button onclick="delRow()" style="background: none;border: none">
-                                            <img class="img-fluid" style="width: 30px;height: 30px"
-                                                 src="/image/minus.png" alt="..."/>
-                                        </button>
-
-                                    </div>
-                                    <div class="col-auto">
-
-                                    </div>
-
-                                </div>
-                                <hr>
-
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <label class="col-form-label" style="padding-right: 1em">여분의
-                                            약&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <select class="form-select" aria-label="Default select example" id="dayselect"
-                                                onchange="Change(); Count();">
-                                            <option value="0" selected>선택 없음</option>
-                                            <option value="1">갯수</option>
-                                            <option value="2">일</option>
-                                            <option value="3">주</option>
-                                            <option value="4">달</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div>
-                                            <div class='ctrl' id="d1" style="visibility: hidden">
-                                                <div class='ctrl__button ctrl__button--decrement'>&ndash;</div>
-                                                <div class='ctrl__counter'>
-                                                    <input class='ctrl__counter-input' maxlength='10' type='text'
-                                                           value='0' id="mediCount">
-                                                    <div class='ctrl__counter-num'>0</div>
-                                                </div>
-                                                <div class='ctrl__button ctrl__button--increment'>+</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <select class="form-select" aria-label="Default select example" id="d2"
-                                                style="visibility: hidden" onchange="Count()">
-                                            <option value="0" selected>하루 몇번</option>
-                                            <option value="1">1번</option>
-                                            <option value="2">2번</option>
-                                            <option value="3">3번</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-auto">
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <h4 class="text-dark mb-0" id="count" style="display: inline" th:text="0"></h4><h4
-                                style="display: inline">개</h4>
-                            <br><br><br><br>
-                            <button id="btn-add" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
-                                추가
-                            </button>
-                            <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
-                                취소
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -418,10 +210,9 @@
 </div>
 
 
-
 <!-- 일정 조회 -->
 <div class="modal fade" id="timebtn" tabindex="-1" aria-labelledby="timebtn"
-     aria-hidden="true" >
+     aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header border-0">
@@ -432,10 +223,12 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
                             <!-- 타이틀 -->
-                            <h1 class="portfolio-modal-title text-dark text-uppercase mb-0" id="scheduleName" style="font-weight: 800;" >의 약통 일정</h1>
+                            <h1 class="portfolio-modal-title text-dark text-uppercase mb-0" id="scheduleName"
+                                style="font-weight: 800;">의 약통 일정</h1>
                             <br>
                             <div style="text-align: center">
-                                <button type="button" onclick="plusbell" class="btn btn-secondary" style="width: 300px;height: 60px">
+                                <button type="button" onclick="plusbell" class="btn btn-secondary"
+                                        style="width: 300px;height: 60px">
                                     <div>
                                         <div data-bs-toggle="modal" data-bs-target="#plusbell" id="schedulePlus">
                                             <i class="fas fa-plus fa-2x"></i>
@@ -446,72 +239,80 @@
                             <br>
                             <div>
 
-                            <div class="row g-3 align-items-center" style="justify-content: center;" >
+                                <div class="row g-3 align-items-center" style="justify-content: center;">
 
-                                <input type="hidden" value="" id="hiddenId">
-                                <div class="col-md-5" th:each="scheLists: ${scheList}">
-                                    <table id="belltable" class="table table-bordered border-secondary"
-                                           style="width: 350px; float: left;">
-                                        <tbody>
-                                        <tr>
-                                            <th class="table-active" valign="middle">
-                                                <div style="text-align: left">
-                                                    <div>
-                                                        <i class="fas fa-stopwatch fa-2x"
-                                                           style="margin-top: 2px;margin-left: 10px"></i>
-                                                        <span style="font-size: 19px; line-height: 2;margin-left: 20px" th:text="${scheLists.getTimeUpdate()}"></span>
+                                    <input type="hidden" value="" id="hiddenId">
+                                    <div class="col-md-5" th:each="scheLists: ${scheList}">
+                                        <table id="belltable" class="table table-bordered border-secondary"
+                                               style="width: 350px; float: left;">
+                                            <tbody>
+                                            <tr>
+                                                <th class="table-active" valign="middle">
+                                                    <div style="text-align: left">
+                                                        <div>
+                                                            <i class="fas fa-stopwatch fa-2x"
+                                                               style="margin-top: 2px;margin-left: 10px"></i>
+                                                            <span style="font-size: 19px; line-height: 2;margin-left: 20px"
+                                                                  th:text="${scheLists.getTimeUpdate()}"></span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                        <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
-                                        <tr style="border-bottom: none">
-                                            <th class="table" valign="middle"
-                                                style="font-size: 20px;padding: 10px;text-align: left">
-                                                <div class="row g-3 align-items-center">
-                                                    <div class="col-md-4">
-                                                        <label style="font-size: 20px; vertical-align:top;" >
-                                                            시작일
-                                                        </label>
+                                                </th>
+                                            </tr>
+                                            <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+                                            <tr style="border-bottom: none">
+                                                <th class="table" valign="middle"
+                                                    style="font-size: 20px;padding: 10px;text-align: left">
+                                                    <div class="row g-3 align-items-center">
+                                                        <div class="col-md-4">
+                                                            <label style="font-size: 20px; vertical-align:top;">
+                                                                시작일
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <h4 type="text" id="addTime"
+                                                                th:text="${scheLists.getStartday()}"
+                                                                style="font-size: 18px;margin-bottom: 0px"></h4>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-8">
-                                                        <h4 type="text" id="addTime" th:text="${scheLists.getStartday()}" style="font-size: 18px;margin-bottom: 0px" ></h4>
+                                                    <div class="row g-3 align-items-center">
+                                                        <div class="col-md-4">
+                                                            <label style="font-size: 20px">
+                                                                주기
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <h4 type="text" id="addTime3"
+                                                                style="font-size: 18px;margin-bottom: 0px"
+                                                                th:text="${scheLists.getCycleUpdate()}"></h4>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row g-3 align-items-center">
-                                                    <div class="col-md-4">
-                                                        <label style="font-size: 20px" >
-                                                            주기
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <h4 type="text" id="addTime3" style="font-size: 18px;margin-bottom: 0px" th:text="${scheLists.getCycleUpdate()}"></h4>
-                                                    </div>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                        <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
-                                        <tr style="border-top: none">
-                                            <th class="table" valign="middle" style="padding-bottom: 5px;">
-                                                <button id="btn-update1" class="btn btn-primary scheduleUpdate" data-bs-toggle="modal"
-                                                        data-bs-target="#belleditbtn" th:value="${scheLists.getId()}"
-                                                style="width: 70px;height: 30px;font-size: 13px">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                    수정
-                                                </button>
-                                                <button id="btn-delete1" class="btn btn-danger scheduleDelete" th:value="${scheLists.getId()}"
-                                                        style="width: 75px;height: 30px;font-size: 13px">
-                                                    <i class="fas fa-xmark fa-fw"></i>
-                                                    삭제
-                                                </button>
-                                            </th>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div> <!-- 일정수정 안에 알람 한개 -->
+                                                </th>
+                                            </tr>
+                                            <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+                                            <tr style="border-top: none">
+                                                <th class="table" valign="middle" style="padding-bottom: 5px;">
+                                                    <button id="btn-update1" class="btn btn-primary scheduleUpdate"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#belleditbtn"
+                                                            th:value="${scheLists.getId()}"
+                                                            style="width: 70px;height: 30px;font-size: 13px">
+                                                        <i class="fa-solid fa-pen"></i>
+                                                        수정
+                                                    </button>
+                                                    <button id="btn-delete1" class="btn btn-danger scheduleDelete"
+                                                            th:value="${scheLists.getId()}"
+                                                            style="width: 75px;height: 30px;font-size: 13px">
+                                                        <i class="fas fa-xmark fa-fw"></i>
+                                                        삭제
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div> <!-- 일정수정 안에 알람 한개 -->
 
-                                <!-- 알람 하나 더 늘리고 싶으면 여기 붙여넣으면됨-->
-                            </div>
+                                    <!-- 알람 하나 더 늘리고 싶으면 여기 붙여넣으면됨-->
+                                </div>
                             </div>
                         </div> <!-- 모달 창 안 가로 범위 -->
 
@@ -529,14 +330,15 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header border-0">
-                <button class="btn-close editcanclebtn" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button class="btn-close editcanclebtn" type="button" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
             </div>
             <div class="modal-body text-center pb-5">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- 타이틀 -->
-                            <h1 class="text-dark text-uppercase mb-0" style="font-weight: 600;" >일정 수정하기</h1>
+                            <h1 class="text-dark text-uppercase mb-0" style="font-weight: 600;">일정 수정하기</h1>
 
                             <br>
                             <div class="row g-3 align-items-center">
@@ -580,7 +382,8 @@
                                     <label class="col-form-label" style="padding-right: 5em">주기</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <select class="form-select" aria-label="Default select example" id="editselectdayBtn2"
+                                    <select class="form-select" aria-label="Default select example"
+                                            id="editselectdayBtn2"
                                             onchange="editBellChange2();">
                                         <option value="0" selected>선택 없음</option>
                                         <option value="1">매일</option>
@@ -675,14 +478,15 @@
                             <br>
                             <div class="row g-3 align-items-center">
                                 <div class="col-md-3">
-                                    <label for="medicase" class="col-form-label"
+                                    <label class="col-form-label"
                                            style="padding-right: 3em">약통선택</label>
                                 </div>
                                 <div class="col-md-9">
                                     <select id="mediBellcase" class="form-select" aria-label="약통 선택하기">
                                         <option selected value="0">약통 선택하기</option>
                                         <option th:each="med : ${mediBoxs}" th:value="${med.getId()}"
-                                                th:text="${med.getName()}">감기약</option>
+                                                th:text="${med.getName()}">감기약
+                                        </option>
                                     </select>
 
                                 </div>
@@ -791,7 +595,6 @@
         </div>
     </div>
 </div>
-
 <!-- bootstrp js 링크 -->
 <script src="/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -1057,6 +860,7 @@
         console.log(result)
         $('#editCount').text(result);
     }
+
     function editBellChange2() {
         var key2 = $('#editselectdayBtn2').val();
         if (key2 == 0) {
@@ -1077,6 +881,7 @@
             document.all["editBel3"].style.visibility = "hidden";
         }
     }
+
     var inc = document.getElementsByClassName("editstepper2");
     for (i = 0; i < inc.length; i++) {
         var incI = inc[i].querySelector("input"),
@@ -1097,6 +902,7 @@
             "stepperInput('" + id + "', " + step + ", " + max + ")"
         );
     }
+
     function Change2() {
         var key2 = $('#selectdayBtn').val();
         if (key2 == 0) {
@@ -1119,7 +925,5 @@
     }
 
 </script>
-
-
 </body>
 </html>
