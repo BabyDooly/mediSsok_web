@@ -4,12 +4,10 @@ package mediSsok.mediSsokspring.service;
 
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
+import mediSsok.mediSsokspring.domain.repository.schedule.DateInfoRepository;
 import mediSsok.mediSsokspring.domain.repository.schedule.ScheduleDateRepository;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleRequestDto;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleSaveRequestDto;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleUpdateRequestDto;
+import mediSsok.mediSsokspring.dto.schedule.*;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +19,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor    //final 필드 생성자 생성
 public class ScheduleDateService {
     private final ScheduleDateRepository scheduleDateRepository;
+
+    private final DateInfoRepository dateInfoRepository;
 
     /*---- 스케줄 ----*/
     // 스케줄 생성
