@@ -12,7 +12,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)  // 기본 생성자 자동 추가
@@ -48,8 +50,14 @@ public class ScheduleDate extends BaseTimeEntity {
     @JoinColumn(name = "medbox_id")
     private MedicineBox medicineBox;
 
+    // 일정 리스트
+    @OneToMany(mappedBy = "scheduleDate", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<DateInfo> dateInfos = new ArrayList<>();
+
+
     @Builder
-    public ScheduleDate(Date startday, int cycle, int week, Member member, MedicineBox medicineBox) {
+    public ScheduleDate(Long id, Date startday, int cycle, int week, Member member, MedicineBox medicineBox) {
+        this.id = id;
         this.startday = startday;
         this.cycle = cycle;
         this.week = week;
@@ -57,7 +65,7 @@ public class ScheduleDate extends BaseTimeEntity {
         this.medicineBox = medicineBox;
     }
 
-    public void     update(Date startday, int cycle, int week) {
+    public void update(Date startday, int cycle, int week) {
         this.startday = startday;
         this.cycle = cycle;
         this.week = week;
