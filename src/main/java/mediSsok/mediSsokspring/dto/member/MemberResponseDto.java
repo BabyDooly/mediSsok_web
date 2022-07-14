@@ -2,30 +2,32 @@ package mediSsok.mediSsokspring.dto.member;
 
 
 import lombok.*;
+import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
+import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
+import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 public class MemberResponseDto {
-
-
     private String email;
     private String password;
     private String nickname;
-
-
     private Long id;
     private String phone;
     private Boolean vibration;
     private Boolean pushAlarms;
     private Boolean locationAlarms;
     private Boolean replenishAlarms;
+    private List<MedicineBoxResponseDto> medicineBoxsName;
 
     @Builder
     public MemberResponseDto(Member entity) {
@@ -38,5 +40,8 @@ public class MemberResponseDto {
         this.pushAlarms = entity.getPushAlarms();
         this.locationAlarms = entity.getLocationAlarms();
         this.replenishAlarms = entity.getReplenishAlarms();
+        this.medicineBoxsName = entity.getMedicineBoxs().stream()
+                .map(MedicineBoxResponseDto::new)
+                .collect(Collectors.toList());
     }
 }

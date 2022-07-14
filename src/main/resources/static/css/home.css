@@ -1,7 +1,11 @@
 @charset "UTF-8";
 /*ㅡㅡㅡㅡㅡㅡㅡㅡ CTRL + F 를 사용해서 원하는 페이지를 검색하세요 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ index CSS ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
-
+.cbox {
+    width: 20px;
+    height: 20px;
+    border-color: #ffffff;
+}
 [type="number"]::-webkit-inner-spin-button,
 [type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -61,7 +65,60 @@
     color: #333;
     border: none;
 }
-
+.editstepper {
+    border: 1px solid #eee;
+    display: inline-block;
+    overflow: visible;
+    height: 2.1em;
+    background: #fff;
+    padding: 1px;
+}
+.editstepper input {
+    width: 69px;
+    height: 100%;
+    text-align: center;
+    border: 0;
+    background: transparent;
+    color: #000;
+}
+.editstepper button {
+    width: 40px;
+    font-weight: 300;
+    height: 100%;
+    line-height: 0.1em;
+    font-size: 1.4em;
+    padding: 0.2em !important;
+    background: #eee;
+    color: #333;
+    border: none;
+}
+.editstepper2 {
+    border: 1px solid #eee;
+    display: inline-block;
+    overflow: visible;
+    height: 2.1em;
+    background: #fff;
+    padding: 1px;
+}
+.editstepper2 input {
+    width: 69px;
+    height: 100%;
+    text-align: center;
+    border: 0;
+    background: transparent;
+    color: #000;
+}
+.editstepper2 button {
+    width: 40px;
+    font-weight: 300;
+    height: 100%;
+    line-height: 0.1em;
+    font-size: 1.4em;
+    padding: 0.2em !important;
+    background: #eee;
+    color: #333;
+    border: none;
+}
 .mainpad{
     padding-left:380px;
     padding-right:380px;
