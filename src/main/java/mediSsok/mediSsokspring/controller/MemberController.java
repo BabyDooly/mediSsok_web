@@ -1,8 +1,8 @@
 package mediSsok.mediSsokspring.controller;
 
 import lombok.RequiredArgsConstructor;
-import mediSsok.mediSsokspring.Email.MailService;
-import mediSsok.mediSsokspring.Email.MailVo;
+import mediSsok.mediSsokspring.service.MailService;
+import mediSsok.mediSsokspring.dto.member.MailVo;
 import mediSsok.mediSsokspring.Validation.CheckEmailValidator;
 import mediSsok.mediSsokspring.Validation.CheckNicknameValidator;
 import mediSsok.mediSsokspring.dto.member.*;
@@ -11,12 +11,14 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -24,7 +26,6 @@ import java.util.Map;
 public class MemberController {
     private final MemberService memberService;
     private final BCryptPasswordEncoder passwordEncoder;
-
     // 회원가입시 중복및 유효성 검사 부분
     private final CheckNicknameValidator checkNicknameValidator;
     private final CheckEmailValidator checkEmailValidator;
@@ -114,26 +115,35 @@ public class MemberController {
         binder.addValidators(checkEmailValidator);
     }
 
-    /** 이메일이 DB에 존재하는지 확인 **/
-    @GetMapping("/checkEmail")
-    public boolean checkEmail(@RequestParam("memberEmail") String memberEmail){
+    /* 이메일이 DB에 존재하는지 확인 */
+    @PostMapping("/check/email")
+    @ResponseBody
+    public boolean checkEmail(@RequestParam("email") String memberEmail){
+        System.out.println("테스트" + memberEmail);
         return mailService.checkEmail(memberEmail);
     }
 
-    /** 비밀번호 찾기 - 임시 비밀번호 발급 **/
-    @PostMapping("/sendPwd")
-    public String sendPwdEmail(@RequestParam("memberEmail") String memberEmail) {
-
-        /** 임시 비밀번호 생성 **/
+    /* 비밀번호 찾기 - 임시 비밀번호 발급 */
+    @PostMapping("/send/email")
+    @ResponseBody
+    public String sendPwdEmail(@RequestParam("email") String memberEmail) {
+        /* 임시 비밀번호 생성 */
         String tmpPassword = mailService.getTmpPassword();
-
-        /** 임시 비밀번호 저장 **/
+        /* 임시 비밀번호 저장 */
         mailService.updatePassword(tmpPassword, memberEmail);
-
-        /** 메일 생성 & 전송 **/
+        /* 메일 생성 & 전송 */
         MailVo mail = mailService.createMail(tmpPassword, memberEmail);
         mailService.sendMail(mail);
+        return "/user/login";
+    }
 
-        return "member/member-login";
+    // 이메일 보내기
+    @Transactional
+    @PostMapping("/sendEmail")
+    public String sendEmail(@RequestParam("memberEmail") String memberEmail){
+        MailDTO dto = ms.createMailAndChangePassword(memberEmail);
+        ms.mailSend(dto);
+
+        return "/member/login";
     }
 }

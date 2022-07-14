@@ -1,5 +1,6 @@
 package mediSsok.mediSsokspring.service;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineBoxRepository;

@@ -1,13 +1,12 @@
 package mediSsok.mediSsokspring.service;
 
 import lombok.RequiredArgsConstructor;
-import mediSsok.mediSsokspring.Validation.CheckEmailValidator;
-import mediSsok.mediSsokspring.Validation.CheckNicknameValidator;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.config.auth.dto.SessionUser;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
 import mediSsok.mediSsokspring.domain.repository.member.MemberRepository;
 import mediSsok.mediSsokspring.dto.member.*;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,8 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -121,5 +118,11 @@ public class MemberService implements UserDetailsService {
     // 회원가입
     public void signUp(MemberResponseDto userDto) {
         // 회원 가입 비즈니스 로직 구현
+    }
+
+    /* 이메일이 존재하는지 확인 */
+    public boolean checkEmail(String memberEmail) {
+        /* 이메일이 존재하면 true, 이메일이 없으면 false  */
+        return memberRepository.existsByEmail(memberEmail);
     }
 }
