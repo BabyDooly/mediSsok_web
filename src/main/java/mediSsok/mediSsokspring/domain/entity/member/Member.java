@@ -78,6 +78,16 @@ public class Member extends BaseTimeEntity {
         this.phone = phone;
     }
 
+    // 비밀번호 변경
+    public void updatePassword(String newPassword) {
+        this.password = newPassword;
+    }
+
+    // 기존비밀번호 체크
+    public void nowPassword(String password) {
+        this.password = password;
+    }
+
     // 알람 변경
     public void alarmUpdate(Boolean vibration, Boolean pushAlarms, Boolean locationAlarms, Boolean replenishAlarms) {
         this.vibration = vibration;
@@ -85,9 +95,5 @@ public class Member extends BaseTimeEntity {
         this.locationAlarms = locationAlarms;
         this.replenishAlarms = replenishAlarms;
     }
-
-    /** 비밀번호 변경 메서드 **/
-    public void updatePassword(String password){
-        this.password = password;
-    }
 }
+

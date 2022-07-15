@@ -65,10 +65,10 @@
     <div class="myPageIndiv2">
         <div class="row g-3 align-items-center">
             <div class="col-auto">
-                <label for="ownPass" class="col-form-label" style="padding-right: 3em">패스워드&nbsp</label>
+                <label for="nowPass" class="col-form-label" style="padding-right: 3em">패스워드&nbsp</label>
             </div>
             <div class="col-md-9">
-                <input type="password" id="ownPass" class="form-control" placeholder="현재 비밀번호">
+                <input type="password" id="nowPass" name="nowPass" class="form-control" placeholder="현재 비밀번호">
             </div>
         </div>
         <br>
@@ -78,7 +78,7 @@
                 <label for="newPass" class="col-form-label">변경할 패스워드</label>
             </div>
             <div class="col-md-9">
-                <input type="password" id="newPass" class="form-control" placeholder="새 비밀번호">
+                <input type="password" id="newPass" name="newPass" class="form-control" placeholder="새 비밀번호">
             </div>
         </div>
         <br>
@@ -88,11 +88,11 @@
                 <label for="rePass" class="col-form-label" style="padding-right: 1em">패스워드 확인</label>
             </div>
             <div class="col-md-9">
-                <input type="password" id="rePass" class="form-control" placeholder="비밀번호 확인">
+                <input type="password" id="rePass" name="rePass" class="form-control" placeholder="비밀번호 확인">
             </div>
             <div class="col-auto">
                 <span>
-                    <button type="button" class="btn btn-primary">변경</button>
+                    <button id="btn-update-password" type="button" class="btn btn-primary">변경</button>
                 </span>
             </div>
         </div>

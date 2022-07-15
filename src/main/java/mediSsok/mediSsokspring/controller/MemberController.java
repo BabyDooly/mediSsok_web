@@ -1,36 +1,28 @@
 package mediSsok.mediSsokspring.controller;
 
 import lombok.RequiredArgsConstructor;
-import mediSsok.mediSsokspring.service.MailService;
-import mediSsok.mediSsokspring.dto.member.MailVo;
 import mediSsok.mediSsokspring.Validation.CheckEmailValidator;
 import mediSsok.mediSsokspring.Validation.CheckNicknameValidator;
 import mediSsok.mediSsokspring.dto.member.*;
 import mediSsok.mediSsokspring.service.MemberService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor    //final 필드 생성자 생성
 public class MemberController {
     private final MemberService memberService;
-    private final BCryptPasswordEncoder passwordEncoder;
     // 회원가입시 중복및 유효성 검사 부분
     private final CheckNicknameValidator checkNicknameValidator;
     private final CheckEmailValidator checkEmailValidator;
-    private final MailService mailService;
-
 
     // 회원가입 페이지(GET)
     @GetMapping("/user/signup")
@@ -50,17 +42,7 @@ public class MemberController {
             // 회원가입 페이지로 다시 리턴
             return "/login/register";
         }
-        System.out.println(memberDto);
-
-        String pw = memberDto.getPassword();
-        String pwconfirm = memberDto.getConfirm_Password();
-
-
-        System.out.println("password: " + pw);
-        System.out.println("PasswordConfirm: " + pwconfirm);
-
-
-        if(!pw.equals(pwconfirm)){
+        if(!memberDto.getPassword().equals(memberDto.getConfirm_Password())){
             model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
             // 회원가입 페이지로 다시 리턴
             return "/login/register";
@@ -101,6 +83,13 @@ public class MemberController {
         return memberService.userUpdate(userDetails.getUsername(), requestDto);
     }
 
+    // 회원 비밀번호 수정(JSON)
+    @PostMapping("/api/member/password")
+    @ResponseBody
+    public Long userPassWordUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberPasswordUpdateRequestDto requestDto){
+        return memberService.passwordUpdate(userDetails.getUsername(), requestDto);
+    }
+
     // 알람 수정(JSON)
     @PostMapping("/api/member/alarm")
     @ResponseBody
@@ -115,35 +104,4 @@ public class MemberController {
         binder.addValidators(checkEmailValidator);
     }
 
-    /* 이메일이 DB에 존재하는지 확인 */
-    @PostMapping("/check/email")
-    @ResponseBody
-    public boolean checkEmail(@RequestParam("email") String memberEmail){
-        System.out.println("테스트" + memberEmail);
-        return mailService.checkEmail(memberEmail);
-    }
-
-    /* 비밀번호 찾기 - 임시 비밀번호 발급 */
-    @PostMapping("/send/email")
-    @ResponseBody
-    public String sendPwdEmail(@RequestParam("email") String memberEmail) {
-        /* 임시 비밀번호 생성 */
-        String tmpPassword = mailService.getTmpPassword();
-        /* 임시 비밀번호 저장 */
-        mailService.updatePassword(tmpPassword, memberEmail);
-        /* 메일 생성 & 전송 */
-        MailVo mail = mailService.createMail(tmpPassword, memberEmail);
-        mailService.sendMail(mail);
-        return "/user/login";
-    }
-
-    // 이메일 보내기
-    @Transactional
-    @PostMapping("/sendEmail")
-    public String sendEmail(@RequestParam("memberEmail") String memberEmail){
-        MailDTO dto = ms.createMailAndChangePassword(memberEmail);
-        ms.mailSend(dto);
-
-        return "/member/login";
-    }
 }

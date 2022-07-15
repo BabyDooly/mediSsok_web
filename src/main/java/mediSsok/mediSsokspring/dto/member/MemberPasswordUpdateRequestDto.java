@@ -9,10 +9,15 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class MemberPasswordUpdateRequestDto {
-    private String password;
+
+    // 기존 비밀번호
+    private String nowPassword;
+    // 변경할 비밀번호
+    private String newPassword;
 
     @Builder
-    public MemberPasswordUpdateRequestDto(String password) {
-        this.password = password;
+    public MemberPasswordUpdateRequestDto(String nowPassword,String newPassword) {
+        this.newPassword = nowPassword;
+        this.newPassword = newPassword;
     }
 }
