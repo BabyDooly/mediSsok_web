@@ -32,31 +32,21 @@ public class SendEmailService {
                 // 아이디가 없을때
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다."));
 
+        // 메일 설정 부분
         MailDTO dto = new MailDTO();
         dto.setAddress(userEmail);
         String password = getTempPassword();
         dto.setTitle("YakSsok 임시비밀번호 안내 이메일 입니다.");
         dto.setMessage("안녕하세요. YakSsok 임시비밀번호 안내 관련 이메일 입니다. 임시 비밀번호는 "
                 + password + " 입니다.");
-        //비밀번호 암호화 시키는 부분
+
+        // 비밀번호 암호화 및 패스워드 업데이트 부분
         PasswordEncoder pe = new BCryptPasswordEncoder();
         String encodePassword = pe.encode(password);
+        System.out.println("암호화 전 비밀번호: "+password);
+        System.out.println("암호화 후 비밀번호: "+encodePassword);
         entity.updatePassword(encodePassword);
         return dto;
-    }
-
-    @Transactional
-    // 비밀번호 DB에 업데이트 하는 부분
-    public Long updatePassword(String password, String userEmail) {
-        System.out.println("변경할 패스워드: " + password);
-        Member entity = memberRepository.findByEmail(userEmail)
-                // 아이디가 없을때
-                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다."));
-        //비밀번호 암호화 시키는 부분
-        PasswordEncoder pe = new BCryptPasswordEncoder();
-        String encodePassword = pe.encode(password);
-        entity.updatePassword(encodePassword);
-        return entity.getId();
     }
 
     // 랜덤 난수를 통한 패스워드 생성 부분

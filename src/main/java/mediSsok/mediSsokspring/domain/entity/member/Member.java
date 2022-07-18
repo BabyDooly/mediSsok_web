@@ -80,8 +80,6 @@ public class Member extends BaseTimeEntity {
     @Builder
     // 비밀번호 변경
     public void updatePassword(String newPassword) {
-        System.out.println("updatePassword 비밀번호 변경 완료");
-        System.out.println("변경할 비밀번호 : " + newPassword);
         this.password = newPassword;
     }
 
