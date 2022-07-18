@@ -10,6 +10,7 @@ import mediSsok.mediSsokspring.domain.entity.member.Member;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -25,8 +26,7 @@ public class DateInfo extends BaseTimeEntity {
 
     // 일정 날짜,시간
     @Column(name = "date_alarm_datetime")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-    private Date alarmDatetime;
+    private LocalDateTime alarmDatetime;
 
     // 복용 여부
     @Column(name = "date_eatCheck")
@@ -47,7 +47,7 @@ public class DateInfo extends BaseTimeEntity {
     private ScheduleDate scheduleDate;
 
     @Builder
-    public DateInfo(Date alarmDatetime, Member member, ScheduleDate scheduleDate) {
+    public DateInfo(LocalDateTime alarmDatetime, Member member, ScheduleDate scheduleDate) {
         this.alarmDatetime = alarmDatetime;
         this.member = member;
         this.scheduleDate = scheduleDate;

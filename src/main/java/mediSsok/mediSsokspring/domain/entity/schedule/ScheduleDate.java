@@ -12,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,8 +30,7 @@ public class ScheduleDate extends BaseTimeEntity {
 
     // 스케줄 시작 날짜
     @Column(name = "sche_startday")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-    private Date startday;
+    private LocalDateTime startday;
 
     // 스케줄 주기 (
     @Column(name = "sche_cycle", length = 20, nullable = false)
@@ -56,7 +56,7 @@ public class ScheduleDate extends BaseTimeEntity {
 
 
     @Builder
-    public ScheduleDate(Long id, Date startday, int cycle, int week, Member member, MedicineBox medicineBox) {
+    public ScheduleDate(Long id, LocalDateTime startday, int cycle, int week, Member member, MedicineBox medicineBox) {
         this.id = id;
         this.startday = startday;
         this.cycle = cycle;
@@ -65,7 +65,7 @@ public class ScheduleDate extends BaseTimeEntity {
         this.medicineBox = medicineBox;
     }
 
-    public void update(Date startday, int cycle, int week) {
+    public void update(LocalDateTime startday, int cycle, int week) {
         this.startday = startday;
         this.cycle = cycle;
         this.week = week;

@@ -8,8 +8,10 @@ import lombok.Setter;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineList;
 import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -18,13 +20,13 @@ import java.util.List;
 @NoArgsConstructor
 public class ScheduleResponseDto {
     private long id;
-    private Date date;
-    private String startday;
-    private String time;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dateTime;
+
     private String timeUpdate;
     private int cycle;
     private String cycleUpdate;
-
     private int week;
 
     private Long memberId;
@@ -33,10 +35,8 @@ public class ScheduleResponseDto {
 
     public ScheduleResponseDto(ScheduleDate entity) {
         this.id = entity.getId();
-        this.date = entity.getStartday();
-        this.startday = entity.getStartday().toString().substring(0,10);
-        this.time = entity.getStartday().toString().substring(11);
-        this.timeUpdate = setTime(entity.getStartday().toString().substring(11,16));
+        this.dateTime = entity.getStartday();
+        this.timeUpdate = setTime(entity.getStartday());
         this.cycle = entity.getCycle();
         this.cycleUpdate = cycleCheck(entity.getCycle(),entity.getWeek());
         this.week = entity.getWeek();
@@ -45,26 +45,25 @@ public class ScheduleResponseDto {
         this.medicineBoxName = entity.getMedicineBox().getName();
     }
 
-    public String setTime(String time) {
-        String hours = time.substring(0,2);
-        String minutes = time.substring(3,5);
-        int int_hours = Integer.parseInt(hours);
+    public String setTime(LocalDateTime time) {
+        int hours = time.getHour();
+        int minutes = time.getMinute();
 
         String result = "";
-        if (int_hours >= 12){
+        if (hours >= 12){
             result += "오후";
-            int_hours -= 12;
+            hours -= 12;
 
-            if (int_hours == 0)
-                int_hours = 12;
+            if (hours == 0)
+                hours = 12;
         }
         else {
             result += "오전";
-            if (int_hours == 0)
-                int_hours = 12;
+            if (hours == 0)
+                hours = 12;
         }
 
-        return result + " " + int_hours + ":" + minutes;
+        return result + " " + hours + ":" + minutes;
     }
 
     public String cycleCheck(int cycle, int week) {

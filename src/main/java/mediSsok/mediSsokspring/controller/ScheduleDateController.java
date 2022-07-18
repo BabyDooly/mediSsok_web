@@ -37,11 +37,9 @@ public class ScheduleDateController {
     public String dispBell(Model model, @AuthenticationPrincipal CustomUserDetails userDetails) {
         List<MedicineBoxResponseDto> list = medicineBoxService.findByMemberId(userDetails.getMember().getId());
 
-
         // 약통, 맴버이름
         model.addAttribute("member", userDetails.getMember().getNickname());
         model.addAttribute("mediBoxs", list);
-
 
         return "/Medi_bell/mediBell";
     }
@@ -50,8 +48,9 @@ public class ScheduleDateController {
     @PostMapping("/api/medi/bell/add")
     @ResponseBody
     public Long save(@RequestBody ScheduleSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
-        requestDto.setMemberId(userDetails.getMember().getId());
-        return scheduleDateService.create(requestDto);
+        Long memberId = userDetails.getMember().getId();
+        requestDto.setMemberId(memberId);
+        return scheduleDateService.create(requestDto, memberId);
     }
 
     // 스케줄 조회

@@ -271,7 +271,7 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <h4 type="text" id="addTime"
-                                                                th:text="${scheLists.getStartday()}"
+                                                                th:text="${#temporals.format(scheLists.getDateTime(), 'yyyy-MM-dd')}"
                                                                 style="font-size: 18px;margin-bottom: 0px"></h4>
                                                         </div>
                                                     </div>

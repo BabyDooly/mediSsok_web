@@ -12,6 +12,7 @@ import mediSsok.mediSsokspring.domain.entity.member.Member;
 import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -21,8 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ScheduleUpdateRequestDto {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-    private Date startday;
+    private LocalDateTime startday;
     private int cycle;
     private int week;
 

@@ -11,6 +11,7 @@ import mediSsok.mediSsokspring.domain.entity.member.Member;
 import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -19,8 +20,8 @@ import java.util.List;
 @NoArgsConstructor
 public class
 ScheduleSaveRequestDto {
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
-    private Date startday;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
+    private LocalDateTime startday;
     private int cycle;
     private int week;
     private Long memberId;

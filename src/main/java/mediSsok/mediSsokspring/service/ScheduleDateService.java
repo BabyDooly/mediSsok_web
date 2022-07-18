@@ -3,6 +3,8 @@ package mediSsok.mediSsokspring.service;
 
 
 import lombok.RequiredArgsConstructor;
+import mediSsok.mediSsokspring.domain.entity.member.Member;
+import mediSsok.mediSsokspring.domain.entity.schedule.DateInfo;
 import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
 import mediSsok.mediSsokspring.domain.repository.schedule.DateInfoRepository;
 import mediSsok.mediSsokspring.domain.repository.schedule.ScheduleDateRepository;
@@ -12,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,22 +29,47 @@ public class ScheduleDateService {
     /*---- 스케줄 ----*/
     // 스케줄 생성
     @Transactional
-    public Long create(ScheduleSaveRequestDto responseDto) {
-        return scheduleDateRepository.save(responseDto.toEntity()).getId();
+    public Long create(ScheduleSaveRequestDto responseDto, Long memberId) {
+        Long scheduleDateId = scheduleDateRepository.save(responseDto.toEntity()).getId();
+
+//        int cycle = responseDto.getCycle();
+//        int week = responseDto.getWeek();
+//
+//        for (int i = 0; i < 100; i++) {
+//            D today = responseDto.getStartday();
+//            Calendar cal=Calendar.getInstance();
+//            cal.setTime(today);
+//
+//
+//            if (cycle == 0){
+//
+//            }
+//            else if (cycle == 1){
+//                cal.add(Calendar.DATE, i);
+//                Date date = cal.getTime();
+//            }
+//            else{
+//
+//            }
+//            cal.setTime(today);
+//            cal.add(Calendar.DATE, i);
+//            Date date = cal.getTime();
+//
+//            DateInfo dto = DateInfo.builder()
+//                    .alarmDatetime(date)
+//                    .member(Member.builder().id(memberId).build())
+//                    .scheduleDate(ScheduleDate.builder().id(scheduleDateId).build())
+//                    .build();
+//            dateInfoRepository.save(dto);
+//        }
+
+        return scheduleDateId;
     }
 
     // 알림 리스트
     @Transactional(readOnly=true)
     public List<ScheduleResponseDto> findByMedicineBoxId (Long id){
         return scheduleDateRepository.findByMedicineBoxId(id, Sort.by(Sort.Direction.ASC, "startday")).stream()
-                .map(ScheduleResponseDto::new)
-                .collect(Collectors.toList());
-    }
-
-    // 스케줄 전체 조회
-    @Transactional
-    public List<ScheduleResponseDto> findAll (){
-        return scheduleDateRepository.findAll(Sort.by(Sort.Direction.ASC, "startday")).stream()
                 .map(ScheduleResponseDto::new)
                 .collect(Collectors.toList());
     }
