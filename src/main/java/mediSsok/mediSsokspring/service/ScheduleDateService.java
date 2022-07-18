@@ -14,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -32,36 +34,58 @@ public class ScheduleDateService {
     public Long create(ScheduleSaveRequestDto responseDto, Long memberId) {
         Long scheduleDateId = scheduleDateRepository.save(responseDto.toEntity()).getId();
 
-//        int cycle = responseDto.getCycle();
-//        int week = responseDto.getWeek();
-//
-//        for (int i = 0; i < 100; i++) {
-//            D today = responseDto.getStartday();
-//            Calendar cal=Calendar.getInstance();
-//            cal.setTime(today);
-//
-//
-//            if (cycle == 0){
-//
-//            }
-//            else if (cycle == 1){
-//                cal.add(Calendar.DATE, i);
-//                Date date = cal.getTime();
-//            }
-//            else{
-//
-//            }
-//            cal.setTime(today);
-//            cal.add(Calendar.DATE, i);
-//            Date date = cal.getTime();
-//
-//            DateInfo dto = DateInfo.builder()
-//                    .alarmDatetime(date)
-//                    .member(Member.builder().id(memberId).build())
-//                    .scheduleDate(ScheduleDate.builder().id(scheduleDateId).build())
-//                    .build();
-//            dateInfoRepository.save(dto);
-//        }
+        int cycle = responseDto.getCycle();
+        int checkCycle = cycle;
+        int week = responseDto.getWeek();
+
+        for (int i = 0; i < 7; i++) {
+            // 날짜 받아오기
+            LocalDateTime date = responseDto.getStartday();
+            date = date.plusDays(i);
+
+            // 요일 계산
+            DayOfWeek dayOfWeek = date.getDayOfWeek();
+            int weekNumber = dayOfWeek.getValue();
+
+            // DateInfoSaveDTO 생성
+            DateInfo dto = DateInfo.builder()
+                    .alarmDatetime(date)
+                    .member(Member.builder().id(memberId).build())
+                    .scheduleDate(ScheduleDate.builder().id(scheduleDateId).build())
+                    .build();
+
+            // 특정요일
+            if (cycle == 0){
+                if ((((week>>0)&1) == 1) && weekNumber == 1)
+                    dateInfoRepository.save(dto);
+                if ((((week>>1)&1) == 1) && weekNumber == 2)
+                    dateInfoRepository.save(dto);
+                if ((((week>>2)&1) == 1) && weekNumber == 3)
+                    dateInfoRepository.save(dto);
+                if ((((week>>3)&1) == 1) && weekNumber == 4)
+                    dateInfoRepository.save(dto);
+                if ((((week>>4)&1) == 1) && weekNumber == 5)
+                    dateInfoRepository.save(dto);
+                if ((((week>>5)&1) == 1) && weekNumber == 6)
+                    dateInfoRepository.save(dto);
+                if ((((week>>6)&1) == 1) && weekNumber == 7)
+                    dateInfoRepository.save(dto);
+            }
+            // 매일
+            else if (cycle == 1){
+                dateInfoRepository.save(dto);
+            }
+            // 일간격
+            else{
+                if (cycle == checkCycle){
+                    dateInfoRepository.save(dto);
+                }
+                checkCycle--;
+
+                if (checkCycle == 0)
+                    checkCycle = cycle;
+            }
+        }
 
         return scheduleDateId;
     }

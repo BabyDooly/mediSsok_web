@@ -179,9 +179,13 @@ let mediBox = {
             data: JSON.stringify(data)
         }).done(function(data) {
             console.log(data['medicineBoxName']);
+            var dateTime = data['dateTime'];
+            var date = dateTime.substring(0,10)
+            var time = dateTime.substring(11,16)
+
             $('#editmedicase').text(data['medicineBoxName'])
-            $('#editstartday').val(data['startday'])
-            $('#editaddTime').val(data['time'])
+            $('#editstartday').val(date)
+            $('#editaddTime').val(time)
 
             if (data['cycle'] == 1){
                 $('#editselectdayBtn2').val(1);
