@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -118,5 +117,19 @@ public class MemberService implements UserDetailsService {
     // 회원가입
     public void signUp(MemberResponseDto userDto) {
         // 회원 가입 비즈니스 로직 구현
+    }
+
+    @Transactional
+    // 유저 이메일 체크
+    public boolean userEmailCheck(String userEmail) {
+        System.out.println("요청받은 이메일 : " + userEmail);
+        boolean user = memberRepository.existsByEmail(userEmail);
+        System.out.println("user 값: "+user);
+        if(user){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

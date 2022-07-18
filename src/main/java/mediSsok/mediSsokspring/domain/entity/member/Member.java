@@ -1,12 +1,10 @@
 package mediSsok.mediSsokspring.domain.entity.member;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import mediSsok.mediSsokspring.domain.BaseTimeEntity;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
+import mediSsok.mediSsokspring.service.SendEmailService;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -78,8 +76,11 @@ public class Member extends BaseTimeEntity {
         this.phone = phone;
     }
 
+    @Builder
     // 비밀번호 변경
     public void updatePassword(String newPassword) {
+        System.out.println("updatePassword 비밀번호 변경 완료");
+        System.out.println("변경할 비밀번호 : " + newPassword);
         this.password = newPassword;
     }
 

@@ -5,6 +5,7 @@ import mediSsok.mediSsokspring.Validation.CheckEmailValidator;
 import mediSsok.mediSsokspring.Validation.CheckNicknameValidator;
 import mediSsok.mediSsokspring.dto.member.*;
 import mediSsok.mediSsokspring.service.MemberService;
+import mediSsok.mediSsokspring.service.SendEmailService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -23,6 +25,7 @@ public class MemberController {
     // 회원가입시 중복및 유효성 검사 부분
     private final CheckNicknameValidator checkNicknameValidator;
     private final CheckEmailValidator checkEmailValidator;
+    private final SendEmailService sendEmailService;
 
     // 회원가입 페이지(GET)
     @GetMapping("/user/signup")
@@ -42,7 +45,7 @@ public class MemberController {
             // 회원가입 페이지로 다시 리턴
             return "/login/register";
         }
-        if(!memberDto.getPassword().equals(memberDto.getConfirm_Password())){
+        if (!memberDto.getPassword().equals(memberDto.getConfirm_Password())) {
             model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
             // 회원가입 페이지로 다시 리턴
             return "/login/register";
@@ -54,8 +57,8 @@ public class MemberController {
 
     // 로그인 페이지
     @GetMapping("/user/login")
-    public String login(@RequestParam(value = "error", required = false)String error,
-                        @RequestParam(value = "exception", required = false)String exception,
+    public String login(@RequestParam(value = "error", required = false) String error,
+                        @RequestParam(value = "exception", required = false) String exception,
                         Model model) {
         model.addAttribute("error", error);
         model.addAttribute("exception", exception);
@@ -72,28 +75,28 @@ public class MemberController {
 
     // 회원 조회
     @GetMapping("/api/member")
-    public MemberResponseDto findById(@AuthenticationPrincipal UserDetails userDetails){
+    public MemberResponseDto findById(@AuthenticationPrincipal UserDetails userDetails) {
         return memberService.findByEmail(userDetails.getUsername());
     }
 
     // 회원 수정(JSON)
     @PostMapping("/api/member/user")
     @ResponseBody
-    public Long userUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberUserUpdateRequestDto requestDto){
+    public Long userUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberUserUpdateRequestDto requestDto) {
         return memberService.userUpdate(userDetails.getUsername(), requestDto);
     }
 
     // 회원 비밀번호 수정(JSON)
     @PostMapping("/api/member/password")
     @ResponseBody
-    public Long userPassWordUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberPasswordUpdateRequestDto requestDto){
+    public Long userPassWordUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberPasswordUpdateRequestDto requestDto) {
         return memberService.passwordUpdate(userDetails.getUsername(), requestDto);
     }
 
     // 알람 수정(JSON)
     @PostMapping("/api/member/alarm")
     @ResponseBody
-    public Long alarmUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberAlarmUpdateRequestDto requestDto){
+    public Long alarmUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberAlarmUpdateRequestDto requestDto) {
         return memberService.alarmUpdate(userDetails.getUsername(), requestDto);
     }
 
@@ -104,4 +107,31 @@ public class MemberController {
         binder.addValidators(checkEmailValidator);
     }
 
+
+    //Email과 name의 일치여부를 check하는 컨트롤러
+    @PostMapping("/api/member/findpw")
+    @ResponseBody
+//  public Map<String, Boolean> pw_find(@RequestBody MemberRequestDto dto) {
+    public Map<String, Boolean> pw_find(@RequestParam("userEmail") String userEmail, MemberSaveResponseDto dto) {
+        System.out.println("컨트롤러 값: " + userEmail);
+        Map<String, Boolean> json = new HashMap<>();
+//      boolean pwFindCheck = memberService.userEmailCheck(dto.getUserEmail());
+        boolean pwFindCheck = memberService.userEmailCheck(userEmail);
+        if (pwFindCheck == true) {
+            System.out.println(pwFindCheck);
+            json.put("check", pwFindCheck);
+        } else if (pwFindCheck == false) {
+            System.out.println("pwFindCheck 실패");
+        }
+        System.out.println("JSON 값: " + json);
+        return json;
+    }
+
+    //등록된 이메일로 임시비밀번호를 발송하고 발송된 임시비밀번호로 사용자의 pw를 변경하는 컨트롤러
+    @PostMapping("/api/member/sendEmail")
+    @ResponseBody
+    public void sendEmail(@RequestParam("userEmail") String userEmail){
+        MailDTO dto = sendEmailService.createMailAndChangePassword(userEmail);
+        sendEmailService.mailSend(dto);
+    }
 }
