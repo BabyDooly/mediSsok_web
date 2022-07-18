@@ -112,26 +112,27 @@ public class MemberController {
     @PostMapping("/api/member/findpw")
     @ResponseBody
 //  public Map<String, Boolean> pw_find(@RequestBody MemberRequestDto dto) {
-    public Map<String, Boolean> pw_find(@RequestParam("userEmail") String userEmail, MemberSaveResponseDto dto) {
-        System.out.println("컨트롤러 값: " + userEmail);
+    public Map<String, Boolean> pw_find(@RequestParam("userEmail") String userEmail, MemberPasswordUpdateRequestDto dto) {
+//        System.out.println("컨트롤러 값: " + userEmail);
         Map<String, Boolean> json = new HashMap<>();
 //      boolean pwFindCheck = memberService.userEmailCheck(dto.getUserEmail());
         boolean pwFindCheck = memberService.userEmailCheck(userEmail);
-        if (pwFindCheck == true) {
-            System.out.println(pwFindCheck);
-            json.put("check", pwFindCheck);
-        } else if (pwFindCheck == false) {
-            System.out.println("pwFindCheck 실패");
-        }
         System.out.println("JSON 값: " + json);
+        json.put("check", pwFindCheck);
         return json;
     }
 
     //등록된 이메일로 임시비밀번호를 발송하고 발송된 임시비밀번호로 사용자의 pw를 변경하는 컨트롤러
     @PostMapping("/api/member/sendEmail")
     @ResponseBody
-    public void sendEmail(@RequestParam("userEmail") String userEmail){
+    public void sendEmail(@RequestParam("userEmail") String userEmail, MemberPasswordUpdateRequestDto requestDto){
         MailDTO dto = sendEmailService.createMailAndChangePassword(userEmail);
         sendEmailService.mailSend(dto);
+        updatePassword(userEmail,requestDto);
+    }
+
+    @ResponseBody
+    public Long updatePassword(@AuthenticationPrincipal String userEmail, @RequestBody MemberPasswordUpdateRequestDto requestDto){
+        return memberService.passwordUpdate(userEmail, requestDto);
     }
 }

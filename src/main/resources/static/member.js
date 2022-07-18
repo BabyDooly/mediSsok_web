@@ -139,24 +139,25 @@ var main = {
             data: {
                 userEmail
             },
-        }).done(function(){
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/member/sendEmail',
-                    // dataType: "json",
-                    // contentType: 'application/json; charset=utf-8',
-                    // data: JSON.stringify(data)
-                    data: {
-                        userEmail
-                    },
-                }).fail(function(error){
-                    alert(JSON.stringify(error));
-                })
-                alert('임시비밀번호를 전송 했습니다.');
-                window.location.href="/user/login";
-            }).fail(function(error){
-                alert(JSON.stringify(error));
-            })
+            success : function (res) {
+                if (res['check']) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/member/sendEmail',
+                        // dataType: "json",
+                        // contentType: 'application/json; charset=utf-8',
+                        // data: JSON.stringify(data)
+                        data: {
+                            userEmail
+                        },
+                    }).fail(function (error) {
+                        alert(JSON.stringify(error));
+                    })
+                    alert('임시비밀번호를 전송 했습니다.');
+                    window.location.href = "/user/login";
+                }
+            }
+        })
     },
 };
 main.init();

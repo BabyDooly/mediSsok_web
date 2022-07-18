@@ -122,9 +122,9 @@ public class MemberService implements UserDetailsService {
     @Transactional
     // 유저 이메일 체크
     public boolean userEmailCheck(String userEmail) {
-        System.out.println("요청받은 이메일 : " + userEmail);
+//        System.out.println("요청받은 이메일 : " + userEmail);
         boolean user = memberRepository.existsByEmail(userEmail);
-        System.out.println("user 값: "+user);
+//        System.out.println("user 값: "+user);
         if(user){
             return true;
         }
@@ -132,4 +132,6 @@ public class MemberService implements UserDetailsService {
             return false;
         }
     }
+
+
 }
