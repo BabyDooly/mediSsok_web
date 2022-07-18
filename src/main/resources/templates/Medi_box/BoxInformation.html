@@ -20,30 +20,31 @@
 </head>
 <body>
 <div th:replace="navbar/navBar :: navBar"/>
-<div class="boxdiv" style="border: 1px solid #000000;margin-top: 60px;">
+<div class="boxdiv" style="margin-top: 60px;">
     <!-- 약통 조회 -->
     <div class="modal-body text-center pb-5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <!-- 약통 이름 -->
-                    <h2 class="portfolio-modal-title text-dark text-uppercase mb-0" id="mediName"
-                        style="font-weight: 800;">약통 이름</h2>
+                    <h1 class="portfolio-modal-title text-dark text-uppercase mb-0" id="mediName"
+                        style="font-weight: 800; font-size: 50px;" th:text="${box.getName()}">약통 이름</h1>
                     <br><br>
 
                     <!-- 약통 이미지 -->
-                    <img id="mediImg2" style="background: #ffa8a8;border-radius: 70%;overflow: hidden"
+                    <img id="mediImg2" style="border-radius: 70%;"
+                         th:style="'background:' + ${box.getColor()}+ ';border-radius:70%'"
                          class="img-fluid" src="/image/mediCase/tes.png" alt="..."/>
                     <hr>
 
                     <!-- 약통 텍스트-->
                     <h3 style="display:inline">메모 : </h3>
-                    <h3 id="mediMemo" style="display:inline">약통 메모<br></h3>
+                    <h3 id="mediMemo" style="display:inline" th:text="${box.getMemo()}">약통 메모<br></h3>
                     <br><br>
                     <h4>약1 : 감기약<br>약2 : 두통약</h4>
                     <br>
 
-                    <h4 style="display:inline">남은 약 개수 : </h4> <h4 id="mediCounts" style="display:inline">몇</h4>
+                    <h4 style="display:inline">남은 약 개수 : </h4> <h4 id="mediCounts" style="display:inline" th:text="${box.getCount()}">몇</h4>
                     <h4 style="display:inline">개</h4>
                     <br><br>
 
@@ -57,7 +58,7 @@
                         <i class="fa-solid fa-pen"></i>
                         수정
                     </button>
-                    <button id="btn-delete" class="btn btn-danger">
+                    <button id="btn-delete" class="btn btn-danger" th:value="${box.getId()}">
                         <i class="fas fa-xmark fa-fw"></i>
                         삭제
                     </button>
@@ -90,7 +91,7 @@
                                             이름</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" id="editMediName" class="form-control" placeholder="약통 이름">
+                                        <input type="text" id="editMediName" class="form-control" placeholder="약통 이름" th:value="${box.getName()}">
                                     </div>
                                 </div>
                                 <hr>
@@ -100,7 +101,7 @@
                                         <label for="editMediMemo" class="col-form-label">메모&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" id="editMediMemo" class="form-control" placeholder="메모">
+                                        <input type="text" id="editMediMemo" class="form-control" placeholder="메모" th:value="${box.getMemo()}">
                                     </div>
                                 </div>
                                 <hr>
@@ -112,7 +113,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <input type="color" id="editcaseColor" class="form-control" placeholder="색상"
-                                               value="#ffa8a8" style="width: 150px;height: 70px">
+                                               value="#ffa8a8" style="width: 150px;height: 70px" th:value="${box.getColor()}">
                                     </div>
                                     <div class="col-auto">
                                     </div>
@@ -192,10 +193,10 @@
                                 </div>
                             </div>
                             <br>
-                            <h4 class="text-dark mb-0" id="editCount" style="display: inline" th:text="0"></h4><h4
+                            <h4 class="text-dark mb-0" id="editCount" style="display: inline" th:text="${box.getCount()}"></h4><h4
                                 style="display: inline">개</h4>
                             <br><br><br><br>
-                            <button id="btn-edit" class="btn btn-primary" style="width: 90px">
+                            <button id="btn-edit" class="btn btn-primary" style="width: 90px" th:value="${box.getId()}">
                                 수정
                             </button>
                             <button class="btn btn-primary" style="width: 90px" data-bs-dismiss="modal">
@@ -224,7 +225,7 @@
                         <div class="col-lg-10">
                             <!-- 타이틀 -->
                             <h1 class="portfolio-modal-title text-dark text-uppercase mb-0" id="scheduleName"
-                                style="font-weight: 800;">의 약통 일정</h1>
+                                style="font-weight: 800;" th:text="${box.getName()} + '의 약통 일정'">의 약통 일정</h1>
                             <br>
                             <div style="text-align: center">
                                 <button type="button" onclick="plusbell" class="btn btn-secondary"
@@ -473,7 +474,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- 타이틀 -->
-                            <h1 class="text-dark text-uppercase mb-0">알람 추가하기</h1>
+                            <h1 class="text-dark text-uppercase mb-0" style="font-weight: 800; font-size: 40px;">일정 추가하기</h1>
 
                             <br>
                             <div class="row g-3 align-items-center">
@@ -482,11 +483,8 @@
                                            style="padding-right: 3em">약통선택</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <select id="mediBellcase" class="form-select" aria-label="약통 선택하기">
-                                        <option selected value="0">약통 선택하기</option>
-                                        <option th:each="med : ${mediBoxs}" th:value="${med.getId()}"
-                                                th:text="${med.getName()}">감기약
-                                        </option>
+                                    <select id="mediBellcase" class="form-select" aria-label="약통 선택하기" disabled>
+                                        <option th:text="${box.getName()}" th:value="${box.getId()}" >감기약</option>
                                     </select>
 
                                 </div>
@@ -921,6 +919,26 @@
             document.all["sel1"].style.visibility = "visible";
             document.all["sel2"].style.visibility = "visible";
             document.all["sel3"].style.visibility = "hidden";
+        }
+        var inc = document.getElementsByClassName("bellstepper");
+        for (i = 0; i < inc.length; i++) {
+            var incI = inc[i].querySelector("input"),
+                id = incI.getAttribute("id"),
+                min = incI.getAttribute("min"),
+                max = incI.getAttribute("max"),
+                step = incI.getAttribute("step");
+            document
+                .getElementById(id)
+                .previousElementSibling.setAttribute(
+                "onclick",
+                "stepperInput('" + id + "', -" + step + ", " + min + ")"
+            );
+            document
+                .getElementById(id)
+                .nextElementSibling.setAttribute(
+                "onclick",
+                "stepperInput('" + id + "', " + step + ", " + max + ")"
+            );
         }
     }
 

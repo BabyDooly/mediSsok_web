@@ -32,7 +32,7 @@ public class ScheduleDateService {
     // 알림 리스트
     @Transactional(readOnly=true)
     public List<ScheduleResponseDto> findByMedicineBoxId (Long id){
-        return scheduleDateRepository.findByMedicineBoxId(id).stream()
+        return scheduleDateRepository.findByMedicineBoxId(id, Sort.by(Sort.Direction.ASC, "startday")).stream()
                 .map(ScheduleResponseDto::new)
                 .collect(Collectors.toList());
     }

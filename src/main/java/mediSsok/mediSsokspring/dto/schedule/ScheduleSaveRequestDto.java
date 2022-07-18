@@ -20,7 +20,6 @@ import java.util.List;
 public class
 ScheduleSaveRequestDto {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
     private Date startday;
     private int cycle;
     private int week;

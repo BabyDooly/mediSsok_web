@@ -4,7 +4,7 @@ let mediBox = {
 
         // 일정 추가
         $('#addbtn').on('click', function () {
-            if ($('#medicase').val() == "0")
+            if ($('#medicasemedicase').val() == "0")
                 alert("약통 선택은 필수입니다.");
             else if ($('#startday').val() == "")
                 alert("시작일 선택은 필수입니다.");

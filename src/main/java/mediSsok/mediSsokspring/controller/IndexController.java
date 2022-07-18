@@ -43,9 +43,6 @@ public class IndexController {
         return "/Medi_search/mediSearch";
     }
 
-    @GetMapping("/medi/medibox/box")
-    public String boxNew(){ return "/Medi_box/Box-new";}
-
     // 복용현황
     @GetMapping("/status")
     public String dispStatus() {

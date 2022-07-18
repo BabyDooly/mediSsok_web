@@ -1,7 +1,7 @@
 let mediBox = {
     init : function () {
         let _this = this;
-        let id;
+        let id = $('#btn-edit').attr('value');
         let scheduleId;
 
 
@@ -12,13 +12,6 @@ let mediBox = {
             else
                 _this.add();
         });
-
-        // 약통 조회
-        $('.mediBox').on('click', function () {
-            id = $(this).attr('id');
-            $('#hiddenId').val(id);
-            _this.medicinboxGet(id);
-        })
 
         // 약통 수정
         $('#btn-edit').on('click', function () {
@@ -34,6 +27,25 @@ let mediBox = {
         $('.scheduleUpdate').on('click', function () {
             scheduleId = $(this).attr("value");
             _this.scheduleGet(scheduleId);
+        });
+
+        // 스케줄 추가
+        $('#addbtn').on('click', function () {
+            if ($('#medicasemedicase').val() == "0")
+                alert("약통 선택은 필수입니다.");
+            else if ($('#startday').val() == "")
+                alert("시작일 선택은 필수입니다.");
+            else if ($('#addBellTime').val() == "")
+                alert("시간 선택은 필수입니다.");
+            else if ($('#selectdayBtn').val() == "0")
+                alert("주기 선택은 필수입니다.");
+            else if ($('#selectdayBtn').val() == "2" && !($('#addMon').is(':checked') || $('#addTue').is(':checked')
+                || $('#addWed').is(':checked') || $('#addThu').is(':checked') || $('#addFri').is(':checked')
+                || $('#addSat').is(':checked') || $('#addSun').is(':checked')))
+                alert("요일 선택은 필수입니다.");
+            else{
+                _this.scheduleAdd(id);
+            }
         });
 
         // 스케줄 수정
@@ -52,7 +64,7 @@ let mediBox = {
                 || $('#editSat').is(':checked') || $('#editSun').is(':checked')))
                 alert("요일 선택은 필수입니다.");
             else{
-                _this.scheduleUpdate(scheduleId);
+                _this.scheduleUpdate(scheduleId , id);
             }
         });
 
@@ -70,7 +82,7 @@ let mediBox = {
         // 스케줄 삭제
         $('.scheduleDelete').on('click', function () {
             scheduleId = $(this).attr("value");
-            _this.scheduleDelete(scheduleId);
+            _this.scheduleDelete(scheduleId, id);
         });
 
     },
@@ -108,40 +120,10 @@ let mediBox = {
             data: JSON.stringify(data)
         }).done(function() {
             alert('약통이 등록되었습니다.');
-            window.location.href = '/medi/medibox'; // 글등록 성공 메인페이지 이동
+            window.location.href = '/medi/medibox'; // 약통 등록 성공 메인페이지 이동
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
-    },
-
-    // 약통 조회
-    medicinboxGet : function (id) {
-        let data = {
-            medicineBoxId: id,
-        };
-
-        $.ajax({
-            type: 'POST',
-            url: '/api/medi/get',
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function(data) {
-            $('#mediName').text(data['name'])
-            $('#mediMemo').text(data['memo'])
-            $('#mediCounts').text(data['count'])
-            $('#mediImg2').css('backgroundColor', data['color'])
-            $('#scheduleName').text(data['name'] + " 약통 일정")
-
-            $('#editMediName').val(data['name'])
-            $('#editMediMemo').val(data['memo'])
-            $('#editCount').text(data['count'])
-            $('#editcaseColor').val(data['color'])
-
-            $('#portfolioModal1').modal('show');
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
     },
 
     // 약통 수정
@@ -161,7 +143,7 @@ let mediBox = {
             data: JSON.stringify(data)
         }).done(function() {
             alert('약통이 수정되었습니다.');
-            window.location.href = '/medi/medibox'; // 글수정 성공 메인페이지 이동
+            window.location.href = '/medi/box/' + id; // 약통 등록 성공 메인페이지 이동
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -243,9 +225,70 @@ let mediBox = {
         })
     },
 
+    // 스케줄 추가
+    scheduleAdd: function (id) {
+        var day = $('#startday').val() + " " + $('#addBellTime').val();
+
+        var cycle_result
+        var week_result = 0;
+
+        // 주기 검사,계산
+        if ($('#selectdayBtn').val() == "1")
+            cycle_result = 1;
+        else if ($('#selectdayBtn').val() == "2"){
+            cycle_result = 0;
+            if ($('#addMon').is(':checked'))
+                week_result = week_result + 1;
+            if ($('#addTue').is(':checked'))
+                week_result = week_result + 2;
+            if ($('#addWed').is(':checked'))
+                week_result = week_result + 4;
+            if ($('#addThu').is(':checked'))
+                week_result = week_result + 8;
+            if ($('#addFri').is(':checked'))
+                week_result = week_result + 16;
+            if ($('#addSat').is(':checked'))
+                week_result = week_result + 32;
+            if ($('#addSun').is(':checked'))
+                week_result = week_result + 64;
+
+        }
+        else if ($('#selectdayBtn').val() == "3"){
+            if ($('#sel2').val() == "0")
+                cycle_result = $('#bellstepper').val();
+            else if ($('#sel2').val() == "1")
+                cycle_result = $('#bellstepper').val() * 7;
+            else if ($('#sel2').val() == "2")
+                cycle_result = $('#bellstepper').val() * 30;
+
+
+        }
+
+        let data = {
+            startday : day,
+            cycle: cycle_result,
+            week: week_result,
+            medicineBoxId: $('#mediBellcase').val(),
+        }
+
+        console.log(data)
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/medi/bell/add',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function () {
+            alert('스케줄이 등록되었습니다.');
+            window.location.href = '/medi/box/' + id; // 스케줄 수정 성공 메인페이지 이동
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
 
     // 스케줄 수정
-    scheduleUpdate : function (id) {
+    scheduleUpdate : function (scheduleId, id) {
         var day = $('#editstartday').val() + " " + $('#editaddTime').val();
 
         var cycle_result
@@ -291,28 +334,28 @@ let mediBox = {
 
         $.ajax({
             type: 'POST',
-            url: '/api/medi/schedule/update/' + id,
+            url: '/api/medi/schedule/update/' + scheduleId,
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
             alert('스케줄이 수정되었습니다.');
-            window.location.href = '/medi/medibox'; // 스케줄 수정 성공 메인페이지 이동
+            window.location.href = '/medi/box/' + id; // 스케줄 수정 성공 메인페이지 이동
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
     },
 
     // 스케줄 삭제
-    scheduleDelete : function (id) {
+    scheduleDelete : function (scheduleId, id) {
         $.ajax({
             type: 'DELETE',
-            url: '/api/medi/schedule/delete/'+id,
+            url: '/api/medi/schedule/delete/'+scheduleId,
             dataType: 'json',
             contentType:'application/json; charset=utf-8'
         }).done(function() {
             alert('스케줄이 삭제되었습니다.');
-            window.location.href = '/medi/medibox'; // 스케줄 삭제 성공시 메인페이지 이동
+            window.location.href = '/medi/box/' + id; // 스케줄 삭제 성공시 메인페이지 이동
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

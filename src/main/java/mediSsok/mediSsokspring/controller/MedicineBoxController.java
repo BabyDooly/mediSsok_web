@@ -1,5 +1,6 @@
 package mediSsok.mediSsokspring.controller;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
@@ -35,14 +36,9 @@ public class MedicineBoxController {
         // 페이징 리스트
         Page<MedicineBoxResponseDto> pageList = medicineBoxService.findByMemberId(userDetails.getMember().getId(), pageable);
 
-        List<ScheduleResponseDto> scheduleList = scheduleDateService.findAll();
-
-        System.out.println("페이지" + pageList.getTotalPages());
-
         // 약통, 맴버이름
         model.addAttribute("member", userDetails.getMember().getNickname());
         model.addAttribute("mediBoxs", pageList);
-        model.addAttribute("scheList", scheduleList);
 
         // 페이징 처리
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
@@ -52,13 +48,16 @@ public class MedicineBoxController {
         return "/Medi_box/myMediBox";
     }
 
-    // 약통 조회
-    @PostMapping("/api/medi/get")
-    @ResponseBody
-    public MedicineBoxResponseDto findById(@RequestBody MedicineBoxRequestDto requestDto) {
-        return medicineBoxService.findById(requestDto.getMedicineBoxId());
-    }
+    // 약통 상세정보
+    @GetMapping("/medi/box/{id}")
+    public String findById(@PathVariable Long id, Model model) {
+        MedicineBoxResponseDto dto =  medicineBoxService.findById(id);
+        List<ScheduleResponseDto> scheduleList = scheduleDateService.findByMedicineBoxId(id);
 
+        model.addAttribute("box", dto);
+        model.addAttribute("scheList", scheduleList);
+        return "/Medi_box/BoxInformation";
+    }
 
     // 약통 추가
     @PostMapping("/api/medi/add")
@@ -81,11 +80,12 @@ public class MedicineBoxController {
         return medicineBoxService.update(id, medicineBoxUpdateRequestDto);
     }
 
-    // 게시물 삭제
+    // 약통 삭제
     @DeleteMapping("/api/medi/delete/{id}")
     @ResponseBody
     public Long delete(@PathVariable Long id){
         medicineBoxService.delete(id);
         return id;
     }
+
 }
