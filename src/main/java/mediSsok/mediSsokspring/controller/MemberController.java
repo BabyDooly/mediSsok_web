@@ -103,12 +103,12 @@ public class MemberController {
     /* 커스텀 유효성 검증을 위해 추가 */
     @InitBinder
     public void validatorBinder(WebDataBinder binder) {
-        binder.addValidators(checkNicknameValidator);
+//        binder.addValidators(checkNicknameValidator);
         binder.addValidators(checkEmailValidator);
     }
 
 
-    //Email과 name의 일치여부를 check하는 컨트롤러
+    // Email이 DB에 존재하는지 체크하는 부분
     @PostMapping("/api/member/findpw")
     @ResponseBody
     public Map<String, Boolean> pw_find(@RequestParam("userEmail") String userEmail, MemberPasswordUpdateRequestDto dto) {
