@@ -31,7 +31,7 @@ public class MedicineBoxController {
     // 내 약통
     @GetMapping("/medi/medibox")
     public String dispMedicase(Model model, @AuthenticationPrincipal CustomUserDetails userDetails,
-                               @PageableDefault(size = 6, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+                                   @PageableDefault(size = 6, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 
         // 페이징 리스트
         Page<MedicineBoxResponseDto> pageList = medicineBoxService.findByMemberId(userDetails.getMember().getId(), pageable);
@@ -52,7 +52,7 @@ public class MedicineBoxController {
     @GetMapping("/medi/box/{id}")
     public String findById(@PathVariable Long id, Model model) {
         MedicineBoxResponseDto dto =  medicineBoxService.findById(id);
-        List<ScheduleResponseDto> scheduleList = scheduleDateService.findByMedicineBoxId(id);
+        List<ScheduleResponseDto> scheduleList = scheduleDateService.scheduleList(id);
 
         model.addAttribute("box", dto);
         model.addAttribute("scheList", scheduleList);

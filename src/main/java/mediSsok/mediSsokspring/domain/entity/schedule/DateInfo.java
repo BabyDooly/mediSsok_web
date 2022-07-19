@@ -52,4 +52,8 @@ public class DateInfo extends BaseTimeEntity {
         this.member = member;
         this.scheduleDate = scheduleDate;
     }
+
+    public void update(LocalDateTime alarmDatetime) {
+        this.alarmDatetime = alarmDatetime;
+    }
 }

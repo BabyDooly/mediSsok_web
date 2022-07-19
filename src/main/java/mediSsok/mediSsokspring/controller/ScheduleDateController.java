@@ -32,16 +32,25 @@ public class ScheduleDateController {
 
     // 오늘 알람
     @GetMapping("/medi/bell")
-    public String dispBell(Model model, @AuthenticationPrincipal CustomUserDetails userDetails) {
+    public String dispBell(Model model, @AuthenticationPrincipal CustomUserDetails userDetails,
+                           @RequestParam(defaultValue="0") int year, @RequestParam(defaultValue="0") int month, @RequestParam(defaultValue="0") int day) {
         LocalDateTime now = LocalDateTime.now();
 
-        LocalDateTime fromDate = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 0,0, 0);
-        System.out.println(fromDate);
-        LocalDateTime toDate = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 23,59, 0);
-        System.out.println(toDate);
+        LocalDateTime fromDate;
+        LocalDateTime toDate;
+
+        if(year == 0 || month == 0 || day == 0){
+            fromDate = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 0,0, 0);
+            toDate = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 23,59, 0);
+        }
+        else {
+            fromDate = LocalDateTime.of(year, month, day, 0,0, 0);
+            toDate = LocalDateTime.of(year, month, day, 23,59, 0);
+        }
+
 
         List<MedicineBoxResponseDto> mediboxList = medicineBoxService.findByMemberId(userDetails.getMember().getId());
-        List<DateInfoResponseDto> alarmList = scheduleDateService.findByMemberIdAndAlarmDatetimeBetween(userDetails.getMember().getId(), fromDate, toDate);
+        List<DateInfoResponseDto> alarmList = scheduleDateService.alarmList(userDetails.getMember().getId(), fromDate, toDate);
 
         // 맴버이름, 약통종류, 알람리스트
         model.addAttribute("member", userDetails.getMember().getNickname());
@@ -52,33 +61,48 @@ public class ScheduleDateController {
     }
 
     // 스케줄 추가
-    @PostMapping("/api/medi/bell/add")
+    @PostMapping("/api/medi/schedule/add")
     @ResponseBody
-    public Long save(@RequestBody ScheduleSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
+    public Long scheduleSave(@RequestBody ScheduleSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
         Long memberId = userDetails.getMember().getId();
         requestDto.setMemberId(memberId);
-        return scheduleDateService.create(requestDto, memberId);
+        return scheduleDateService.scheduleCreate(requestDto, memberId);
     }
 
     // 스케줄 조회
     @PostMapping("/api/medi/schedule/get")
     @ResponseBody
     public ScheduleResponseDto findById(@RequestBody ScheduleRequestDto requestDto) {
-        return scheduleDateService.findById(requestDto.getScheduleId());
+        return scheduleDateService.scheduleFindById(requestDto.getScheduleId());
     }
 
     // 스케줄 수정
     @PostMapping("/api/medi/schedule/update/{id}")
     @ResponseBody
-    public Long update(@PathVariable Long id, @RequestBody ScheduleUpdateRequestDto scheduleUpdateRequestDto){
-        return scheduleDateService.update(id, scheduleUpdateRequestDto);
+    public Long scheduleUpdate(@PathVariable Long id, @RequestBody ScheduleUpdateRequestDto scheduleUpdateRequestDto){
+        return scheduleDateService.scheduleUpdate(id, scheduleUpdateRequestDto);
     }
 
     // 스케줄 삭제
     @DeleteMapping("/api/medi/schedule/delete/{id}")
     @ResponseBody
-    public Long delete(@PathVariable Long id){
-        scheduleDateService.delete(id);
+    public Long scheduleDelete(@PathVariable Long id){
+        scheduleDateService.scheduleDelete(id);
+        return id;
+    }
+
+    // 알람 수정
+    @PostMapping("/api/medi/alarm/update/{id}")
+    @ResponseBody
+    public Long alarmUpdate(@PathVariable Long id, @RequestBody DateInfoUpdateRequestDto dateInfoUpdateRequestDto){
+        return scheduleDateService.alarmUpdate(id, dateInfoUpdateRequestDto);
+    }
+
+    // 알람 삭제
+    @DeleteMapping("/api/medi/alarm/delete/{id}")
+    @ResponseBody
+    public Long alarmDelete(@PathVariable Long id){
+        scheduleDateService.alarmDelete(id);
         return id;
     }
 }

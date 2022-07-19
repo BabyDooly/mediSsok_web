@@ -70,14 +70,12 @@ public class Member extends BaseTimeEntity {
         this.phone = phone;
     }
 
-    @Builder
     // 개인정보 변경
     public void userUpdate(String nickname, String phone) {
         this.nickname = nickname;
         this.phone = phone;
     }
 
-    @Builder
     // 비밀번호 변경
     public void updatePassword(String newPassword) {
         this.password = newPassword;

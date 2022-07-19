@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
+import static mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto.setTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,6 +24,8 @@ public class DateInfoResponseDto {
     private long id;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime alarmDatetime;
+
+    private String timeUpdate;
     private Boolean eatCheck;
     private Boolean alarmCheck;
     private Long memberId;
@@ -31,6 +35,7 @@ public class DateInfoResponseDto {
     public DateInfoResponseDto(DateInfo entity) {
         this.id = entity.getId();
         this.alarmDatetime = entity.getAlarmDatetime();
+        this.timeUpdate = setTime(entity.getAlarmDatetime());
         this.eatCheck = entity.getEatCheck();
         this.alarmCheck = entity.getAlarmCheck();
         this.memberId = entity.getMember().getId();

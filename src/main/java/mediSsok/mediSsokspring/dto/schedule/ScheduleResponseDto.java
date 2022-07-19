@@ -28,7 +28,6 @@ public class ScheduleResponseDto {
     private int cycle;
     private String cycleUpdate;
     private int week;
-
     private Long memberId;
     private Long medicineBoxId;
     private String medicineBoxName;
@@ -45,7 +44,7 @@ public class ScheduleResponseDto {
         this.medicineBoxName = entity.getMedicineBox().getName();
     }
 
-    public String setTime(LocalDateTime time) {
+    public static String setTime(LocalDateTime time) {
         int hours = time.getHour();
         int minutes = time.getMinute();
 
@@ -63,7 +62,10 @@ public class ScheduleResponseDto {
                 hours = 12;
         }
 
-        return result + " " + hours + ":" + minutes;
+        String H = String.format("%02d", hours);
+        String M = String.format("%02d", minutes);
+
+        return result + " " + H + ":" + M;
     }
 
     public String cycleCheck(int cycle, int week) {

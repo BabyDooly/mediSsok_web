@@ -279,7 +279,7 @@ let mediBox = {
 
         $.ajax({
             type: 'POST',
-            url: '/api/medi/bell/add',
+            url: '/api/medi/schedule/add',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)

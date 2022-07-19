@@ -113,21 +113,18 @@
                            style="position: absolute;line-height: 1.4;margin-left: 10px"></i>
                     </div>
                     <div>
-                        <span style="font-size: 20px; position: absolute;line-height: 2.5;margin-left: 50px"
-                              th:text="${#temporals.format(alarms.getAlarmDatetime(), 'a HH시 mm분')}">아침 식후 30분</span>
+                        <span style="font-size: 20px; position: absolute;line-height: 2.5;margin-left: 50px" th:text="${alarms.getTimeUpdate()}">아침 식후 30분</span>
                     </div>
                     <div style="text-align: right">
                         <button style="background: none;border: none;width: 40px;font-size:20px;" th:id="|btn${alarms.getId()}|" onclick="bellbtn(this.id)">
                             <i th:id="|img${alarms.getId()}|" class="fas fa-bell fa-aw fa-lg" style="line-height: 1.6"></i>
                         </button>
-                        <button style="border: none; background: #e5e5e5;width: 40px;font-size:20px;"
-                                onclick="belleditbtn">
+                        <button class="alarm-getID" style="border: none; background: #e5e5e5;width: 40px; font-size:20px;" th:value="${alarms.getId()}">
                             <div data-bs-toggle="modal" data-bs-target="#belleditbtn">
                                 <i class="fas fa-edit fa-aw fa-lg" style="line-height: 1.6"></i>
                             </div>
                         </button>
-                        <button style="border: none;background: #e5e5e5;width: 40px;font-size:20px;"
-                                onclick="delBellbtn()">
+                        <button class="btn-delete" style="border: none; background: #e5e5e5; width: 40px; font-size: 20px;" th:value="${alarms.getId()}">
                             <i class="fas fa-times fa-aw fa-lg" style="line-height: 1.6"></i>
                         </button>
                     </div>
@@ -307,34 +304,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- 타이틀 -->
-                            <h1 class="text-dark text-uppercase mb-0">알람 수정하기</h1>
-
-                            <br>
-                            <div class="row g-3 align-items-center">
-                                <div class="col-md-3">
-                                    <label for="editmedicase" class="col-form-label"
-                                           style="padding-right: 3em">약통선택</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <select id="editmedicase" class="form-select" aria-label="약통 선택하기">
-                                        <option selected value="">약통 선택하기</option>
-                                        <option value="감기약">감기약</option>
-                                        <option value="혈압약">혈압약</option>
-                                        <option value="두통약">두통약</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <br>
-
-                            <div class="row g-3 align-items-center">
-                                <div class="col-md-3">
-                                    <label for="editstartday" class="col-form-label"
-                                           style="padding-right: 3.6em">시작일&nbsp</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="date" id="editstartday" class="form-control" placeholder="2022-06-24">
-                                </div>
-                            </div>
+                            <h1 class="text-dark text-uppercase mb-0" style="font-weight: 600;">알람 수정하기</h1>
                             <br>
 
                             <div class="row g-3 align-items-center">
@@ -346,78 +316,10 @@
                                     <input type="time" id="editaddTime" class="form-control">
                                 </div>
                             </div>
-                            <br>
-
-                            <div class="row g-3 align-items-center">
-                                <div class="col-md-3">
-                                    <label class="col-form-label" style="padding-right: 5em">주기</label>
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="form-select" aria-label="Default select example"
-                                            id="editselectdayBtn"
-                                            onchange="editBellChange();">
-                                        <option value="0" selected>선택 없음</option>
-                                        <option value="1">매일</option>
-                                        <option value="2">특정 요일</option>
-                                        <option value="3">일 간격</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <div id="editsel1" style="visibility: hidden">
-                                                <span class="editstepper">
-                                                  <button>–</button>
-                                                    <input type="number" id="editstepper" value="0" min="0" max="365"
-                                                           step="1" onchange="editBellCount();">
-                                                  <button>+</button>
-                                                </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="form-select" aria-label="Default select example" id="editsel2"
-                                            style="visibility: hidden">
-                                        <option value="0" selected>일 간격</option>
-                                        <option value="1">1번</option>
-                                        <option value="2">2번</option>
-                                        <option value="3">3번</option>
-                                    </select>
-                                </div>
-                                <div class="col-auto">
-                                </div>
-                            </div>
-                            <div class="row g-3 align-items-center">
-                                <div class="col-md-3">
-                                </div>
-                                <div class="col-md-7">
-                                    <div id="editsel3" style="font-size: 20px; visibility: hidden;">
-                                        &nbsp;<input type='checkbox' name='editday' value='0' class="cbox"
-                                                     style="accent-color: red;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='editday' value='1' class="cbox"
-                                               style="accent-color: #d1721d;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='editday' value='2' class="cbox"
-                                               style="accent-color: #9a7928;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='editday' value='3' class="cbox"
-                                               style="accent-color: green;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='editday' value='4' class="cbox"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='editday' value='5' class="cbox"
-                                               style="accent-color: darkblue;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type='checkbox' name='editday' value='6' class="cbox"
-                                               style="accent-color: purple;"/><br>
-                                        &nbsp;월&nbsp;&nbsp;&nbsp;&nbsp;
-                                        화&nbsp;&nbsp;&nbsp;&nbsp;
-                                        수&nbsp;&nbsp;&nbsp;&nbsp;
-                                        목&nbsp;&nbsp;&nbsp;&nbsp;
-                                        금&nbsp;&nbsp;&nbsp;&nbsp;
-                                        토&nbsp;&nbsp;&nbsp;&nbsp;
-                                        일
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
 
                             <br><br><br><br>
 
-                            <button id="editaddbtn" onclick="editaddbtn()" class="btn btn-primary"
-                                    data-bs-dismiss="modal"
+                            <button id="editaddbtn" onclick="editaddbtn()" class="btn btn-primary btn-edit" data-bs-dismiss="modal"
                                     style="width: 90px">
                                 수정
                             </button>
@@ -439,14 +341,37 @@
 <script src="/schedule.js"></script>
 
 <script>
-    function updateDiv() {
-        window.location.reload();
-    }
+    var year
+    var month
+    var day
+    var week
+    var weekName = new Array('일','월','화','수','목','금','토')
 
-    date = new Date();
-    month = date.getMonth() + 1;
-    day = date.getDate();
-    document.getElementById("today").innerHTML = month + "/" + day + "알람";
+    if(window.location.search == ''){
+        date = new Date();
+        year = date.getFullYear();
+        month = date.getMonth() + 1;
+        day = date.getDate();
+        week = weekName[date.getDay()];
+    }
+    else{
+        let query = window.location.search;
+        let param = new URLSearchParams(query);
+
+        let y = param.get('year');
+        let m = param.get('month');
+        let d = param.get('day');
+
+        var today = new Date(y+'-'+m+'-'+d).getDay();
+
+        year = y;
+        month = m;
+        day = d;
+        week = weekName[today];
+    }
+    document.getElementById("today").innerHTML = month + "/" + day + "(" + week + ") 알람" ;
+
+
 
 
 
@@ -458,11 +383,6 @@
             img1.classList.replace('far', 'fas');
         }
         count++;
-    }
-
-    function delbtn() {
-        const div = document.getElementById('divv');
-        div.remove();
     }
 
     function Change2() {
@@ -518,56 +438,6 @@
                 el.value = parseInt(el.value) + s;
             }
         }
-    }
-
-    function delBellbtn() {
-        if (confirm("정말 삭제 하시겠습니까?") == true) {
-            alert("삭제되었습니다.")
-        } else {
-            alert("취소되었습니다.")
-        }
-    }
-
-    function editBellChange() {
-        var key2 = $('#editselectdayBtn').val();
-        if (key2 == 0) {
-            document.all["editsel1"].style.visibility = "hidden";
-            document.all["editsel2"].style.visibility = "hidden";
-            document.all["editsel3"].style.visibility = "hidden";
-        } else if (key2 == 1) {
-            document.all["editsel1"].style.visibility = "hidden";
-            document.all["editsel2"].style.visibility = "hidden";
-            document.all["editsel3"].style.visibility = "hidden";
-        } else if (key2 == 2) {
-            document.all["editsel1"].style.visibility = "hidden";
-            document.all["editsel2"].style.visibility = "hidden";
-            document.all["editsel3"].style.visibility = "visible";
-        } else {
-            document.all["editsel1"].style.visibility = "visible";
-            document.all["editsel2"].style.visibility = "visible";
-            document.all["editsel3"].style.visibility = "hidden";
-        }
-    }
-
-    var inc = document.getElementsByClassName("editstepper");
-    for (i = 0; i < inc.length; i++) {
-        var incI = inc[i].querySelector("input"),
-            id = incI.getAttribute("id"),
-            min = incI.getAttribute("min"),
-            max = incI.getAttribute("max"),
-            step = incI.getAttribute("step");
-        document
-            .getElementById(id)
-            .previousElementSibling.setAttribute(
-            "onclick",
-            "stepperInput('" + id + "', -" + step + ", " + min + ")"
-        );
-        document
-            .getElementById(id)
-            .nextElementSibling.setAttribute(
-            "onclick",
-            "stepperInput('" + id + "', " + step + ", " + max + ")"
-        );
     }
 </script>
 </body>
