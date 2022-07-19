@@ -141,7 +141,27 @@ public class ScheduleDateService {
         DateInfo entity = dateInfoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("알람이 없습니다. id = " + id));
 
-        entity.update(requestDto.getAlarmDatetime());
+        entity.timeUpdate(requestDto.getAlarmDatetime());
+        return id;
+    }
+
+    // 알람 여부 변경
+    @Transactional
+    public Long eatCheck(Long id, AlarmCheckRequestDto requestDto){
+        DateInfo entity = dateInfoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("알람이 없습니다. id = " + id));
+
+        entity.alarmUpdate(requestDto.getAlarmCheck());
+        return id;
+    }
+
+    // 복용 여부 변경
+    @Transactional
+    public Long alarmCheck(Long id, EatCheckRequestDto requestDto){
+        DateInfo entity = dateInfoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("알람이 없습니다. id = " + id));
+
+        entity.eatUpdate(requestDto.getEatCheck());
         return id;
     }
 
