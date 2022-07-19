@@ -7,10 +7,7 @@ import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxRequestDto;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxSaveRequestDto;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxUpdateRequestDto;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleRequestDto;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleSaveRequestDto;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleUpdateRequestDto;
+import mediSsok.mediSsokspring.dto.schedule.*;
 import mediSsok.mediSsokspring.service.MedicineBoxService;
 import mediSsok.mediSsokspring.service.MemberService;
 import mediSsok.mediSsokspring.service.ScheduleDateService;
@@ -22,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,11 +33,20 @@ public class ScheduleDateController {
     // 오늘 알람
     @GetMapping("/medi/bell")
     public String dispBell(Model model, @AuthenticationPrincipal CustomUserDetails userDetails) {
-        List<MedicineBoxResponseDto> list = medicineBoxService.findByMemberId(userDetails.getMember().getId());
+        LocalDateTime now = LocalDateTime.now();
 
-        // 약통, 맴버이름
+        LocalDateTime fromDate = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 0,0, 0);
+        System.out.println(fromDate);
+        LocalDateTime toDate = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 23,59, 0);
+        System.out.println(toDate);
+
+        List<MedicineBoxResponseDto> mediboxList = medicineBoxService.findByMemberId(userDetails.getMember().getId());
+        List<DateInfoResponseDto> alarmList = scheduleDateService.findByMemberIdAndAlarmDatetimeBetween(userDetails.getMember().getId(), fromDate, toDate);
+
+        // 맴버이름, 약통종류, 알람리스트
         model.addAttribute("member", userDetails.getMember().getNickname());
-        model.addAttribute("mediBoxs", list);
+        model.addAttribute("mediBoxs", mediboxList);
+        model.addAttribute("alarm", alarmList);
 
         return "/Medi_bell/mediBell";
     }

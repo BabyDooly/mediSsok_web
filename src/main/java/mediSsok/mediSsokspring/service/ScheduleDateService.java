@@ -90,11 +90,19 @@ public class ScheduleDateService {
         return scheduleDateId;
     }
 
-    // 알림 리스트
+    // 약통별 스케줄 리스트
     @Transactional(readOnly=true)
     public List<ScheduleResponseDto> findByMedicineBoxId (Long id){
         return scheduleDateRepository.findByMedicineBoxId(id, Sort.by(Sort.Direction.ASC, "startday")).stream()
                 .map(ScheduleResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    // 요일별 스케줄 리스트
+    @Transactional(readOnly=true)
+    public List<DateInfoResponseDto> findByMemberIdAndAlarmDatetimeBetween (Long memberId, LocalDateTime fromDate, LocalDateTime toDate){
+        return dateInfoRepository.findByMemberIdAndAlarmDatetimeBetween(memberId, fromDate, toDate, Sort.by(Sort.Direction.ASC, "alarmDatetime")).stream()
+                .map(DateInfoResponseDto::new)
                 .collect(Collectors.toList());
     }
 
@@ -126,4 +134,5 @@ public class ScheduleDateService {
 
         scheduleDateRepository.delete(entity);
     }
+
 }

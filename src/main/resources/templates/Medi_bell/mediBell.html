@@ -82,7 +82,9 @@
 
 <body>
 <div th:replace="navbar/navBar :: navBar"/>
-<p class="mainText" th:text="${member} + '님의 오늘 알람'"></p>
+<div style="text-align: center; padding-top: 80px;line-height: 77px;">
+<p style="display:inline" class="mainText" th:text="${member} + '님의 '"> <p  id="today" style="display:inline" class="mainText" ></p>
+</div>
 <p class="mainSubText">오늘도 잊지말고 꼭 드셔주세요.</p>
 <div style="text-align: center">
     <button type="button" onclick="plusbtn" class="btn btn-secondary" style="width: 300px;height: 60px">
@@ -97,7 +99,7 @@
 <br>
 
 <div class="mediSearchDiv">
-    <table id="belltable" class="table table-bordered border-secondary" style="width: 401px;float: left;">
+    <table id="belltable" class="table table-bordered border-secondary" style="width: 401px;float: left;" th:each="alarms : ${alarm}">
         <tbody>
         <tr>
             <th class="table-active" valign="middle">
@@ -107,7 +109,7 @@
                            style="position: absolute;line-height: 1.6;margin-left: 10px"></i>
                     </div>
                     <div>
-                        <span style="font-size: 20px; position: absolute;line-height: 2.5;margin-left: 50px">아침 식후 30분</span>
+                        <span style="font-size: 20px; position: absolute;line-height: 2.5;margin-left: 50px" th:text="${#temporals.format(alarms.getAlarmDatetime(), 'a HH시 mm분')}">아침 식후 30분</span>
                     </div>
                     <div style="text-align: right">
                         <button style="background: none;border: none;width: 40px" onclick="bellbtn()">
@@ -127,8 +129,8 @@
         </tr>
         <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <tr>
-            <th class="table" valign="middle" style="height: 100px;font-size: 20px;padding: 10px">
-                감기약<br>혈압약
+            <th class="table" valign="middle" style="height: 100px;font-size: 20px;padding: 10px" th:text="${alarms.getMedicineBoxName()}">
+                감기약
             </th>
         </tr>
         <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
@@ -143,8 +145,6 @@
         </tbody>
     </table>
 </div>
-
-
 
 </div>
 
@@ -430,6 +430,11 @@
     function updateDiv() {
         window.location.reload();
     }
+
+    date = new Date();
+    month = date.getMonth() + 1;
+    day = date.getDate();
+    document.getElementById("today").innerHTML = month + "/" + day + "알람" ;
 
     var count = 1;
 

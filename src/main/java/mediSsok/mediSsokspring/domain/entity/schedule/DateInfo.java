@@ -30,11 +30,11 @@ public class DateInfo extends BaseTimeEntity {
 
     // 복용 여부
     @Column(name = "date_eatCheck")
-    private boolean eatCheck = true;
+    private Boolean eatCheck = true;
 
     // 알람 여부
     @Column(name = "date_alarmCheck")
-    private boolean alarmCheck = false;
+    private Boolean alarmCheck = true;
 
     // 사용자 ID(Member)
     @ManyToOne(fetch = FetchType.LAZY)
