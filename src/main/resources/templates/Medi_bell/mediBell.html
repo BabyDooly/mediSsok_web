@@ -2,7 +2,8 @@
 
 <!-- 타임리프 사용 -->
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      style="margin-bottom: 100px">
 <head>
     <meta charset="UTF-8">
     <title>myPage</title>
@@ -83,9 +84,11 @@
 <body>
 <div th:replace="navbar/navBar :: navBar"/>
 <div style="text-align: center; padding-top: 80px;line-height: 77px;">
-<p style="display:inline" class="mainText" th:text="${member} + '님의 '"> <p  id="today" style="display:inline" class="mainText" ></p>
+    <p style="display:inline" class="mainText" th:text="${member} + '님의 '">
+    <p id="today" style="display:inline" class="mainText"></p>
+    <p class="mainSubText">오늘도 잊지말고 꼭 드셔주세요.</p>
 </div>
-<p class="mainSubText">오늘도 잊지말고 꼭 드셔주세요.</p>
+
 <div style="text-align: center">
     <button type="button" onclick="plusbtn" class="btn btn-secondary" style="width: 300px;height: 60px">
         <div>
@@ -98,30 +101,34 @@
 
 <br>
 
-<div class="mediSearchDiv">
-    <table id="belltable" class="table table-bordered border-secondary" style="width: 401px;float: left;" th:each="alarms : ${alarm}">
+<div class="mediBellDiv2">
+    <table id="belltable" class="table table-bordered border-secondary" style="width: 401px;float: left;
+            margin: 20px" th:each="alarms : ${alarm}">
         <tbody>
         <tr>
             <th class="table-active" valign="middle">
                 <div>
                     <div>
                         <i class="fas fa-stopwatch fa-aw fa-2x"
-                           style="position: absolute;line-height: 1.6;margin-left: 10px"></i>
+                           style="position: absolute;line-height: 1.4;margin-left: 10px"></i>
                     </div>
                     <div>
-                        <span style="font-size: 20px; position: absolute;line-height: 2.5;margin-left: 50px" th:text="${#temporals.format(alarms.getAlarmDatetime(), 'a HH시 mm분')}">아침 식후 30분</span>
+                        <span style="font-size: 20px; position: absolute;line-height: 2.5;margin-left: 50px"
+                              th:text="${#temporals.format(alarms.getAlarmDatetime(), 'a HH시 mm분')}">아침 식후 30분</span>
                     </div>
                     <div style="text-align: right">
-                        <button style="background: none;border: none;width: 40px" onclick="bellbtn()">
-                            <i id="img1" class="fas fa-bell fa-aw fa-2x" style="line-height: 1.6"></i>
+                        <button style="background: none;border: none;width: 40px;font-size:20px;" th:id="|btn${alarms.getId()}|" onclick="bellbtn(this.id)">
+                            <i th:id="|img${alarms.getId()}|" class="fas fa-bell fa-aw fa-lg" style="line-height: 1.6"></i>
                         </button>
-                        <button style="border: none; background: #e5e5e5;width: 40px" onclick="belleditbtn">
+                        <button style="border: none; background: #e5e5e5;width: 40px;font-size:20px;"
+                                onclick="belleditbtn">
                             <div data-bs-toggle="modal" data-bs-target="#belleditbtn">
-                                <i class="fas fa-edit fa-aw fa-2x" style="line-height: 1.6"></i>
+                                <i class="fas fa-edit fa-aw fa-lg" style="line-height: 1.6"></i>
                             </div>
                         </button>
-                        <button style="border: none;background: #e5e5e5;width: 40px" onclick="delBellbtn()">
-                            <i class="fas fa-times fa-aw fa-2x" style="line-height: 1.6"></i>
+                        <button style="border: none;background: #e5e5e5;width: 40px;font-size:20px;"
+                                onclick="delBellbtn()">
+                            <i class="fas fa-times fa-aw fa-lg" style="line-height: 1.6"></i>
                         </button>
                     </div>
                 </div>
@@ -129,21 +136,26 @@
         </tr>
         <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <tr>
-            <th class="table" valign="middle" style="height: 100px;font-size: 20px;padding: 10px" th:text="${alarms.getMedicineBoxName()}">
+            <th class="table" valign="middle" style="height: 100px;font-size: 30px;padding: 15px;
+                vertical-align: middle;text-align: center" th:text="${alarms.getMedicineBoxName()}">
                 감기약
             </th>
         </tr>
         <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <tr>
             <th class="table-active" valign="middle" style="padding: 0px">
-                <input id="toggle-on1" class="toggle toggle-left" name="toggle1" value="false" type="radio" checked>
-                <label for="toggle-on1" class="btn">안 먹었어요</label>
-                <input id="toggle-off1" class="toggle toggle-right" name="toggle1" value="true" type="radio">
-                <label for="toggle-off1" class="btn">먹었어요</label>
+                <input th:id="|on-${alarms.getId()}|" class="toggle toggle-left" th:name="|toggle${alarms.getId()}|" value="false"
+                       type="radio" checked>
+                <label th:for="|on-${alarms.getId()}|" class="btn">안 먹었어요</label>
+                <input th:id="|off-${alarms.getId()}|" class="toggle toggle-right" th:name="|toggle${alarms.getId()}|" value="true"
+                       type="radio">
+                <label th:for="|off-${alarms.getId()}|" class="btn">먹었어요</label>
             </th>
         </tr>
         </tbody>
     </table>
+</div>
+<div style="height: 200px;position:fixed;bottom: 0;">
 </div>
 
 </div>
@@ -173,7 +185,8 @@
                                     <select id="medicase" class="form-select" aria-label="약통 선택하기">
                                         <option selected value="0">약통 선택하기</option>
                                         <option th:each="med : ${mediBoxs}" th:value="${med.getId()}"
-                                        th:text="${med.getName()}">감기약</option>
+                                                th:text="${med.getName()}">감기약
+                                        </option>
                                     </select>
 
                                 </div>
@@ -309,7 +322,6 @@
                                         <option value="혈압약">혈압약</option>
                                         <option value="두통약">두통약</option>
                                     </select>
-
                                 </div>
                             </div>
                             <br>
@@ -341,7 +353,8 @@
                                     <label class="col-form-label" style="padding-right: 5em">주기</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <select class="form-select" aria-label="Default select example" id="editselectdayBtn"
+                                    <select class="form-select" aria-label="Default select example"
+                                            id="editselectdayBtn"
                                             onchange="editBellChange();">
                                         <option value="0" selected>선택 없음</option>
                                         <option value="1">매일</option>
@@ -403,7 +416,8 @@
 
                             <br><br><br><br>
 
-                            <button id="editaddbtn" onclick="editaddbtn()" class="btn btn-primary" data-bs-dismiss="modal"
+                            <button id="editaddbtn" onclick="editaddbtn()" class="btn btn-primary"
+                                    data-bs-dismiss="modal"
                                     style="width: 90px">
                                 수정
                             </button>
@@ -432,16 +446,16 @@
     date = new Date();
     month = date.getMonth() + 1;
     day = date.getDate();
-    document.getElementById("today").innerHTML = month + "/" + day + "알람" ;
+    document.getElementById("today").innerHTML = month + "/" + day + "알람";
 
-    var count = 1;
 
-    function bellbtn() {
-        var img1 = document.getElementById("img1");
-        if (count % 2 == 1) {
-            img1.classList.replace('fas','far');
+
+    function bellbtn(btnId) {
+        var img1 = document.getElementById("img" + btnId.substring(3, btnId.length));
+        if (img1.classList.contains('fas')) {
+            img1.classList.replace('fas', 'far');
         } else {
-            img1.classList.replace('far','fas');
+            img1.classList.replace('far', 'fas');
         }
         count++;
     }
@@ -505,10 +519,11 @@
             }
         }
     }
-    function delBellbtn(){
-        if(confirm("정말 삭제 하시겠습니까?")==true) {
+
+    function delBellbtn() {
+        if (confirm("정말 삭제 하시겠습니까?") == true) {
             alert("삭제되었습니다.")
-        }else{
+        } else {
             alert("취소되었습니다.")
         }
     }
@@ -533,6 +548,7 @@
             document.all["editsel3"].style.visibility = "hidden";
         }
     }
+
     var inc = document.getElementsByClassName("editstepper");
     for (i = 0; i < inc.length; i++) {
         var incI = inc[i].querySelector("input"),

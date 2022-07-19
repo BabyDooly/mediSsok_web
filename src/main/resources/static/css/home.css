@@ -585,6 +585,13 @@ increment-next {  from {
     overflow: hidden;
     border: 1px solid black;
 }
+.mediBellDiv2{
+    width: 1380px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+    vertical-align: middle; /*센터 맞춤 속성*/
+    line-height: normal; /*센터 맞춤 속성*/
+}
 .portfolio2 .portfolio-item2 {
     cursor: pointer;
     position: relative;
