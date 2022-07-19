@@ -26,7 +26,8 @@
                     <label for="emailText" class="col-form-label">이메일</label>
                 </div>
                 <div class="col-md-9">
-                    <input type="text" id="emailText" class="form-control" placeholder="test2@naver.com" th:value="${member.getEmail()}" disabled>
+                    <input type="text" id="emailText" class="form-control" placeholder="test2@naver.com"
+                           th:value="${member.getEmail()}" disabled>
                 </div>
             </div>
             <br>
@@ -36,7 +37,8 @@
                     <label class="col-form-label">닉네임</label>
                 </div>
                 <div class="col-md-9">
-                    <input type="text" id="nameText" class="form-control" placeholder="닉네임" th:value="${member.getNickname()}">
+                    <input type="text" id="nameText" class="form-control" placeholder="닉네임"
+                           th:value="${member.getNickname()}">
                 </div>
             </div>
 
@@ -45,7 +47,8 @@
                     <label for="callText" class="col-form-label">연락처</label>
                 </div>
                 <div class="col-md-9">
-                    <input type="text" id="callText" class="form-control" placeholder="010-1234-5678" th:value="${member.getPhone()}">
+                    <input type="text" id="callText" class="form-control" placeholder="010-1234-5678"
+                           th:value="${member.getPhone()}">
                 </div>
             </div>
             <br>
@@ -102,8 +105,9 @@
     <p class="myPageHead">&nbsp&nbsp친구 설정</p>
     <div class="myPageBox">
         <div class="text-center">
-            <img src="/image/human-icon1.png" class="rounded myPageImage" alt="...">
-            <button type="button" class="myPageBtnImage " id="img_btn"><img class="myPagebtnImage2" src="/image/plusbutton.png"></button>
+            <button type="button" class="myPageBtnImage " id="img_btn" data-bs-target="#connect" data-bs-toggle="modal" >
+                <img class="myPagebtnImage2" src="/image/plusbutton.png">
+            </button>
         </div>
     </div>
 
@@ -112,24 +116,36 @@
     <br>
     <div class="myPageIndiv3">
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="vibrationCheckbox" th:field="*{member.vibration}">
-            <label class="form-check-label" for="vibrationCheckbox">진동 모드</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="vibrationCheckbox"
+                   th:field="*{member.vibration}">
+            <label class="form-check-label" for="vibrationCheckbox" style="font-weight:bolder">진동 모드</label>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="pushAlarmCheckbox" th:field="*{member.pushAlarms}">
-            <label class="form-check-label" for="pushAlarmCheckbox">푸쉬 알림</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="pushAlarmCheckbox"
+                   th:field="*{member.pushAlarms}">
+            <label class="form-check-label" for="pushAlarmCheckbox" style="font-weight:bolder">푸쉬 알림</label>
         </div>
         <div class=" form-check form-switch">
-            <input class="form-check-input " type="checkbox" role="switch" id="locationAlarmsCheckbox" th:field="*{member.locationAlarms}">
-            <label class="form-check-label " for="locationAlarmsCheckbox">위치 알림</label>
+            <input class="form-check-input " type="checkbox" role="switch" id="locationAlarmsCheckbox"
+                   th:field="*{member.locationAlarms}">
+            <label class="form-check-label " for="locationAlarmsCheckbox" style="font-weight:bolder">위치 알림</label>
         </div>
         <div class=" form-check form-switch">
-            <input class="form-check-input " type="checkbox" role="switch" id="s4">
-            <label class="form-check-label " for="s4">출근 시 알림</label>
+            <input class="form-check-input " type="checkbox" role="switch" id="replenishAlarmsCheckbox"
+                   th:field="*{member.replenishAlarms}">
+            <label class="form-check-label" for="replenishAlarmsCheckbox" style="font-weight:bolder">보충 약 알림</label>
         </div>
         <div class=" form-check form-switch">
-            <input class="form-check-input " type="checkbox" role="switch" id="replenishAlarmsCheckbox" th:field="*{member.replenishAlarms}">
-            <label class="form-check-label " for="replenishAlarmsCheckbox">보충 약 알림</label>
+            <input class="form-check-input " type="checkbox" role="switch" id="s4" onclick="isChecked(this)">
+            <label class="form-check-label " for="s4" style="font-weight:bolder">출근 시 알림</label>
+        </div>
+        <div id="workTimeDiv" style="text-align: right; display: none" class="row g-3">
+            <div class="col-md-4" style="padding-left: 0px">
+                <label for="workTime" class="col-form-label" style="padding-right: 3em">└ 출근 시간</label>
+            </div>
+            <div class="col-md-6">
+                <input type="time" id="workTime" class="form-control">
+            </div>
         </div>
     </div>
 
@@ -156,11 +172,82 @@
         </div>
     </div>
 </div>
+
+<!-- 친구 추가 -->
+<div class="portfolio-modal modal fade" id="connect" tabindex="-1" aria-labelledby="connect"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- 타이틀 -->
+                            <h1 class="text-dark text-uppercase mb-0">친구 연동</h1>
+                            <br>
+                            <h5>함께 연동할 다른 사용자를 등록하시려면 프로필을 추가하세요.</h5>
+                            <br>
+                            <form id="form" name="form" method="post" target="iframe1" class="row g-3 align-items-center needs-validation" novalidate>
+                                <div class="col-auto">
+                                    <label for="connectEmail" class="col-form-label" style="padding-right: 3em">친구 이메일</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="email" id="connectEmail" class="form-control" placeholder="이메일">
+                                </div>
+                                <div class="row g-3 invalid-feedback">
+                                    Please choose a username.
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit">요청 보내기</button>
+                                </div>
+                            </form>
+                            <br><br><br>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<iframe id="iframe1" name="iframe1" style="display:none"></iframe>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/member.js"></script>
-
-
 <!-- bootstrp js 링크 -->
 <script src="/js/bootstrap.min.js"></script>
+
+<script>
+    function isChecked(element) {
+        if (element.checked) {
+            console.log("트루에요");
+            $('#workTimeDiv').show();
+        } else {
+            console.log("아니에요");
+            $('#workTimeDiv').hide();
+        }
+    }
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
 </body>
 </html>
