@@ -1,29 +1,20 @@
 package mediSsok.mediSsokspring.service;
 
 import lombok.RequiredArgsConstructor;
-import mediSsok.mediSsokspring.Validation.CheckEmailValidator;
-import mediSsok.mediSsokspring.Validation.CheckNicknameValidator;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.config.auth.dto.SessionUser;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
-import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
 import mediSsok.mediSsokspring.domain.repository.member.MemberRepository;
-import mediSsok.mediSsokspring.domain.repository.schedule.ScheduleDateRepository;
 import mediSsok.mediSsokspring.dto.member.*;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleRequestDto;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleSaveRequestDto;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleUpdateRequestDto;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -66,21 +57,24 @@ public class MemberService implements UserDetailsService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. email = " + email));
 
         entity.userUpdate(requestDto.getNickname(), requestDto.getPhone());
-
         return entity.getId();
     }
 
-
     // 비밀번호 변경
     @Transactional
-    public Long passwordUpdate(Long id, MemberPasswordUpdateRequestDto requestDto){
-        Member entity = memberRepository.findById(id)
+    public Long passwordUpdate(String email, MemberPasswordUpdateRequestDto requestDto){
+        Member entity = memberRepository.findByEmail(email)
                 // 아이디가 없을때
-                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id = " + id));
-
-//        entity.update(requestDto.getNickname(), requestDto.getPhone());
-
-        return id;
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id = " + email));
+        //비밀번호 암호화 시키는 부분
+        PasswordEncoder pe = new BCryptPasswordEncoder();
+        // 암호화된 비밀번호를 평문과 비교시 .matches 사용해야함 같으면 true 다르면 false;
+        if(pe.matches(requestDto.getNowPassword(), entity.getPassword())){
+            //비밀번호 변경 시키는 부분
+            entity.updatePassword(pe.encode(requestDto.getNewPassword()));
+            return entity.getId();
+        }
+        return null;
     }
 
     // 알림 설정
@@ -89,9 +83,7 @@ public class MemberService implements UserDetailsService {
         Member entity = memberRepository.findByEmail(email)
                 // 아이디가 없을때
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. email = " + email));
-
         entity.alarmUpdate(requestDto.getVibration(), requestDto.getPushAlarms(), requestDto.getLocationAlarms(), requestDto.getReplenishAlarms());
-
         return entity.getId();
     }
 
@@ -118,17 +110,17 @@ public class MemberService implements UserDetailsService {
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
         Member member = memberRepository.findByEmail(userEmail)
                 .orElseThrow(() ->  new UsernameNotFoundException("해당 사용자가 존재하지 않습니다. email = " + userEmail));
-
         // 세션 저장
         session.setAttribute("member", new SessionUser(member));
-
         // 시큐리티 세션에 유저 정보 저장
         return new CustomUserDetails(member);
     }
 
-    // 회원가입
-    public void signUp(MemberResponseDto userDto) {
-        // 회원 가입 비즈니스 로직 구현
+    @Transactional
+    // 유저 이메일 체크
+    public boolean userEmailCheck(String userEmail) {
+        boolean user = memberRepository.existsByEmail(userEmail);
+        if(user){ return true; }
+        else { return false; }
     }
 }
-

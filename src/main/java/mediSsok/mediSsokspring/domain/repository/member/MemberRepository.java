@@ -1,5 +1,6 @@
 package mediSsok.mediSsokspring.domain.repository.member;
 
+import com.mysql.cj.MysqlConnection;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 

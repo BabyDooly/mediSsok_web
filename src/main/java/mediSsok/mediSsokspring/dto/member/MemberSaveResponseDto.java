@@ -17,7 +17,6 @@ import javax.websocket.OnMessage;
 @NoArgsConstructor
 @Builder
 public class MemberSaveResponseDto {
-
     @NotBlank(message = "이메일은 필수 입력 값입니다.")
     @Email(message = "이메일 형식에 맞지 않습니다.")
     private String email;
@@ -25,7 +24,7 @@ public class MemberSaveResponseDto {
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
     private String password;
 
-    @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
+    @NotBlank(message = "재확인 부분은 필수 입력 값입니다.")
     private String confirm_Password;
 
     @NotBlank(message = "닉네임은 필수 입력 값입니다.")

@@ -16,4 +16,5 @@ public class MemberUserUpdateRequestDto {
         this.nickname = nickname;
         this.phone = phone;
     }
+
 }
