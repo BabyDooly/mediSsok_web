@@ -204,10 +204,23 @@
                                     <button type="submit">요청 보내기</button>
                                 </div>
                             </form>
-                            <br><br><br>
+                            <hr>
+                            <div class="row g-3 align-items-center">
+                                <div class="col-auto">
+                                    <label for="connectName" class="col-form-label" style="padding-right: 3em">친구 닉네임</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="text" id="connectName" class="form-control" placeholder="친구 닉네임">
+                                </div>
+                                <div class="col-md-2">
 
+                                </div>
+                            </div>
                         </div>
+
+
                     </div>
+
                 </div>
             </div>
         </div>
@@ -222,10 +235,8 @@
 <script>
     function isChecked(element) {
         if (element.checked) {
-            console.log("트루에요");
             $('#workTimeDiv').show();
         } else {
-            console.log("아니에요");
             $('#workTimeDiv').hide();
         }
     }
