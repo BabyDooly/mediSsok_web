@@ -155,6 +155,8 @@ var main = {
                     })
                     alert('임시비밀번호를 전송 했습니다.');
                     window.location.href = "/user/login";
+                } else {
+                    alert('유효한 이메일이 아닙니다.');
                 }
             }
         })
