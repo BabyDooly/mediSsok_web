@@ -113,18 +113,25 @@
                            style="position: absolute;line-height: 1.4;margin-left: 10px"></i>
                     </div>
                     <div>
-                        <span style="font-size: 20px; position: absolute;line-height: 2.5;margin-left: 50px" th:text="${alarms.getTimeUpdate()}">아침 식후 30분</span>
+                        <span style="font-size: 20px; position: absolute;line-height: 2.5;margin-left: 50px"
+                              th:text="${alarms.getTimeUpdate()}">아침 식후 30분</span>
                     </div>
                     <div style="text-align: right">
-                        <button style="background: none;border: none;width: 40px;font-size:20px;" th:id="|btn${alarms.getId()}|" onclick="bellbtn(this.id)">
-                            <i th:id="|img${alarms.getId()}|" class="fas fa-bell fa-aw fa-lg" style="line-height: 1.6"></i>
+                        <button style="background: none;border: none;width: 40px;font-size:20px;"
+                                th:id="|btn${alarms.getId()}|" onclick="bellbtn(this.id)">
+                            <i th:id="|img${alarms.getId()}|" class="fas fa-bell fa-aw fa-lg"
+                               style="line-height: 1.6"></i>
                         </button>
-                        <button class="alarm-getID" style="border: none; background: #e5e5e5;width: 40px; font-size:20px;" th:value="${alarms.getId()}">
+                        <button class="alarm-getID"
+                                style="border: none; background: #e5e5e5;width: 40px; font-size:20px;"
+                                th:value="${alarms.getId()}">
                             <div data-bs-toggle="modal" data-bs-target="#belleditbtn">
                                 <i class="fas fa-edit fa-aw fa-lg" style="line-height: 1.6"></i>
                             </div>
                         </button>
-                        <button class="btn-delete" style="border: none; background: #e5e5e5; width: 40px; font-size: 20px;" th:value="${alarms.getId()}">
+                        <button class="btn-delete"
+                                style="border: none; background: #e5e5e5; width: 40px; font-size: 20px;"
+                                th:value="${alarms.getId()}">
                             <i class="fas fa-times fa-aw fa-lg" style="line-height: 1.6"></i>
                         </button>
                     </div>
@@ -141,10 +148,12 @@
         <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <tr>
             <th class="table-active" valign="middle" style="padding: 0px">
-                <input th:id="|on-${alarms.getId()}|" class="toggle toggle-left" th:name="|toggle${alarms.getId()}|" value="false"
+                <input th:id="|on-${alarms.getId()}|" class="toggle toggle-left" th:name="|toggle${alarms.getId()}|"
+                       value="false"
                        type="radio" checked>
                 <label th:for="|on-${alarms.getId()}|" class="btn">안 먹었어요</label>
-                <input th:id="|off-${alarms.getId()}|" class="toggle toggle-right" th:name="|toggle${alarms.getId()}|" value="true"
+                <input th:id="|off-${alarms.getId()}|" class="toggle toggle-right" th:name="|toggle${alarms.getId()}|"
+                       value="true"
                        type="radio">
                 <label th:for="|off-${alarms.getId()}|" class="btn">먹었어요</label>
             </th>
@@ -319,7 +328,8 @@
 
                             <br><br><br><br>
 
-                            <button id="editaddbtn" onclick="editaddbtn()" class="btn btn-primary btn-edit" data-bs-dismiss="modal"
+                            <button id="editaddbtn" onclick="editaddbtn()" class="btn btn-primary btn-edit"
+                                    data-bs-dismiss="modal"
                                     style="width: 90px">
                                 수정
                             </button>
@@ -334,7 +344,16 @@
         </div>
     </div>
 </div>
-
+<div style="position: fixed;height: 100%;top: 45%;left: 30px">
+    <button style="background: none;border: none">
+        <i class="fas fa-angle-left fa-6x"></i>
+    </button>
+</div>
+<div style="position: fixed;right: 0;height: 100%;top: 45%;right: 30px">
+    <button style="background: none;border: none">
+        <i class="fas fa-angle-right fa-6x"></i>
+    </button>
+</div>
 <!-- bootstrp js 링크 -->
 <script src="/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -345,16 +364,15 @@
     var month
     var day
     var week
-    var weekName = new Array('일','월','화','수','목','금','토')
+    var weekName = new Array('일', '월', '화', '수', '목', '금', '토')
 
-    if(window.location.search == ''){
+    if (window.location.search == '') {
         date = new Date();
         year = date.getFullYear();
         month = date.getMonth() + 1;
         day = date.getDate();
         week = weekName[date.getDay()];
-    }
-    else{
+    } else {
         let query = window.location.search;
         let param = new URLSearchParams(query);
 
@@ -362,17 +380,14 @@
         let m = param.get('month');
         let d = param.get('day');
 
-        var today = new Date(y+'-'+m+'-'+d).getDay();
+        var today = new Date(y + '-' + m + '-' + d).getDay();
 
         year = y;
         month = m;
         day = d;
         week = weekName[today];
     }
-    document.getElementById("today").innerHTML = month + "/" + day + "(" + week + ") 알람" ;
-
-
-
+    document.getElementById("today").innerHTML = month + "/" + day + "(" + week + ") 알람";
 
 
     function bellbtn(btnId) {

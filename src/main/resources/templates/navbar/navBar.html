@@ -20,14 +20,15 @@
                         <a class="nav-link" aria-current="page" th:href="@{/medi/medibox}">내 약통</a>
                     </li>
                     <li class="nav-item midBtn">
+                        <a class="nav-link" th:href="@{/medi/bell}">오늘 알람</a>
+                    </li>
+                    <li class="nav-item midBtn">
                         <a class="nav-link" th:href="@{/status}">복용 현황</a>
                     </li>
                     <li class="nav-item midBtn">
                         <a class="nav-link" th:href="@{/medi/search}">알약 검색</a>
                     </li>
-                    <li class="nav-item midBtn">
-                        <a class="nav-link" th:href="@{/medi/bell}">오늘 알람</a>
-                    </li>
+
                 </ul>
             </div>
             <a class="navbar-brand" th:href="@{/user/mypage}" sec:authorize="isAuthenticated()">
