@@ -148,12 +148,16 @@
         <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <tr>
             <th class="table-active" valign="middle" style="padding: 0px">
-                <input th:id="|on-${alarms.getId()}|" class="toggle toggle-left" th:name="|toggle${alarms.getId()}|"
-                       value="false" type="radio" checked>
+                <input th:id="|on-${alarms.getId()}|" class="toggle toggle-left eatBtn" th:name="|toggle${alarms.getId()}|"
+                       value="false" type="radio" th:if="${alarms.getEatCheck() == false}" th:value="${alarms.getId()}" checked>
+                <input th:id="|on-${alarms.getId()}|" class="toggle toggle-left eatBtn" th:name="|toggle${alarms.getId()}|"
+                       value="false" type="radio" th:if="${alarms.getEatCheck() == true}" th:value="${alarms.getId()}">
                 <label th:for="|on-${alarms.getId()}|" class="btn">안 먹었어요</label>
-                <input th:id="|off-${alarms.getId()}|" class="toggle toggle-right" th:name="|toggle${alarms.getId()}|"
-                       value="true" type="radio">
-                <label th:for="|off-${alarms.getId()}|" class="btn">먹었어요</label>
+                <input th:id="|off-${alarms.getId()}|" class="toggle toggle-right eatBtn" th:name="|toggle${alarms.getId()}|"
+                       value="true" type="radio" th:if="${alarms.getEatCheck() == true}" th:value="${alarms.getId()}" checked>
+                <input th:id="|off-${alarms.getId()}|" class="toggle toggle-right eatBtn" th:name="|toggle${alarms.getId()}|"
+                       value="true" type="radio" th:if="${alarms.getEatCheck() == false}" th:value="${alarms.getId()}">
+                <label th:for="|off-${alarms.getId()}|" class="btn" >먹었어요</label>
             </th>
         </tr>
         </tbody>

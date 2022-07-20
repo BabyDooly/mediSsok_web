@@ -49,10 +49,27 @@ let mediBox = {
             }
         })
 
-        // // 복용 여부
-        // $('.btn-edit').on('click', function () {
-        //     _this.eatCheck(id);
-        // })
+        // 복용 여부
+        $('.eatBtn').on('click', function () {
+            id = $(this).attr("value");
+            console.log(id);
+
+            var on = "on-" + id;
+            var off = "off-" + id;
+            var onCheck = $('#' + on).is(":checked")
+            var offCheck = $('#' + off).is(":checked")
+
+            console.log(onCheck)
+            console.log(offCheck)
+
+            if (offCheck) {
+                alert("먹었어요")
+                _this.eatCheck(id, true);
+            } else if(onCheck) {
+                alert("안먹었어요")
+                _this.eatCheck(id, false);
+            }
+        })
 
         // 알림 삭제
         $('.btn-delete').on('click', function () {
