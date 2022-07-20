@@ -79,8 +79,8 @@ public class ScheduleDateController {
     // 스케줄 수정
     @PostMapping("/api/medi/schedule/update/{id}")
     @ResponseBody
-    public Long scheduleUpdate(@PathVariable Long id, @RequestBody ScheduleUpdateRequestDto scheduleUpdateRequestDto){
-        return scheduleDateService.scheduleUpdate(id, scheduleUpdateRequestDto);
+    public Long scheduleUpdate(@PathVariable Long id, @RequestBody ScheduleUpdateRequestDto requestDto){
+        return scheduleDateService.scheduleUpdate(id, requestDto);
     }
 
     // 스케줄 삭제
@@ -94,8 +94,8 @@ public class ScheduleDateController {
     // 알람 수정
     @PostMapping("/api/medi/alarm/update/{id}")
     @ResponseBody
-    public Long alarmUpdate(@PathVariable Long id, @RequestBody DateInfoUpdateRequestDto dateInfoUpdateRequestDto){
-        return scheduleDateService.alarmUpdate(id, dateInfoUpdateRequestDto);
+    public Long alarmUpdate(@PathVariable Long id, @RequestBody DateInfoUpdateRequestDto requestDto){
+        return scheduleDateService.alarmUpdate(id, requestDto);
     }
 
     // 알람 삭제
@@ -104,5 +104,19 @@ public class ScheduleDateController {
     public Long alarmDelete(@PathVariable Long id){
         scheduleDateService.alarmDelete(id);
         return id;
+    }
+
+    // 알람 여부 변경
+    @PostMapping("/api/medi/alarm/check/{id}")
+    @ResponseBody
+    public Long alarmCheck(@PathVariable Long id, @RequestBody AlarmCheckRequestDto requestDto){
+        return scheduleDateService.alarmCheck(id, requestDto);
+    }
+
+    // 복용 여부 변경
+    @PostMapping("/api/medi/eat/check/{id}")
+    @ResponseBody
+    public Long eatCheck(@PathVariable Long id, @RequestBody EatCheckRequestDto requestDto){
+        return scheduleDateService.eatCheck(id, requestDto);
     }
 }

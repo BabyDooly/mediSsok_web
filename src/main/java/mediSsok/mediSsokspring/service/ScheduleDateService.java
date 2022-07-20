@@ -145,26 +145,6 @@ public class ScheduleDateService {
         return id;
     }
 
-    // 알람 여부 변경
-    @Transactional
-    public Long eatCheck(Long id, AlarmCheckRequestDto requestDto){
-        DateInfo entity = dateInfoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("알람이 없습니다. id = " + id));
-
-        entity.alarmUpdate(requestDto.getAlarmCheck());
-        return id;
-    }
-
-    // 복용 여부 변경
-    @Transactional
-    public Long alarmCheck(Long id, EatCheckRequestDto requestDto){
-        DateInfo entity = dateInfoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("알람이 없습니다. id = " + id));
-
-        entity.eatUpdate(requestDto.getEatCheck());
-        return id;
-    }
-
     // 알람 삭제
     @Transactional
     public void alarmDelete(Long id){
@@ -172,5 +152,25 @@ public class ScheduleDateService {
                 .orElseThrow(() -> new IllegalArgumentException("알람이 없습니다. id = " + id));
 
         dateInfoRepository.delete(entity);
+    }
+    
+    //  복용 여부 변경
+    @Transactional
+    public Long eatCheck(Long id, EatCheckRequestDto requestDto){
+        DateInfo entity = dateInfoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("알람이 없습니다. id = " + id));
+
+        entity.eatUpdate(requestDto.getEatCheck());
+        return id;
+    }
+
+    // 알람 여부 변경
+    @Transactional
+    public Long alarmCheck(Long id, AlarmCheckRequestDto requestDto){
+        DateInfo entity = dateInfoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("알람이 없습니다. id = " + id));
+
+        entity.alarmUpdate(requestDto.getAlarmCheck());
+        return id;
     }
 }

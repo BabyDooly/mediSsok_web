@@ -117,10 +117,10 @@
                               th:text="${alarms.getTimeUpdate()}">아침 식후 30분</span>
                     </div>
                     <div style="text-align: right">
-                        <button style="background: none;border: none;width: 40px;font-size:20px;"
-                                th:id="|btn${alarms.getId()}|" onclick="bellbtn(this.id)">
-                            <i th:id="|img${alarms.getId()}|" class="fas fa-bell fa-aw fa-lg"
-                               style="line-height: 1.6"></i>
+                        <button style="background: none;border: none;width: 40px;font-size:20px;" class="alarmBtn"
+                                th:id="|btn${alarms.getId()}|" th:value="${alarms.getId()}">
+                            <i th:id="|img${alarms.getId()}|" th:if="${alarms.getAlarmCheck() == true}" class="fas fa-bell fa-aw fa-lg" style="line-height: 1.6"></i>
+                            <i th:id="|img${alarms.getId()}|" th:if="${alarms.getAlarmCheck() == false}" class="far fa-bell fa-aw fa-lg" style="line-height: 1.6"></i>
                         </button>
                         <button class="alarm-getID"
                                 style="border: none; background: #e5e5e5;width: 40px; font-size:20px;"
@@ -149,12 +149,10 @@
         <tr>
             <th class="table-active" valign="middle" style="padding: 0px">
                 <input th:id="|on-${alarms.getId()}|" class="toggle toggle-left" th:name="|toggle${alarms.getId()}|"
-                       value="false"
-                       type="radio" checked>
+                       value="false" type="radio" checked>
                 <label th:for="|on-${alarms.getId()}|" class="btn">안 먹었어요</label>
                 <input th:id="|off-${alarms.getId()}|" class="toggle toggle-right" th:name="|toggle${alarms.getId()}|"
-                       value="true"
-                       type="radio">
+                       value="true" type="radio">
                 <label th:for="|off-${alarms.getId()}|" class="btn">먹었어요</label>
             </th>
         </tr>
@@ -403,15 +401,7 @@
     }
 
 
-    function bellbtn(btnId) {
-        var img1 = document.getElementById("img" + btnId.substring(3, btnId.length));
-        if (img1.classList.contains('fas')) {
-            img1.classList.replace('fas', 'far');
-        } else {
-            img1.classList.replace('far', 'fas');
-        }
-        count++;
-    }
+
 
     function Change2() {
         var key2 = $('#selectdayBtn').val();

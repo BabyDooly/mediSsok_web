@@ -75,6 +75,7 @@ public class MemberController {
 
     // 회원 조회
     @GetMapping("/api/member")
+    @ResponseBody
     public MemberResponseDto findById(@AuthenticationPrincipal UserDetails userDetails) {
         return memberService.findByEmail(userDetails.getUsername());
     }

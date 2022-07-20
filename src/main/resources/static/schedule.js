@@ -28,12 +28,31 @@ let mediBox = {
             id = $(this).attr("value");
             console.log(id);
         })
-
-
+        
         // 알림 수정
         $('.btn-edit').on('click', function () {
             _this.alarmUpdate(id);
         })
+
+        // 알람 여부
+        $('.alarmBtn').on('click', function () {
+            id = $(this).attr("value");
+            console.log(id);
+            var img1 = document.getElementById("img" + id);
+            console.log(img1);
+            if (img1.classList.contains('fas')) {
+                alert("알람 OFF")
+                _this.alarmCheck(id, false);
+            } else {
+                alert("알람 ON")
+                _this.alarmCheck(id, true);
+            }
+        })
+
+        // // 복용 여부
+        // $('.btn-edit').on('click', function () {
+        //     _this.eatCheck(id);
+        // })
 
         // 알림 삭제
         $('.btn-delete').on('click', function () {
@@ -103,7 +122,7 @@ let mediBox = {
             data: JSON.stringify(data)
         }).done(function () {
             alert('스케줄이 등록되었습니다.');
-            window.location.href = '/medi/bell'; // 스케줄 등록 성공시 메인페이지 이동
+            location.reload(); // 스케줄 등록 성공시 리로드
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -153,7 +172,7 @@ let mediBox = {
             data: JSON.stringify(data)
         }).done(function() {
             alert('알림이 수정되었습니다.');
-            window.location.href = '/medi/bell'; // 알림 수정 성공시 메인페이지 이동
+            location.reload(); // 알림 수정 성공시 리로드
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -168,7 +187,45 @@ let mediBox = {
             contentType:'application/json; charset=utf-8'
         }).done(function() {
             alert('알림이 삭제되었습니다.');
-            window.location.href = '/medi/bell'; // 알림 삭제 성공시 메인페이지 이동
+            location.reload(); // 알림 삭제 성공시 리로드
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+
+    // 알람 여부
+    alarmCheck : function (id, check) {
+        let data = {
+            alarmCheck : check
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/medi/alarm/check/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            location.reload(); // 알람 여부 성공시 메인페이지 이동
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+
+    // 복용 여부
+    eatCheck : function (id, check) {
+        let data = {
+            eatCheck : check
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/medi/eat/check/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            location.reload(); // 복용 여부 수정 성공시 메인페이지 이동
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

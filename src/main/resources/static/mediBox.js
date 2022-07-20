@@ -120,7 +120,7 @@ let mediBox = {
             data: JSON.stringify(data)
         }).done(function() {
             alert('약통이 등록되었습니다.');
-            window.location.href = '/medi/medibox'; // 약통 등록 성공 메인페이지 이동
+            window.location.href = '/medi/medibox'; // 약통 등록 성공시 리로드
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -143,7 +143,7 @@ let mediBox = {
             data: JSON.stringify(data)
         }).done(function() {
             alert('약통이 수정되었습니다.');
-            window.location.href = '/medi/box/' + id; // 약통 등록 성공 메인페이지 이동
+            window.location.href = '/medi/box/' + id; // 약통 등록 성공시 페이지 리로드
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -158,7 +158,7 @@ let mediBox = {
             contentType:'application/json; charset=utf-8'
         }).done(function() {
             alert('약통이 삭제되었습니다.');
-            window.location.href = '/medi/medibox'; // 약통 삭제 성공시 메인페이지 이동
+            window.location.href = '/medi/medibox'; // 약통 삭제 성공시 페이지 리로드
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
