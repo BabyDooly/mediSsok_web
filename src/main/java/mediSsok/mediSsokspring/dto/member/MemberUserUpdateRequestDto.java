@@ -10,4 +10,5 @@ import lombok.Setter;
 public class MemberUserUpdateRequestDto {
     private String nickname;
     private String phone;
+    private String picture;
 }

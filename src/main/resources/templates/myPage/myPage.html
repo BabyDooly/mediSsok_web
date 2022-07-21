@@ -64,9 +64,9 @@
                 </span>
             </div>
         </div>
-        <div style="position: relative;bottom: 215px;margin-left: 470px;width: 150px;height: 150px;border: 1px solid black;"
+        <div style="position: relative;bottom: 215px;margin-left: 470px;width: 150px;height: 150px;border: 4px solid black; border-radius: 20%;"
              data-bs-toggle="modal" data-bs-target="#profile-change">
-            <img id="myProfile" style="width: 100%;height: 100%" src="/image/profile-icon/man1.png">
+            <img id="myProfile" style="width: 100%;height: 100%; padding:5px;" th:src="'/image/profile-icon/' + ${member.getPicture()}+ '.png'" th:value="${member.getPicture()}">
         </div>
     </div>
 
@@ -111,9 +111,11 @@
             </div>
         </div>
     </div>
-    <br>
+    <br><br>
+
     <hr class="myPageHr">
     <p class="myPageHead">&nbsp&nbsp친구 설정</p>
+    <br>
     <div class="myPageBox">
         <div class="text-center">
             <button type="button" class="myPageBtnImage " id="img_btn" data-bs-target="#connect" data-bs-toggle="modal">
@@ -121,6 +123,8 @@
             </button>
         </div>
     </div>
+
+    <br><br>
 
     <hr class="myPageHr">
     <p class="myPageHead">&nbsp&nbsp알림 설정</p>
@@ -254,7 +258,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- 타이틀 -->
-                            <h1 class="text-dark text-uppercase mb-0">프로필 변경하기</h1>
+                            <h1 class="text-dark text-uppercase mb-0" style="font-weight: 600;">프로필 변경하기</h1>
                             <br>
 
                             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
@@ -262,8 +266,8 @@
                                     <!--남자 프로필 1~13-->
                                     <div class="col-sm-2" style="width: 20%" th:each="num : ${#numbers.sequence(1,13)}">
                                         <input type="radio" class="btn-check" name="profile-check" th:id="manIcon + ${num}" th:value="man+${num}" autocomplete="off" style="opacity: 0;">
-                                        <label class="btn btn-outline-primary" th:for="manIcon + ${num}">
-                                            <img style="width: 100px;height: 100px;border: 1px solid black"
+                                        <label class="btn btn-outline-primary" th:for="manIcon + ${num}"  style=" border-radius: 20%;">
+                                            <img style="width: 100px;height: 100px;border: 1px solid black; padding:5px; border-radius: 20%;"
                                                  th:src="'/image/profile-icon/man' + ${num} + '.png'">
                                         </label>
                                     </div>
@@ -271,8 +275,8 @@
                                     <!--여자 프로필 1~13-->
                                     <div class="col-sm-2" style="width: 20%" th:each="num : ${#numbers.sequence(1,12)}">
                                         <input type="radio" class="btn-check" name="profile-check" th:id="girlIcon + ${num}" th:value="girl+${num}" autocomplete="off" style="opacity: 0;">
-                                        <label class="btn btn-outline-primary" th:for="girlIcon + ${num}">
-                                            <img style="width: 100px;height: 100px;border: 1px solid black"
+                                        <label class="btn btn-outline-primary" th:for="girlIcon + ${num}" style=" border-radius: 20%;">
+                                            <img style="width: 100px;height: 100px;border: 1px solid black; padding:5px; border-radius: 20%;"
                                                  th:src="'/image/profile-icon/girl' + ${num} + '.png'">
                                         </label>
                                     </div>
@@ -281,7 +285,7 @@
                             </div>
 
                             <br><br><br>
-                            <button id="addbtn" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                            <button id="addbtn" class="btn btn-primary" data-bs-dismiss="modal" onclick="changeImg()" style="width: 90px">
                                 변경
                             </button>
                             <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
@@ -310,6 +314,12 @@
         } else {
             $('#workTimeDiv').hide();
         }
+    }
+
+    function changeImg(){
+        var listVar = $('input[name=profile-check]:checked').val();
+
+        document.getElementById("myProfile").src = "/image/profile-icon/" + listVar +".png";
     }
 
     (function () {

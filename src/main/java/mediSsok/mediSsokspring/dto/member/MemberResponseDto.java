@@ -14,11 +14,12 @@ import java.util.stream.Collectors;
 @ToString
 @NoArgsConstructor
 public class MemberResponseDto {
+    private Long id;
     private String email;
     private String password;
     private String nickname;
-    private Long id;
     private String phone;
+    private String picture;
     private Boolean vibration;
     private Boolean pushAlarms;
     private Boolean locationAlarms;
@@ -34,6 +35,7 @@ public class MemberResponseDto {
         this.password = entity.getPassword();
         this.nickname = entity.getNickname();
         this.phone = entity.getPhone();
+        this.picture = entity.getPicture();
         this.vibration = entity.getVibration();
         this.pushAlarms = entity.getPushAlarms();
         this.locationAlarms = entity.getLocationAlarms();

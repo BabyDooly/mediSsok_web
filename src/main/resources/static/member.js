@@ -1,6 +1,8 @@
 let main = {
     init: function () {
         let _this = this;
+
+        // 회원 정보 수정
         $('#btn-update').on('click', function () {
             _this.userUpdate();
         });
@@ -28,9 +30,17 @@ let main = {
 
     // 유저 정보 수정
     userUpdate: function () {
+        let pic = $('input[name=profile-check]:checked').val();
+        console.log(pic);
+        console.log($("#myProfile").attr("value"))
+
+        if (pic == undefined)
+            pic = $("#myProfile").attr("value");
+
         let data = {
             nickname: $('#nameText').val(),
-            phone: $('#callText').val()
+            phone: $('#callText').val(),
+            picture: pic
         };
 
         $.ajax({

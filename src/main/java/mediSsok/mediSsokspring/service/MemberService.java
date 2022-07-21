@@ -61,7 +61,7 @@ public class MemberService implements UserDetailsService {
                 // 아이디가 없을때
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. email = " + email));
 
-        entity.userUpdate(requestDto.getNickname(), requestDto.getPhone());
+        entity.userUpdate(requestDto.getNickname(), requestDto.getPhone(), requestDto.getPicture());
         return entity.getId();
     }
 

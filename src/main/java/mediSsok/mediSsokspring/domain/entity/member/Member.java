@@ -25,17 +25,25 @@ public class Member extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // PK 생성 규칙
     private Long id;
 
+    // 이메일
     @Column(name = "member_email", length = 50, nullable = false)
     private String email;
 
+    // 비밀번호
     @Column(name = "member_password", nullable = false)
     private String password;
-
+    
+    // 닉네임
     @Column(name = "member_nickname", length = 20, nullable = false)
     private String nickname;
 
+    // 전화번호
     @Column(name = "member_phone", length = 30)
     private String phone;
+
+    // 프로필 사진
+    @Column(name = "member_picture", length = 5)
+    private String picture = "man1";
 
     // 진동모드
     @Column(name = "member_vibration_mode")
@@ -83,9 +91,10 @@ public class Member extends BaseTimeEntity {
     }
 
     // 개인정보 변경
-    public void userUpdate(String nickname, String phone) {
+    public void userUpdate(String nickname, String phone, String picture) {
         this.nickname = nickname;
         this.phone = phone;
+        this.picture = picture;
     }
 
     // 비밀번호 변경
