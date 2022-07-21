@@ -21,52 +21,55 @@
 <div class="myPage">
     <hr class="myPageHr">
     <p class="myPageHead">&nbsp&nbsp개인정보</p>
+
     <div class="myPageIndiv">
+        <br>
+        <div class="row g-3 align-items-center  no-gutters">
+            <br>
+            <div class="col-auto">
+                <label for="emailText" class="col-form-label">이메일</label>
+            </div>
+            <div class="col-md-9">
+                <input type="text" id="emailText" class="form-control" placeholder="test2@naver.com" style="font-weight: 600;"
+                       th:value="${member.getEmail()}" disabled>
+            </div>
+        </div>
+        <br>
+
+        <div class="row g-3 align-items-center no-gutters">
+            <div class="col-auto">
+                <label class="col-form-label">닉네임</label>
+            </div>
+            <div class="col-md-9">
+                <input type="text" id="nameText" class="form-control" placeholder="닉네임" style="font-weight: 600;"
+                       th:value="${member.getNickname()}">
+            </div>
+        </div>
+        <br>
+        <div class="row g-3 align-items-center no-gutters">
+            <div class="col-auto">
+                <label for="callText" class="col-form-label">연락처</label>
+            </div>
+            <div class="col-md-9">
+                <input type="text" id="callText" class="form-control" placeholder="010-1234-5678"
+                       th:value="${member.getPhone()}">
+            </div>
+        </div>
         <br>
 
         <div class="row g-3 align-items-center">
-            <br>
-            <div class="row g-3 align-items-center no-gutters">
-                <div class="col-auto">
-                    <label for="emailText" class="col-form-label">이메일</label>
-                </div>
-                <div class="col-md-9">
-                    <input type="text" id="emailText" class="form-control" placeholder="test2@naver.com" style="font-weight: 600;"
-                           th:value="${member.getEmail()}" disabled>
-                </div>
-            </div>
-            <br>
-
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label class="col-form-label">닉네임</label>
-                </div>
-                <div class="col-md-9">
-                    <input type="text" id="nameText" class="form-control" placeholder="닉네임" style="font-weight: 600;"
-                           th:value="${member.getNickname()}">
-                </div>
-            </div>
-
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label for="callText" class="col-form-label">연락처</label>
-                </div>
-                <div class="col-md-9">
-                    <input type="text" id="callText" class="form-control" placeholder="010-1234-5678"
-                           th:value="${member.getPhone()}">
-                </div>
-            </div>
-            <br>
-
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
+            <div class="col-auto">
                 <span>
                     <button id="btn-update" type="button" class="btn btn-primary">변경</button>
                 </span>
-                </div>
             </div>
         </div>
+        <div style="position: relative;bottom: 215px;margin-left: 470px;width: 150px;height: 150px;border: 1px solid black;"
+             data-bs-toggle="modal" data-bs-target="#profile-change">
+            <img id="myProfile" style="width: 100%;height: 100%" src="/image/profile-icon/man1.png">
+        </div>
     </div>
+
     <hr class="myPageHr">
     <p class="myPageHead">&nbsp&nbsp 패스워드 변경</p>
     <br>
@@ -76,7 +79,8 @@
                 <label for="nowPass" class="col-form-label" style="padding-right: 3em">패스워드&nbsp</label>
             </div>
             <div class="col-md-9">
-                <input type="password" maxlength="20" id="nowPass" name="nowPass" class="form-control" placeholder="현재 비밀번호">
+                <input type="password" maxlength="20" id="nowPass" name="nowPass" class="form-control"
+                       placeholder="현재 비밀번호">
             </div>
         </div>
         <br>
@@ -86,7 +90,8 @@
                 <label for="newPass" class="col-form-label">변경할 패스워드</label>
             </div>
             <div class="col-md-9">
-                <input type="password" maxlength="20" id="newPass" name="newPass" class="form-control" placeholder="새 비밀번호">
+                <input type="password" maxlength="20" id="newPass" name="newPass" class="form-control"
+                       placeholder="새 비밀번호">
             </div>
         </div>
         <br>
@@ -96,7 +101,8 @@
                 <label for="rePass" class="col-form-label" style="padding-right: 1em">패스워드 확인</label>
             </div>
             <div class="col-md-9">
-                <input type="password" maxlength="20" id="rePass" name="rePass" class="form-control" placeholder="비밀번호 확인">
+                <input type="password" maxlength="20" id="rePass" name="rePass" class="form-control"
+                       placeholder="비밀번호 확인">
             </div>
             <div class="col-auto">
                 <span>
@@ -110,7 +116,7 @@
     <p class="myPageHead">&nbsp&nbsp친구 설정</p>
     <div class="myPageBox">
         <div class="text-center">
-            <button type="button" class="myPageBtnImage " id="img_btn" data-bs-target="#connect" data-bs-toggle="modal" >
+            <button type="button" class="myPageBtnImage " id="img_btn" data-bs-target="#connect" data-bs-toggle="modal">
                 <img class="myPagebtnImage2" src="/image/plusbutton.png">
             </button>
         </div>
@@ -141,7 +147,8 @@
             <label class="form-check-label" for="replenishAlarmsCheckbox" style="font-weight:bolder">보충 약 알림</label>
         </div>
         <div class=" form-check form-switch">
-            <input class="form-check-input " type="checkbox" role="switch" id="s4_1" th:checked="${member.getWorkAlarms != null}" onclick="isChecked()">
+            <input class="form-check-input " type="checkbox" role="switch" id="s4_1"
+                   th:checked="${member.getWorkAlarms != null}" onclick="isChecked()">
 
             <label class="form-check-label " for="s4_1" style="font-weight:bolder">출근 시 알림</label>
         </div>
@@ -150,7 +157,8 @@
                 <label for="workTime" class="col-form-label" style="padding-right: 3em">└ 출근 시간</label>
             </div>
             <div class="col-md-6">
-                <input type="time" id="workTime" class="form-control"  th:value="${#temporals.format(member.getWorkAlarms(), 'hh:mm')}">
+                <input type="time" id="workTime" class="form-control"
+                       th:value="${#temporals.format(member.getWorkAlarms(), 'hh:mm')}">
             </div>
         </div>
     </div>
@@ -224,12 +232,69 @@
                             <br><br>
                     </div>
 
+
+                    </div>
+
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- 프로필 변경 -->
+<div class="portfolio-modal modal fade" id="profile-change" tabindex="-1" aria-labelledby="profile-change"
+     aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 1000px">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- 타이틀 -->
+                            <h1 class="text-dark text-uppercase mb-0">프로필 변경하기</h1>
+                            <br>
+
+                            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div class="row g-3 align-items-center" >
+                                    <!--남자 프로필 1~13-->
+                                    <div class="col-sm-2" style="width: 20%" th:each="num : ${#numbers.sequence(1,13)}">
+                                        <input type="radio" class="btn-check" name="profile-check" th:id="manIcon + ${num}" th:value="man+${num}" autocomplete="off" style="opacity: 0;">
+                                        <label class="btn btn-outline-primary" th:for="manIcon + ${num}">
+                                            <img style="width: 100px;height: 100px;border: 1px solid black"
+                                                 th:src="'/image/profile-icon/man' + ${num} + '.png'">
+                                        </label>
+                                    </div>
+
+                                    <!--여자 프로필 1~13-->
+                                    <div class="col-sm-2" style="width: 20%" th:each="num : ${#numbers.sequence(1,12)}">
+                                        <input type="radio" class="btn-check" name="profile-check" th:id="girlIcon + ${num}" th:value="girl+${num}" autocomplete="off" style="opacity: 0;">
+                                        <label class="btn btn-outline-primary" th:for="girlIcon + ${num}">
+                                            <img style="width: 100px;height: 100px;border: 1px solid black"
+                                                 th:src="'/image/profile-icon/girl' + ${num} + '.png'">
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <br><br><br>
+                            <button id="addbtn" class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                                변경
+                            </button>
+                            <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                                취소
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 <iframe id="iframe1" name="iframe1" style="display:none"></iframe>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/member.js"></script>
