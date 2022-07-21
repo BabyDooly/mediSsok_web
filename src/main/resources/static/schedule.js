@@ -111,8 +111,36 @@ let mediBox = {
 
     // 알림 수정
     alarmUpdate : function (id) {
+        var year
+        var month
+        var day
+
+        if (window.location.search == '') {
+            date = new Date();
+            year = date.getFullYear();
+            month = date.getMonth() + 1;
+            day = date.getDate();
+
+            month = month >= 10 ? month : '0' + month;
+            day = day >= 10 ? day : '0' + day;
+        } else {
+            let query = window.location.search;
+            let param = new URLSearchParams(query);
+
+            year = param.get('year');
+            month = param.get('month');
+            day = param.get('day');
+
+            month = month >= 10 ? month : '0' + month;
+            day = day >= 10 ? day : '0' + day;
+        }
+
+        var today = year + '-' + month + '-' + day + ' ' + $('#editaddTime').val();
+
+
+
         let data = {
-            alarmDatetime : $('#editaddTime').val()
+            alarmDatetime : today
         }
 
         console.log(data);

@@ -76,8 +76,8 @@ public class MedicineBoxController {
     // 약통 수정
     @PostMapping("/api/medi/update/{id}")
     @ResponseBody
-    public Long update(@PathVariable Long id, @RequestBody MedicineBoxUpdateRequestDto medicineBoxUpdateRequestDto){
-        return medicineBoxService.update(id, medicineBoxUpdateRequestDto);
+    public Long update(@PathVariable Long id, @RequestBody MedicineBoxUpdateRequestDto requestDto){
+        return medicineBoxService.update(id, requestDto);
     }
 
     // 약통 삭제

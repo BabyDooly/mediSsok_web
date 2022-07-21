@@ -345,12 +345,12 @@
     </div>
 </div>
 <div style="position: fixed;height: 100%;top: 45%;left: 30px">
-    <button style="background: none;border: none">
+    <button style="background: none;border: none" onclick="previousPage()">
         <i class="fas fa-angle-left fa-6x"></i>
     </button>
 </div>
 <div style="position: fixed;right: 0;height: 100%;top: 45%;right: 30px">
-    <button style="background: none;border: none">
+    <button style="background: none;border: none" onclick="nextPage()">
         <i class="fas fa-angle-right fa-6x"></i>
     </button>
 </div>
@@ -388,6 +388,19 @@
         week = weekName[today];
     }
     document.getElementById("today").innerHTML = month + "/" + day + "(" + week + ") 알람";
+
+    function nextPage(){
+        var now  = new Date(year + '-' + month + '-' + day);
+        var tomorrow = new Date(now.setDate(now.getDate() + 1));
+        window.location.href = "/medi/bell?year=" + tomorrow.getFullYear() + "&month=" + (tomorrow.getMonth() + 1) + "&day=" + tomorrow.getDate();
+    }
+
+    function previousPage(){
+        var now  = new Date(year + '-' + month + '-' + day);
+        console.log(now);
+        var yesterday = new Date(now.setDate(now.getDate() - 1));
+        window.location.href = "/medi/bell?year=" + yesterday.getFullYear() + "&month=" + (yesterday.getMonth() + 1) + "&day=" + yesterday.getDate();
+    }
 
 
     function bellbtn(btnId) {

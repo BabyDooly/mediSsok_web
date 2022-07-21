@@ -45,15 +45,24 @@ public class DateInfo extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sche_id")
     private ScheduleDate scheduleDate;
-
     @Builder
-    public DateInfo(LocalDateTime alarmDatetime, Member member, ScheduleDate scheduleDate) {
+    public DateInfo(LocalDateTime alarmDatetime, Boolean eatCheck, Boolean alarmCheck, Member member, ScheduleDate scheduleDate) {
         this.alarmDatetime = alarmDatetime;
+        this.eatCheck = eatCheck;
+        this.alarmCheck = alarmCheck;
         this.member = member;
         this.scheduleDate = scheduleDate;
     }
 
-    public void update(LocalDateTime alarmDatetime) {
+    public void timeUpdate(LocalDateTime alarmDatetime) {
         this.alarmDatetime = alarmDatetime;
+    }
+
+    public void eatUpdate(Boolean eatCheck) {
+        this.eatCheck = eatCheck;
+    }
+
+    public void alarmUpdate(Boolean alarmCheck) {
+        this.alarmCheck = alarmCheck;
     }
 }
