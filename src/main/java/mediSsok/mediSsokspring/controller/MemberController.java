@@ -3,6 +3,7 @@ package mediSsok.mediSsokspring.controller;
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.Validation.CheckEmailValidator;
 import mediSsok.mediSsokspring.Validation.CheckNicknameValidator;
+import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.dto.member.*;
 import mediSsok.mediSsokspring.service.MemberService;
 import mediSsok.mediSsokspring.service.SendEmailService;
@@ -15,22 +16,34 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor    //final 필드 생성자 생성
 public class MemberController {
     private final MemberService memberService;
+
     // 회원가입시 중복및 유효성 검사 부분
     private final CheckNicknameValidator checkNicknameValidator;
     private final CheckEmailValidator checkEmailValidator;
     private final SendEmailService sendEmailService;
 
+    /*---- 개인정보 ----*/
+
     // 회원가입 페이지(GET)
     @GetMapping("/user/signup")
     public String dispSignup() {
         return "/login/register";
+    }
+
+    // 로그인 페이지(GET)
+    @GetMapping("/user/login")
+    public String login(@RequestParam(value = "error", required = false) String error,
+                        @RequestParam(value = "exception", required = false) String exception,
+                        Model model) {
+        model.addAttribute("error", error);
+        model.addAttribute("exception", exception);
+        return "/login/login";
     }
 
     // 회원가입 로직검사(POST)
@@ -50,55 +63,9 @@ public class MemberController {
             // 회원가입 페이지로 다시 리턴
             return "/login/register";
         } else {
-            memberService.save(memberDto);
+            memberService.memberCreate(memberDto);
         }
         return "redirect:/user/login";
-    }
-
-    // 로그인 페이지
-    @GetMapping("/user/login")
-    public String login(@RequestParam(value = "error", required = false) String error,
-                        @RequestParam(value = "exception", required = false) String exception,
-                        Model model) {
-        model.addAttribute("error", error);
-        model.addAttribute("exception", exception);
-        return "/login/login";
-    }
-
-    // 마이페이지
-    @GetMapping("/user/mypage")
-    public String dispMypage(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        MemberResponseDto dto = memberService.findByEmail(userDetails.getUsername());
-        model.addAttribute("member", dto);
-        return "/myPage/myPage";
-    }
-
-    // 회원 조회
-    @GetMapping("/api/member")
-    @ResponseBody
-    public MemberResponseDto findById(@AuthenticationPrincipal UserDetails userDetails) {
-        return memberService.findByEmail(userDetails.getUsername());
-    }
-
-    // 회원 수정(JSON)
-    @PostMapping("/api/member/user")
-    @ResponseBody
-    public Long userUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberUserUpdateRequestDto requestDto) {
-        return memberService.userUpdate(userDetails.getUsername(), requestDto);
-    }
-
-    // 회원 비밀번호 수정(JSON)
-    @PostMapping("/api/member/password")
-    @ResponseBody
-    public Long userPassWordUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberPasswordUpdateRequestDto requestDto) {
-        return memberService.passwordUpdate(userDetails.getUsername(), requestDto);
-    }
-
-    // 알람 수정(JSON)
-    @PostMapping("/api/member/alarm")
-    @ResponseBody
-    public Long alarmUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberAlarmUpdateRequestDto requestDto) {
-        return memberService.alarmUpdate(userDetails.getUsername(), requestDto);
     }
 
     /* 커스텀 유효성 검증을 위해 추가 */
@@ -108,23 +75,76 @@ public class MemberController {
         binder.addValidators(checkEmailValidator);
     }
 
-
-    // Email이 DB에 존재하는지 체크하는 부분
-    @PostMapping("/api/member/findpw")
-    @ResponseBody
-    public Map<String, Boolean> pw_find(@RequestParam("userEmail") String userEmail, MemberPasswordUpdateRequestDto dto) {
-        Map<String, Boolean> json = new HashMap<>();
-        boolean pwFindCheck = memberService.userEmailCheck(userEmail);
-        System.out.println("JSON 값: " + json);
-        json.put("check", pwFindCheck);
-        return json;
+    // 비밀번호 찾기 페이지(GET)
+    @GetMapping("/user/forgot")
+    public String dispForgot() {
+        return "/login/forgot-password";
     }
 
-    //등록된 이메일로 임시비밀번호를 발송하고 발송된 임시비밀번호로 사용자의 pw를 변경하는 컨트롤러
+    // Email이 DB에 존재하는지 체크하는 부분(POST)
+    @PostMapping("/api/member/findEmail")
+    @ResponseBody
+    public boolean findEmail(@RequestBody MemberRequestDto requestDto) {
+        return memberService.userEmailCheck(requestDto.getMemberEmail());
+    }
+
+    //등록된 이메일로 임시비밀번호를 발송하고 발송된 임시비밀번호로 사용자의 pw를 변경하는 컨트롤러(POST)
     @PostMapping("/api/member/sendEmail")
     @ResponseBody
-    public void sendEmail(@RequestParam("userEmail") String userEmail){
-        MailDTO dto = sendEmailService.createMailAndChangePassword(userEmail);
+    public void sendEmail(@RequestBody MemberRequestDto requestDto){
+        MailDTO dto = sendEmailService.createMailAndChangePassword(requestDto.getMemberEmail());
         sendEmailService.mailSend(dto);
+    }
+
+    // 마이페이지(GET)
+    @GetMapping("/user/mypage")
+    public String dispMypage(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        MemberResponseDto dto = memberService.findByEmail(userDetails.getUsername());
+        model.addAttribute("member", dto);
+        return "/myPage/myPage";
+    }
+
+    // 회원 조회(GET,JSON)
+    @GetMapping("/api/member")
+    @ResponseBody
+    public MemberResponseDto findById(@AuthenticationPrincipal UserDetails userDetails) {
+        return memberService.findByEmail(userDetails.getUsername());
+    }
+
+    // 회원 수정(POST)
+    @PostMapping("/api/member/user")
+    @ResponseBody
+    public Long userUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberUserUpdateRequestDto requestDto) {
+        return memberService.userUpdate(userDetails.getUsername(), requestDto);
+    }
+
+    // 회원 비밀번호 수정(POST)
+    @PostMapping("/api/member/password")
+    @ResponseBody
+    public Long userPassWordUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberPasswordUpdateRequestDto requestDto) {
+        return memberService.passwordUpdate(userDetails.getUsername(), requestDto);
+    }
+
+    // 알람 수정(POST)
+    @PostMapping("/api/member/alarm")
+    @ResponseBody
+    public Long alarmUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberAlarmUpdateRequestDto requestDto) {
+        return memberService.alarmUpdate(userDetails.getUsername(), requestDto);
+    }
+
+    /*---- 연동 ----*/
+    // 연동 추가(POST)
+    @PostMapping("/api/link/add")
+    @ResponseBody
+    public Long linkCreate(@RequestBody LinkInfoSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
+        requestDto.setMemberId(userDetails.getMember().getId());
+
+        boolean check = memberService.linkEmailCheck(requestDto.getUserEmail(), userDetails.getMember().getId());
+
+        // 중복이 있으면 0번 반환
+        if (check)
+            return 0L;
+        else
+            return memberService.linkCreate(requestDto);
     }
 }

@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mediSsok.mediSsokspring.domain.BaseTimeEntity;
-import mediSsok.mediSsokspring.domain.entity.member.Member;
 
 import javax.persistence.*;
 

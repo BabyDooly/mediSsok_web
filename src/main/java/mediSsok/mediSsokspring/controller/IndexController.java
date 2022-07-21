@@ -31,11 +31,6 @@ public class IndexController {
         return "/index";
     }
 
-    // 비밀번호 찾기 페이지
-    @GetMapping("/user/forgot")
-    public String dispForgot() {
-        return "/login/forgot-password";
-    }
 
     // 약 검색
     @GetMapping("/medi/search")
@@ -48,6 +43,4 @@ public class IndexController {
     public String dispStatus() {
         return "/Medi_status/mediStat";
     }
-
-
 }

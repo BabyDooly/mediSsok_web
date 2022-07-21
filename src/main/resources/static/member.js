@@ -1,32 +1,34 @@
-var main = {
+let main = {
     init: function () {
-        var _this = this;
+        let _this = this;
         $('#btn-update').on('click', function () {
             _this.userUpdate();
         });
 
         // 알람 업데이트
-        var _this = this;
         $('#liveToastBtn').on('click', function () {
             _this.alarmUpdate();
         });
 
         //비밀번호 변경
-        var _this = this;
         $('#btn-update-password').on('click', function () {
             _this.userPassWordUpdate();
         });
 
-        //비밀번호 찾기 버튼
-        var _this = this;
+        //비밀번호 찾기
         $('#checkEmail').on('click', function () {
             _this.findPassword();
+        });
+
+        //회원 연동
+        $('#emailSubmit').on('click', function () {
+            _this.link();
         });
     },
 
     // 유저 정보 수정
     userUpdate: function () {
-        var data = {
+        let data = {
             nickname: $('#nameText').val(),
             phone: $('#callText').val()
         };
@@ -47,15 +49,15 @@ var main = {
     
     // 비밀번호 변경
     userPassWordUpdate: function () {
-        var data = {
+        let data = {
             nowPassword: $('#nowPass').val(),
             newPassword: $('#newPass').val(),
         };
 
         // 편하게 하기 위해서 작성
-        var Password = $('#nowPass').val();
-        var newPassword = $('#newPass').val();
-        var rePassword = $('#rePass').val();
+        let Password = $('#nowPass').val();
+        let newPassword = $('#newPass').val();
+        let rePassword = $('#rePass').val();
 
         //아래 로직은 Null값이 못들어가게 선언
         if (Password.length < 1) {
@@ -114,7 +116,7 @@ var main = {
 
         console.log("값: " + workAlarms);
         
-        var data = {
+        let data = {
             vibration: $('#vibrationCheckbox').is(':checked'),
             pushAlarms: $('#pushAlarmCheckbox').is(':checked'),
             locationAlarms: $('#locationAlarmsCheckbox').is(':checked'),
@@ -131,8 +133,8 @@ var main = {
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
-            var toastLiveExample = document.getElementById('liveToast')
-            var toast = new bootstrap.Toast(toastLiveExample)
+            let toastLiveExample = document.getElementById('liveToast')
+            let toast = new bootstrap.Toast(toastLiveExample)
 
             toast.show()
             setTimeout(function(){window.location.href="/";}, 2000);
@@ -141,9 +143,13 @@ var main = {
         });
     },
 
-    // 비밀번호 찾기 부분
+    // 비밀번호 찾기
     findPassword: function () {
-        var userEmail = $("#userEmail").val();
+        let userEmail = $("#userEmail").val()
+
+        let data = {
+            memberEmail : $("#userEmail").val()
+        };
 
         //아래 로직은 Null값이 못들어가게 선언
         if(userEmail.length < 1){
@@ -154,29 +160,125 @@ var main = {
 
         $.ajax({
             type: 'POST',
-            url: '/api/member/findpw',
-            // dataType: "json",
-            // contentType:'application/json; charset=utf-8',
-            // data: JSON.stringify(userEmail)
-            data: {
-                userEmail
-            },
+            url: '/api/member/findEmail',
+            dataType: "json",
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data),
             success : function (res) {
-                if (res['check']) {
+                if (res == true) {
                     $.ajax({
                         type: 'POST',
                         url: '/api/member/sendEmail',
-                        // dataType: "json",
-                        // contentType: 'application/json; charset=utf-8',
-                        // data: JSON.stringify(data)
-                        data: {
-                            userEmail
-                        },
+                        dataType: "json",
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data),
                     }).fail(function (error) {
                         alert(JSON.stringify(error));
                     })
                     alert('임시비밀번호를 전송 했습니다.');
                     window.location.href = "/user/login";
+                } else {
+                    alert('유효한 이메일이 아닙니다.');
+                }
+            }
+        })
+    },
+
+    // 비밀번호 찾기
+    findPassword: function () {
+        let userEmail = $("#userEmail").val()
+
+        let data = {
+            memberEmail : userEmail
+        };
+
+        //아래 로직은 Null값이 못들어가게 선언
+        if(userEmail.length < 1){
+            alert("이메일을 입력해주세요");
+            $("#userEmail").focus();
+            return;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/member/findEmail',
+            dataType: "json",
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+            success : function (res) {
+                if (res == true) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/member/sendEmail',
+                        dataType: "json",
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data),
+                    }).fail(function (error) {
+                        alert(JSON.stringify(error));
+                    })
+                    alert('임시비밀번호를 전송 했습니다.');
+                    window.location.href = "/user/login";
+                } else {
+                    alert('유효한 이메일이 아닙니다.');
+                }
+            }
+        })
+    },
+
+    // 회원 연동
+    link: function () {
+        let userEmail = $("#connectEmail").val()
+        let userNickName = $("#connectName").val()
+
+        if (userEmail.length < 1) {
+            alert("이메일을 입력해주세요");
+            $("#connectEmail").focus();
+            return;
+        }
+
+        if (userNickName.length < 1) {
+            alert("닉네임을 입력해주세요");
+            $("#connectName").focus();
+            return;
+        }
+
+        let emailData = {
+            memberEmail: userEmail
+        };
+
+        let linkData = {
+            userEmail: userEmail,
+            nickname: userNickName
+        };
+        console.log(linkData)
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/member/findEmail',
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(emailData),
+            success: function (res) {
+                if (res == true) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/link/add',
+                        dataType: "json",
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(linkData),
+                        success: function (suc) {
+                            console.log(suc)
+
+                            if (suc == 0)
+                                alert('이미 연동 신청한 이메일입니다.');
+                            else {
+                                alert('연동을 신청 했습니다.');
+                                window.location.href = "/user/mypage";
+                            }
+                        }
+                    }).fail(function (error) {
+                        alert(JSON.stringify(error));
+                    })
                 } else {
                     alert('유효한 이메일이 아닙니다.');
                 }

@@ -31,6 +31,20 @@ let mediBox = {
 
         // 스케줄 추가
         $('#addbtn').on('click', function () {
+            let today = new Date();
+            let year = today.getFullYear();
+            let month = today.getMonth() + 1;
+            let day = today.getDate();
+
+            today = new Date(year + "-" + month + "-" + day + " 0:0:0")
+
+            let start = new Date($('#startday').val() + " 0:0:0");
+
+            console.log(today);
+            console.log(start);
+            console.log(start < today);
+
+
             if ($('#medicasemedicase').val() == "0")
                 alert("약통 선택은 필수입니다.");
             else if ($('#startday').val() == "")
@@ -43,6 +57,8 @@ let mediBox = {
                 || $('#addWed').is(':checked') || $('#addThu').is(':checked') || $('#addFri').is(':checked')
                 || $('#addSat').is(':checked') || $('#addSun').is(':checked')))
                 alert("요일 선택은 필수입니다.");
+            else if(start < today)
+                alert("오늘 이후의 날짜를 선택하세요.");
             else{
                 _this.scheduleAdd(id);
             }
@@ -179,9 +195,9 @@ let mediBox = {
             data: JSON.stringify(data)
         }).done(function(data) {
             console.log(data['medicineBoxName']);
-            var dateTime = data['dateTime'];
-            var date = dateTime.substring(0,10)
-            var time = dateTime.substring(11,16)
+            let dateTime = data['dateTime'];
+            let date = dateTime.substring(0,10)
+            let time = dateTime.substring(11,16)
 
             $('#editmedicase').text(data['medicineBoxName'])
             $('#editstartday').val(date)
@@ -231,10 +247,10 @@ let mediBox = {
 
     // 스케줄 추가
     scheduleAdd: function (id) {
-        var day = $('#startday').val() + " " + $('#addBellTime').val();
+        let day = $('#startday').val() + " " + $('#addBellTime').val();
 
-        var cycle_result
-        var week_result = 0;
+        let cycle_result
+        let week_result = 0;
 
         // 주기 검사,계산
         if ($('#selectdayBtn').val() == "1")
@@ -293,10 +309,10 @@ let mediBox = {
 
     // 스케줄 수정
     scheduleUpdate : function (scheduleId, id) {
-        var day = $('#editstartday').val() + " " + $('#editaddTime').val();
+        let day = $('#editstartday').val() + " " + $('#editaddTime').val();
 
-        var cycle_result
-        var week_result = 0;
+        let cycle_result
+        let week_result = 0;
 
         // 주기 검사,계산
         if ($('#editselectdayBtn2').val() == "1")

@@ -18,11 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor    //final 필드 생성자 생성
@@ -30,7 +27,9 @@ public class ScheduleDateController {
     private final MedicineBoxService medicineBoxService;
     private final ScheduleDateService scheduleDateService;
 
-    // 오늘 알람
+    /*---- 스케줄 ----*/
+
+    // 오늘 알람 페이지(GET)
     @GetMapping("/medi/bell")
     public String dispBell(Model model, @AuthenticationPrincipal CustomUserDetails userDetails,
                            @RequestParam(defaultValue="0") int year, @RequestParam(defaultValue="0") int month, @RequestParam(defaultValue="0") int day) {
@@ -60,30 +59,30 @@ public class ScheduleDateController {
         return "/Medi_bell/mediBell";
     }
 
-    // 스케줄 추가
+    // 스케줄 추가(POST)
     @PostMapping("/api/medi/schedule/add")
     @ResponseBody
-    public Long scheduleSave(@RequestBody ScheduleSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
+    public Long scheduleCreate(@RequestBody ScheduleSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
         Long memberId = userDetails.getMember().getId();
         requestDto.setMemberId(memberId);
         return scheduleDateService.scheduleCreate(requestDto, memberId);
     }
 
-    // 스케줄 조회
+    // 스케줄 조회(POST)
     @PostMapping("/api/medi/schedule/get")
     @ResponseBody
-    public ScheduleResponseDto findById(@RequestBody ScheduleRequestDto requestDto) {
+    public ScheduleResponseDto scheduleFind(@RequestBody ScheduleRequestDto requestDto) {
         return scheduleDateService.scheduleFindById(requestDto.getScheduleId());
     }
 
-    // 스케줄 수정
+    // 스케줄 수정(POST)
     @PostMapping("/api/medi/schedule/update/{id}")
     @ResponseBody
     public Long scheduleUpdate(@PathVariable Long id, @RequestBody ScheduleUpdateRequestDto requestDto){
         return scheduleDateService.scheduleUpdate(id, requestDto);
     }
 
-    // 스케줄 삭제
+    // 스케줄 삭제(DELETE)
     @DeleteMapping("/api/medi/schedule/delete/{id}")
     @ResponseBody
     public Long scheduleDelete(@PathVariable Long id){
@@ -91,21 +90,23 @@ public class ScheduleDateController {
         return id;
     }
 
-    // 알람 조회
+    /*---- 알람 ----*/
+
+    // 알람 조회(POST)
     @PostMapping("/api/medi/alarm/get")
     @ResponseBody
-    public DateInfoResponseDto findById(@RequestBody DateInfoRequestDto requestDto) {
+    public DateInfoResponseDto alarmFind(@RequestBody DateInfoRequestDto requestDto) {
         return scheduleDateService.alarmFindById(requestDto.getDateInfoId());
     }
 
-    // 알람 수정
+    // 알람 수정(POST)
     @PostMapping("/api/medi/alarm/update/{id}")
     @ResponseBody
     public Long alarmUpdate(@PathVariable Long id, @RequestBody DateInfoUpdateRequestDto requestDto){
         return scheduleDateService.alarmUpdate(id, requestDto);
     }
 
-    // 알람 삭제
+    // 알람 삭제(DELETE)
     @DeleteMapping("/api/medi/alarm/delete/{id}")
     @ResponseBody
     public Long alarmDelete(@PathVariable Long id){
@@ -113,14 +114,14 @@ public class ScheduleDateController {
         return id;
     }
 
-    // 알람 여부 변경
+    // 알람 여부 변경(POST)
     @PostMapping("/api/medi/alarm/check/{id}")
     @ResponseBody
     public Long alarmCheck(@PathVariable Long id, @RequestBody AlarmCheckRequestDto requestDto){
         return scheduleDateService.alarmCheck(id, requestDto);
     }
 
-    // 복용 여부 변경
+    // 복용 여부 변경(POST)
     @PostMapping("/api/medi/eat/check/{id}")
     @ResponseBody
     public Long eatCheck(@PathVariable Long id, @RequestBody EatCheckRequestDto requestDto){

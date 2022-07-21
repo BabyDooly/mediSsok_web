@@ -4,15 +4,9 @@ package mediSsok.mediSsokspring.dto.schedule;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import mediSsok.mediSsokspring.domain.entity.member.Member;
 import mediSsok.mediSsokspring.domain.entity.schedule.DateInfo;
-import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 import static mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto.setTime;

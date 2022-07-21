@@ -8,7 +8,6 @@ import mediSsok.mediSsokspring.domain.entity.schedule.DateInfo;
 import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
 import mediSsok.mediSsokspring.domain.repository.schedule.DateInfoRepository;
 import mediSsok.mediSsokspring.domain.repository.schedule.ScheduleDateRepository;
-import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
 import mediSsok.mediSsokspring.dto.schedule.*;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -16,8 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -126,6 +123,8 @@ public class ScheduleDateService {
         scheduleDateRepository.delete(entity);
     }
 
+    /*---- 알람 ----*/
+
     // 날짜별 알람 리스트
     @Transactional(readOnly=true)
     public List<DateInfoResponseDto> alarmList (Long memberId, LocalDateTime fromDate, LocalDateTime toDate){
@@ -162,7 +161,7 @@ public class ScheduleDateService {
         dateInfoRepository.delete(entity);
     }
     
-    //  복용 여부 변경
+    // 복용 여부 변경
     @Transactional
     public Long eatCheck(Long id, EatCheckRequestDto requestDto){
         DateInfo entity = dateInfoRepository.findById(id)
