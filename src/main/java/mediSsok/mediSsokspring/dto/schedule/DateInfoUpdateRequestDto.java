@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import mediSsok.mediSsokspring.domain.entity.schedule.DateInfo;
-import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
 
 import java.time.LocalDateTime;
 

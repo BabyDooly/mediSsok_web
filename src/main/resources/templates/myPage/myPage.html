@@ -8,6 +8,11 @@
     <!-- bootstrap, custom css 링크 -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/home.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <!-- fontawesome-free 파일 설치해서 넣었는데 적용안됨, 그래서 직접 링크함-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
 </head>
 <body>
 <div th:replace="navbar/navBar :: navBar"/>
@@ -25,7 +30,7 @@
                 <label for="emailText" class="col-form-label">이메일</label>
             </div>
             <div class="col-md-9">
-                <input type="text" id="emailText" class="form-control" placeholder="test2@naver.com"
+                <input type="text" id="emailText" class="form-control" placeholder="test2@naver.com" style="font-weight: 600;"
                        th:value="${member.getEmail()}" disabled>
             </div>
         </div>
@@ -36,7 +41,7 @@
                 <label class="col-form-label">닉네임</label>
             </div>
             <div class="col-md-9">
-                <input type="text" id="nameText" class="form-control" placeholder="닉네임"
+                <input type="text" id="nameText" class="form-control" placeholder="닉네임" style="font-weight: 600;"
                        th:value="${member.getNickname()}">
             </div>
         </div>
@@ -195,40 +200,37 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- 타이틀 -->
-                            <h1 class="text-dark text-uppercase mb-0">친구 연동</h1>
+                            <h1 class="text-dark text-uppercase mb-0" style="font-weight: 600;">친구 연동</h1>
                             <br>
                             <h5>함께 연동할 다른 사용자를 등록하시려면 프로필을 추가하세요.</h5>
                             <br>
-                            <form id="form" name="form" method="post" target="iframe1"
-                                  class="row g-3 align-items-center needs-validation" novalidate>
+                            <form id="form" name="form" method="post" target="iframe1" class="row g-3 align-items-center needs-validation" novalidate>
                                 <div class="col-auto">
-                                    <label for="connectEmail" class="col-form-label" style="padding-right: 3em">친구
-                                        이메일</label>
+                                    <label for="connectEmail" class="col-form-label" style="padding-right: 3em">친구 이메일</label>
                                 </div>
                                 <div class="col-md-7">
-                                    <input type="email" id="connectEmail" class="form-control" placeholder="이메일">
-                                </div>
-                                <div class="row g-3 invalid-feedback">
-                                    Please choose a username.
+                                    <input type="email" id="connectEmail" class="form-control"  style="font-family: 'Font Awesome 5 Free';font-weight: 550;"
+                                           placeholder="&#xf0e0; 이메일*">
+                                    <div class="invalid-feedback">
+                                        이메일 형식으로 입력해야 합니다.
+                                    </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="submit">요청 보내기</button>
+                                    <button type="submit" id="emailSubmit">요청 보내기</button>
                                 </div>
                             </form>
                             <hr>
                             <div class="row g-3 align-items-center">
                                 <div class="col-auto">
-                                    <label for="connectName" class="col-form-label" style="padding-right: 3em">친구
-                                        닉네임</label>
+                                    <label for="connectName" class="col-form-label" style="padding-right: 3em">친구 닉네임</label>
                                 </div>
                                 <div class="col-md-7">
-                                    <input type="text" id="connectName" class="form-control" placeholder="친구 닉네임">
-                                </div>
-                                <div class="col-md-2">
-
-                                </div>
+                                    <input type="text" id="connectName" class="form-control" style="font-family: 'Font Awesome 5 Free';font-weight: 550;"
+                                           placeholder="&#xf500; 친구 닉네임*">
                             </div>
                         </div>
+                            <br><br>
+                    </div>
 
 
                     </div>
@@ -300,6 +302,8 @@
 <script src="/js/bootstrap.min.js"></script>
 
 <script>
+    window.onload = isChecked();
+
     function isChecked() {
         if ($('#s4_1').is(":checked")) {
             $('#workTimeDiv').show();
@@ -308,15 +312,10 @@
         }
     }
 
-    window.onload = isChecked();
-
     (function () {
         'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
         var forms = document.querySelectorAll('.needs-validation')
 
-        // Loop over them and prevent submission
         Array.prototype.slice.call(forms)
             .forEach(function (form) {
                 form.addEventListener('submit', function (event) {
@@ -324,8 +323,8 @@
                         event.preventDefault()
                         event.stopPropagation()
                     }
-
                     form.classList.add('was-validated')
+
                 }, false)
             })
     })()

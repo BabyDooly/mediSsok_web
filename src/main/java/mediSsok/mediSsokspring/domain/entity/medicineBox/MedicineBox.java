@@ -27,7 +27,7 @@ public class MedicineBox extends BaseTimeEntity {
     private String name;
 
     // 약통 메모
-    @Column(name = "medbox_memo")
+    @Column(name = "medbox_memo", length = 50, nullable = false)
     private String memo;
 
     // 약통 색상
@@ -50,7 +50,7 @@ public class MedicineBox extends BaseTimeEntity {
     // 스케줄 리스트
     @OneToMany(mappedBy = "medicineBox", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ScheduleDate> ScheduleDates = new ArrayList<>();
-    
+
     @Builder
     public MedicineBox(Long id, String name, String memo, String color, int count, Member member, List<MedicineList> medicineLists) {
         this.id = id;

@@ -5,19 +5,21 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mediSsok.mediSsokspring.domain.BaseTimeEntity;
-import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)  // 기본 생성자 자동 추가
 @Getter
 @Entity
 @Table(name = "date_info")
+@DynamicInsert
+@DynamicUpdate
 public class DateInfo extends BaseTimeEntity {
     @Id
     @Column(name = "date_id")
@@ -25,16 +27,18 @@ public class DateInfo extends BaseTimeEntity {
     private Long id;
 
     // 일정 날짜,시간
-    @Column(name = "date_alarm_datetime")
+    @Column(name = "date_alarm_datetime", nullable = false)
     private LocalDateTime alarmDatetime;
 
     // 복용 여부
-    @Column(name = "date_eatCheck")
-    private Boolean eatCheck = false;
+    @Column(name = "date_eat_check")
+    @ColumnDefault("false")
+    private Boolean eatCheck;
 
     // 알람 여부
-    @Column(name = "date_alarmCheck")
-    private Boolean alarmCheck = true;
+    @Column(name = "date_alarm_check")
+    @ColumnDefault("true")
+    private Boolean alarmCheck;
 
     // 사용자 ID(Member)
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,6 +1,5 @@
 package mediSsok.mediSsokspring.controller;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
@@ -27,10 +26,11 @@ public class MedicineBoxController {
 
     private final ScheduleDateService scheduleDateService;
 
+    /*---- 약통 ----*/
 
-    // 내 약통
+    // 내 약통 페이지(GET)
     @GetMapping("/medi/medibox")
-    public String dispMedicase(Model model, @AuthenticationPrincipal CustomUserDetails userDetails,
+    public String dispMediBox(Model model, @AuthenticationPrincipal CustomUserDetails userDetails,
                                    @PageableDefault(size = 6, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 
         // 페이징 리스트
@@ -48,9 +48,9 @@ public class MedicineBoxController {
         return "/Medi_box/myMediBox";
     }
 
-    // 약통 상세정보
+    // 약통 상세정보 페이지(GET)
     @GetMapping("/medi/box/{id}")
-    public String findById(@PathVariable Long id, Model model) {
+    public String mediBoxFind(@PathVariable Long id, Model model) {
         MedicineBoxResponseDto dto =  medicineBoxService.findById(id);
         List<ScheduleResponseDto> scheduleList = scheduleDateService.scheduleList(id);
 
@@ -59,10 +59,10 @@ public class MedicineBoxController {
         return "/Medi_box/BoxInformation";
     }
 
-    // 약통 추가
+    // 약통 추가(POST)
     @PostMapping("/api/medi/add")
     @ResponseBody
-    public Long save(@RequestBody MedicineBoxSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
+    public Long mediBoxCreate(@RequestBody MedicineBoxSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
 //        System.out.println(requestDto);
 //
 //        for (MedicineList medicineList : requestDto.getMedicineLists()) {
@@ -70,22 +70,21 @@ public class MedicineBoxController {
 //        }
 
         requestDto.setMemberId(userDetails.getMember().getId());
-        return medicineBoxService.create(requestDto);
+        return medicineBoxService.mediBoxCreate(requestDto);
     }
 
-    // 약통 수정
+    // 약통 수정(POST)
     @PostMapping("/api/medi/update/{id}")
     @ResponseBody
-    public Long update(@PathVariable Long id, @RequestBody MedicineBoxUpdateRequestDto requestDto){
-        return medicineBoxService.update(id, requestDto);
+    public Long mediBoxUpdate(@PathVariable Long id, @RequestBody MedicineBoxUpdateRequestDto requestDto){
+        return medicineBoxService.mediBoxUpdate(id, requestDto);
     }
 
-    // 약통 삭제
+    // 약통 삭제(DELETE)
     @DeleteMapping("/api/medi/delete/{id}")
     @ResponseBody
-    public Long delete(@PathVariable Long id){
-        medicineBoxService.delete(id);
+    public Long mediBoxDelete(@PathVariable Long id){
+        medicineBoxService.mediBoxDelete(id);
         return id;
     }
-
 }

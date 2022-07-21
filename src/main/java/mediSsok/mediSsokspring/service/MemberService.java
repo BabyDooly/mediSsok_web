@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.config.auth.dto.SessionUser;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
+import mediSsok.mediSsokspring.domain.repository.member.LinkInfoRepository;
 import mediSsok.mediSsokspring.domain.repository.member.MemberRepository;
 import mediSsok.mediSsokspring.dto.member.*;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,12 +25,16 @@ import java.util.*;
 public class MemberService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
+    private final LinkInfoRepository linkInfoRepository;
+
     private final HttpSession session;
 
 
+    /*---- 개인정보 ----*/
+
     // 회원가입
     @Transactional
-    public String save(MemberSaveRequestDto memberDto) {
+    public String memberCreate(MemberSaveRequestDto memberDto) {
         // 비밀번호 암호화후 저장
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
@@ -96,15 +101,6 @@ public class MemberService implements UserDetailsService {
         return new MemberResponseDto(entity);
     }
 
-    // 아이디 조회
-    @Transactional
-    public MemberResponseDto findById (long id){
-        Member entity = memberRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id = " + id));
-
-        return new MemberResponseDto(entity);
-    }
-
     // userEmail DB에 있는지 확인
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
@@ -120,6 +116,21 @@ public class MemberService implements UserDetailsService {
     // 유저 이메일 체크
     public boolean userEmailCheck(String userEmail) {
         boolean user = memberRepository.existsByEmail(userEmail);
+        if(user){ return true; }
+        else { return false; }
+    }
+
+    /*---- 연동 ----*/
+    // 연동 생성
+    @Transactional
+    public Long linkCreate(LinkInfoSaveRequestDto requestDto) {
+        return linkInfoRepository.save(requestDto.toEntity()).getId();
+    }
+
+    @Transactional
+    // 연동 중복 체크
+    public boolean linkEmailCheck(String userEmail, Long memberId) {
+        boolean user = linkInfoRepository.existsByUserEmailAndMemberId(userEmail, memberId);
         if(user){ return true; }
         else { return false; }
     }

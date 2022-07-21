@@ -1,15 +1,12 @@
 package mediSsok.mediSsokspring.service;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineBoxRepository;
 import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineListRepository;
 import mediSsok.mediSsokspring.dto.medicineBox.*;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +22,7 @@ public class MedicineBoxService {
     /*---- 약통 ----*/
     // 생성
     @Transactional
-    public Long create(MedicineBoxSaveRequestDto requestDto) {
+    public Long mediBoxCreate(MedicineBoxSaveRequestDto requestDto) {
         return medicineBoxRepository.save(requestDto.toEntity()).getId();
     }
 
@@ -53,7 +50,7 @@ public class MedicineBoxService {
 
     // 약통 수정
     @Transactional
-    public Long update(Long id, MedicineBoxUpdateRequestDto requestDto){
+    public Long mediBoxUpdate(Long id, MedicineBoxUpdateRequestDto requestDto){
         MedicineBox medicineBox = medicineBoxRepository.findById(id)
                 // 아이디가 없을때
                 .orElseThrow(() -> new IllegalArgumentException("해당 약통이 없습니다. id = " + id));
@@ -65,7 +62,7 @@ public class MedicineBoxService {
 
     // 약통 삭제
     @Transactional
-    public void delete(Long id){
+    public void mediBoxDelete(Long id){
         MedicineBox entity = medicineBoxRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 약통이 없습니다. id = " + id));
 

@@ -6,6 +6,20 @@ let mediBox = {
 
         // 일정 추가
         $('#addbtn').on('click', function () {
+            let today = new Date();
+            let year = today.getFullYear();
+            let month = today.getMonth() + 1;
+            let day = today.getDate();
+
+            today = new Date(year + "-" + month + "-" + day + " 0:0:0")
+
+            let start = new Date($('#startday').val() + " 0:0:0");
+
+            console.log(today);
+            console.log(start);
+            console.log(start < today);
+
+
             if ($('#medicasemedicase').val() == "0")
                 alert("약통 선택은 필수입니다.");
             else if ($('#startday').val() == "")
@@ -18,6 +32,8 @@ let mediBox = {
             || $('#addWed').is(':checked') || $('#addThu').is(':checked') || $('#addFri').is(':checked')
             || $('#addSat').is(':checked') || $('#addSun').is(':checked')))
                 alert("요일 선택은 필수입니다.");
+            else if(start < today)
+                alert("오늘 이후의 날짜를 선택하세요.");
             else{
                 _this.add();
             }
@@ -39,7 +55,7 @@ let mediBox = {
         $('.alarmBtn').on('click', function () {
             id = $(this).attr("value");
             console.log(id);
-            var img1 = document.getElementById("img" + id);
+            let img1 = document.getElementById("img" + id);
             console.log(img1);
             if (img1.classList.contains('fas')) {
                 alert("알람 OFF")
@@ -55,10 +71,10 @@ let mediBox = {
             id = $(this).attr("value");
             console.log(id);
 
-            var on = "on-" + id;
-            var off = "off-" + id;
-            var onCheck = $('#' + on).is(":checked")
-            var offCheck = $('#' + off).is(":checked")
+            let on = "on-" + id;
+            let off = "off-" + id;
+            let onCheck = $('#' + on).is(":checked")
+            let offCheck = $('#' + off).is(":checked")
 
             console.log(onCheck)
             console.log(offCheck)
@@ -86,10 +102,10 @@ let mediBox = {
 
     // 일정 추가
     add: function () {
-        var day = $('#startday').val() + " " + $('#addTime').val();
+        let day = $('#startday').val() + " " + $('#addTime').val();
 
-        var cycle_result
-        var week_result = 0;
+        let cycle_result
+        let week_result = 0;
 
         // 주기 검사,계산
         if ($('#selectdayBtn').val() == "1")
@@ -160,8 +176,8 @@ let mediBox = {
             data: JSON.stringify(data)
         }).done(function(data) {
             console.log(data['medicineBoxName']);
-            var alarmDatetime = data['alarmDatetime'];
-            var time = alarmDatetime.substring(11,16)
+            let alarmDatetime = data['alarmDatetime'];
+            let time = alarmDatetime.substring(11,16)
 
             $('#editaddTime').val(time)
         }).fail(function (error) {
@@ -171,9 +187,9 @@ let mediBox = {
 
     // 알림 수정
     alarmUpdate : function (id) {
-        var year
-        var month
-        var day
+        let year
+        let month
+        let day
 
         if (window.location.search == '') {
             date = new Date();
@@ -195,7 +211,7 @@ let mediBox = {
             day = day >= 10 ? day : '0' + day;
         }
 
-        var today = year + '-' + month + '-' + day + ' ' + $('#editaddTime').val();
+        let today = year + '-' + month + '-' + day + ' ' + $('#editaddTime').val();
 
 
 
