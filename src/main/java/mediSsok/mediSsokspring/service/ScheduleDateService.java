@@ -114,7 +114,6 @@ public class ScheduleDateService {
                 .orElseThrow(() -> new IllegalArgumentException("스케줄이 없습니다. id = " + id));
 
         entity.update(requestDto.getStartday(), requestDto.getCycle(), requestDto.getWeek());
-
         return id;
     }
 
@@ -133,6 +132,15 @@ public class ScheduleDateService {
         return dateInfoRepository.findByMemberIdAndAlarmDatetimeBetween(memberId, fromDate, toDate, Sort.by(Sort.Direction.ASC, "alarmDatetime")).stream()
                 .map(DateInfoResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    // 알람 아이디 조회
+    @Transactional
+    public DateInfoResponseDto alarmFindById (Long id){
+        DateInfo entity = dateInfoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("맴버 약통에 대한 스케줄이 없습니다. id = " + id));
+
+        return new DateInfoResponseDto(entity);
     }
 
     // 알람 수정

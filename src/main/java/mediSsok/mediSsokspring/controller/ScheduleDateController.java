@@ -91,6 +91,13 @@ public class ScheduleDateController {
         return id;
     }
 
+    // 알람 조회
+    @PostMapping("/api/medi/alarm/get")
+    @ResponseBody
+    public DateInfoResponseDto findById(@RequestBody DateInfoRequestDto requestDto) {
+        return scheduleDateService.alarmFindById(requestDto.getDateInfoId());
+    }
+
     // 알람 수정
     @PostMapping("/api/medi/alarm/update/{id}")
     @ResponseBody

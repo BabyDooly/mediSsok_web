@@ -23,10 +23,11 @@ let mediBox = {
             }
         });
 
-        // 알림 아이디 받아보기
+        // 알림 아이디 받아보기 (조회)
         $('.alarm-getID').on('click', function () {
             id = $(this).attr("value");
             console.log(id);
+            _this.alarmGet(id);
         })
         
         // 알림 수정
@@ -143,6 +144,29 @@ let mediBox = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
+    },
+
+    // 알람 조회
+    alarmGet : function (id) {
+        let data = {
+            dateInfoId: id,
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/medi/alarm/get',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function(data) {
+            console.log(data['medicineBoxName']);
+            var alarmDatetime = data['alarmDatetime'];
+            var time = alarmDatetime.substring(11,16)
+
+            $('#editaddTime').val(time)
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
     },
 
     // 알림 수정

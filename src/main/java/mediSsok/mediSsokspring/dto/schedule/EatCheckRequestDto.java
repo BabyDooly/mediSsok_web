@@ -16,10 +16,4 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class EatCheckRequestDto {
     private Boolean eatCheck;
-
-    public DateInfo toEntity(){
-        return DateInfo.builder()
-                .eatCheck(eatCheck)
-                .build();
-    }
 }

@@ -10,6 +10,7 @@ import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,8 @@ public class MemberResponseDto {
     private Boolean pushAlarms;
     private Boolean locationAlarms;
     private Boolean replenishAlarms;
+    private LocalTime workAlarms;
+
     private List<MedicineBoxResponseDto> medicineBoxsName;
 
     @Builder
@@ -40,6 +43,7 @@ public class MemberResponseDto {
         this.pushAlarms = entity.getPushAlarms();
         this.locationAlarms = entity.getLocationAlarms();
         this.replenishAlarms = entity.getReplenishAlarms();
+        this.workAlarms = entity.getWorkAlarms();
         this.medicineBoxsName = entity.getMedicineBoxs().stream()
                 .map(MedicineBoxResponseDto::new)
                 .collect(Collectors.toList());

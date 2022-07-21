@@ -25,12 +25,4 @@ public class ScheduleUpdateRequestDto {
     private LocalDateTime startday;
     private int cycle;
     private int week;
-
-    public ScheduleDate toEntity(){
-        return ScheduleDate.builder()
-                .startday(startday)
-                .cycle(cycle)
-                .week(week)
-                .build();
-    }
 }

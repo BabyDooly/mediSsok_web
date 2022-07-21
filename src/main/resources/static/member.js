@@ -5,6 +5,7 @@ var main = {
             _this.userUpdate();
         });
 
+        // 알람 업데이트
         var _this = this;
         $('#liveToastBtn').on('click', function () {
             _this.alarmUpdate();
@@ -23,6 +24,7 @@ var main = {
         });
     },
 
+    // 유저 정보 수정
     userUpdate: function () {
         var data = {
             nickname: $('#nameText').val(),
@@ -37,11 +39,13 @@ var main = {
             data: JSON.stringify(data)
         }).done(function () {
             alert('정보가 수정되었습니다.');
+            location.reload();
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
     },
-
+    
+    // 비밀번호 변경
     userPassWordUpdate: function () {
         var data = {
             nowPassword: $('#nowPass').val(),
@@ -84,18 +88,41 @@ var main = {
             data: JSON.stringify(data)
         }).done(function () {
             alert('정보가 수정되었습니다.');
+            location.reload();
         }).fail(function (error) {
             alert('비밀번호를 확인해주세요.');
         });
     },
 
+    // 알람 업데이트
     alarmUpdate : function () {
+        let Check1 = $('#s4_1').is(":checked");
+        let Check2 = $('#s4_2').is(":checked");
+        let workAlarms;
+
+        console.log("check1 : " + Check1);
+        console.log("check2 : " + Check2);
+        console.log($('#workTime').val())
+
+        if($('#workTime').val() != null)
+            workAlarms = $('#workTime').val();
+
+        console.log("값: " + workAlarms);
+
+        if (Check1 == false && Check2 == false)
+            workAlarms = null;
+
+        console.log("값: " + workAlarms);
+        
         var data = {
             vibration: $('#vibrationCheckbox').is(':checked'),
             pushAlarms: $('#pushAlarmCheckbox').is(':checked'),
             locationAlarms: $('#locationAlarmsCheckbox').is(':checked'),
-            replenishAlarms: $('#replenishAlarmsCheckbox').is(':checked')
+            replenishAlarms: $('#replenishAlarmsCheckbox').is(':checked'),
+            workAlarms: workAlarms
         };
+
+        console.log(data);
 
         $.ajax({
             type: 'POST',
@@ -104,16 +131,11 @@ var main = {
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
-            var toastTrigger = document.getElementById('liveToastBtn')
             var toastLiveExample = document.getElementById('liveToast')
-            if (toastTrigger) {
-                toastTrigger.addEventListener('click', function () {
-                    var toast = new bootstrap.Toast(toastLiveExample)
+            var toast = new bootstrap.Toast(toastLiveExample)
 
-                    toast.show()
-                    setTimeout(function(){window.location.href="/";}, 3000);
-                })
-            }
+            toast.show()
+            setTimeout(function(){window.location.href="/";}, 2000);
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

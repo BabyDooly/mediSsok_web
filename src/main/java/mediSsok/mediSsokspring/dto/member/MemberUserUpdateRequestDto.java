@@ -11,10 +11,4 @@ import lombok.Setter;
 public class MemberUserUpdateRequestDto {
     private String nickname;
     private String phone;
-    @Builder
-    public MemberUserUpdateRequestDto(String nickname, String phone) {
-        this.nickname = nickname;
-        this.phone = phone;
-    }
-
 }

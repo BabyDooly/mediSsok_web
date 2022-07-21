@@ -14,10 +14,4 @@ public class MemberPasswordUpdateRequestDto {
     private String nowPassword;
     // 변경할 비밀번호
     private String newPassword;
-
-    @Builder
-    public MemberPasswordUpdateRequestDto(String nowPassword,String newPassword) {
-        this.newPassword = nowPassword;
-        this.newPassword = newPassword;
-    }
 }

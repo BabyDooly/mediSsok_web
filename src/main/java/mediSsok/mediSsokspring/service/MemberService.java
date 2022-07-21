@@ -29,7 +29,7 @@ public class MemberService implements UserDetailsService {
 
     // 회원가입
     @Transactional
-    public String save(MemberSaveResponseDto memberDto) {
+    public String save(MemberSaveRequestDto memberDto) {
         // 비밀번호 암호화후 저장
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
@@ -83,7 +83,7 @@ public class MemberService implements UserDetailsService {
         Member entity = memberRepository.findByEmail(email)
                 // 아이디가 없을때
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. email = " + email));
-        entity.alarmUpdate(requestDto.getVibration(), requestDto.getPushAlarms(), requestDto.getLocationAlarms(), requestDto.getReplenishAlarms());
+        entity.alarmUpdate(requestDto.getVibration(), requestDto.getPushAlarms(), requestDto.getLocationAlarms(), requestDto.getReplenishAlarms(), requestDto.getWorkAlarms());
         return entity.getId();
     }
 
@@ -105,7 +105,7 @@ public class MemberService implements UserDetailsService {
         return new MemberResponseDto(entity);
     }
 
-    // useremail이 DB에 있는지 확인
+    // userEmail DB에 있는지 확인
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
         Member member = memberRepository.findByEmail(userEmail)

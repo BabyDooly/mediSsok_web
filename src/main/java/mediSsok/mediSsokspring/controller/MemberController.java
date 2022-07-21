@@ -35,7 +35,7 @@ public class MemberController {
 
     // 회원가입 로직검사(POST)
     @PostMapping("/user/signupProc")
-    public String Signup(@Valid MemberSaveResponseDto memberDto, Errors errors, Model model) {
+    public String Signup(@Valid MemberSaveRequestDto memberDto, Errors errors, Model model) {
         if (errors.hasErrors()) {
             // 유효성 통과 못한 필드와 메시지를 핸들링
             Map<String, String> validatorResult = memberService.validateHandling(errors);

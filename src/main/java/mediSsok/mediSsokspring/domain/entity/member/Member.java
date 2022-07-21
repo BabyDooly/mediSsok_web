@@ -7,6 +7,7 @@ import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
 import mediSsok.mediSsokspring.service.SendEmailService;
 
 import javax.persistence.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,7 +48,7 @@ public class Member extends BaseTimeEntity {
 
     // 출근알림
     @Column(name = "member_work_alarm")
-    private Date workAlarms;
+    private LocalTime workAlarms;
 
     // 보충알림
     @Column(name = "member_replenish_alarm", nullable = false)
@@ -87,11 +88,12 @@ public class Member extends BaseTimeEntity {
     }
 
     // 알람 변경
-    public void alarmUpdate(Boolean vibration, Boolean pushAlarms, Boolean locationAlarms, Boolean replenishAlarms) {
+    public void alarmUpdate(Boolean vibration, Boolean pushAlarms, Boolean locationAlarms, Boolean replenishAlarms, LocalTime workAlarms) {
         this.vibration = vibration;
         this.pushAlarms = pushAlarms;
         this.locationAlarms = locationAlarms;
         this.replenishAlarms = replenishAlarms;
+        this.workAlarms = workAlarms;
     }
 }
 

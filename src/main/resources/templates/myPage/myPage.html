@@ -136,15 +136,16 @@
             <label class="form-check-label" for="replenishAlarmsCheckbox" style="font-weight:bolder">보충 약 알림</label>
         </div>
         <div class=" form-check form-switch">
-            <input class="form-check-input " type="checkbox" role="switch" id="s4" onclick="isChecked(this)">
-            <label class="form-check-label " for="s4" style="font-weight:bolder">출근 시 알림</label>
+            <input class="form-check-input " type="checkbox" role="switch" id="s4_1" th:checked="${member.getWorkAlarms != null}" onclick="isChecked()">
+
+            <label class="form-check-label " for="s4_1" style="font-weight:bolder">출근 시 알림</label>
         </div>
         <div id="workTimeDiv" style="text-align: right; display: none" class="row g-3">
             <div class="col-md-4" style="padding-left: 0px">
                 <label for="workTime" class="col-form-label" style="padding-right: 3em">└ 출근 시간</label>
             </div>
             <div class="col-md-6">
-                <input type="time" id="workTime" class="form-control">
+                <input type="time" id="workTime" class="form-control"  th:value="${#temporals.format(member.getWorkAlarms(), 'hh:mm')}">
             </div>
         </div>
     </div>
@@ -233,13 +234,15 @@
 <script src="/js/bootstrap.min.js"></script>
 
 <script>
-    function isChecked(element) {
-        if (element.checked) {
+    function isChecked() {
+        if ($('#s4_1').is(":checked")) {
             $('#workTimeDiv').show();
         } else {
             $('#workTimeDiv').hide();
         }
     }
+    window.onload = isChecked();
+
     (function () {
         'use strict'
 

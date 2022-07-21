@@ -16,10 +16,4 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class AlarmCheckRequestDto {
     private Boolean alarmCheck;
-
-    public DateInfo toEntity(){
-        return DateInfo.builder()
-                .alarmCheck(alarmCheck)
-                .build();
-    }
 }

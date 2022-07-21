@@ -6,5 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DateInfoRequestDto {
-    private Long dateId;
+    private Long dateInfoId;
 }

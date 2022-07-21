@@ -18,11 +18,4 @@ import java.time.LocalDateTime;
 public class DateInfoUpdateRequestDto {
     @JsonFormat(pattern="HH:mm")
     private LocalDateTime alarmDatetime;
-
-
-    public DateInfo toEntity(){
-        return DateInfo.builder()
-                .alarmDatetime(alarmDatetime)
-                .build();
-    }
 }

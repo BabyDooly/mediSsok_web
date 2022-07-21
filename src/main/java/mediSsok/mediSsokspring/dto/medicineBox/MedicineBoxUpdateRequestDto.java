@@ -20,14 +20,4 @@ public class MedicineBoxUpdateRequestDto {
     private String color;
     private int count;
     private List<MedicineList> medicineLists;
-
-    public MedicineBox toEntity(){
-        return MedicineBox.builder()
-                .name(name)
-                .color(color)
-                .memo(memo)
-                .count(count)
-                .medicineLists(medicineLists)
-                .build();
-    }
 }
