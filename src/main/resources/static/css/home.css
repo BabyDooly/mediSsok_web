@@ -659,8 +659,9 @@ increment-next {  from {
 
 .myPageIndiv{
     height: 340px;
-    width: 580px;
-    margin: 0 auto;
+    width: 500px;
+    margin-left: 65px;
+    margin-right: 0px;
     text-align: center;
     vertical-align: middle; /*센터 맞춤 속성*/
     line-height: normal; /*센터 맞춤 속성*/
