@@ -688,6 +688,13 @@ increment-next {  from {
     vertical-align: middle; /*센터 맞춤 속성*/
     line-height: normal; /*센터 맞춤 속성*/
 }
+.myPageBox{
+    height: 270px;
+    width: 580px;
+    margin: 0 auto;
+    vertical-align: middle; /*센터 맞춤 속성*/
+    line-height: normal; /*센터 맞춤 속성*/
+}
 .myPageInText{
     font-size: 18px;
 }
