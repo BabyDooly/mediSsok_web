@@ -31,4 +31,7 @@ public class IndexController {
     public String dispStatus() {
         return "/Medi_status/mediStat";
     }
+
+    @GetMapping("/medi/info")
+    public String mediINfo(){ return "/Medi_search/mediInfo"; }
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- 타임리프 사용 -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>myPage</title>
+    <!-- bootstrap, custom css 링크 -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/home.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+</head>
+<body>
+<div th:replace="navbar/navBar :: navBar"/>
+<p class="mainText">타이레놀정160mg</p>
+<p class="mainSubText">[ Tylenol Tab. 160mg ]</p>
+<div style="width: 1060px;margin: 0 auto;position: relative"><!-- 제일 큰 페이지 박스 -->
+    <div class="row g-3 align-items-center" style="vertical-align: middle;height: 300px;text-align: center"> <!-- 밑에 이미지랑 테이블 담을 div -->
+        <div class="col-md-6"> <!-- 이미지 넣을 div -->
+            <img style="width: 60%;" src="/image/medi.png">
+            <h6>타이레놀정160mg</h6>
+        </div>
+        <div class="col-md-6"> <!-- 테이블 넣을 div -->
+            gd
+        </div>
+
+    </div>
+</div>
+
+
+<div class="testDiv">
+
+</div>
+<!-- bootstrp js 링크 -->
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function search() {
+        $('#searchArea').show()
+    }
+
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+        trigger: 'focus';
+    })
+</script>
+</body>
+</html>

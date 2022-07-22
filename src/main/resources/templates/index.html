@@ -10,19 +10,86 @@
     <!-- bootstrap, custom css 링크 -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/home.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 </head>
 
 <body>
 <div th:replace="navbar/navBar :: navBar"/>
-<p class="mainText">약   쏙</p>
+<p class="mainText">약 쏙</p>
 <p class="mainSubText">약과 나의 약속, 시간에 맞춰 쏙</p>
+
+<button type="button" class="myPageBtnImage " id="testBtn" data-bs-target="#connectAccept"
+        data-bs-toggle="modal" style="background: none;height: 50px">
+    <img class="connectAccept" src="/image/plusbutton.png">
+</button>
+
+<!-- 연동 수락 -->
+<div class="portfolio-modal modal fade" id="connectAccept" tabindex="-1" aria-labelledby="connectAccept"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- 타이틀 -->
+                            <h1 class="text-dark text-uppercase mb-0" style="font-weight: 600;">연동 요청 목록</h1>
+                            <br>
+                            <h5>함께 연동할 다른 사용자를 등록하시려면 요청을 수락해주세요.</h5>
+                            <br>
+                            <hr>
+
+                            <form
+                                  class="row g-3 align-items-center needs-validation" novalidate>
+                                <div class="col-auto">
+                                    <label for="connectEmail" class="col-form-label"
+                                           style="padding-right: 3em">이메일</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="connectEmail" class="form-control"
+                                           style=";font-weight: 800;" placeholder="1234@1234.com" disabled>
+                                    <div class="invalid-feedback">
+                                        이메일 형식으로 입력해야 합니다.
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <button id="d" class="btn btn-primary btn-edit"
+                                            style="width: 80%">
+                                        수락
+                                    </button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button id="dg" class="btn btn-danger" data-bs-dismiss="modal"
+                                            style="width: 80%">
+                                        거부
+                                    </button>
+                                </div>
+                            </form>
+
+
+                            <hr>
+
+                            <br><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="mainCon">
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -35,11 +102,13 @@
                 <img src="/image/test3.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -66,23 +135,7 @@
 
 <div class="main_box">
     <div class="main">
-        <img src="/image/main_menu_img.png" class ="mainMenuImg" alt="...">
-        <div class="subDiv">
-            <p class="subTextName">약쏙 사용설명서</p><br>
-            <p class="subTextSub">User's Guide</p><br>
-            <p>가나다라마바사 가나다라마바사 가나다<br>
-            사용설명서 어쩌구 저쩌구<br>
-            이러쿵 저러쿵 궁시렁 궁시렁<br>
-            동해물과 백두산 이러쿵 저러쿵 가나다<br>
-            몰라 몰라 사용 설명서 페이지 몰라</p><br><br>
-            <p>#약쏙 #사용설명서</p>
-        </div>
-    </div>
-</div>
-
-<div class="main_box">
-    <div class="main">
-        <img src="/image/main_menu_img.png" class ="mainMenuImg2" alt="...">
+        <img src="/image/main_menu_img.png" class="mainMenuImg" alt="...">
         <div class="subDiv">
             <p class="subTextName">약쏙 사용설명서</p><br>
             <p class="subTextSub">User's Guide</p><br>
@@ -98,7 +151,7 @@
 
 <div class="main_box">
     <div class="main">
-        <img src="/image/main_menu_img.png" class ="mainMenuImg" alt="...">
+        <img src="/image/main_menu_img.png" class="mainMenuImg2" alt="...">
         <div class="subDiv">
             <p class="subTextName">약쏙 사용설명서</p><br>
             <p class="subTextSub">User's Guide</p><br>
@@ -114,7 +167,23 @@
 
 <div class="main_box">
     <div class="main">
-        <img src="/image/main_menu_img.png" class ="mainMenuImg2" alt="...">
+        <img src="/image/main_menu_img.png" class="mainMenuImg" alt="...">
+        <div class="subDiv">
+            <p class="subTextName">약쏙 사용설명서</p><br>
+            <p class="subTextSub">User's Guide</p><br>
+            <p>가나다라마바사 가나다라마바사 가나다<br>
+                사용설명서 어쩌구 저쩌구<br>
+                이러쿵 저러쿵 궁시렁 궁시렁<br>
+                동해물과 백두산 이러쿵 저러쿵 가나다<br>
+                몰라 몰라 사용 설명서 페이지 몰라</p><br><br>
+            <p>#약쏙 #사용설명서</p>
+        </div>
+    </div>
+</div>
+
+<div class="main_box">
+    <div class="main">
+        <img src="/image/main_menu_img.png" class="mainMenuImg2" alt="...">
         <div class="subDiv">
             <p class="subTextName">약쏙 사용설명서</p><br>
             <p class="subTextSub">User's Guide</p><br>

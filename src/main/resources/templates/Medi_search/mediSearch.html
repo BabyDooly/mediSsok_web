@@ -9,6 +9,11 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/home.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <style>
+        .tevents:hover tbody tr:hover td {
+            background: lightgray;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="navbar/navBar :: navBar"/>
@@ -272,25 +277,40 @@
 </div>
 
 <div class="mediSearchDiv" id="searchArea">
-        <h1 style="display: inline;color: #0d6efd">검색결과 리스트</h1>
-        <h2 style="display: inline">( N개 )</h2>
-    <table class="table table-bordered" style="font-size: 20px;text-align: center;vertical-align: middle">
+    <h1 style="display: inline;color: #0d6efd">검색결과 리스트</h1>
+    <h2 style="display: inline">( N개 )</h2>
+    <table class="table table-bordered tevents" style="font-size: 20px;text-align: center;vertical-align: middle">
         <thead>
         <tr class="table-active">
             <th scope="col">식별/포장</th>
             <th scope="col">제품명</th>
             <th scope="col">성분/함량</th>
             <th scope="col">회사명</th>
-
             <th scope="col">제형</th>
             <th scope="col">구분</th>
-
-
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row"> <img src="/image/mediSearch-shape2/shape1.png"> </th>
+        <tr onclick="location.href='/medi/info'">
+                <td scope="row"><img src="/image/mediSearch-shape2/shape1.png"></td>
+                <td>타이레놀</td>
+                <td>Acetaminophen　500mg</td>
+                <td>한국얀센</td>
+
+                <td>정제</td>
+                <td>일반</td>
+        </tr>
+        <tr onclick="location.href='/medi/info'">
+            <td scope="row"><img src="/image/mediSearch-shape2/shape1.png"></td>
+            <td>타이레놀</td>
+            <td>Acetaminophen　500mg</td>
+            <td>한국얀센</td>
+
+            <td>정제</td>
+            <td>일반</td>
+        </tr>
+        <tr onclick="location.href='/medi/info'">
+            <td scope="row"><img src="/image/mediSearch-shape2/shape1.png"></td>
             <td>타이레놀</td>
             <td>Acetaminophen　500mg</td>
             <td>한국얀센</td>
@@ -309,7 +329,7 @@
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    function search(){
+    function search() {
         $('#searchArea').show()
     }
 
