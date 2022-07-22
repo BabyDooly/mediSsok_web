@@ -19,6 +19,10 @@ public class LinkInfoSaveRequestDto {
     private String nickname;
     private Long memberId;
 
+    private Member member;
+
+    private Boolean permit;
+
     public LinkInfo toEntity(){
         return LinkInfo.builder()
                 .userEmail(userEmail)

@@ -9,6 +9,8 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/home.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
     <!-- fontawesome-free 파일 설치해서 넣었는데 적용안됨, 그래서 직접 링크함-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -120,14 +122,14 @@
     <p class="myPageHead">&nbsp&nbsp친구 설정</p>
     <br>
     <div style="display: flex;flex-wrap: wrap; width: 580px;height: auto;margin:0 auto;justify-content: center;align-items: center;">
-        <div>
-        <div style="width: 125px;height: auto;border: 4px solid black; border-radius: 20%;margin: 10px;"
-             data-bs-toggle="modal" data-bs-target="#profile-edit" value="1">
+        <div th:each="link : ${linkList}">
+        <div th:style="${link.getPermit() ? 'width: 125px;height: auto;border: 4px solid black; border-radius: 20%;margin: 10px' :
+        'background-color:lightgray; filter: grayscale(100%); width: 125px;height: auto;border: 4px solid black; border-radius: 20%;margin: 10px'}"
+             data-bs-toggle="modal" data-bs-target="#profile-edit" th:value="${link.getId()}" class="link">
             <img id="myProfile1" style="width: 100%;height: 100%; padding:5px;"
-                 th:src="'/image/profile-icon/man1.png'"
-                 th:value="${member.getPicture()}">
+                th:src="'/image/profile-icon/' + ${link.getPicture()}+ '.png'" th:value="${link.getPicture()}">
         </div>
-        <h2 style="text-align: center;margin-top: 10px">닉네임</h2>
+        <h2 style="text-align: center;margin-top: 10px; font-size: 30px;" th:text="${link.getNickname()}">닉네임</h2>
         </div>
 
         <button type="button" class="myPageBtnImage " id="img_btn" data-bs-target="#connect"
@@ -335,6 +337,20 @@
                             <!-- 타이틀 -->
                             <h1 class="text-dark text-uppercase mb-0" style="font-weight: 600;">친구 연동 수정</h1>
                             <br>
+                            <div id = "profile-text" style="width:100%;margin-top: 0.1rem; font-size: 17px;color:#dc3545">
+                                연동 수락 대기 중입니다.
+                            </div>
+                            <br>
+                            <div class="row g-3 align-items-center">
+                                <div class="col-md-3">
+                                    <label for="profile-email" class="col-form-label"
+                                           style="padding-right: 3em">이메일</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" id="profile-email" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <br>
                             <div class="row g-3 align-items-center">
                                 <div class="col-md-3">
                                     <label for="profile-nickname" class="col-form-label"
@@ -347,11 +363,13 @@
 
                             <br><br><br><br>
 
-                            <button id="editaddbtn" onclick="editaddbtn()" class="btn btn-primary btn-edit"
+                            <button id="editaddbtn" class="btn btn-primary btn-edit"
                                     style="width: 90px">
+                                <i class="fa-solid fa-pen"></i>
                                 수정
                             </button>
-                            <button class="btn btn-danger" data-bs-dismiss="modal" style="width: 90px">
+                            <button id="deletebtn" class="btn btn-danger" data-bs-dismiss="modal" style="width: 90px">
+                                <i class="fas fa-xmark fa-fw"></i>
                                 삭제
                             </button>
 

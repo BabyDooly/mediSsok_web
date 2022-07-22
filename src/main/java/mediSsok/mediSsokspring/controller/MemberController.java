@@ -4,7 +4,11 @@ import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.Validation.CheckEmailValidator;
 import mediSsok.mediSsokspring.Validation.CheckNicknameValidator;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
+import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
 import mediSsok.mediSsokspring.dto.member.*;
+import mediSsok.mediSsokspring.dto.schedule.ScheduleRequestDto;
+import mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto;
+import mediSsok.mediSsokspring.dto.schedule.ScheduleUpdateRequestDto;
 import mediSsok.mediSsokspring.service.MemberService;
 import mediSsok.mediSsokspring.service.SendEmailService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -98,42 +103,48 @@ public class MemberController {
 
     // 마이페이지(GET)
     @GetMapping("/user/mypage")
-    public String dispMypage(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        MemberResponseDto dto = memberService.findByEmail(userDetails.getUsername());
-        model.addAttribute("member", dto);
+    public String dispMypage(@AuthenticationPrincipal CustomUserDetails userDetails, Model model) {
+        // 맴버 정보 조회
+        MemberResponseDto memberDto = memberService.findByEmail(userDetails.getUsername());
+        // 링크 사용자 조회
+        List<LinkInfoResponseDto> linkListDto = memberService.linkFind(userDetails.getMember().getId());
+
+        model.addAttribute("member", memberDto);
+        model.addAttribute("linkList", linkListDto);
+
         return "/myPage/myPage";
     }
 
     // 회원 조회(GET,JSON)
     @GetMapping("/api/member")
     @ResponseBody
-    public MemberResponseDto findById(@AuthenticationPrincipal UserDetails userDetails) {
+    public MemberResponseDto findById(@AuthenticationPrincipal CustomUserDetails userDetails) {
         return memberService.findByEmail(userDetails.getUsername());
     }
 
     // 회원 수정(POST)
     @PostMapping("/api/member/user")
     @ResponseBody
-    public Long userUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberUserUpdateRequestDto requestDto) {
+    public Long userUpdate(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestBody MemberUserUpdateRequestDto requestDto) {
         return memberService.userUpdate(userDetails.getUsername(), requestDto);
     }
 
     // 회원 비밀번호 수정(POST)
     @PostMapping("/api/member/password")
     @ResponseBody
-    public Long userPassWordUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberPasswordUpdateRequestDto requestDto) {
+    public Long userPassWordUpdate(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestBody MemberPasswordUpdateRequestDto requestDto) {
         return memberService.passwordUpdate(userDetails.getUsername(), requestDto);
     }
 
     // 알람 수정(POST)
     @PostMapping("/api/member/alarm")
     @ResponseBody
-    public Long alarmUpdate(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MemberAlarmUpdateRequestDto requestDto) {
+    public Long alarmUpdate(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestBody MemberAlarmUpdateRequestDto requestDto) {
         return memberService.alarmUpdate(userDetails.getUsername(), requestDto);
     }
 
     /*---- 연동 ----*/
-    // 연동 추가(POST)
+    // 연동 신청(POST)
     @PostMapping("/api/link/add")
     @ResponseBody
     public Long linkCreate(@RequestBody LinkInfoSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
@@ -146,5 +157,28 @@ public class MemberController {
             return 0L;
         else
             return memberService.linkCreate(requestDto);
+    }
+
+    // 연동 조회(POST)
+    @PostMapping("/api/link/get")
+    @ResponseBody
+    public LinkInfoResponseDto linkFind(@RequestBody LinkInfoRequestDto requestDto) {
+        return memberService.linkFindById(requestDto.getLinkId());
+    }
+
+
+    // 연동 수정(POST)
+    @PostMapping("/api/link/update/{id}")
+    @ResponseBody
+    public Long linkUpdate(@PathVariable Long id, @RequestBody LinkInfoUpdateRequestDto requestDto){
+        return memberService.linkUpdate(id, requestDto);
+    }
+
+    // 약통 삭제(DELETE)
+    @DeleteMapping("/api/link/delete/{id}")
+    @ResponseBody
+    public Long linkDelete(@PathVariable Long id){
+        memberService.linkDelete(id);
+        return id;
     }
 }

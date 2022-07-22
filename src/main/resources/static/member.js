@@ -1,6 +1,7 @@
 let main = {
     init: function () {
         let _this = this;
+        let linkId;
 
         // 회원 정보 수정
         $('#btn-update').on('click', function () {
@@ -25,6 +26,22 @@ let main = {
         //회원 연동
         $('#emailSubmit').on('click', function () {
             _this.link();
+        });
+
+        //연동 정보 가져오기
+        $('.link').on('click', function () {
+            linkId = $(this).attr("value");
+            _this.linkGet(linkId);
+        });
+
+        // 연동 정보 수정
+        $('#editaddbtn').on('click', function () {
+            _this.linkUpdate(linkId);
+        });
+
+        // 연동 제거
+        $('#deletebtn').on('click', function () {
+            _this.linkDelete(linkId);
         });
     },
 
@@ -295,6 +312,68 @@ let main = {
             }
         })
     },
+
+    // 링크 정보 조회
+    linkGet : function (id) {
+        let data = {
+            linkId: id,
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/link/get',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function(data) {
+            console.log(data);
+            $('#profile-email').val(data['userEmail'])
+            $('#profile-nickname').val(data['nickname'])
+
+            if (data['permit'] == true)
+                $('#profile-text').hide();
+
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    },
+
+    // 링크 정보 수정
+    linkUpdate : function (id) {
+        let data = {
+            nickname : $('#profile-nickname').val()
+        }
+
+        console.log(data)
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/link/update/' + id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('연동이 수정되었습니다.');
+            window.location.href = "/user/mypage";
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+
+    // 스케줄 삭제
+    linkDelete : function (id) {
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/link/delete/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function() {
+            alert('연동이 제거되었습니다.');
+            window.location.href = "/user/mypage";
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
 };
 main.init();
 

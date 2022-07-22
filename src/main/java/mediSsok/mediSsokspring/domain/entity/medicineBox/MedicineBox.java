@@ -62,7 +62,6 @@ public class MedicineBox extends BaseTimeEntity {
         this.medicineLists = medicineLists;
     }
 
-
     public void update(String name, String memo, String color, int count) {
         this.name = name;
         this.memo = memo;

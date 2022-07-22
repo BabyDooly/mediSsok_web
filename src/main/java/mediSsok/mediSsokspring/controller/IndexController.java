@@ -19,18 +19,6 @@ public class IndexController {
     @GetMapping("/ttt")
     public String tt(){return "/test/ttt";}
 
-    // 메인 페이지
-    @GetMapping("/")
-    public String index() {
-        return "/index";
-    }
-
-    // 메인 페이지2
-    @GetMapping("/main")
-    public String main() {
-        return "/index";
-    }
-
 
     // 약 검색
     @GetMapping("/medi/search")
