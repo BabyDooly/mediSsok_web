@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.dto.medicineBox.*;
+import mediSsok.mediSsokspring.dto.member.MemberResponseDto;
 import mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto;
 import mediSsok.mediSsokspring.service.MedicineBoxService;
 import mediSsok.mediSsokspring.service.ScheduleDateService;
@@ -58,6 +59,15 @@ public class MedicineBoxController {
         model.addAttribute("scheList", scheduleList);
         return "/Medi_box/BoxInformation";
     }
+
+    // 약통 리스트
+    @GetMapping("/api/medi/list")
+    @ResponseBody
+    public Page<MedicineBoxResponseDto> findById(@AuthenticationPrincipal CustomUserDetails userDetails, Pageable pageable) {
+        return medicineBoxService.findByMemberId(userDetails.getMember().getId(), pageable);
+    }
+
+
 
     // 약통 추가(POST)
     @PostMapping("/api/medi/add")

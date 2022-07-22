@@ -136,18 +136,7 @@ public class MemberService implements UserDetailsService {
     // 연동 생성
     @Transactional
     public Long linkCreate(LinkInfoSaveRequestDto requestDto) {
-        if (requestDto.getPermit() == null){
-            return linkInfoRepository.save(requestDto.toEntity()).getId();
-        }
-        else {
-            LinkInfo dto = LinkInfo.builder()
-                    .userEmail(requestDto.getUserEmail())
-                    .nickname(requestDto.getNickname())
-                    .permit(requestDto.getPermit())
-                    .member(requestDto.getMember())
-                    .build();
-           return linkInfoRepository.save(dto).getId();
-        }
+        return linkInfoRepository.save(requestDto.toEntity()).getId();
     }
 
     @Transactional
@@ -210,7 +199,6 @@ public class MemberService implements UserDetailsService {
                     .userEmail(list.getUserEmail())
                     .nickname(list.getNickname())
                     .permit(list.getPermit())
-                    .picture(member.getPicture())
                     .myEmail(member.getEmail())
                     .build();
 

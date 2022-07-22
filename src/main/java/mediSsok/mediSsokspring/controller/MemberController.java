@@ -115,6 +115,7 @@ public class MemberController {
         return "/myPage/myPage";
     }
 
+
     // 회원 조회(GET,JSON)
     @GetMapping("/api/member")
     @ResponseBody

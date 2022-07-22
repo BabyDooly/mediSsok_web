@@ -13,6 +13,7 @@
 
     <!-- Custom fonts for this template-->
     <!-- fontawesome-free 파일 설치해서 넣었는데 적용안됨, 그래서 직접 링크함-->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
     <style type="text/css">
@@ -305,7 +306,7 @@
 <!-- 알람 수정 -->
 <div class="portfolio-modal modal fade" id="belleditbtn" tabindex="-1" aria-labelledby="belleditbtn"
      aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header border-0">
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -316,23 +317,23 @@
                         <div class="col-lg-8">
                             <!-- 타이틀 -->
                             <h1 class="text-dark text-uppercase mb-0" style="font-weight: 600;">알람 수정하기</h1>
-                            <br>
+                            <br><br>
 
                             <div class="row g-3 align-items-center">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="editaddTime" class="col-form-label"
                                            style="padding-right: 3em">알람시간</label>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <input type="time" id="editaddTime" class="form-control">
                                 </div>
                             </div>
 
-                            <br><br><br><br>
+                            <br><br><br>
 
-                            <button id="editaddbtn" onclick="editaddbtn()" class="btn btn-primary btn-edit"
+                            <button id="editaddbtn" class="btn btn-primary btn-edit"
                                     style="width: 90px">
-                                <i class="fa-solid fa-pen"></i>
+                                <i class="fas fa-pen"></i>
                                 수정
                             </button>
                             <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">

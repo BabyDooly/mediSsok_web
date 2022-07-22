@@ -43,19 +43,16 @@
                             <hr>
 
                             <form
-                                  class="row g-3 align-items-center needs-validation" novalidate>
+                                  class="row g-3 align-items-center needs-validation" novalidate th:each="link : ${linkList}">
                                 <div class="col-auto">
                                     <label for="connectEmail" class="col-form-label"
-                                           style="padding-right: 3em">이메일</label>
+                                           style="padding-right: 3em">신청 이메일</label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <input type="text" id="connectEmail" class="form-control"
-                                           style=";font-weight: 800;" placeholder="1234@1234.com" disabled>
-                                    <div class="invalid-feedback">
-                                        이메일 형식으로 입력해야 합니다.
-                                    </div>
+                                           style=";font-weight: 800;" placeholder="1234@1234.com" disabled th:value="${link.getMyEmail()}">
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2" >
                                     <button id="d" class="btn btn-primary btn-edit"
                                             style="width: 80%">
                                         수락
@@ -198,7 +195,18 @@
 </div>
 
 <!-- bootstrp js 링크 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script>
+    window.onload = isChecked();
 
+    function isChecked() {
+        if ($('#s4_1').is(":checked")) {
+            $('#workTimeDiv').show();
+        } else {
+            $('#workTimeDiv').hide();
+        }
+    }
+</script>
 </body>
 </html>

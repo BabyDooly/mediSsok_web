@@ -19,9 +19,9 @@ public class LinkInfoSaveRequestDto {
     private String nickname;
     private Long memberId;
 
-    private Member member;
+    private boolean permit;
 
-    private Boolean permit;
+    private Member member;
 
     public LinkInfo toEntity(){
         return LinkInfo.builder()
