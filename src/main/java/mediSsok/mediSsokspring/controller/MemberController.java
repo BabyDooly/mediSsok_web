@@ -151,11 +151,14 @@ public class MemberController {
     public Long linkCreate(@RequestBody LinkInfoSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
         requestDto.setMemberId(userDetails.getMember().getId());
 
-        boolean check = memberService.linkEmailCheck(requestDto.getUserEmail(), userDetails.getMember().getId());
+        int check = memberService.linkEmailCheck(requestDto.getUserEmail(), userDetails.getMember().getId(), userDetails.getMember().getEmail());
 
-        // 중복이 있으면 0번 반환
-        if (check)
-            return 0L;
+        // 1번 이미 신청한 이메일
+        if (check == 1)
+            return 1L;
+        // 2번 자기 자신
+        else if (check == 2)
+            return 2L;
         else
             return memberService.linkCreate(requestDto);
     }
@@ -173,6 +176,13 @@ public class MemberController {
     @ResponseBody
     public Long linkUpdate(@PathVariable Long id, @RequestBody LinkInfoUpdateRequestDto requestDto){
         return memberService.linkUpdate(id, requestDto);
+    }
+
+    // 연동 허용 수정(POST)
+    @PostMapping("/api/link/permit/update/{id}")
+    @ResponseBody
+    public Long linkUpdate(@PathVariable Long id, @RequestBody LinkInfoPermitRequestDto requestDto){
+        return memberService.linkPermitUpdate(id, requestDto);
     }
 
     // 약통 삭제(DELETE)

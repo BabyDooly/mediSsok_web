@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mediSsok.mediSsokspring.domain.BaseTimeEntity;
+import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -49,14 +50,22 @@ public class DateInfo extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sche_id")
     private ScheduleDate scheduleDate;
+
+    // 약통 ID(MedicineBox)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "medbox_id")
+    private MedicineBox medicineBox;
     @Builder
-    public DateInfo(LocalDateTime alarmDatetime, Boolean eatCheck, Boolean alarmCheck, Member member, ScheduleDate scheduleDate) {
+    public DateInfo(LocalDateTime alarmDatetime, Boolean eatCheck, Boolean alarmCheck, Member member, ScheduleDate scheduleDate, MedicineBox medicineBox) {
         this.alarmDatetime = alarmDatetime;
         this.eatCheck = eatCheck;
         this.alarmCheck = alarmCheck;
         this.member = member;
         this.scheduleDate = scheduleDate;
+        this.medicineBox = medicineBox;
     }
+
+
 
     public void timeUpdate(LocalDateTime alarmDatetime) {
         this.alarmDatetime = alarmDatetime;

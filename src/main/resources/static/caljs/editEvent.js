@@ -52,7 +52,7 @@ var editEvent = function (event, element, view) {
         }
 
         if (editTitle.val() === '') {
-            alert('일정명은 필수입니다.')
+            alert('약통 이름은 필수입니다.')
             return false;
         }
 

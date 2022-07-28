@@ -26,11 +26,7 @@ public class IndexController {
         return "/Medi_search/mediSearch";
     }
 
-    // 복용현황
-    @GetMapping("/status")
-    public String dispStatus() {
-        return "/Medi_status/mediStat";
-    }
+
 
     @GetMapping("/medi/info")
     public String mediINfo(){ return "/Medi_search/mediInfo"; }

@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor    //final 필드 생성자 생성
 public class MedicineBoxService {
     private final MedicineBoxRepository medicineBoxRepository;
-    private final MedicineListRepository medicineListRepository;
 
     /*---- 약통 ----*/
     // 생성

@@ -141,13 +141,16 @@ public class MemberService implements UserDetailsService {
 
     @Transactional
     // 연동 중복 체크
-    public boolean linkEmailCheck(String userEmail, Long memberId) {
+    public int linkEmailCheck(String userEmail, Long memberId, String myEmail) {
         boolean user = linkInfoRepository.existsByUserEmailAndMemberId(userEmail, memberId);
-        if (user) {
-            return true;
-        } else {
-            return false;
-        }
+
+        if (user)
+            return 1;
+        else if(userEmail.equals(myEmail))
+            return 2;
+        else
+            return 0;
+
     }
     
     // 링크 아이디 조회
@@ -214,7 +217,17 @@ public class MemberService implements UserDetailsService {
         LinkInfo entity = linkInfoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("연동 내역이 없습니다. id = " + id));
 
-        entity.update(requestDto.getNickname());
+        entity.nickNameUpdate(requestDto.getNickname());
+        return id;
+    }
+
+    // 연동 허용 수정
+    @Transactional
+    public Long linkPermitUpdate(Long id, LinkInfoPermitRequestDto requestDto){
+        LinkInfo entity = linkInfoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("연동 내역이 없습니다. id = " + id));
+
+        entity.permitUpdate(requestDto.isPermit());
         return id;
     }
 

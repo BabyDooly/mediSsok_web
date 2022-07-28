@@ -34,14 +34,7 @@ public class MainController {
         return "/index";
     }
 
-    // 연동 신청 체크(GET)
-    @GetMapping("/api/check")
-    @ResponseBody
-    public List<LinkInfoResponseDto> test(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        return memberService.linkPermitFind(userDetails.getMember().getEmail());
-    }
-
-    // 연동 신청(POST)
+    // 연동 허용(POST)
     @PostMapping("/api/link/permit")
     @ResponseBody
     public Long linkUpdate(@RequestBody LinkInfoSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {

@@ -50,7 +50,11 @@ public class LinkInfo extends BaseTimeEntity {
         this.member = member;
     }
 
-    public void update(String nickname) {
+    public void nickNameUpdate(String nickname) {
         this.nickname = nickname;
+    }
+
+    public void permitUpdate(boolean permit) {
+        this.permit = permit;
     }
 }

@@ -18,11 +18,6 @@
 <p class="mainText">약 쏙</p>
 <p class="mainSubText">약과 나의 약속, 시간에 맞춰 쏙</p>
 
-<button type="button" class="myPageBtnImage " id="testBtn" data-bs-target="#connectAccept"
-        data-bs-toggle="modal" style="background: none;height: 50px">
-    <img class="connectAccept" src="/image/plusbutton.png">
-</button>
-
 <!-- 연동 수락 -->
 <div class="portfolio-modal modal fade" id="connectAccept" tabindex="-1" aria-labelledby="connectAccept"
      aria-hidden="true">
@@ -42,8 +37,8 @@
                             <br>
                             <hr>
 
-                            <form
-                                  class="row g-3 align-items-center needs-validation" novalidate th:each="link : ${linkList}">
+                            <form class="row g-3 align-items-center needs-validation" th:each="link : ${linkList}">
+                                <input type="hidden" th:id="hidden + ${link.getId()}" th:value="${link.getMyEmail()}">
                                 <div class="col-auto">
                                     <label for="connectEmail" class="col-form-label"
                                            style="padding-right: 3em">신청 이메일</label>
@@ -53,22 +48,19 @@
                                            style=";font-weight: 800;" placeholder="1234@1234.com" disabled th:value="${link.getMyEmail()}">
                                 </div>
                                 <div class="col-md-2" >
-                                    <button id="d" class="btn btn-primary btn-edit"
-                                            style="width: 80%">
+                                    <button id="d" class="btn btn-primary btn-edit update"
+                                            style="width: 80%" th:value="${link.getId()}">
                                         수락
                                     </button>
                                 </div>
                                 <div class="col-md-2">
-                                    <button id="dg" class="btn btn-danger" data-bs-dismiss="modal"
-                                            style="width: 80%">
+                                    <button id="dg" class="btn btn-danger refuse" data-bs-dismiss="modal"
+                                            style="width: 80%" th:value="${link.getId()}">
                                         거부
                                     </button>
                                 </div>
                             </form>
-
-
                             <hr>
-
                             <br><br>
                         </div>
                     </div>
@@ -197,14 +189,13 @@
 <!-- bootstrp js 링크 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/main.js"></script>
 <script>
-    window.onload = isChecked();
 
-    function isChecked() {
-        if ($('#s4_1').is(":checked")) {
-            $('#workTimeDiv').show();
-        } else {
-            $('#workTimeDiv').hide();
+    console.log($('#connectEmail').length > 0);
+    window.onload=function isLink() {
+        if ($('#connectEmail').length == true) {
+            $('#connectAccept').modal('show');
         }
     }
 </script>

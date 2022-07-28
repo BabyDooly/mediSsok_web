@@ -27,6 +27,7 @@ public class LinkInfoSaveRequestDto {
         return LinkInfo.builder()
                 .userEmail(userEmail)
                 .nickname(nickname)
+                .permit(permit)
                 .member(Member.builder().id(memberId).build())
                 .build();
     }

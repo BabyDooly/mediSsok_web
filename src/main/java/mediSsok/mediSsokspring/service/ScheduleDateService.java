@@ -3,12 +3,16 @@ package mediSsok.mediSsokspring.service;
 
 
 import lombok.RequiredArgsConstructor;
+import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
 import mediSsok.mediSsokspring.domain.entity.schedule.DateInfo;
 import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
 import mediSsok.mediSsokspring.domain.repository.schedule.DateInfoRepository;
 import mediSsok.mediSsokspring.domain.repository.schedule.ScheduleDateRepository;
+import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
 import mediSsok.mediSsokspring.dto.schedule.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +34,8 @@ public class ScheduleDateService {
     @Transactional
     public Long scheduleCreate(ScheduleSaveRequestDto responseDto, Long memberId) {
         Long scheduleDateId = scheduleDateRepository.save(responseDto.toEntity()).getId();
+        Long medicineBoxId = responseDto.getMedicineBoxId();
+
 
         int cycle = responseDto.getCycle();
         int checkCycle = cycle;
@@ -49,6 +55,7 @@ public class ScheduleDateService {
                     .alarmDatetime(date)
                     .member(Member.builder().id(memberId).build())
                     .scheduleDate(ScheduleDate.builder().id(scheduleDateId).build())
+                    .medicineBox(MedicineBox.builder().id(medicineBoxId).build())
                     .build();
 
             // 특정요일
@@ -179,5 +186,15 @@ public class ScheduleDateService {
 
         entity.alarmUpdate(requestDto.getAlarmCheck());
         return id;
+    }
+
+    
+    /*---- 캘린더 ----*/
+    // 일정 리스트
+    @Transactional(readOnly=true)
+    public List<CalendarResponseDto> calendarList (Long id){
+        return dateInfoRepository.findByMemberId(id).stream()
+                .map(CalendarResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
