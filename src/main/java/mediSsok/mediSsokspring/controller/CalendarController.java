@@ -33,8 +33,15 @@ public class CalendarController {
     // 캘린더 리스트 전송(GET)
     @GetMapping("/api/status/list")
     @ResponseBody
-    public List<CalendarResponseDto> calendarList(@AuthenticationPrincipal CustomUserDetails userDetails) {
+    public List<CalendarResponseDto> calendarMyList(@AuthenticationPrincipal CustomUserDetails userDetails) {
         return scheduleDateService.calendarList(userDetails.getMember().getId());
+    }
+
+    // 캘린더 링크 리스트 전송(GET)
+    @GetMapping("/api/status/list/{id}")
+    @ResponseBody
+    public List<CalendarResponseDto> calendarLinkList(@PathVariable Long id) {
+        return scheduleDateService.calendarList(id);
     }
 
     // 캘린더 일정 수정(POST)

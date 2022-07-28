@@ -55,6 +55,7 @@ public class DateInfo extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medbox_id")
     private MedicineBox medicineBox;
+
     @Builder
     public DateInfo(LocalDateTime alarmDatetime, Boolean eatCheck, Boolean alarmCheck, Member member, ScheduleDate scheduleDate, MedicineBox medicineBox) {
         this.alarmDatetime = alarmDatetime;
