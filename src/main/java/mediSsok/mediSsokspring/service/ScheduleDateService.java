@@ -197,4 +197,14 @@ public class ScheduleDateService {
                 .map(CalendarResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    // 일정 수정
+    @Transactional
+    public Long calendarUpdate(Long id, CalendarUpdateRequestDto requestDto){
+        DateInfo entity = dateInfoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("일정이 없습니다. id = " + id));
+
+        entity.calendarUpdate(requestDto.getStartday(), requestDto.getEatCheck());
+        return id;
+    }
 }

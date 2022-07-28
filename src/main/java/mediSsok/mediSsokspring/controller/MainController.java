@@ -42,5 +42,4 @@ public class MainController {
 
         return memberService.linkCreate(requestDto);
     }
-
 }

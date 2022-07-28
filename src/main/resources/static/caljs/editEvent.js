@@ -85,15 +85,31 @@ var editEvent = function (event, element, view) {
 
         $("#calendar").fullCalendar('updateEvent', event);
 
+
+        let editEat
+        if(element2.value=='#D25565'){
+            editEat = false;
+        }else{
+            editEat = true;
+        }
+
+        let data = {
+            startday: editStart.val(),
+            eatCheck: editEat
+        };
+
+        console.log(data);
+
         //일정 업데이트
         $.ajax({
-            type: "get",
-            url: "",
-            data: {
-                //...
-            },
+            type: 'POST',
+            url: '/api/status/update/' + event._id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data),
             success: function (response) {
-                alert('수정되었습니다.')
+                alert('일정이 수정되었습니다.')
+                location.reload();
             }
         });
 
@@ -109,14 +125,13 @@ $('#deleteEvent').on('click', function () {
 
     //삭제시
     $.ajax({
-        type: "get",
-        url: "",
-        data: {
-            //...
-        },
+        type: 'DELETE',
+        url: '/api/medi/alarm/delete/'+ $(this).data('id'),
+        dataType: 'json',
+        contentType:'application/json; charset=utf-8',
         success: function (response) {
-            alert('삭제되었습니다.');
+            alert('일정이 삭제되었습니다.')
+            location.reload();
         }
     });
-
 });

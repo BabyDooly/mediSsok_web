@@ -65,8 +65,6 @@ public class DateInfo extends BaseTimeEntity {
         this.medicineBox = medicineBox;
     }
 
-
-
     public void timeUpdate(LocalDateTime alarmDatetime) {
         this.alarmDatetime = alarmDatetime;
     }
@@ -77,5 +75,10 @@ public class DateInfo extends BaseTimeEntity {
 
     public void alarmUpdate(Boolean alarmCheck) {
         this.alarmCheck = alarmCheck;
+    }
+
+    public void calendarUpdate(LocalDateTime alarmDatetime, Boolean eatCheck) {
+        this.alarmDatetime = alarmDatetime;
+        this.eatCheck = eatCheck;
     }
 }

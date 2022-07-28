@@ -3,6 +3,7 @@ package mediSsok.mediSsokspring.controller;
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
+import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxUpdateRequestDto;
 import mediSsok.mediSsokspring.dto.schedule.*;
 import mediSsok.mediSsokspring.service.MedicineBoxService;
 import mediSsok.mediSsokspring.service.ScheduleDateService;
@@ -19,7 +20,6 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor    //final 필드 생성자 생성
 public class CalendarController {
-    private final MedicineBoxService medicineBoxService;
     private final ScheduleDateService scheduleDateService;
 
     /*---- 스케줄 ----*/
@@ -33,7 +33,14 @@ public class CalendarController {
     // 캘린더 리스트 전송(GET)
     @GetMapping("/api/status/list")
     @ResponseBody
-    public List<CalendarResponseDto> CalendarList(@AuthenticationPrincipal CustomUserDetails userDetails) {
+    public List<CalendarResponseDto> calendarList(@AuthenticationPrincipal CustomUserDetails userDetails) {
         return scheduleDateService.calendarList(userDetails.getMember().getId());
+    }
+
+    // 캘린더 일정 수정(POST)
+    @PostMapping("/api/status/update/{id}")
+    @ResponseBody
+    public Long calendarUpdate(@PathVariable Long id, @RequestBody CalendarUpdateRequestDto requestDto){
+        return scheduleDateService.calendarUpdate(id, requestDto);
     }
 }
