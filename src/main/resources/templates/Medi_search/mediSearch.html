@@ -13,6 +13,9 @@
         .tevents:hover tbody tr:hover td {
             background: lightgray;
         }
+        .btngroupMargin{
+            margin: 10px;
+        }
     </style>
 </head>
 <body>
@@ -27,8 +30,8 @@
         <tbody>
         <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <tr>
-            <th class="table-active" width="150" valign="middle">식별문자</th>
-            <td height="120" align="left" valign="middle">
+            <th rowspan="2" class="table-active" width="150" valign="middle">식별문자</th>
+            <td rowspan="2" width="485" height="120" align="left" valign="middle">
                 <form class="row gx-2 align-items-center">
                     <div class="col-7">
                         <label class="visually-hidden" for="autoSizingInput1">Name</label>
@@ -59,41 +62,11 @@
                     </div>
                 </form>
             </td>
-            <td colspan="2" width="400" align="center" valign="middle">사진 들어갈 자리</td>
-        </tr>
-
-        <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
-        <tr>
-            <th class="table-active" width="150" valign="middle" rowspan="2">제형</th>
-            <td rowspan="2" height="100" valign="middle" text-align="left">
-                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio1"><img
-                            src="/image/mediSearch-shape2/shape1.png"></label>
-
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio2"><img
-                            src="/image/mediSearch-shape2/shape2.png"></label>
-
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio3"><img
-                            src="/image/mediSearch-shape2/shape3.png"></label>
-
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio4"><img src="/image/mediSearch-shape2/any.png"></label>
-
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off" checked>
-                    <label class="btn btn-outline-primary" for="btnradio5"><img src="/image/mediSearch-shape2/all.png"></label>
-                </div>
+            <th width="150" valign="middle" class="table-active">제품명/성분명</th>
+            <td height="80" align="center" valign="middle">
+                <input type="text" class="form-control" id="autoSizingInput3">
             </td>
-            <div>
-                <th width="150" valign="middle" class="table-active">제품명/성분명</th>
-                <td height="80" align="center" valign="middle">
-                    <input type="text" class="form-control" id="autoSizingInput3">
-                </td>
-            </div>
         </tr>
-
         <tr>
             <th class="table-active" width="150" valign="middle">회사명</th>
             <td height="80" align="center" valign="middle">
@@ -102,55 +75,103 @@
         </tr>
         <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <tr>
+            <th class="table-active" width="150" valign="middle" rowspan="2">제형</th>
+            <td rowspan="2" height="100" valign="middle" text-align="left">
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group"
+                     style="display : block; text-align: left">
+                    <input type="checkbox" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio1"><img
+                            src="/image/mediSearch-shape2/shape1.png"></label>
+
+                    <input type="checkbox" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio2"><img
+                            src="/image/mediSearch-shape2/shape2.png"></label>
+
+                    <input type="checkbox" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio3"><img
+                            src="/image/mediSearch-shape2/shape3.png"></label>
+
+                    <input type="checkbox" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio5"><img src="/image/mediSearch-shape2/all.png"></label>
+                </div>
+            </td>
+            <div>
+
+            </div>
+        </tr>
+        <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+        <tr>
+            <th class="table-active" width="150" valign="middle">분할선</th>
+            <td height="100" align="center" valign="middle" colspan="4">
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group"
+                     style="display : block; text-align: left">
+                    <input type="checkbox" class="btn-check" name="btnradio3" id="btnradio___1" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio___1"><img
+                            src="/image/mediSearch-line/line0.png"></label>
+
+                    <input type="checkbox" class="btn-check" name="btnradio3" id="btnradio___2" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio___2"><img
+                            src="/image/mediSearch-line/line2.png"></label>
+
+                    <input type="checkbox" class="btn-check" name="btnradio3" id="btnradio___3" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio___3"><img
+                            src="/image/mediSearch-line/line1.png"></label>
+
+                    <input type="checkbox" class="btn-check" name="btnradio3" id="btnradio___5" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio___5"><img src="/image/mediSearch-line/all.png"></label>
+
+                </div>
+            </td>
+        </tr>
+        <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+        <tr>
             <th class="table-active" width="150" valign="middle">모양</th>
             <td align="center" valign="middle" colspan="4">
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group"
                      style="display : block; text-align: left">
-                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio_1" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio_1"><img
+                    <input type="checkbox" class="btn-check" name="btnradio1" id="btnradio_1" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio_1"><img
                             src="/image/mediSearch-shape/circle.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio_2" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio_2"><img
+                    <input type="checkbox" class="btn-check" name="btnradio1" id="btnradio_2" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio_2"><img
                             src="/image/mediSearch-shape/roundcircle.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio_3" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio_3"><img src="/image/mediSearch-shape/cap.png"></label>
+                    <input type="checkbox" class="btn-check" name="btnradio1" id="btnradio_3" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio_3"><img src="/image/mediSearch-shape/cap.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio_4" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio_4"><img
+                    <input type="checkbox" class="btn-check" name="btnradio1" id="btnradio_4" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio_4"><img
                             src="/image/mediSearch-shape/halfcircle.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio_5" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio_5"><img
+                    <input type="checkbox" class="btn-check" name="btnradio1" id="btnradio_5" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio_5"><img
                             src="/image/mediSearch-shape/triangle.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio_6" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio_6"><img
+                    <input type="checkbox" class="btn-check" name="btnradio1" id="btnradio_6" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio_6"><img
                             src="/image/mediSearch-shape/square.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio_7" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio_7"><img
+                    <input type="checkbox" class="btn-check" name="btnradio1" id="btnradio_7" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio_7"><img
                             src="/image/mediSearch-shape/rhombus.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio_8" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio_8"><img
+                    <input type="checkbox" class="btn-check" name="btnradio1" id="btnradio_8" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio_8"><img
                             src="/image/mediSearch-shape/angle5.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio_9" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio_9"><img
+                    <input type="checkbox" class="btn-check" name="btnradio1" id="btnradio_9" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio_9"><img
                             src="/image/mediSearch-shape/angle6.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio_10" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio_10"><img
+                    <input type="checkbox" class="btn-check" name="btnradio1" id="btnradio_10" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio_10"><img
                             src="/image/mediSearch-shape/angle8.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio_11" autocomplete="off" checked>
-                    <label class="btn btn-outline-primary" for="btnradio_11"><img src="/image/mediSearch-shape/all.png"></label>
+                    <input type="checkbox" class="btn-check" name="btnradio1" id="btnradio_11" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio_11"><img src="/image/mediSearch-shape/all.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio_12" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio_12"><img src="/image/mediSearch-shape/any.png"></label>
-                </div>
+                   </div>
             </td>
         </tr>
         <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
@@ -159,102 +180,77 @@
             <td height="100" align="center" valign="middle" colspan="4">
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group"
                      style="display : block; text-align: left">
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__1" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__1"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__1" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__1"><img
                             src="/image/mediSearch-color/white.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__2" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__2"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__2" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__2"><img
                             src="/image/mediSearch-color/yellow.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__3" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__3"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__3" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__3"><img
                             src="/image/mediSearch-color/orange.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__4" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__4"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__4" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__4"><img
                             src="/image/mediSearch-color/pink.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__5" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__5"><img src="/image/mediSearch-color/red.png"></label>
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__5" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__5"><img src="/image/mediSearch-color/red.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__6" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__6"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__6" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__6"><img
                             src="/image/mediSearch-color/brown.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__7" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__7"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__7" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__7"><img
                             src="/image/mediSearch-color/chartreuse.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__8" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__8"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__8" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__8"><img
                             src="/image/mediSearch-color/green.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__9" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__9"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__9" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__9"><img
                             src="/image/mediSearch-color/cyan.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__10" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__10"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__10" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__10"><img
                             src="/image/mediSearch-color/blue.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__11" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__11"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__11" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__11"><img
                             src="/image/mediSearch-color/navy.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__12" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__12"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__12" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__12"><img
                             src="/image/mediSearch-color/darkmagenta.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__13" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__13"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__13" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__13"><img
                             src="/image/mediSearch-color/purple.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__14" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__14"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__14" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__14"><img
                             src="/image/mediSearch-color/gray.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__15" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__15"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__15" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__15"><img
                             src="/image/mediSearch-color/black.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__16" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio__16"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__16" autocomplete="off">
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__16"><img
                             src="/image/mediSearch-color/transparency.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio__17" autocomplete="off" checked>
-                    <label class="btn btn-outline-primary" for="btnradio__17"><img
+                    <input type="checkbox" class="btn-check" name="btnradio2" id="btnradio__17" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary btngroupMargin" for="btnradio__17"><img
                             src="/image/mediSearch-color/all.png"></label>
                 </div>
             </td>
         </tr>
         <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
-        <tr>
-            <th class="table-active" width="150" valign="middle">분할선</th>
-            <td height="100" align="center" valign="middle" colspan="4">
-                <div class="btn-group" role="group" aria-label="Basic radio toggle button group"
-                     style="display : block; text-align: left">
-                    <input type="radio" class="btn-check" name="btnradio3" id="btnradio___1" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio___1"><img
-                            src="/image/mediSearch-line/line0.png"></label>
 
-                    <input type="radio" class="btn-check" name="btnradio3" id="btnradio___2" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio___2"><img
-                            src="/image/mediSearch-line/line2.png"></label>
-
-                    <input type="radio" class="btn-check" name="btnradio3" id="btnradio___3" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio___3"><img
-                            src="/image/mediSearch-line/line1.png"></label>
-
-                    <input type="radio" class="btn-check" name="btnradio3" id="btnradio___4" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio___4"><img src="/image/mediSearch-line/any.png"></label>
-
-                    <input type="radio" class="btn-check" name="btnradio3" id="btnradio___5" autocomplete="off" checked>
-                    <label class="btn btn-outline-primary" for="btnradio___5"><img src="/image/mediSearch-line/all.png"></label>
-
-                </div>
-            </td>
-        </tr>
         </tbody>
     </table>
 </div>

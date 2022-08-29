@@ -25,7 +25,7 @@ var calendar = $('#calendar').fullCalendar({
     eventLimitClick: 'popover', //+된거 눌렀을때 popover
     eventLimitText:'개',
     navLinks: false, // 달력상의 날짜를 클릭할 수 있는지
-    defaultDate: moment('2022-07'), //실제 사용시 현재 날짜로 수정
+
     timeFormat: 'HH:mm',
     defaultTimedEventDuration: '01:00:00',
     editable: false, // 이벤트 드래그, 리사이징 등의 편집 여부 결정

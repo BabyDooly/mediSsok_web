@@ -13,7 +13,7 @@ public class IndexController {
     // test 알람설정 만드는중
     @GetMapping("/test")
     public String test(){
-        return "/login/test";
+        return "/test/tes";
     }
 
     @GetMapping("/ttt")
