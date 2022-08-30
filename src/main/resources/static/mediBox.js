@@ -271,7 +271,6 @@ let mediBox = {
                 week_result = week_result + 32;
             if ($('#addSun').is(':checked'))
                 week_result = week_result + 64;
-
         }
         else if ($('#selectdayBtn').val() == "3"){
             if ($('#sel2').val() == "0")
@@ -280,8 +279,6 @@ let mediBox = {
                 cycle_result = $('#bellstepper').val() * 7;
             else if ($('#sel2').val() == "2")
                 cycle_result = $('#bellstepper').val() * 30;
-
-
         }
 
         let data = {

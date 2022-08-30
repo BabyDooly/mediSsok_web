@@ -55,11 +55,6 @@ public class Member extends BaseTimeEntity {
     @ColumnDefault("true")
     private Boolean pushAlarms;
 
-    // 위치알림
-    @Column(name = "member_location_alarm")
-    @ColumnDefault("false")
-    private Boolean locationAlarms;
-
     // 보충알림
     @Column(name = "member_replenish_alarm")
     @ColumnDefault("false")
@@ -108,10 +103,9 @@ public class Member extends BaseTimeEntity {
     }
 
     // 알람 변경
-    public void alarmUpdate(Boolean vibration, Boolean pushAlarms, Boolean locationAlarms, Boolean replenishAlarms, LocalTime workAlarms) {
+    public void alarmUpdate(Boolean vibration, Boolean pushAlarms, Boolean replenishAlarms, LocalTime workAlarms) {
         this.vibration = vibration;
         this.pushAlarms = pushAlarms;
-        this.locationAlarms = locationAlarms;
         this.replenishAlarms = replenishAlarms;
         this.workAlarms = workAlarms;
     }

@@ -146,7 +146,6 @@ let main = {
         let data = {
             vibration: $('#vibrationCheckbox').is(':checked'),
             pushAlarms: $('#pushAlarmCheckbox').is(':checked'),
-            locationAlarms: $('#locationAlarmsCheckbox').is(':checked'),
             replenishAlarms: $('#replenishAlarmsCheckbox').is(':checked'),
             workAlarms: workAlarms
         };

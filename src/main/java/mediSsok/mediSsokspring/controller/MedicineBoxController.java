@@ -60,14 +60,19 @@ public class MedicineBoxController {
         return "/Medi_box/BoxInformation";
     }
 
-    // 약통 리스트
+    // 약통 리스트(JSON)
     @GetMapping("/api/medi/list")
     @ResponseBody
     public Page<MedicineBoxResponseDto> findById(@AuthenticationPrincipal CustomUserDetails userDetails, Pageable pageable) {
         return medicineBoxService.findByMemberId(userDetails.getMember().getId(), pageable);
     }
 
-
+    // 일정 리스트(JSON)
+    @GetMapping("/api/medi/schedule/list/{id}")
+    @ResponseBody
+    public List<ScheduleResponseDto> findByIdSchedule(@PathVariable Long id) {
+        return scheduleDateService.scheduleList(id);
+    }
 
     // 약통 추가(POST)
     @PostMapping("/api/medi/add")

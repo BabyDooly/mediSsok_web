@@ -175,6 +175,15 @@ public class ScheduleDateService {
                 .orElseThrow(() -> new IllegalArgumentException("알람이 없습니다. id = " + id));
 
         entity.eatUpdate(requestDto.getEatCheck());
+        if (requestDto.getEatCheck() == true){
+            if (entity.getMedicineBox().getCount() != 0)
+                entity.getMedicineBox().setCount(entity.getMedicineBox().getCount() - 1);
+        }
+        else
+            entity.getMedicineBox().setCount(entity.getMedicineBox().getCount() + 1);
+
+        System.out.println("갯수 : " + entity.getMedicineBox().getCount());
+
         return id;
     }
 

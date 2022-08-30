@@ -16,4 +16,8 @@ public interface LinkInfoRepository extends JpaRepository<LinkInfo, Long> {
 
     // 이메일 중복하면 true 반환
     boolean existsByUserEmailAndMemberId (String email, Long memberId);
+
+    // 연동 삭제
+    LinkInfo findByUserEmailAndMemberId(String email, Long memberId);
+
 }

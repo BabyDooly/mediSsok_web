@@ -27,7 +27,6 @@ public class IndexController {
     }
 
 
-
     @GetMapping("/medi/info")
     public String mediINfo(){ return "/Medi_search/mediInfo"; }
 }

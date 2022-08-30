@@ -30,5 +30,4 @@ public class MedicineBoxResponseDto {
         this.count = entity.getCount();
         this.memberId = entity.getMember().getId();
     }
-
 }

@@ -22,7 +22,6 @@ public class MemberResponseDto {
     private String picture;
     private Boolean vibration;
     private Boolean pushAlarms;
-    private Boolean locationAlarms;
     private Boolean replenishAlarms;
     private LocalTime workAlarms;
 
@@ -38,7 +37,6 @@ public class MemberResponseDto {
         this.picture = entity.getPicture();
         this.vibration = entity.getVibration();
         this.pushAlarms = entity.getPushAlarms();
-        this.locationAlarms = entity.getLocationAlarms();
         this.replenishAlarms = entity.getReplenishAlarms();
         this.workAlarms = entity.getWorkAlarms();
         this.medicineBoxsName = entity.getMedicineBoxs().stream()

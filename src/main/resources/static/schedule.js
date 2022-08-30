@@ -58,10 +58,8 @@ let mediBox = {
             let img1 = document.getElementById("img" + id);
             console.log(img1);
             if (img1.classList.contains('fas')) {
-                alert("알람 OFF")
                 _this.alarmCheck(id, false);
             } else {
-                alert("알람 ON")
                 _this.alarmCheck(id, true);
             }
         })
@@ -70,6 +68,10 @@ let mediBox = {
         $('.eatBtn').on('click', function () {
             id = $(this).attr("value");
             console.log(id);
+
+            let clickCheck = $(this).attr("id");
+
+            console.log(clickCheck)
 
             let on = "on-" + id;
             let off = "off-" + id;
@@ -80,10 +82,8 @@ let mediBox = {
             console.log(offCheck)
 
             if (offCheck) {
-                alert("먹었어요")
                 _this.eatCheck(id, true);
             } else if(onCheck) {
-                alert("안먹었어요")
                 _this.eatCheck(id, false);
             }
         })
@@ -263,7 +263,7 @@ let mediBox = {
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
-            location.reload(); // 알람 여부 성공시 메인페이지 이동
+            location.reload(); // 알람 여부 성공시 리로드
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -282,10 +282,32 @@ let mediBox = {
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
-            location.reload(); // 복용 여부 수정 성공시 메인페이지 이동
+            // location.reload(); // 복용 여부 수정 성공시 리로드
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
+
+
+        let dateId = {
+            dateInfoId: id,
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/medi/alarm/get',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(dateId)
+        }).done(function(data) {
+            console.log(data);
+            // let toastLive = document.getElementById('liveCount')
+            // let toast1 = new bootstrap.Toast(toastLive)
+            //
+            // toast1.show()
+            // setTimeout(function(){}, 5000);
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
     },
 }
 mediBox.init();

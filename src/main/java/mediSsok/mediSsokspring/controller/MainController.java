@@ -34,12 +34,12 @@ public class MainController {
         return "/index";
     }
 
-    // 연동 허용(POST)
-    @PostMapping("/api/link/permit")
-    @ResponseBody
-    public Long linkUpdate(@RequestBody LinkInfoSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
-        requestDto.setMember(userDetails.getMember());
-
-        return memberService.linkCreate(requestDto);
-    }
+//    // 연동 허용(POST)
+//    @PostMapping("/api/link/permit")
+//    @ResponseBody
+//    public Long linkUpdate(@RequestBody LinkInfoSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
+//        requestDto.setMember(userDetails.getMember());
+//
+//        return memberService.linkCreate(requestDto);
+//    }
 }

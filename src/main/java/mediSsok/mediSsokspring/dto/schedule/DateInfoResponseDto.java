@@ -24,6 +24,8 @@ public class DateInfoResponseDto {
     private Long memberId;
     private Long scheduleDateId;
     private String medicineBoxName;
+    private Boolean replenishAlarms;
+    private int medCount;
 
     public DateInfoResponseDto(DateInfo entity) {
         this.id = entity.getId();
@@ -34,5 +36,7 @@ public class DateInfoResponseDto {
         this.memberId = entity.getMember().getId();
         this.scheduleDateId = entity.getScheduleDate().getId();
         this.medicineBoxName = entity.getScheduleDate().getMedicineBox().getName();
+        this.replenishAlarms = entity.getMember().getReplenishAlarms();
+        this.medCount = entity.getMedicineBox().getCount();
     }
 }

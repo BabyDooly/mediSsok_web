@@ -97,7 +97,7 @@ public class MemberService implements UserDetailsService {
         Member entity = memberRepository.findByEmail(email)
                 // 아이디가 없을때
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. email = " + email));
-        entity.alarmUpdate(requestDto.getVibration(), requestDto.getPushAlarms(), requestDto.getLocationAlarms(), requestDto.getReplenishAlarms(), requestDto.getWorkAlarms());
+        entity.alarmUpdate(requestDto.getVibration(), requestDto.getPushAlarms(), requestDto.getReplenishAlarms(), requestDto.getWorkAlarms());
         return entity.getId();
     }
 
@@ -150,14 +150,13 @@ public class MemberService implements UserDetailsService {
             return 2;
         else
             return 0;
-
     }
     
     // 링크 아이디 조회
     @Transactional
     public LinkInfoResponseDto linkFindById (Long id){
         LinkInfo entity = linkInfoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("맴버 약통에 대한 스케줄이 없습니다. id = " + id));
+                .orElseThrow(() -> new IllegalArgumentException("링크된 아이디가 없습니다. id = " + id));
 
         return new LinkInfoResponseDto(entity);
     }
@@ -235,8 +234,16 @@ public class MemberService implements UserDetailsService {
     @Transactional
     public void linkDelete(Long id){
         LinkInfo entity = linkInfoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 약통이 없습니다. id = " + id));
+                .orElseThrow(() -> new IllegalArgumentException("해당 연동이 없습니다. id = " + id));
+
+
 
         linkInfoRepository.delete(entity);
+
+//        String userEmail = entity.getUserEmail();
+//        Long memberId = entity.getMember().getId();
+//
+//        LinkInfo linkMember = linkInfoRepository.findByUserEmailAndMemberId(userEmail, memberId);
+//        linkInfoRepository.delete(linkMember);
     }
 }

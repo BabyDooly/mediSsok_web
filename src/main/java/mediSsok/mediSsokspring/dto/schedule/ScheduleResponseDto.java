@@ -17,7 +17,6 @@ public class ScheduleResponseDto {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateTime;
-
     private String timeUpdate;
     private int cycle;
     private String cycleUpdate;

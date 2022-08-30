@@ -13,7 +13,6 @@ import java.time.LocalTime;
 public class MemberAlarmUpdateRequestDto {
     private Boolean vibration;
     private Boolean pushAlarms;
-    private Boolean locationAlarms;
     private Boolean replenishAlarms;
     @JsonFormat(pattern="HH:mm")
     private LocalTime workAlarms;
