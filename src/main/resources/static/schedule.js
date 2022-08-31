@@ -275,6 +275,11 @@ let mediBox = {
             eatCheck : check
         }
 
+        let dateId = {
+            dateInfoId: id,
+        };
+
+
         $.ajax({
             type: 'POST',
             url: '/api/medi/eat/check/'+id,
@@ -283,31 +288,38 @@ let mediBox = {
             data: JSON.stringify(data)
         }).done(function() {
             // location.reload(); // 복용 여부 수정 성공시 리로드
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/medi/alarm/get',
+                dataType: 'json',
+                contentType:'application/json; charset=utf-8',
+                data: JSON.stringify(dateId)
+            }).done(function(data) {
+                console.log(data);
+
+                if (data['replenishAlarms'] == true) {
+                    let medicineBoxName =  data['medicineBoxName'];
+                    document.getElementById("liveTitle").innerHTML = medicineBoxName;
+
+                    let medCount =  data['medCount'];
+                    document.getElementById("medCountText").innerHTML = medCount + "개 남았습니다";
+
+                    let toastLive = document.getElementById('liveCount')
+                    let toast1 = new bootstrap.Toast(toastLive)
+
+                    toast1.show()
+                    setTimeout(function(){}, 4000);
+                }
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            })
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
 
 
-        let dateId = {
-            dateInfoId: id,
-        };
 
-        $.ajax({
-            type: 'POST',
-            url: '/api/medi/alarm/get',
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(dateId)
-        }).done(function(data) {
-            console.log(data);
-            // let toastLive = document.getElementById('liveCount')
-            // let toast1 = new bootstrap.Toast(toastLive)
-            //
-            // toast1.show()
-            // setTimeout(function(){}, 5000);
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        })
     },
 }
 mediBox.init();

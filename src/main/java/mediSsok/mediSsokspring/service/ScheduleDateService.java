@@ -213,7 +213,16 @@ public class ScheduleDateService {
         DateInfo entity = dateInfoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("일정이 없습니다. id = " + id));
 
+        entity.eatUpdate(requestDto.getEatCheck());
+        if (requestDto.getEatCheck() == true){
+            if (entity.getMedicineBox().getCount() != 0)
+                entity.getMedicineBox().setCount(entity.getMedicineBox().getCount() - 1);
+        }
+        else
+            entity.getMedicineBox().setCount(entity.getMedicineBox().getCount() + 1);
         entity.calendarUpdate(requestDto.getStartday(), requestDto.getEatCheck());
         return id;
     }
+
+
 }

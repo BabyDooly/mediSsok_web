@@ -108,8 +108,7 @@ var editEvent = function (event, element, view) {
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data),
             success: function (response) {
-                alert('일정이 수정되었습니다.')
-                location.reload();
+                // location.reload();
             }
         });
 
