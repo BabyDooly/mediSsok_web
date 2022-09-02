@@ -32,7 +32,18 @@ var editEvent = function (event, element, view) {
     editColor.val(event.backgroundColor);
     addBtnContainer.hide();
     modifyBtnContainer.show();
-    eventModal.modal('show');
+    // eventModal.modal('show');
+
+    let query = window.location.search;         // http://localhost:8080/notice?id=1&name=하나
+    let param = new URLSearchParams(query);     // ?id=1&name=하나
+
+
+    if (param.get("memberId") != null)
+        eventModal.modal('hide');
+
+    else
+        eventModal.modal('show');
+
 
     element2.value=editColor.val();
     element2.style.backgroundColor=editColor.val();

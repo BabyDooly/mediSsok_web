@@ -129,17 +129,16 @@ border: 0px;background: #212529;">
 <p class="mainSubText">우리 가족 다같이, 건강하게 쏙</p>
 <div class="mediStatDiv">
 
-    <select class="form-control" style="width: 10%;background: #F2F2F2">
-        <option selected value="1">나</option>
-        <option value="2">친구1</option>
-        <option value="3">친구2</option>
-        <option value="4">친구3</option>
-        <option value="5">친구4</option>
+    <select class="form-control" style="width: 10%;background: #F2F2F2" onchange="if(this.value) location.href=(this.value);" >
+        <option selected value="0">친구 선택</option>
+        <option th:each="link : ${linkList}" th:value="'/status?memberId=' + ${link.getUserid()} + '&linkId=' + ${link.getId()}"
+                th:text="${link.getNickname()}">친구
+        </option>
     </select>
 
-    <img src="/image/profile-icon/man1.png" class="rounded myPageImage" alt="..."
+    <img th:src="'/image/profile-icon/' + ${member.getPicture()}+ '.png'" class="rounded myPageImage" alt="..."
         style="width: 100px;height: 100px;padding: 3px; border:3px solid black; border-radius: 20%;text-align: center">
-    <p style="font-size: 25px;margin-bottom: 0">나</p>
+    <p style="font-size: 25px;margin-bottom: 0" th:text="${member.getNickname()}">나</p>
 
 </div>
 

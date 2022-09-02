@@ -56,6 +56,8 @@ public class MedicineBoxController {
         List<ScheduleResponseDto> scheduleList = scheduleDateService.scheduleList(id);
 
         model.addAttribute("box", dto);
+        System.out.println("디티오 : " + dto.toString());
+
         model.addAttribute("scheList", scheduleList);
         return "/Medi_box/BoxInformation";
     }
@@ -78,12 +80,6 @@ public class MedicineBoxController {
     @PostMapping("/api/medi/add")
     @ResponseBody
     public Long mediBoxCreate(@RequestBody MedicineBoxSaveRequestDto requestDto, @AuthenticationPrincipal CustomUserDetails userDetails) {
-//        System.out.println(requestDto);
-//
-//        for (MedicineList medicineList : requestDto.getMedicineLists()) {
-//            System.out.println(medicineList);
-//        }
-
         requestDto.setMemberId(userDetails.getMember().getId());
         return medicineBoxService.mediBoxCreate(requestDto);
     }

@@ -38,15 +38,24 @@
                     <hr>
 
                     <!-- 약통 텍스트-->
-                    <h3 style="display:inline">메모 : </h3>
+                    <br>
+                    <div th:if="${box.getMemo()} != ''">
+                    <h3 style="display:inline" >메모 : </h3>
                     <h3 id="mediMemo" style="display:inline" th:text="${box.getMemo()}">약통 메모<br></h3>
                     <br><br>
-                    <h4>약1 : 감기약<br>약2 : 두통약</h4>
-                    <br>
+                    </div>
+
+                    <div th:if="${box.getMedicineLists().size()} != 0">
+                    <h4>-약-</h4>
+                    <div th:each="list : ${box.getMedicineLists()}">
+                        <h3 th:text="${list.getId()}">두통약</h3>
+                    </div>
+                    <br><br>
+                    </div>
 
                     <h4 style="display:inline">남은 약 개수 : </h4> <h4 id="mediCounts" style="display:inline" th:text="${box.getCount()}">몇</h4>
                     <h4 style="display:inline">개</h4>
-                    <br><br>
+                    <br><br><br>
 
                     <button id="btn-time" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#timebtn">
@@ -129,7 +138,7 @@
                                             <tbody id="editmediTbody">
                                             <tr>
                                                 <td><input type="text" id="editmedi" class="form-control"
-                                                           placeholder="무슨약"></td>
+                                                           placeholder="약 이름"></td>
                                             </tr>
 
                                             </tbody>

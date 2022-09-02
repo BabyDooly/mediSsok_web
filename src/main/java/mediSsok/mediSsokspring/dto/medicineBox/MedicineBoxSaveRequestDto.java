@@ -17,7 +17,7 @@ public class MedicineBoxSaveRequestDto {
     private String color;
     private int count;
     private Long memberId;
-    private List<MedicineList> medicineLists;
+    private List<String> medicineLists;
 
     public MedicineBox toEntity(){
         return MedicineBox.builder()
@@ -26,7 +26,6 @@ public class MedicineBoxSaveRequestDto {
                 .memo(memo)
                 .count(count)
                 .member(Member.builder().id(memberId).build())
-                .medicineLists(medicineLists)
                 .build();
     }
 }

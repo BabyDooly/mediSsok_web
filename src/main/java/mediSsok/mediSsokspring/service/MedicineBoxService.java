@@ -2,9 +2,13 @@ package mediSsok.mediSsokspring.service;
 
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
+import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineList;
+import mediSsok.mediSsokspring.domain.entity.member.LinkInfo;
+import mediSsok.mediSsokspring.domain.entity.member.Member;
 import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineBoxRepository;
 import mediSsok.mediSsokspring.domain.repository.medicineBox.MedicineListRepository;
 import mediSsok.mediSsokspring.dto.medicineBox.*;
+import mediSsok.mediSsokspring.dto.member.LinkInfoResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,11 +22,30 @@ import java.util.stream.Collectors;
 public class MedicineBoxService {
     private final MedicineBoxRepository medicineBoxRepository;
 
+    private final MedicineListRepository medicineListRepository;
+
+
     /*---- 약통 ----*/
     // 생성
     @Transactional
     public Long mediBoxCreate(MedicineBoxSaveRequestDto requestDto) {
-        return medicineBoxRepository.save(requestDto.toEntity()).getId();
+        Long boxId = medicineBoxRepository.save(requestDto.toEntity()).getId();
+
+        MedicineBox entity = medicineBoxRepository.findById(boxId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 약통이 없습니다. id = " + boxId));
+
+        List<String> listDto = requestDto.getMedicineLists();
+
+        for (String list: listDto) {
+            MedicineList dto = MedicineList.builder()
+                    .name(list)
+                    .medicineBox(entity)
+                    .build();
+
+            medicineListRepository.save(dto);
+        }
+
+        return boxId;
     }
 
     // 약통 리스트

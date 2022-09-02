@@ -4,12 +4,16 @@ package mediSsok.mediSsokspring.service;
 
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
+import mediSsok.mediSsokspring.domain.entity.member.LinkInfo;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
 import mediSsok.mediSsokspring.domain.entity.schedule.DateInfo;
 import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
+import mediSsok.mediSsokspring.domain.repository.member.LinkInfoRepository;
+import mediSsok.mediSsokspring.domain.repository.member.MemberRepository;
 import mediSsok.mediSsokspring.domain.repository.schedule.DateInfoRepository;
 import mediSsok.mediSsokspring.domain.repository.schedule.ScheduleDateRepository;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
+import mediSsok.mediSsokspring.dto.member.LinkInfoResponseDto;
 import mediSsok.mediSsokspring.dto.schedule.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,15 +23,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor    //final 필드 생성자 생성
 public class ScheduleDateService {
+    private final MemberRepository memberRepository;
+
     private final ScheduleDateRepository scheduleDateRepository;
 
     private final DateInfoRepository dateInfoRepository;
+
+    private final LinkInfoRepository linkInfoRepository;
+
 
     /*---- 스케줄 ----*/
     // 스케줄 생성
@@ -41,7 +51,7 @@ public class ScheduleDateService {
         int checkCycle = cycle;
         int week = responseDto.getWeek();
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 30; i++) {
             // 날짜 받아오기
             LocalDateTime date = responseDto.getStartday();
             date = date.plusDays(i);
@@ -86,7 +96,7 @@ public class ScheduleDateService {
                 }
                 checkCycle--;
 
-                if (checkCycle == 0)
+                if (checkCycle == 1)
                     checkCycle = cycle;
             }
         }
@@ -224,5 +234,29 @@ public class ScheduleDateService {
         return id;
     }
 
+    // 링크 리스트 조회
+    @Transactional
+    public List<LinkInfoResponseDto> linkFind(Long LinkId) {
+        List<LinkInfoResponseDto> returnList = new ArrayList<>();
+        List<LinkInfo> linkList = linkInfoRepository.findByMemberIdAndPermit(LinkId, true);
+
+        for (LinkInfo list: linkList) {
+            Member member = memberRepository.findByEmail(list.getUserEmail())
+                    .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. email = " + list.getUserEmail()));
+
+            LinkInfoResponseDto dto = LinkInfoResponseDto.builder()
+                    .id(list.getId())
+                    .userEmail(list.getUserEmail())
+                    .nickname(list.getNickname())
+                    .permit(list.getPermit())
+                    .picture(member.getPicture())
+                    .userid(member.getId())
+                    .build();
+
+            returnList.add(dto);
+        }
+
+        return returnList;
+    }
 
 }

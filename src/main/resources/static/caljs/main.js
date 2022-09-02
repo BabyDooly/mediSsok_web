@@ -57,15 +57,30 @@ var calendar = $('#calendar').fullCalendar({
      *  일정 받아옴
      * ************** */
     events: function (start, end, timezone, callback) {
+        let query = window.location.search;         // http://localhost:8080/notice?id=1&name=하나
+        let param = new URLSearchParams(query);     // ?id=1&name=하나
+
+        let idUrl;
+
+        if (param.get("memberId") != null)
+            idUrl = "/api/status/list/" + param.get('memberId')
+
+        else
+            idUrl = "/api/status/list";
+
+        console.log(idUrl)
+
         $.ajax({
             type: "get",
-            url: "/api/status/list",
+            url: idUrl,
             data: {
                 // 화면이 바뀌면 Date 객체인 start, end 가 들어옴
                 //startDate : moment(start).format('YYYY-MM-DD'),
                 //endDate   : moment(end).format('YYYY-MM-DD')
             },
             success: function (response) {
+                console.log(response);
+
                 var fixedDate = response.map(function (array) {
                     if (array.allDay && array.start !== array.end) {
                         array.end = moment(array.end).add(1, 'days'); // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력

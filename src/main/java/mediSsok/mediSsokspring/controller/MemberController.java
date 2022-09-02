@@ -185,11 +185,12 @@ public class MemberController {
         return memberService.linkPermitUpdate(id, requestDto);
     }
 
-    // 약통 삭제(DELETE)
+    // 연동 삭제(DELETE)
     @DeleteMapping("/api/link/delete/{id}")
     @ResponseBody
     public Long linkDelete(@PathVariable Long id){
         memberService.linkDelete(id);
+
         return id;
     }
 }

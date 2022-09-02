@@ -158,7 +158,19 @@ public class MemberService implements UserDetailsService {
         LinkInfo entity = linkInfoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("링크된 아이디가 없습니다. id = " + id));
 
-        return new LinkInfoResponseDto(entity);
+        Member member = memberRepository.findByEmail(entity.getUserEmail())
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. email = " + entity.getUserEmail()));
+
+        LinkInfoResponseDto returnList = LinkInfoResponseDto.builder()
+                .id(entity.getId())
+                .userEmail(entity.getUserEmail())
+                .myEmail(entity.getMember().getEmail())
+                .nickname(entity.getNickname())
+                .permit(entity.getPermit())
+                .picture(member.getPicture())
+                .build();
+
+        return returnList;
     }
 
 
@@ -233,17 +245,20 @@ public class MemberService implements UserDetailsService {
     // 연동 삭제
     @Transactional
     public void linkDelete(Long id){
+        // 내쪽 연동 삭제
         LinkInfo entity = linkInfoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 연동이 없습니다. id = " + id));
 
-
-
         linkInfoRepository.delete(entity);
 
-//        String userEmail = entity.getUserEmail();
-//        Long memberId = entity.getMember().getId();
-//
-//        LinkInfo linkMember = linkInfoRepository.findByUserEmailAndMemberId(userEmail, memberId);
-//        linkInfoRepository.delete(linkMember);
+        // 상대방쪽 연동 삭제
+        String email = entity.getMember().getEmail();
+        Member member = memberRepository.findByEmail(entity.getUserEmail())
+                .orElseThrow(() -> new IllegalArgumentException("맴버가 없습니다. 이메일 = " + entity.getUserEmail()));
+
+        LinkInfo entity2 = linkInfoRepository.findByUserEmailAndMemberId(email, member.getId());
+
+        if (entity2 != null)
+            linkInfoRepository.delete(entity2);
     }
 }

@@ -4,8 +4,11 @@ import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxUpdateRequestDto;
+import mediSsok.mediSsokspring.dto.member.LinkInfoResponseDto;
+import mediSsok.mediSsokspring.dto.member.MemberResponseDto;
 import mediSsok.mediSsokspring.dto.schedule.*;
 import mediSsok.mediSsokspring.service.MedicineBoxService;
+import mediSsok.mediSsokspring.service.MemberService;
 import mediSsok.mediSsokspring.service.ScheduleDateService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,15 +23,47 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor    //final 필드 생성자 생성
 public class CalendarController {
+    private final MemberService memberService;
     private final ScheduleDateService scheduleDateService;
 
     /*---- 스케줄 ----*/
 
     // 캘린더
     @GetMapping("/status")
-    public String dispStatus() {
-        return "/Medi_status/mediStat";
+    public String dispStatus(@AuthenticationPrincipal CustomUserDetails userDetails, Model model,
+                            @RequestParam(defaultValue="0") Long memberId, @RequestParam(defaultValue="0") Long linkId) {
+        List<LinkInfoResponseDto> linkListDto = scheduleDateService.linkFind(userDetails.getMember().getId());
+        LinkInfoResponseDto memberDto;
+
+        LinkInfoResponseDto dto = LinkInfoResponseDto.builder()
+                .id(0L)
+                .userEmail(userDetails.getMember().getEmail())
+                .myEmail(userDetails.getMember().getEmail())
+                .nickname("나")
+                .permit(true)
+                .picture(userDetails.getMember().getPicture())
+                .userid(userDetails.getMember().getId())
+                .build();
+
+        linkListDto.add(0, dto);
+
+        if ((linkId == 0 && userDetails.getMember().getId() == memberId) || memberId == 0 && linkId == 0)
+            memberDto = dto;
+        else if(linkId == 0)
+            return "/index";
+        else
+            memberDto = memberService.linkFindById(linkId);
+
+
+        model.addAttribute("linkList", linkListDto);
+        model.addAttribute("member", memberDto);
+
+        if ((linkId == 0 && userDetails.getMember().getId() == memberId))
+            return "redirect:/status";
+        else
+            return "/Medi_status/mediStat";
     }
+
 
     // 캘린더 리스트 전송(GET)
     @GetMapping("/api/status/list")

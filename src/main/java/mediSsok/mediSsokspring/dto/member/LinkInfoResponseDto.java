@@ -26,15 +26,18 @@ public class LinkInfoResponseDto {
     private Boolean permit;
     private String picture;
     private String myEmail;
+    private Long userid;
+
 
     @Builder
-    public LinkInfoResponseDto(Long id, String userEmail, String nickname, Boolean permit, String picture, String myEmail) {
+    public LinkInfoResponseDto(Long id, String userEmail, String nickname, Boolean permit, String picture, String myEmail, Long userid) {
         this.id = id;
         this.userEmail = userEmail;
         this.nickname = nickname;
         this.permit = permit;
         this.picture = picture;
         this.myEmail = myEmail;
+        this.userid = userid;
     }
 
     @Builder
@@ -43,5 +46,6 @@ public class LinkInfoResponseDto {
         this.userEmail = entity.getUserEmail();
         this.nickname = entity.getNickname();
         this.permit = entity.getPermit();
+        this.picture = entity.getMember().getPicture();
     }
 }
