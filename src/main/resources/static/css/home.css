@@ -155,14 +155,9 @@
     width:120px;
 }
 .mainCon{/* 사진크기 900x600 */
-    width: 1200px;
+    width: 1400px;
     margin: auto;
-    border-width: 1px;
-    outline: solid;
     position: relative;
-    border: solid #dee2e6;
-    border-width: 1px 0 0;
-
 }
 .mainMidnav{
     justify-content : center;
@@ -173,7 +168,7 @@
     font-size: 20px;
 }
 .mainText{
-    padding-top: 80px;
+    padding-top: 40px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 900;
@@ -182,6 +177,7 @@
     text-align: center;
     color: #000000;
 }
+
 .mainSubText{
     top: 130px;
     font-family: 'Inter';
@@ -189,6 +185,27 @@
     font-weight: 400;
     font-size: 36px;
     line-height: 44px;
+    text-align: center;
+
+    color: #000000;
+}
+.mainText2{
+    padding-top: 40px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 33px;
+    line-height: 77px;
+    text-align: center;
+    color: #000000;
+}
+
+.mainSubText2{
+    top: 130px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
     text-align: center;
 
     color: #000000;

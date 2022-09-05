@@ -3,23 +3,138 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <meta charset="UTF-8">
-  <title>myPage</title>
-  <!-- bootstrap, custom css 링크 -->
-  <link href="/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/css/home.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>myPage</title>
+    <!-- bootstrap, custom css 링크 -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/home.css" rel="stylesheet">
 
-  <!-- Custom fonts for this template-->
-  <!-- fontawesome-free 파일 설치해서 넣었는데 적용안됨, 그래서 직접 링크함-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <!-- Custom fonts for this template-->
+    <!-- fontawesome-free 파일 설치해서 넣었는데 적용안됨, 그래서 직접 링크함-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
 </head>
 <body>
-<div th:replace="navbar/navBar :: navBar"/>
-<p class="mainText">테스트 페이지입니다.</p>
-<p class="mainSubText">메인 디자인 새로 만드는 중입니다</p>
+<div th:replace="navbar/navBar2 :: navBar2"/>
+<div style="background: #e8e8e8;height: 560px;display: flex;align-content: center">
+    <div class="mainCon">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner" style="border-radius: 3%">
+                <div class="carousel-item active">
+                    <img src="/image/a.png" style="height: 500px;" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/image/b.png" style="height: 500px;" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/image/c.png" style="height: 500px;" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
+<p class="mainText2">약과의 시간 약속 약쏙에서</p>
+<p class="mainSubText2">약 복용 현황, 여러 약통의 복용법 및 약 정보 조회와 복용 알람 기능까지<br>모든 기능을 약 쏙에서 찾아보세요.</p>
+<div style="width: 1400px;margin: 0 auto">
+    <img src="/image/d.png" style="height: 700px;width: 1400px">
+</div>
+<div style="background: #e8e8e8">
+    <div style="height: 400px;margin: 150px auto;width: 1400px">
+        <div style="float: left">
+            <p style="padding-left: 70px;font-size: 60px;font-weight: bold;width: 600px">약 쏙의 기능</p>
+            <p style="padding-left: 70px;font-size: 20px;width: 600px">
+                어머니, 어제는 약 잘 챙겨 드셨어요?<br>
+                아버지, 오늘도 출근전에 약 잊지마세요.<br>
+                할머니, 내일엔 이 약을 꼭 드셔야해요!<br>
+                <br>
+                우리 가족모두 쉽게 사용하는 '약'속 지키미<br>
+                저 약쏙이가 도와드릴게요.<br>
+                <br>
+                저와의 중요한 약속. 걱정마세요😆<br>
+            </p>
 
+            <a tabindex="0" style="margin-left: 70px;font-size: 20px"  data-bs-toggle="popover" data-bs-trigger="focus" data-bs-html="true"
+               data-bs-content="당신과 소중한 분들의 약 복용 현황📆<br/>
+                집에서 나가기전 휴대약 확인📢<br/>
+                헷갈리는 약들의 복용법, 주의점 등. 약 정보 조회⚠<br/>
+                지정한 시간에 울리는 복용 알람까지!⏰">
+                More
+                <img src="/image/plus3.png" style="width: 25px">
+            </a>
+        </div>
+
+        <div style="float: right">
+            <img src="/image/mainMedi.jpg"
+                 style="width: 600px;height: 500px;margin-top: 150px;margin-right: 150px;border: 2px solid black;border-radius: 4%">
+            <p style="font-size: 25px;font-weight: bold;margin-left: 50px;margin-top: 20px;margin-bottom: 5px">
+                자주먹는 약, 나만의 약통으로 관리 기능</p>
+            <p style="font-size: 15px;margin-left: 50px">
+                한눈에 보고, 메모하기! 편하게 알람설정을 도와주는 내 약통</p>
+        </div>
+
+        <div style="float: left">
+            <img src="/image/mainAlarm.png"
+                 style="width: 500px;height: 600px;margin-top: 150px;border: 2px solid black;border-radius: 4%">
+            <p style="font-size: 25px;font-weight: bold;margin-left: 50px;margin-top: 20px;margin-bottom: 5px">
+                지정된 시간에 복용 알람 기능</p>
+            <p style="font-size: 15px;margin-left: 50px">
+                꼭 먹어야하는 약 알람으로 해결하자, 내 약 갯수도 자동으로 파악</p>
+        </div>
+
+        <div style="float: right">
+            <img src="/image/mainStatus.JPG"
+                 style="width: 500px;height: 700px;margin-top: 200px;border: 2px solid black;border-radius: 4%">
+            <p style="font-size: 25px;font-weight: bold;margin-left: 50px;margin-top: 20px;margin-bottom: 5px">
+                약 정보를 검색할 수 있는 검색 기능</p>
+            <p style="font-size: 15px;margin-left: 50px">
+                이 약은 무슨 약이지? 이름을 몰라도 카테고리로 검색!</p>
+        </div>
+
+        <div style="float: left">
+            <img src="/image/mainSearch.jpg"
+                 style="width: 700px;height: 600px;margin-left:100px;margin-top:150px;border: 2px solid black;border-radius: 4%">
+            <p style="font-size: 25px;font-weight: bold;margin-left: 100px;margin-top: 20px;margin-bottom: 5px">
+                지정된 시간에 복용 알람 기능</p>
+            <p style="font-size: 15px;margin-left: 100px">
+                꼭 먹어야하는 약 알람으로 해결하자, 내 약 갯수도 자동으로 파악</p>
+        </div>
+    </div>
+</div>
+<div style="height: 1810px">
+    <!-- 여백 맞추기 -->
+</div>
+
+
+
+<div style="height: 200px;width: 1400px;margin: 0 auto">
+    <hr style="border: 1px solid black">
+</div>
 <!-- bootstrp js 링크 -->
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script>
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
+</script>
 </body>
 </html>
