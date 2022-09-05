@@ -12,7 +12,6 @@
     <!-- Custom fonts for this template-->
     <!-- fontawesome-free 파일 설치해서 넣었는데 적용안됨, 그래서 직접 링크함-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-
 </head>
 <body>
 <div th:replace="navbar/navBar2 :: navBar2"/>
@@ -118,15 +117,42 @@
         </div>
     </div>
 </div>
-<div style="height: 1810px">
+<div style="height: 1710px">
     <!-- 여백 맞추기 -->
 </div>
 
 
 
-<div style="height: 200px;width: 1400px;margin: 0 auto">
+<div style="height: 200px;width: 1400px;margin: 0 auto;">
     <hr style="border: 1px solid black">
+    <div class="row g-3 align-items-center" style="text-align: center">
+        <div class="col-md-4" style="height: 216px">
+            <p style="font-weight: bold;font-size: 20px">Function</p>
+            <p style="font-size: 12px;color: #505050"><a style="padding: 0px;margin-bottom: 16px" class="nav-link bottomText" aria-current="page" th:href="@{/medi/medibox}">내 약통</a></p>
+            <p style="font-size: 12px;color: #505050"><a style="padding: 0px;margin-bottom: 16px" class="nav-link bottomText" th:href="@{/medi/bell}">오늘 알람</a></p>
+            <p style="font-size: 12px;color: #505050"><a style="padding: 0px;margin-bottom: 16px" class="nav-link bottomText" th:href="@{/status}">복용 현황</a></p>
+            <p style="font-size: 12px;color: #505050"><a style="padding: 0px;margin-bottom: 16px" class="nav-link bottomText" th:href="@{/medi/search}">알약 검색</a></p>
+        </div>
+
+        <div class="col-md-4" style="height: 216px">
+            <p style="font-weight: bold;font-size: 20px">Capstone Project</p>
+            <p style="font-size: 12px;color: #505050">약 쏙</p>
+            <p style="font-size: 12px;color: #505050">2022-05-08</p>
+            <p style="font-size: 12px;color: #505050">~</p>
+            <p style="font-size: 12px;color: #505050">2022-09-16</p>
+
+        </div>
+        <div class="col-md-4" style="height: 216px">
+            <p style="font-weight: bold;font-size: 20px">Made</p>
+            <p style="font-size: 12px;color: #505050">홍 성 주</p>
+            <p style="font-size: 12px;color: #505050">박 유 빈</p>
+            <p style="font-size: 12px;color: #505050">한 성 수</p>
+            <p style="font-size: 12px;color: #505050">이 동 진</p>
+            <p style="font-size: 12px;color: #505050">이 해 든</p>
+        </div>
+    </div>
 </div>
+<div style="height: 100px"></div>
 <!-- bootstrp js 링크 -->
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>

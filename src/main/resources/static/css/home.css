@@ -266,6 +266,18 @@
     font-size: 15px;
 
 }
+.bottomText:link{
+    color: #505050;
+}
+.bottomText:visited{
+    color: #505050
+}
+.bottomText:hover{
+    color: #b7b7b7
+}
+.bottomText:active{
+    color: #dedede
+}
 /*
 
 .container2 {
