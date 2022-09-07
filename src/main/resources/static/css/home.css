@@ -190,11 +190,11 @@
     color: #000000;
 }
 .mainText2{
-    padding-top: 40px;
+    padding-top: 20px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 900;
-    font-size: 33px;
+    font-size: 50px;
     line-height: 77px;
     text-align: center;
     color: #000000;
@@ -205,7 +205,7 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
 
     color: #000000;
@@ -265,6 +265,18 @@
 .subTextSub2{
     font-size: 15px;
 
+}
+.bottomText:link{
+    color: #505050;
+}
+.bottomText:visited{
+    color: #505050
+}
+.bottomText:hover{
+    color: #b7b7b7
+}
+.bottomText:active{
+    color: #dedede
 }
 /*
 
