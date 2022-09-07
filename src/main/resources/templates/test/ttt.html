@@ -1,128 +1,99 @@
 <!DOCTYPE html>
-<html lang="ko">
-
+<!-- 타임리프 사용 -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>FullCalendar Example</title>
+    <meta charset="UTF-8">
+    <title>myPage</title>
+    <!-- bootstrap, custom css 링크 -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/home.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="/vendor/css/fullcalendar.min.css" />
-    <link rel="stylesheet" href="/vendor/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/vendor/css/select2.min.css" />
-    <link rel="stylesheet" href="/vendor/css/bootstrap-datetimepicker.min.css" />
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600"/>
-
-    <link rel="stylesheet" href="/css/calmain.css"/>
-
+    <!-- Custom fonts for this template-->
+    <!-- fontawesome-free 파일 설치해서 넣었는데 적용안됨, 그래서 직접 링크함-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 </head>
-
 <body>
-<div class="container">
-
-    <!-- 일자 클릭시 메뉴오픈 -->
-    <div id="contextMenu" class="dropdown clearfix">
-        <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
-            style="display:block;position:static;margin-bottom:5px;">
-            <li><a tabindex="-1" href="#">카테고리1</a></li>
-            <li><a tabindex="-1" href="#">카테고리2</a></li>
-            <li><a tabindex="-1" href="#">카테고리3</a></li>
-            <li><a tabindex="-1" href="#">카테고리4</a></li>
-            <li class="divider"></li>
-            <li><a tabindex="-2" href="#" data-role="close">Close</a></li>
-        </ul>
+<div th:replace="navbar/navBar2 :: navBar2"/>
+<section class="portfolio-item page-section portfolio" id="portfolio">
+    <div class="row justify-content-center" style="padding-top: 225px; width: 900px;margin: 0 auto">
+        <!-- Portfolio Item 1-->
+        <div class="col-md-6 col-lg-4 " style="height: 350px; margin-bottom: 20px;">
+            <div style="width: 100%;height: 100%;border-radius: 30px;box-shadow: 6px 6px 10px 5px #d6d6d6bd;">
+                <div style="width: 100%;height: 60%; background: #0d6efd;border-radius: 30px 30px 0 0;overflow: hidden">
+                </div>
+                <img src="/image/mediCase/mediCapTest.png" style="position: relative;left: 50%;transform: translate(-50%, -50%);
+                    background: #ffffff;border-radius: 70%;box-shadow: 0px 3px 5px 0px #767676bd;width: 85px">
+                <div style="width: 100%; background: white;border-radius: 0 0 30px 30px;overflow: hidden;display: contents;">
+                    <p style="text-align: center; font-size: 35px;font-weight: bold;transform: translate(0, -70%);">감기약</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 " style="height: 350px; margin-bottom: 20px;">
+            <div style="width: 100%;height: 100%;border-radius: 30px;box-shadow: 6px 6px 10px 5px #d6d6d6bd;">
+                <div style="width: 100%;height: 60%; background: #0d6efd;border-radius: 30px 30px 0 0;overflow: hidden">
+                </div>
+                <img src="/image/mediCase/mediCapTest.png" style="position: relative;left: 50%;transform: translate(-50%, -50%);
+                    background: #ffffff;border-radius: 70%;box-shadow: 0px 3px 5px 0px #767676bd;width: 85px">
+                <div style="width: 100%; background: white;border-radius: 0 0 30px 30px;overflow: hidden;display: contents;">
+                    <p style="text-align: center; font-size: 35px;font-weight: bold;transform: translate(0, -70%);">감기약</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 " style="height: 350px; margin-bottom: 20px;">
+            <div style="width: 100%;height: 100%;border-radius: 30px;box-shadow: 6px 6px 10px 5px #d6d6d6bd;">
+                <div style="width: 100%;height: 60%; background: #0d6efd;border-radius: 30px 30px 0 0;overflow: hidden">
+                </div>
+                <img src="/image/mediCase/mediCapTest.png" style="position: relative;left: 50%;transform: translate(-50%, -50%);
+                    background: #ffffff;border-radius: 70%;box-shadow: 0px 3px 5px 0px #767676bd;width: 85px">
+                <div style="width: 100%; background: white;border-radius: 0 0 30px 30px;overflow: hidden;display: contents;">
+                    <p style="text-align: center; font-size: 35px;font-weight: bold;transform: translate(0, -70%);">감기약</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 " style="height: 350px; margin-bottom: 20px;">
+            <div style="width: 100%;height: 100%;border-radius: 30px;box-shadow: 6px 6px 10px 5px #d6d6d6bd;">
+                <div style="width: 100%;height: 60%; background: #0d6efd;border-radius: 30px 30px 0 0;overflow: hidden">
+                </div>
+                <img src="/image/mediCase/mediCapTest.png" style="position: relative;left: 50%;transform: translate(-50%, -50%);
+                    background: #ffffff;border-radius: 70%;box-shadow: 0px 3px 5px 0px #767676bd;width: 85px">
+                <div style="width: 100%; background: white;border-radius: 0 0 30px 30px;overflow: hidden;display: contents;">
+                    <p style="text-align: center; font-size: 35px;font-weight: bold;transform: translate(0, -70%);">감기약</p>
+                </div>
+            </div>
+        </div><div class="col-md-6 col-lg-4 " style="height: 350px; margin-bottom: 20px;">
+        <div style="width: 100%;height: 100%;border-radius: 30px;box-shadow: 6px 6px 10px 5px #d6d6d6bd;">
+            <div style="width: 100%;height: 60%; background: #0d6efd;border-radius: 30px 30px 0 0;overflow: hidden">
+            </div>
+            <img src="/image/mediCase/mediCapTest.png" style="position: relative;left: 50%;transform: translate(-50%, -50%);
+                    background: #ffffff;border-radius: 70%;box-shadow: 0px 3px 5px 0px #767676bd;width: 85px">
+            <div style="width: 100%; background: white;border-radius: 0 0 30px 30px;overflow: hidden;display: contents;">
+                <p style="text-align: center; font-size: 35px;font-weight: bold;transform: translate(0, -70%);">감기약</p>
+            </div>
+        </div>
     </div>
-
-    <div id="wrapper">
-        <div id="loading"></div>
-        <div id="calendar"></div>
     </div>
+</section>
 
-
-    <!-- 일정 추가 MODAL -->
-    <div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"></h4>
-                </div>
-                <div class="modal-body">
-
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <label class="col-xs-4" for="edit-title">일정명</label>
-                            <input class="inputModal" type="text" name="edit-title" id="edit-title"
-                                   required="required" />
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <label class="col-xs-4" for="edit-start">시작</label>
-                            <input class="inputModal" type="text" name="edit-start" id="edit-start">
-                        </div>
-                    </div>
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <label class="col-xs-4">복용여부</label>
-                            <button class="inputModal" type="button" name="color" onclick="test();" id="edit-color" value="#d25565" style="background: #d25565;color: #ffffff">안먹었어요</button>
-                        </div>
-                    </div>
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <label class="col-xs-4" for="edit-desc">설명</label>
-                            <textarea rows="4" cols="50" class="inputModal" name="edit-desc"
-                                      id="edit-desc"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer modalBtnContainer-addEvent">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary" id="save-event">저장</button>
-                </div>
-                <div class="modal-footer modalBtnContainer-modifyEvent">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                    <button type="button" class="btn btn-danger" id="deleteEvent">삭제</button>
-                    <button type="button" class="btn btn-primary" id="updateEvent">저장</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-</div><!-- /.container -->
-
-
-<script src="/vendor/js/jquery.min.js"></script>
-<script src="/vendor/js/bootstrap.min.js"></script>
-<script src="/vendor/js/moment.min.js"></script>
-<script src="/vendor/js/fullcalendar.min.js"></script>
-<script src="/vendor/js/ko.js"></script>
-<script src="/vendor/js/select2.min.js"></script>
-<script src="/vendor/js/bootstrap-datetimepicker.min.js"></script>
-<script src="/caljs/main.js"></script>
-<script src="/caljs/addEvent.js"></script>
-<script src="/caljs/editEvent.js"></script>
-<script src="/caljs/etcSetting.js"></script>
-
+<!--<div class="portfolio-item mx-auto mediBox"
+     style="border-radius: 70%" >
+    <a>
+        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-auto w-auto">
+            <div class="portfolio-item-caption-content text-center text-white">
+                <i class="fa fa-search fa-3x"></i>
+            </div>
+        </div>
+    </a>
+    <img id="mediImg" style="border-radius: 70%;" class="img-fluid" src="/image/mediCase/mediCap.png" alt="..."/>
+</div>-->
+<!-- bootstrp js 링크 -->
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
 <script>
-    const element2 = document.getElementById('edit-color')
-    function test() {
-        if ($('#edit-color').val() == '#D25565') {
-            element2.value = '#2bad00';
-            element2.style.backgroundColor = '#2bad00';
-            element2.innerText = '먹었어요';
-        } else {
-            element2.value = '#D25565';
-            element2.style.backgroundColor = '#D25565';
-            element2.innerText = '안먹었어요';
-        }
-    }
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
 </script>
 </body>
-
 </html>
