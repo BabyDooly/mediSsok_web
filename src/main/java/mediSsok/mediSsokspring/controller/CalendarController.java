@@ -32,17 +32,18 @@ public class CalendarController {
     @GetMapping("/status")
     public String dispStatus(@AuthenticationPrincipal CustomUserDetails userDetails, Model model,
                             @RequestParam(defaultValue="0") Long memberId, @RequestParam(defaultValue="0") Long linkId) {
+        MemberResponseDto myDto = memberService.findByEmail(userDetails.getUsername());
         List<LinkInfoResponseDto> linkListDto = scheduleDateService.linkFind(userDetails.getMember().getId());
         LinkInfoResponseDto memberDto;
 
         LinkInfoResponseDto dto = LinkInfoResponseDto.builder()
                 .id(0L)
-                .userEmail(userDetails.getMember().getEmail())
-                .myEmail(userDetails.getMember().getEmail())
+                .userEmail(myDto.getEmail())
+                .myEmail(myDto.getEmail())
                 .nickname("나")
                 .permit(true)
-                .picture(userDetails.getMember().getPicture())
-                .userid(userDetails.getMember().getId())
+                .picture(myDto.getPicture())
+                .userid(myDto.getId())
                 .build();
 
         linkListDto.add(0, dto);

@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ScheduleRequestDto {
-    private Long scheduleId;
+public class DateInfoSearchRequestDto {
+    private Long dateInfoId;
 }

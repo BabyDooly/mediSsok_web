@@ -48,7 +48,7 @@ public class MedicineBoxService {
         return boxId;
     }
 
-    // 약통 리스트
+    // 약통 리스트(페이징o)
     @Transactional(readOnly=true)
     public Page<MedicineBoxResponseDto> findByMemberId(Long memberId, Pageable pageable){
         return medicineBoxRepository.findByMemberId(memberId, pageable);
@@ -96,19 +96,4 @@ public class MedicineBoxService {
     public int pageCount(Pageable pageable) {
         return medicineBoxRepository.findAll(pageable).getTotalPages();
     }
-
-    /*---- 약리스트 ----*/
-    // 저장
-//    public Long save(final MedicineListSaveResponseDto dto) {
-//        return medicineListRepository.save(dto.toEntity()).getId();
-//    }
-
-//    // 약 리스트
-//    @Transactional(readOnly = true)
-//    public List<MedicineListReadResponseDto> findByid(final long medBoxId) {
-//        return medicineListRepository.findAll()
-//                .stream()
-//                .filter(MedicineList -> (MedicineList.getMedicineBox().getId() == medBoxId))
-//                .map(MedicineListReadResponseDto::new).collect(Collectors.toList());
-//    }
 }

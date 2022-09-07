@@ -286,33 +286,14 @@
             <th scope="col">구분</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody th:each="medi : ${medicines}">
         <tr onclick="location.href='/medi/info'">
-                <td scope="row"><img src="/image/mediSearch-shape2/shape1.png"></td>
+                <td scope="row"><img th:src="${medi.getImageUrl()}" style="width: 10%;height: 10%;"></td>
                 <td>타이레놀</td>
-                <td>Acetaminophen　500mg</td>
-                <td>한국얀센</td>
-
-                <td>정제</td>
-                <td>일반</td>
-        </tr>
-        <tr onclick="location.href='/medi/info'">
-            <td scope="row"><img src="/image/mediSearch-shape2/shape1.png"></td>
-            <td>타이레놀</td>
-            <td>Acetaminophen　500mg</td>
-            <td>한국얀센</td>
-
-            <td>정제</td>
-            <td>일반</td>
-        </tr>
-        <tr onclick="location.href='/medi/info'">
-            <td scope="row"><img src="/image/mediSearch-shape2/shape1.png"></td>
-            <td>타이레놀</td>
-            <td>Acetaminophen　500mg</td>
-            <td>한국얀센</td>
-
-            <td>정제</td>
-            <td>일반</td>
+                <td th:text="${medi.getCodeName()}">Acetaminophen　500mg</td>
+                <td th:text="${medi.getCompanyName()}">한국얀센</td>
+                <td th:text="${medi.getFormulation()}">정제</td>
+                <td th:text="${medi.getSB()}">일반</td>
         </tr>
         </tbody>
     </table>

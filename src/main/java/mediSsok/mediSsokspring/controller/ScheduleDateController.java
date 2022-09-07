@@ -2,20 +2,14 @@ package mediSsok.mediSsokspring.controller;
 
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
-import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
-import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxRequestDto;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
-import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxSaveRequestDto;
-import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxUpdateRequestDto;
+import mediSsok.mediSsokspring.dto.member.MemberResponseDto;
 import mediSsok.mediSsokspring.dto.schedule.*;
 import mediSsok.mediSsokspring.service.MedicineBoxService;
 import mediSsok.mediSsokspring.service.MemberService;
 import mediSsok.mediSsokspring.service.ScheduleDateService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +19,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor    //final 필드 생성자 생성
 public class ScheduleDateController {
+    private final MemberService memberService;
     private final MedicineBoxService medicineBoxService;
     private final ScheduleDateService scheduleDateService;
 
@@ -48,12 +43,12 @@ public class ScheduleDateController {
             toDate = LocalDateTime.of(year, month, day, 23,59, 0);
         }
 
-
+        MemberResponseDto memberDto = memberService.findByEmail(userDetails.getUsername());
         List<MedicineBoxResponseDto> mediboxList = medicineBoxService.findByMemberId(userDetails.getMember().getId());
         List<DateInfoResponseDto> alarmList = scheduleDateService.alarmList(userDetails.getMember().getId(), fromDate, toDate);
 
         // 맴버이름, 약통종류, 알람리스트
-        model.addAttribute("member", userDetails.getMember().getNickname());
+        model.addAttribute("member", memberDto.getNickname());
         model.addAttribute("mediBoxs", mediboxList);
         model.addAttribute("alarm", alarmList);
 
@@ -72,7 +67,7 @@ public class ScheduleDateController {
     // 스케줄 조회(POST)
     @PostMapping("/api/medi/schedule/get")
     @ResponseBody
-    public ScheduleResponseDto scheduleFind(@RequestBody ScheduleRequestDto requestDto) {
+    public ScheduleResponseDto scheduleFind(@RequestBody ScheduleSearchRequestDto requestDto) {
         return scheduleDateService.scheduleFindById(requestDto.getScheduleId());
     }
 
@@ -96,7 +91,7 @@ public class ScheduleDateController {
     // 알람 조회(POST)
     @PostMapping("/api/medi/alarm/get")
     @ResponseBody
-    public DateInfoResponseDto alarmFind(@RequestBody DateInfoRequestDto requestDto) {
+    public DateInfoResponseDto alarmFind(@RequestBody DateInfoSearchRequestDto requestDto) {
         return scheduleDateService.alarmFindById(requestDto.getDateInfoId());
     }
 

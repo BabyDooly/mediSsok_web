@@ -7,6 +7,7 @@ import mediSsok.mediSsokspring.dto.medicineBox.*;
 import mediSsok.mediSsokspring.dto.member.MemberResponseDto;
 import mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto;
 import mediSsok.mediSsokspring.service.MedicineBoxService;
+import mediSsok.mediSsokspring.service.MemberService;
 import mediSsok.mediSsokspring.service.ScheduleDateService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,8 +24,8 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor    //final 필드 생성자 생성
 public class MedicineBoxController {
+    private final MemberService memberService;
     private final MedicineBoxService medicineBoxService;
-
     private final ScheduleDateService scheduleDateService;
 
     /*---- 약통 ----*/
@@ -33,12 +34,13 @@ public class MedicineBoxController {
     @GetMapping("/medi/medibox")
     public String dispMediBox(Model model, @AuthenticationPrincipal CustomUserDetails userDetails,
                                    @PageableDefault(size = 6, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        MemberResponseDto memberDto = memberService.findByEmail(userDetails.getUsername());
 
         // 페이징 리스트
         Page<MedicineBoxResponseDto> pageList = medicineBoxService.findByMemberId(userDetails.getMember().getId(), pageable);
 
         // 약통, 맴버이름
-        model.addAttribute("member", userDetails.getMember().getNickname());
+        model.addAttribute("member", memberDto.getNickname());
         model.addAttribute("mediBoxs", pageList);
 
         // 페이징 처리

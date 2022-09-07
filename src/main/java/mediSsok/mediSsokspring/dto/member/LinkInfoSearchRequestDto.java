@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LinkInfoRequestDto {
+public class LinkInfoSearchRequestDto {
     private Long linkId;
 }

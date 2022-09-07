@@ -4,15 +4,10 @@ import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.Validation.CheckEmailValidator;
 import mediSsok.mediSsokspring.Validation.CheckNicknameValidator;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
-import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
 import mediSsok.mediSsokspring.dto.member.*;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleRequestDto;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleUpdateRequestDto;
 import mediSsok.mediSsokspring.service.MemberService;
 import mediSsok.mediSsokspring.service.SendEmailService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -89,14 +84,14 @@ public class MemberController {
     // Email이 DB에 존재하는지 체크하는 부분(POST)
     @PostMapping("/api/member/findEmail")
     @ResponseBody
-    public boolean findEmail(@RequestBody MemberRequestDto requestDto) {
+    public boolean findEmail(@RequestBody MemberSearchRequestDto requestDto) {
         return memberService.userEmailCheck(requestDto.getMemberEmail());
     }
 
     //등록된 이메일로 임시비밀번호를 발송하고 발송된 임시비밀번호로 사용자의 pw를 변경하는 컨트롤러(POST)
     @PostMapping("/api/member/sendEmail")
     @ResponseBody
-    public void sendEmail(@RequestBody MemberRequestDto requestDto){
+    public void sendEmail(@RequestBody MemberSearchRequestDto requestDto){
         MailDTO dto = sendEmailService.createMailAndChangePassword(requestDto.getMemberEmail());
         sendEmailService.mailSend(dto);
     }
@@ -166,7 +161,7 @@ public class MemberController {
     // 연동 조회(POST)
     @PostMapping("/api/link/get")
     @ResponseBody
-    public LinkInfoResponseDto linkFind(@RequestBody LinkInfoRequestDto requestDto) {
+    public LinkInfoResponseDto linkFind(@RequestBody LinkInfoSearchRequestDto requestDto) {
         return memberService.linkFindById(requestDto.getLinkId());
     }
 

@@ -20,13 +20,6 @@ public class IndexController {
     public String tt(){return "/test/ttt";}
 
 
-    // 약 검색
-    @GetMapping("/medi/search")
-    public String dispSearch() {
-        return "/Medi_search/mediSearch";
-    }
-
-
     @GetMapping("/medi/info")
     public String mediINfo(){ return "/Medi_search/mediInfo"; }
 }

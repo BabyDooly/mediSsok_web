@@ -48,7 +48,7 @@
                     <div th:if="${box.getMedicineLists().size()} != 0">
                     <h4>-약-</h4>
                     <div th:each="list : ${box.getMedicineLists()}">
-                        <h3 th:text="${list.getId()}">두통약</h3>
+                        <h3 th:text="${list.getName()}">두통약</h3>
                     </div>
                     <br><br>
                     </div>
