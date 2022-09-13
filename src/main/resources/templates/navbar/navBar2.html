@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
 </head>
 <div th:fragment="navBar2">
-    <nav class="navbar navbar-expand-lg navbar navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar navbar-light bg-light" style="max-width: 1895px;margin: 0 auto">
         <div class="container-fluid mainpad">
             <a class="navbar-brand mainIcon" th:href="@{/main}" style="font-weight: bolder">
                 약 쏙
@@ -39,7 +39,7 @@
                 </ul>
             </div>
             <a class="navbar-brand" th:href="@{/user/mypage}" sec:authorize="isAuthenticated()">
-                <img src="/image/human-icon.png"  alt="" width="50" height="50">
+                <img src="/image/human-icon1.png"  alt="" width="50" height="50">
             </a>
             <a class="navbar-brand" th:href="@{/user/logout}" sec:authorize="isAuthenticated()">
                 <input type="button" value="로그아웃" class="btn btn-secondary btn-user btn-block">

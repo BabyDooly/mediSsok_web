@@ -14,10 +14,7 @@
 </head>
 
 <body>
-<div th:replace="navbar/navBar :: navBar"/>
-<p class="mainText">약 쏙</p>
-<p class="mainSubText">약과 나의 약속, 시간에 맞춰 쏙</p>
-
+<div th:replace="navbar/navBar2 :: navBar2"/>
 <!-- 연동 수락 -->
 <div class="portfolio-modal modal fade" id="connectAccept" tabindex="-1" aria-labelledby="connectAccept"
      aria-hidden="true">
@@ -69,122 +66,155 @@
         </div>
     </div>
 </div>
-
-<div class="mainCon">
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="/image/test1.jpg" class="d-block w-100" alt="...">
+<div style="background: #e8e8e8;height: 560px;display: flex;align-content: center">
+    <div class="mainCon">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
             </div>
-            <div class="carousel-item">
-                <img src="/image/test2.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-inner" style="border-radius: 3%">
+                <div class="carousel-item active">
+                    <img src="/image/a.png" style="height: 500px;" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/image/b.png" style="height: 500px;" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/image/c.png" style="height: 500px;" class="d-block w-100" alt="...">
+                </div>
             </div>
-            <div class="carousel-item">
-                <img src="/image/test3.jpg" class="d-block w-100" alt="...">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</div>
-
-<div class="txt_box">
-    <div class="txt">
-        어머니, 어제는 약 잘 챙겨 드셨어요?<br>
-        아버지, 오늘도 출근전에 약 잊지마세요.<br>
-        할머니, 내일엔 이 약을 꼭 드셔야해요!<br>
-        <br>
-        당신과 소중한 분들의 약 복용 현황📆<br>
-        집에서 나가기전 휴대약 확인📢<br>
-        헷갈리는 약들의 복용법, 주의점 등. 약 정보 조회⚠<br>
-        지정한 시간에 울리는 복용 알람까지!⏰<br>
-        <br>
-        우리 가족모두 쉽게 사용하는 '약'속 지키미<br>
-        저 약쏙이가 도와드릴게요.<br>
-        <br>
-        저와의 중요한 약속. 걱정마세요😆<br>
-    </div>
-</div>
-
-<div class="main_box">
-    <div class="main">
-        <img src="/image/main_menu_img.png" class="mainMenuImg" alt="...">
-        <div class="subDiv">
-            <p class="subTextName">약쏙 사용설명서</p><br>
-            <p class="subTextSub">User's Guide</p><br>
-            <p>가나다라마바사 가나다라마바사 가나다<br>
-                사용설명서 어쩌구 저쩌구<br>
-                이러쿵 저러쿵 궁시렁 궁시렁<br>
-                동해물과 백두산 이러쿵 저러쿵 가나다<br>
-                몰라 몰라 사용 설명서 페이지 몰라</p><br><br>
-            <p>#약쏙 #사용설명서</p>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
 </div>
+<p class="mainText2" style="margin-top: 100px;margin-bottom: 0px">약과의 시간 약속 약쏙에서<br></p>
+<p class="mainSubText2" style="margin-bottom: 100px">약 복용 현황, 여러 약통의 복용법 및 약 정보 조회와 복용 알람 기능까지<br>모든 기능을 약 쏙에서 찾아보세요.
+</p>
+<div style="width: 1400px;margin: 0 auto">
+    <img src="/image/d.png" style="height: 700px;width: 1400px">
+</div>
+<div style="height: 100px"></div>
 
-<div class="main_box">
-    <div class="main">
-        <img src="/image/main_menu_img.png" class="mainMenuImg2" alt="...">
-        <div class="subDiv">
-            <p class="subTextName">약쏙 사용설명서</p><br>
-            <p class="subTextSub">User's Guide</p><br>
-            <p>가나다라마바사 가나다라마바사 가나다<br>
-                사용설명서 어쩌구 저쩌구<br>
-                이러쿵 저러쿵 궁시렁 궁시렁<br>
-                동해물과 백두산 이러쿵 저러쿵 가나다<br>
-                몰라 몰라 사용 설명서 페이지 몰라</p><br><br>
-            <p>#약쏙 #사용설명서</p>
+<div style="background: #f7f7f7">
+
+    <div style="height: 400px;margin: 150px auto;width: 1400px">
+        <div style="float: left">
+            <p style="padding-left: 90px;font-size: 60px;font-weight: bold;width: 600px">약 쏙의 기능</p>
+            <p style="padding-left: 70px;font-size: 20px;width: 600px">
+                어머니, 어제는 약 잘 챙겨 드셨어요?<br>
+                아버지, 오늘도 출근전에 약 잊지마세요.<br>
+                할머니, 내일엔 이 약을 꼭 드셔야해요!<br>
+                <br>
+                우리 가족모두 쉽게 사용하는 '약'속 지키미<br>
+                저 약쏙이가 도와드릴게요.<br>
+                <br>
+                저와의 중요한 약속. 걱정마세요😆<br>
+            </p>
+
+            <a tabindex="0" style="margin-left: 70px;font-size: 20px" data-bs-toggle="popover" data-bs-trigger="focus"
+               data-bs-html="true"
+               data-bs-content="당신과 소중한 분들의 약 복용 현황📆<br/>
+                집에서 나가기전 휴대약 확인📢<br/>
+                헷갈리는 약들의 복용법, 주의점 등. 약 정보 조회⚠<br/>
+                지정한 시간에 울리는 복용 알람까지!⏰">
+                More
+                <img src="/image/plus3.png" style="width: 25px">
+            </a>
         </div>
+
+        <div style="float: right">
+            <img src="/image/mainMedi.jpg"
+                 style="width: 600px;height: 500px;margin-top: 150px;margin-right: 0px;box-shadow: 0px 6px 10px 5px #d6d6d6bd;">
+            <p style="font-size: 25px;font-weight: bold;margin-left: 50px;margin-top: 20px;margin-bottom: 5px">
+                자주먹는 약, 나만의 약통으로 관리 기능</p>
+            <p style="font-size: 15px;margin-left: 50px">
+                한눈에 보고, 메모하기! 편하게 알람설정을 도와주는 내 약통</p>
+        </div>
+
+        <div style="float: left">
+            <img src="/image/mainAlarm.png"
+                 style="width: 550px;height: 600px;margin-top: 150px;margin-left: 100px;box-shadow: 0px 6px 10px 5px #d6d6d6bd;">
+            <p style="font-size: 25px;font-weight: bold;margin-left: 140px;margin-top: 20px;margin-bottom: 5px">
+                지정된 시간에 복용 알람 기능</p>
+            <p style="font-size: 15px;margin-left: 140px">
+                꼭 먹어야하는 약 알람으로 해결하자, 내 약 갯수도 자동으로 파악</p>
+        </div>
+
+        <div style="float: right">
+            <img src="/image/mainStatus.JPG"
+                 style="width: 550px;height: 700px;margin-top: 200px;margin-right: 0px;box-shadow: 0px 6px 10px 5px #d6d6d6bd;">
+            <p style="font-size: 25px;font-weight: bold;margin-left: 50px;margin-top: 20px;margin-bottom: 5px">
+                약 정보를 검색할 수 있는 검색 기능</p>
+            <p style="font-size: 15px;margin-left: 50px">
+                이 약은 무슨 약이지? 이름을 몰라도 카테고리로 검색!</p>
+        </div>
+
+        <div style="float: left">
+            <img src="/image/mainSearch.jpg"
+                 style="width: 650px;height: 600px;margin-left:60px;margin-top:150px;box-shadow: 0px 6px 10px 5px #d6d6d6bd;">
+            <p style="font-size: 25px;font-weight: bold;margin-left: 100px;margin-top: 20px;margin-bottom: 5px">
+                지정된 시간에 복용 알람 기능</p>
+            <p style="font-size: 15px;margin-left: 100px">
+                꼭 먹어야하는 약 알람으로 해결하자, 내 약 갯수도 자동으로 파악</p>
+        </div>
+    </div>
+
+    <div style="height: 1710px">
+        <!-- 여백 맞추기 -->
     </div>
 </div>
 
-<div class="main_box">
-    <div class="main">
-        <img src="/image/main_menu_img.png" class="mainMenuImg" alt="...">
-        <div class="subDiv">
-            <p class="subTextName">약쏙 사용설명서</p><br>
-            <p class="subTextSub">User's Guide</p><br>
-            <p>가나다라마바사 가나다라마바사 가나다<br>
-                사용설명서 어쩌구 저쩌구<br>
-                이러쿵 저러쿵 궁시렁 궁시렁<br>
-                동해물과 백두산 이러쿵 저러쿵 가나다<br>
-                몰라 몰라 사용 설명서 페이지 몰라</p><br><br>
-            <p>#약쏙 #사용설명서</p>
+<br>
+<div style="height: 200px;width: 1400px;margin: 0 auto;">
+    <div class="row g-3 align-items-center" style="text-align: center">
+        <div class="col-md-4" style="height: 216px">
+            <p style="font-weight: bold;font-size: 20px">Function</p>
+            <p style="font-size: 12px;color: #505050"><a style="padding: 0px;margin-bottom: 16px"
+                                                         class="nav-link bottomText" aria-current="page"
+                                                         th:href="@{/medi/medibox}">내 약통</a></p>
+            <p style="font-size: 12px;color: #505050"><a style="padding: 0px;margin-bottom: 16px"
+                                                         class="nav-link bottomText" th:href="@{/medi/bell}">오늘 알람</a>
+            </p>
+            <p style="font-size: 12px;color: #505050"><a style="padding: 0px;margin-bottom: 16px"
+                                                         class="nav-link bottomText" th:href="@{/status}">복용 현황</a></p>
+            <p style="font-size: 12px;color: #505050"><a style="padding: 0px;margin-bottom: 16px"
+                                                         class="nav-link bottomText" th:href="@{/medi/search}">알약 검색</a>
+            </p>
         </div>
-    </div>
-</div>
 
-<div class="main_box">
-    <div class="main">
-        <img src="/image/main_menu_img.png" class="mainMenuImg2" alt="...">
-        <div class="subDiv">
-            <p class="subTextName">약쏙 사용설명서</p><br>
-            <p class="subTextSub">User's Guide</p><br>
-            <p>가나다라마바사 가나다라마바사 가나다<br>
-                사용설명서 어쩌구 저쩌구<br>
-                이러쿵 저러쿵 궁시렁 궁시렁<br>
-                동해물과 백두산 이러쿵 저러쿵 가나다<br>
-                몰라 몰라 사용 설명서 페이지 몰라</p><br><br>
-            <p>#약쏙 #사용설명서</p>
+        <div class="col-md-4" style="height: 216px">
+            <p style="font-weight: bold;font-size: 20px">Capstone Project</p>
+            <p style="font-size: 12px;color: #505050">약 쏙</p>
+            <p style="font-size: 12px;color: #505050">2022-05-08</p>
+            <p style="font-size: 12px;color: #505050">~</p>
+            <p style="font-size: 12px;color: #505050">2022-09-16</p>
+
+        </div>
+        <div class="col-md-4" style="height: 216px">
+            <p style="font-weight: bold;font-size: 20px">Made</p>
+            <p style="font-size: 12px;color: #505050">홍 성 주</p>
+            <p style="font-size: 12px;color: #505050">박 유 빈</p>
+            <p style="font-size: 12px;color: #505050">한 성 수</p>
+            <p style="font-size: 12px;color: #505050">이 동 진</p>
+            <p style="font-size: 12px;color: #505050">이 해 든</p>
         </div>
     </div>
 </div>
+<div style="height: 100px"></div>
 
 <!-- bootstrp js 링크 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

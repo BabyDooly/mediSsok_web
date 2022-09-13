@@ -2,7 +2,7 @@
 <!-- 타임리프 사용 -->
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-        lang="ko">
+      lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>내 약통</title>
@@ -20,17 +20,17 @@
 </head>
 <body>
 
-<div th:replace="navbar/navBar :: navBar"/>
+<div th:replace="navbar/navBar2 :: navBar2"/>
 
 
 <!--메인 페이지-->
 <p class="mainText" th:text="${member} + '님의 약통'"></p>
 <p class="mainSubText">자주 먹는 약 정보, 내 약통에 쏙</p>
-<br>
+
 
 <div class="myMediCaseDiv">
     <button onclick="plusbtn"
-            style="margin-top: 80px; border: 0px;background: #ffffff;width: 100px;height: 100px;overflow: auto;background: none">
+            style=" border: 0px;background: #ffffff;width: 100px;height: 100px;overflow: auto;background: none">
         <div>
             <div data-bs-toggle="modal" data-bs-target="#plusbtn">
                 <div class="d-flex align-items-center justify-content-center h-100 w-100">
@@ -40,34 +40,43 @@
         </div>
     </button>
     <section class="portfolio-item page-section portfolio" id="portfolio">
-        <div class="row justify-content-center" style="padding-top: 225px; width: 900px;margin: 0 auto">
+        <div class="row" style=" width: 1060px;margin: 0 auto; border: 2px solid black">
             <!-- Portfolio Item 1-->
-            <div class="col-md-6 col-lg-4 " style="height: 350px; margin-bottom: 20px;" th:each="mediBox: ${mediBoxs}">
-                <div class="portfolio-item mx-auto mediBox"
-                     style="border-radius: 70%" th:id="${mediBox.getId()}" >
-                    <a th:href="@{/medi/box/{Id}(Id=${mediBox.getId()})}">
-                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white">
-                            <i class="fa fa-search fa-3x"></i>
+            <div class="col-lg-3 " style="height: 350px;padding: 30px;margin: 0px;" th:each="mediBox: ${mediBoxs}">
+                <div class="portfolio-item"
+                     th:id="${mediBox.getId()}" style="height: 100%">
+                    <div style="width: 100%;height: 100%;border-radius: 30px;box-shadow: 6px 6px 10px 5px #d6d6d6bd;">
+                        <div th:style="'background:' + ${mediBox.getColor()}+ ';border-radius:70%;width: 100%;height: 60%;border-radius: 30px 30px 0 0;'">
+                        </div>
+                        <img src="/image/mediCase/mediCapTest.png" style="position: relative;transform: translate(0, -50%);
+                    background: #ffffff;border-radius: 70%;box-shadow: 0px 3px 5px 0px #767676bd;width: 85px">
+                        <div style="width: 100%; background: white;border-radius: 0 0 30px 30px;display: contents;">
+                            <p style="text-align: center; font-size: 35px;font-weight: bold;transform: translate(0, -70%);"th:text="${mediBox.getName()}">
+                                </p>
                         </div>
                     </div>
+                    <a th:href="@{/medi/box/{Id}(Id=${mediBox.getId()})}">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white">
+
+                            </div>
+                        </div>
                     </a>
-                    <img id="mediImg" style="border-radius: 70%;"
-                         th:style="'background:' + ${mediBox.getColor()}+ ';border-radius:70%'" class="img-fluid"
-                         src="/image/mediCase/tes.png" alt="..."/>
                 </div>
-                <hr>
-                <h2 th:text="${mediBox.getName()}"></h2>
-            </div>
-            <div class="pagination justify-content-center">
-                <a role="button" class="btn btn-lg" th:if="${hasPrev == true}" th:href="@{/medi/medibox(page=${previous})}" ><i class="fa-solid fa-square-caret-left fa-2x"></i></a>
-                <a role="button" class="btn btn-lg" th:if="${hasPrev == false}" href="" ><i class="fa-regular fa-square-caret-left fa-2x disabled"></i></a>
-                <a role="button" class="btn btn-lg" th:if="${hasNext == false}" href=""><i class="fa-regular fa-square-caret-right fa-2x disabled"></i></a>
-                <a role="button" class="btn btn-lg" th:if="${hasNext == true}" th:href="@{/medi/medibox(page=${next})}"><i class="fa-solid fa-square-caret-right fa-2x"></i></a>
             </div>
 
         </div>
-    </section>
+        <div class="pagination justify-content-center">
+            <a role="button" class="btn btn-lg" th:if="${hasPrev == true}" th:href="@{/medi/medibox(page=${previous})}"><i
+                    class="fa-solid fa-square-caret-left fa-2x"></i></a>
+            <a role="button" class="btn btn-lg" th:if="${hasPrev == false}" href=""><i
+                    class="fa-regular fa-square-caret-left fa-2x disabled"></i></a>
+            <a role="button" class="btn btn-lg" th:if="${hasNext == false}" href=""><i
+                    class="fa-regular fa-square-caret-right fa-2x disabled"></i></a>
+            <a role="button" class="btn btn-lg" th:if="${hasNext == true}" th:href="@{/medi/medibox(page=${next})}"><i
+                    class="fa-solid fa-square-caret-right fa-2x"></i></a>
+        </div>
+</section>
 </div>
 
 <!-- 약통 추가 -->

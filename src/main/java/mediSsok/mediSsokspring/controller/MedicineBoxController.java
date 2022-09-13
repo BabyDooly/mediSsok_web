@@ -33,7 +33,7 @@ public class MedicineBoxController {
     // 내 약통 페이지(GET)
     @GetMapping("/medi/medibox")
     public String dispMediBox(Model model, @AuthenticationPrincipal CustomUserDetails userDetails,
-                                   @PageableDefault(size = 6, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+                                   @PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         MemberResponseDto memberDto = memberService.findByEmail(userDetails.getUsername());
 
         // 페이징 리스트
