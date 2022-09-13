@@ -23,12 +23,33 @@ public class MedicinesResponseDto {
     private String SB;
 
     public MedicinesResponseDto(Medicines entity) {
+        String name = entity.getName();
+        String codeName = entity.getCodeName();
+        String SB = entity.getSB();
+        int enter;
+
+        if (name.contains("(")){
+            enter = name.indexOf("(");
+            name = name.substring(0,enter) + "<br>" + name.substring(enter);
+        }
+
+        if (codeName.contains("(")){
+            enter = codeName.indexOf("(");
+            codeName = codeName.substring(0,enter) + "<br>" + codeName.substring(enter);
+        }
+
+        if (SB.contains("의약품")){
+            enter = SB.indexOf("의약품");
+            SB = SB.substring(0,enter);
+        }
+
+
         this.id = entity.getId();
-        this.name = entity.getName();
+        this.name = name;
         this.companyName = entity.getCompanyName();
         this.imageUrl = entity.getImageUrl();
         this.formulation = entity.getFormulation();
-        this.codeName = entity.getCodeName();
-        this.SB = entity.getSB();
+        this.codeName = codeName;
+        this.SB = SB;
     }
 }

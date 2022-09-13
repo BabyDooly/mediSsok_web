@@ -45,15 +45,15 @@ let mediBox = {
             console.log(start < today);
 
 
-            if ($('#medicasemedicase').val() == "0")
+            if ($('#medicasemedicase').val() === "0")
                 alert("약통 선택은 필수입니다.");
-            else if ($('#startday').val() == "")
+            else if ($('#startday').val() === "")
                 alert("시작일 선택은 필수입니다.");
-            else if ($('#addBellTime').val() == "")
+            else if ($('#addBellTime').val() === "")
                 alert("시간 선택은 필수입니다.");
-            else if ($('#selectdayBtn').val() == "0")
+            else if ($('#selectdayBtn').val() === "0")
                 alert("주기 선택은 필수입니다.");
-            else if ($('#selectdayBtn').val() == "2" && !($('#addMon').is(':checked') || $('#addTue').is(':checked')
+            else if ($('#selectdayBtn').val() === "2" && !($('#addMon').is(':checked') || $('#addTue').is(':checked')
                 || $('#addWed').is(':checked') || $('#addThu').is(':checked') || $('#addFri').is(':checked')
                 || $('#addSat').is(':checked') || $('#addSun').is(':checked')))
                 alert("요일 선택은 필수입니다.");
@@ -69,13 +69,13 @@ let mediBox = {
             console.log($('#editstartday').val());
             console.log($('#editaddTime').val());
 
-            if ($('#editstartday').val() == "")
+            if ($('#editstartday').val() === "")
                 alert("시작일 선택은 필수입니다.");
-            else if ($('#editaddTime').val() == "")
+            else if ($('#editaddTime').val() === "")
                 alert("시간 선택은 필수입니다.");
-            else if ($('#editselectdayBtn2').val() == "0")
+            else if ($('#editselectdayBtn2').val() === "0")
                 alert("주기 선택은 필수입니다.");
-            else if ($('#editselectdayBtn2').val() == "2" && !($('#editMon').is(':checked') || $('#editTue').is(':checked')
+            else if ($('#editselectdayBtn2').val() === "2" && !($('#editMon').is(':checked') || $('#editTue').is(':checked')
                 || $('#editWed').is(':checked') || $('#editThu').is(':checked') || $('#editFri').is(':checked')
                 || $('#editSat').is(':checked') || $('#editSun').is(':checked')))
                 alert("요일 선택은 필수입니다.");
