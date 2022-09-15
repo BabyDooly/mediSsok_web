@@ -12,39 +12,92 @@
 </head>
 <body>
 <div th:replace="navbar/navBar2 :: navBar2"/>
-<p class="mainText">타이레놀정160mg</p>
-<p class="mainSubText">[ Tylenol Tab. 160mg ]</p>
+<p class="mainText" th:text="${medicine.getName()}">타이레놀정160mg</p>
 <div style="width: 1060px;margin: 0 auto;position: relative"><!-- 제일 큰 페이지 박스 -->
     <div class="row g-3 align-items-center" style="vertical-align: middle;height: 300px;text-align: center"> <!-- 밑에 이미지랑 테이블 담을 div -->
         <div class="col-md-6"> <!-- 이미지 넣을 div -->
-            <img style="width: 60%;" src="https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/151706776344800062">
-            <h6>타이레놀정160mg</h6>
+            <img style="width: 60%;" th:src="${medicine.getImageUrl()}">
         </div>
         <div class="col-md-6"> <!-- 테이블 넣을 div -->
-            gd
-        </div>
 
+        </div>
     </div>
 </div>
 
 
 <div class="testDiv">
+    <div>
+        <div>[성상]</div>
+        <div th:text="${crawling.getAppearance()}">성상내용</div>
+    </div>
+    <br>
 
+    <div>
+        <div>[제형]</div>
+        <div th:text="${medicine.getFormulation()}">제형내용</div>
+    </div>
+    <br>
+
+    <div>
+        <div>[모양]</div>
+        <div th:text="${medicine.getShape()}">모양내용</div>
+    </div>
+    <br>
+
+    <div>
+        <div>[색깔]</div>
+        <div th:text="${medicine.getColor()}">색깔내용</div>
+    </div>
+    <br>
+
+    <div>
+        <div>[모양식별 표기]</div>
+        <div th:text="'(앞) ' + ${medicine.getMarkFront()}">식별 앞 내용</div>
+        <div th:text="'(뒤) ' + ${medicine.getMarkBack()}">식별 뒤 내용</div>
+    </div>
+    <br>
+
+    <div>
+        <div>[구분]</div>
+        <div th:text="${medicine.getSBOriginal()}">구분내용</div>
+    </div>
+    <br>
+
+    <div>
+        <div>[제조(수입) 업체명]</div>
+        <div th:text="${medicine.getCompanyName()}">제조(수입) 업체명내용</div>
+    </div>
+    <br>
+
+    <div>
+        <div>[성분정보]</div>
+        <div th:each="ingredient : ${crawling.getIngredient()}">
+            <div th:text="${ingredient}"></div>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div>[저장방법]</div>
+        <div th:text="${crawling.getSave()}">저장방법내용</div>
+    </div>
+    <br>
+
+    <div>
+        <div>[효능효과]</div>
+        <div th:utext="${crawling.getEffect()}">효능효과내용</div>
+    </div>
+    <br>
+
+    <div>
+        <div>[용법용량]</div>
+        <div th:utext="${crawling.getIntake()}">용법용량내용</div>
+    </div>
+    <br>
 </div>
 <!-- bootstrp js 링크 -->
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    function search() {
-        $('#searchArea').show()
-    }
-
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-        return new bootstrap.Popover(popoverTriggerEl)
-        trigger: 'focus';
-    })
-</script>
 </body>
 </html>

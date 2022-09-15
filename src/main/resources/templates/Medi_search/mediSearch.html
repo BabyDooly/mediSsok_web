@@ -33,7 +33,7 @@
         <tr>
             <th rowspan="2"  width="150" valign="middle" class="table-active">제품명/성분명</th>
             <td rowspan="2"  height="80" align="center" valign="middle">
-                <input type="text" class="form-control" id="autoSizingInput3">
+                <input type="text" class="form-control" id="autoSizingInput3" >
             </td>
         </tr>
         <tr>
@@ -42,14 +42,7 @@
                 <form class="row gx-2 align-items-center">
                     <div class="col-7" style="margin-bottom: 10px">
                         <label class="visually-hidden" for="autoSizingInput1">Name</label>
-                        <input type="text" class="form-control" id="autoSizingInput1" placeholder="문자 1">
-                    </div>
-                </form>
-
-                <form class="row gx-2 align-items-center">
-                    <div class="col-7">
-                        <label class="visually-hidden" for="autoSizingInput">Name</label>
-                        <input type="text" class="form-control" id="autoSizingInput" placeholder="문자 2">
+                        <input type="text" class="form-control" id="autoSizingInput1" placeholder="문자">
                     </div>
                 </form>
             </td>
@@ -291,7 +284,8 @@
         </tr>
         </thead>
         <tbody th:each="medi : ${medicines}">
-                <tr onclick="location.href='/medi/info'">
+
+                <tr th:onclick="|location.href='@{/medi/info?id={id}(id=${medi.getId()})}'|">
                         <td><img th:src="${medi.getImageUrl()}" style="width: 100%;"></td>
                         <td th:utext="${medi.getName()}">타이레놀</td>
                         <td th:utext="${medi.getCodeName()}">효능</td>

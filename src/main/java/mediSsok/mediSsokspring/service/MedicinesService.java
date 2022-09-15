@@ -32,36 +32,36 @@ public class MedicinesService {
     public List<MedicinesResponseDto> findByMedicines (MedicinesSearchRequestDto dto){
         // 분할선 '없음', 모양 '기타'
         if (dto.getShape().equals("기타") && dto.getLine().equals("없음"))
-            return medicinesRepository.searchNotShapeLine(dto.getName(), dto.getCompanyName(), dto.getMark1(), dto.getMark2(),
+            return medicinesRepository.searchNotShapeLine(dto.getName(), dto.getCompanyName(), dto.getMark(),
                             dto.getLine(),dto.getFormulation(), "원형", "타원형", "장방형", "반원형", "삼각형",
                             "사각형", "마름모형", "오각형","육각형", "팔각형", dto.getColor()).stream()
                     .map(MedicinesResponseDto::new)
                     .collect(Collectors.toList());
         // 분할선 '없음'
         else if (dto.getLine().equals("없음"))
-            return medicinesRepository.searchNotLine(dto.getName(), dto.getCompanyName(), dto.getMark1(), dto.getMark2(),
+            return medicinesRepository.searchNotLine(dto.getName(), dto.getCompanyName(), dto.getMark(),
                             "분할선", dto.getFormulation(), dto.getShape(), dto.getColor()).stream()
                     .map(MedicinesResponseDto::new)
                     .collect(Collectors.toList());
         // 모양 '기타'
         else if (dto.getShape().equals("기타"))
-            return medicinesRepository.searchNotShape(dto.getName(), dto.getCompanyName(), dto.getMark1(), dto.getMark2(),
+            return medicinesRepository.searchNotShape(dto.getName(), dto.getCompanyName(), dto.getMark(),
                             dto.getLine(),dto.getFormulation(), "원형", "타원형", "장방형", "반원형", "삼각형",
                             "사각형", "마름모형", "오각형","육각형", "팔각형", dto.getColor()).stream()
                     .map(MedicinesResponseDto::new)
                     .collect(Collectors.toList());
         else
-            return medicinesRepository.searchByMedicines(dto.getName(), dto.getCompanyName(), dto.getMark1(), dto.getMark2(),
+            return medicinesRepository.searchByMedicines(dto.getName(), dto.getCompanyName(), dto.getMark(),
                         dto.getLine(), dto.getFormulation(), dto.getShape(), dto.getColor()).stream()
                 .map(MedicinesResponseDto::new)
                 .collect(Collectors.toList());
     }
 
-//    // 알약 조회
-//    public MedicineBoxResponseDto findById (Long id){
-//        MedicineBox entity = medicinesRepository.findById(id)
-//                .orElseThrow(() -> new IllegalArgumentException("해당 약통이 없습니다. id = " + id));
-//
-//        return new MedicineBoxResponseDto(entity);
-//    }
+    // 알약 조회
+    public MedicinesResponseDto findById (Long id){
+        Medicines entity = medicinesRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 약통이 없습니다. id = " + id));
+
+        return new MedicinesResponseDto(entity);
+    }
 }

@@ -3,12 +3,7 @@ package mediSsok.mediSsokspring.dto.medicines;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
-import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineList;
 import mediSsok.mediSsokspring.domain.entity.medicines.Medicines;
-
-import javax.persistence.Column;
-import java.util.List;
 
 @Getter
 @Setter
@@ -22,6 +17,12 @@ public class MedicinesResponseDto {
     private String codeName;
     private String SB;
 
+    private String markFront;
+    private String markBack;
+    private String shape;
+    private String color;
+    private String SBOriginal;
+
     public MedicinesResponseDto(Medicines entity) {
         String name = entity.getName();
         String codeName = entity.getCodeName();
@@ -30,8 +31,10 @@ public class MedicinesResponseDto {
 
         if (name.contains("(")){
             enter = name.indexOf("(");
-            name = name.substring(0,enter) + "<br>" + name.substring(enter);
+            name = name.substring(0,enter);
         }
+        name = name.replace("밀리그램", "mg");
+
 
         if (codeName.contains("(")){
             enter = codeName.indexOf("(");
@@ -51,5 +54,11 @@ public class MedicinesResponseDto {
         this.formulation = entity.getFormulation();
         this.codeName = codeName;
         this.SB = SB;
+
+        this.markFront = entity.getMarkFront();
+        this.markBack = entity.getMarkBack();
+        this.shape = entity.getShape();
+        this.color = entity.getColor();
+        this.SBOriginal = entity.getSB();
     }
 }

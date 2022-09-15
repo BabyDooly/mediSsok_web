@@ -1,8 +1,8 @@
 package mediSsok.mediSsokspring.controller;
 
 import lombok.RequiredArgsConstructor;
-import mediSsok.mediSsokspring.Validation.CheckEmailValidator;
-import mediSsok.mediSsokspring.Validation.CheckNicknameValidator;
+import mediSsok.mediSsokspring.service.Validation.CheckEmailValidator;
+import mediSsok.mediSsokspring.service.Validation.CheckNicknameValidator;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.dto.member.*;
 import mediSsok.mediSsokspring.service.MemberService;

@@ -1,4 +1,4 @@
-package mediSsok.mediSsokspring.Validation;
+package mediSsok.mediSsokspring.service.Validation;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.Errors;

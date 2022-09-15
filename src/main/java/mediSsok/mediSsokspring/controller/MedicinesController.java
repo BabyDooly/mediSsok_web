@@ -2,8 +2,10 @@ package mediSsok.mediSsokspring.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mediSsok.mediSsokspring.dto.medicines.MedicinesInfoResponseDto;
 import mediSsok.mediSsokspring.dto.medicines.MedicinesResponseDto;
 import mediSsok.mediSsokspring.dto.medicines.MedicinesSearchRequestDto;
+import mediSsok.mediSsokspring.service.Crawling;
 import mediSsok.mediSsokspring.service.MedicinesService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +27,7 @@ public class MedicinesController {
     }
 
     @GetMapping("/medi/searchDetail")
-    public String Search(Model model, MedicinesSearchRequestDto dto) {
-
+    public String searchDetail(Model model, MedicinesSearchRequestDto dto) {
         // 리스트 생성
         List<MedicinesResponseDto> list = medicinesService.findByMedicines(dto);
         int size = list.size();
@@ -37,5 +38,18 @@ public class MedicinesController {
         model.addAttribute("medicines", list);
 
         return "/Medi_search/mediSearch";
+    }
+
+    @GetMapping("/medi/info")
+    public String mediINfo(@RequestParam(defaultValue="0") Long id, Model model){
+        MedicinesResponseDto medicine = medicinesService.findById(id);
+        
+        // 크롤링 데이터
+        Crawling crawling = new Crawling();
+        MedicinesInfoResponseDto dto = crawling.process(id);
+
+        model.addAttribute("medicine", medicine);
+        model.addAttribute("crawling", dto);
+        return "/Medi_search/mediInfo";
     }
 }

@@ -11,10 +11,8 @@ let mediSearch = {
             document.getElementById("autoSizingInput3").value = param.get('name');
         if (param.has('companyName'))
             document.getElementById("autoSizingInput4").value = param.get('companyName');
-        if (param.has('mark1'))
-            document.getElementById("autoSizingInput1").value = param.get('mark1');
-        if (param.has('mark2'))
-            document.getElementById("autoSizingInput").value = param.get('mark2');
+        if (param.has('mark'))
+            document.getElementById("autoSizingInput1").value = param.get('mark');
 
         let formulation = param.get('formulation')
         if (param.has('formulation'))
@@ -34,7 +32,6 @@ let mediSearch = {
             document.getElementById("autoSizingInput3").value = "";
             document.getElementById("autoSizingInput4").value = "";
             document.getElementById("autoSizingInput1").value = "";
-            document.getElementById("autoSizingInput").value = "";
 
             $("#btnradio6").prop('checked', true);
             $("#btnradio___6").prop('checked', true);
@@ -56,13 +53,9 @@ let mediSearch = {
             if(companyName !== "")
                 url = url + 'companyName=' + companyName + '&';
 
-            let mark1 = document.getElementById('autoSizingInput1').value;
-            if(mark1 !== "")
-                url = url + 'mark1=' + mark1 + '&';
-
-            let mark2 = document.getElementById('autoSizingInput').value;
-            if(mark2 !== "")
-                url = url + 'mark2=' + mark2 + '&';
+            let mark = document.getElementById('autoSizingInput1').value;
+            if(mark !== "")
+                url = url + 'mark=' + mark + '&';
 
 
             let formulation = $('input[name="btnradio"]:checked').val();

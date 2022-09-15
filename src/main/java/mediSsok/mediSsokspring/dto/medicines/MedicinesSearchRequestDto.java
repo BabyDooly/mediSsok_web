@@ -12,8 +12,7 @@ import javax.persistence.Column;
 public class MedicinesSearchRequestDto {
     private String name;
     private String companyName;
-    private String mark1;
-    private String mark2;
+    private String mark;
     private String line;
     private String formulation;
     private String shape;
@@ -22,8 +21,7 @@ public class MedicinesSearchRequestDto {
     public MedicinesSearchRequestDto(){
         name = "";
         companyName = "";
-        mark1 = "";
-        mark2 = "";
+        mark = "";
         line = "";
         formulation = "";
         shape = "";
