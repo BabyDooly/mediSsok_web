@@ -1,20 +1,21 @@
-package mediSsok.mediSsokspring.Validation;
+package mediSsok.mediSsokspring.service.Validation;
 
+import mediSsok.mediSsokspring.dto.member.MemberSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.domain.repository.member.MemberRepository;
-import mediSsok.mediSsokspring.dto.member.MemberSaveRequestDto;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
 @RequiredArgsConstructor
 @Component
-public class CheckEmailValidator extends AbstractValidator<MemberSaveRequestDto> {
+public class CheckNicknameValidator extends AbstractValidator<MemberSaveRequestDto> {
+
     private final MemberRepository userRepository;
 
     @Override
     protected void doValidate(MemberSaveRequestDto dto, Errors errors) {
-        if (userRepository.existsByEmail(dto.toEntity().getEmail())) {
-            errors.rejectValue("email", "이메일 중복 오류", "이미 사용중인 이메일 입니다.");
+        if (userRepository.existsByNickname(dto.toEntity().getNickname())) {
+            errors.rejectValue("nickname", "닉네임 중복 오류", "이미 사용중인 닉네임 입니다.");
         }
     }
 }

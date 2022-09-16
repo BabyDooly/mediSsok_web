@@ -18,8 +18,4 @@ public class IndexController {
 
     @GetMapping("/ttt")
     public String tt(){return "/test/ttt";}
-
-
-    @GetMapping("/medi/info")
-    public String mediINfo(){ return "/Medi_search/mediInfo"; }
 }

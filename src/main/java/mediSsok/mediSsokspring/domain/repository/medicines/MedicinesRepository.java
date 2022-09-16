@@ -14,7 +14,7 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Long> {
     @Query("SELECT m FROM Medicines m WHERE " +
             "m.name LIKE %:name% " +
             "AND m.companyName LIKE %:companyName% " +
-            "AND ((m.markBack LIKE %:mark1% AND m.markFront LIKE %:mark2%) OR (m.markBack LIKE %:mark2% AND m.markFront LIKE %:mark1%)) " +
+            "AND (m.markBack LIKE %:mark% OR m.markFront LIKE %:mark%) " +
             "AND (m.markBack LIKE %:line% OR m.markFront LIKE %:line%) " +
             "AND m.formulation LIKE %:formulation% " +
             "AND m.shape LIKE %:shape% " +
@@ -22,8 +22,7 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Long> {
     List<Medicines> searchByMedicines(
             @Param("name") String name,
             @Param("companyName") String companyName,
-            @Param("mark1") String mark1,
-            @Param("mark2") String mark2,
+            @Param("mark") String mark,
             @Param("line") String line,
             @Param("formulation") String formulation,
             @Param("shape") String shape,
@@ -34,7 +33,7 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Long> {
     @Query("SELECT m FROM Medicines m WHERE " +
             "m.name LIKE %:name% " +
             "AND m.companyName LIKE %:companyName% " +
-            "AND ((m.markBack LIKE %:mark1% AND m.markFront LIKE %:mark2%) OR (m.markBack LIKE %:mark2% AND m.markFront LIKE %:mark1%)) " +
+            "AND (m.markBack LIKE %:mark% OR m.markFront LIKE %:mark%) " +
             "AND m.markBack NOT LIKE %:line% AND m.markFront NOT LIKE %:line% " +
             "AND m.formulation LIKE %:formulation% " +
             "AND m.shape LIKE %:shape% " +
@@ -42,8 +41,7 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Long> {
     List<Medicines> searchNotLine(
             @Param("name") String name,
             @Param("companyName") String companyName,
-            @Param("mark1") String mark1,
-            @Param("mark2") String mark2,
+            @Param("mark") String mark,
             @Param("line") String line,
             @Param("formulation") String formulation,
             @Param("shape") String shape,
@@ -54,7 +52,7 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Long> {
     @Query("SELECT m FROM Medicines m WHERE " +
             "m.name LIKE %:name% " +
             "AND m.companyName LIKE %:companyName% " +
-            "AND ((m.markBack LIKE %:mark1% AND m.markFront LIKE %:mark2%) OR (m.markBack LIKE %:mark2% AND m.markFront LIKE %:mark1%)) " +
+            "AND (m.markBack LIKE %:mark% OR m.markFront LIKE %:mark%) " +
             "AND (m.markBack LIKE %:line% OR m.markFront LIKE %:line%) " +
             "AND m.formulation LIKE %:formulation% " +
             "AND m.shape NOT LIKE %:shape1% AND m.shape NOT LIKE %:shape2% AND m.shape NOT LIKE %:shape3% AND m.shape NOT LIKE %:shape4% AND m.shape NOT LIKE %:shape5% " +
@@ -63,8 +61,7 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Long> {
     List<Medicines> searchNotShape(
             @Param("name") String name,
             @Param("companyName") String companyName,
-            @Param("mark1") String mark1,
-            @Param("mark2") String mark2,
+            @Param("mark") String mark,
             @Param("line") String line,
             @Param("formulation") String formulation,
             @Param("shape1") String shape1,
@@ -84,7 +81,7 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Long> {
     @Query("SELECT m FROM Medicines m WHERE " +
             "m.name LIKE %:name% " +
             "AND m.companyName LIKE %:companyName% " +
-            "AND ((m.markBack LIKE %:mark1% AND m.markFront LIKE %:mark2%) OR (m.markBack LIKE %:mark2% AND m.markFront LIKE %:mark1%)) " +
+            "AND (m.markBack LIKE %:mark% OR m.markFront LIKE %:mark%) " +
             "AND m.markBack NOT LIKE %:line% AND m.markFront NOT LIKE %:line% " +
             "AND m.formulation LIKE %:formulation% " +
             "AND m.shape NOT LIKE %:shape1% AND m.shape NOT LIKE %:shape2% AND m.shape NOT LIKE %:shape3% AND m.shape NOT LIKE %:shape4% AND m.shape NOT LIKE %:shape5% " +
@@ -93,8 +90,7 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Long> {
     List<Medicines> searchNotShapeLine(
             @Param("name") String name,
             @Param("companyName") String companyName,
-            @Param("mark1") String mark1,
-            @Param("mark2") String mark2,
+            @Param("mark") String mark,
             @Param("line") String line,
             @Param("formulation") String formulation,
             @Param("shape1") String shape1,
