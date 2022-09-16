@@ -1,0 +1,3 @@
+C:\spring\my\mediSsok\medicines.csv
+여기다가 csv파일을 넣고
+inputData.sql SQL문을 실행해 주세요
