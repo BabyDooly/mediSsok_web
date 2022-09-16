@@ -370,7 +370,7 @@ p, span {
 /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ myMediCase CSS ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 .myMediCaseDiv{
     width: 1060px;
-    height: 1300px;
+    height: 800px;
     margin: 0 auto;
     vertical-align: middle; /*센터 맞춤 속성*/
     line-height: normal; /*센터 맞춤 속성*/

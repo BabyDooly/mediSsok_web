@@ -125,7 +125,7 @@
                 저와의 중요한 약속. 걱정마세요😆<br>
             </p>
 
-            <a tabindex="0" style="margin-left: 70px;font-size: 20px" data-bs-toggle="popover" data-bs-trigger="focus"
+            <a tabindex="1" style="margin-left: 70px;font-size: 20px" data-bs-toggle="popover" data-bs-trigger="focus"
                data-bs-html="true"
                data-bs-content="당신과 소중한 분들의 약 복용 현황📆<br/>
                 집에서 나가기전 휴대약 확인📢<br/>
@@ -220,6 +220,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/main.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
 <script>
 
     console.log($('#connectEmail').length > 0);
@@ -228,6 +229,10 @@
             $('#connectAccept').modal('show');
         }
     }
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
 </script>
 </body>
 </html>
