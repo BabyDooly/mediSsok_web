@@ -7,6 +7,9 @@ import mediSsok.mediSsokspring.dto.medicines.MedicinesResponseDto;
 import mediSsok.mediSsokspring.dto.medicines.MedicinesSearchRequestDto;
 import mediSsok.mediSsokspring.service.Crawling;
 import mediSsok.mediSsokspring.service.MedicinesService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,15 +30,18 @@ public class MedicinesController {
     }
 
     @GetMapping("/medi/searchDetail")
-    public String searchDetail(Model model, MedicinesSearchRequestDto dto) {
+    public String searchDetail(@PageableDefault(size = 20) Pageable pageable, Model model, MedicinesSearchRequestDto dto) {
         // 리스트 생성
-        List<MedicinesResponseDto> list = medicinesService.findByMedicines(dto);
-        int size = list.size();
-
+        Page<MedicinesResponseDto> list = medicinesService.findByMedicines(dto, pageable);
+        int size = list.getSize();
+        int startPage = Math.max(1, list.getPageable().getPageNumber() - 4);
+        int endPage = Math.min(list.getPageable().getPageNumber()+4, list.getTotalPages());
 
         // 약 리스트
         model.addAttribute("size", size);
         model.addAttribute("medicines", list);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
 
         return "/Medi_search/mediSearch";
     }

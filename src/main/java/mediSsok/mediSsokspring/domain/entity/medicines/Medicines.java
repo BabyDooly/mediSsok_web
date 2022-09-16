@@ -23,7 +23,7 @@ public class Medicines {
     private Long id;
 
     // 제품명
-    @Column(name = "med_name", length = 50)
+    @Column(name = "med_name", length = 150)
     private String name;
 
     // 제조사
@@ -35,30 +35,30 @@ public class Medicines {
     private String imageUrl;
 
     // 약 표시(앞)
-    @Column(name = "med_mark_front", length = 20)
+    @Column(name = "med_mark_front", length = 50)
     private String markFront;
 
     // 약 표시(뒤)
-    @Column(name = "med_mark_back", length = 20)
+    @Column(name = "med_mark_back", length = 50)
     private String markBack;
 
     // 제형
-    @Column(name = "med_formulation", length = 20)
+    @Column(name = "med_formulation", length = 50)
     private String formulation;
 
     // 모양
-    @Column(name = "med_shape", length = 20)
+    @Column(name = "med_shape", length = 50)
     private String shape;
 
     // 색상
-    @Column(name = "med_color", length = 20)
+    @Column(name = "med_color", length = 50)
     private String color;
 
     // 분류명
-    @Column(name = "med_code_name", length = 30)
+    @Column(name = "med_code_name", length = 50)
     private String codeName;
 
     // 전문|일반 구분
-    @Column(name = "med_SB", length = 20)
+    @Column(name = "med_SB", length = 50)
     private String SB;
 }

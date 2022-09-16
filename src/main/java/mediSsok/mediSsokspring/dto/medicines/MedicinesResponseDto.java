@@ -34,6 +34,7 @@ public class MedicinesResponseDto {
             name = name.substring(0,enter);
         }
         name = name.replace("밀리그램", "mg");
+        name = name.replace("밀리그람", "mg");
 
 
         if (codeName.contains("(")){

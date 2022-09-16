@@ -1,10 +1,13 @@
 package mediSsok.mediSsokspring.domain.repository.medicines;
 
 import mediSsok.mediSsokspring.domain.entity.medicines.Medicines;
+import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
+import mediSsok.mediSsokspring.dto.medicines.MedicinesResponseDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -19,14 +22,15 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Long> {
             "AND m.formulation LIKE %:formulation% " +
             "AND m.shape LIKE %:shape% " +
             "AND m.color LIKE %:color%")
-    List<Medicines> searchByMedicines(
+    Page<MedicinesResponseDto> searchByMedicines(
             @Param("name") String name,
             @Param("companyName") String companyName,
             @Param("mark") String mark,
             @Param("line") String line,
             @Param("formulation") String formulation,
             @Param("shape") String shape,
-            @Param("color") String color
+            @Param("color") String color,
+            Pageable pageable
     );
 
     // 분할선 '없음' 검색
@@ -38,14 +42,15 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Long> {
             "AND m.formulation LIKE %:formulation% " +
             "AND m.shape LIKE %:shape% " +
             "AND m.color LIKE %:color%")
-    List<Medicines> searchNotLine(
+    Page<MedicinesResponseDto> searchNotLine(
             @Param("name") String name,
             @Param("companyName") String companyName,
             @Param("mark") String mark,
             @Param("line") String line,
             @Param("formulation") String formulation,
             @Param("shape") String shape,
-            @Param("color") String color
+            @Param("color") String color,
+            Pageable pageable
     );
 
     // 모양 '기타' 검색
@@ -58,7 +63,7 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Long> {
             "AND m.shape NOT LIKE %:shape1% AND m.shape NOT LIKE %:shape2% AND m.shape NOT LIKE %:shape3% AND m.shape NOT LIKE %:shape4% AND m.shape NOT LIKE %:shape5% " +
             "AND m.shape NOT LIKE %:shape6% AND m.shape NOT LIKE %:shape7% AND m.shape NOT LIKE %:shape8% AND m.shape NOT LIKE %:shape9% AND m.shape NOT LIKE %:shape10% " +
             "AND m.color LIKE %:color%")
-    List<Medicines> searchNotShape(
+    Page<MedicinesResponseDto> searchNotShape(
             @Param("name") String name,
             @Param("companyName") String companyName,
             @Param("mark") String mark,
@@ -74,7 +79,8 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Long> {
             @Param("shape8") String shape8,
             @Param("shape9") String shape9,
             @Param("shape10") String shape10,
-            @Param("color") String color
+            @Param("color") String color,
+            Pageable pageable
     );
 
     // 모양 '기타', 분할선 '없음' 검색
@@ -87,7 +93,7 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Long> {
             "AND m.shape NOT LIKE %:shape1% AND m.shape NOT LIKE %:shape2% AND m.shape NOT LIKE %:shape3% AND m.shape NOT LIKE %:shape4% AND m.shape NOT LIKE %:shape5% " +
             "AND m.shape NOT LIKE %:shape6% AND m.shape NOT LIKE %:shape7% AND m.shape NOT LIKE %:shape8% AND m.shape NOT LIKE %:shape9% AND m.shape NOT LIKE %:shape10% " +
             "AND m.color LIKE %:color%")
-    List<Medicines> searchNotShapeLine(
+    Page<MedicinesResponseDto> searchNotShapeLine(
             @Param("name") String name,
             @Param("companyName") String companyName,
             @Param("mark") String mark,
@@ -103,6 +109,7 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Long> {
             @Param("shape8") String shape8,
             @Param("shape9") String shape9,
             @Param("shape10") String shape10,
-            @Param("color") String color
+            @Param("color") String color,
+            Pageable pageable
     );
 }

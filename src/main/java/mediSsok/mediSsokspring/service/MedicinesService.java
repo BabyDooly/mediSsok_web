@@ -29,32 +29,24 @@ public class MedicinesService {
     /*---- 알약 ----*/
     // 알약 리스트
     @Transactional(readOnly=true)
-    public List<MedicinesResponseDto> findByMedicines (MedicinesSearchRequestDto dto){
+    public Page<MedicinesResponseDto> findByMedicines (MedicinesSearchRequestDto dto, Pageable pageable){
         // 분할선 '없음', 모양 '기타'
         if (dto.getShape().equals("기타") && dto.getLine().equals("없음"))
             return medicinesRepository.searchNotShapeLine(dto.getName(), dto.getCompanyName(), dto.getMark(),
                             dto.getLine(),dto.getFormulation(), "원형", "타원형", "장방형", "반원형", "삼각형",
-                            "사각형", "마름모형", "오각형","육각형", "팔각형", dto.getColor()).stream()
-                    .map(MedicinesResponseDto::new)
-                    .collect(Collectors.toList());
+                            "사각형", "마름모형", "오각형","육각형", "팔각형", dto.getColor(), pageable);
         // 분할선 '없음'
         else if (dto.getLine().equals("없음"))
             return medicinesRepository.searchNotLine(dto.getName(), dto.getCompanyName(), dto.getMark(),
-                            "분할선", dto.getFormulation(), dto.getShape(), dto.getColor()).stream()
-                    .map(MedicinesResponseDto::new)
-                    .collect(Collectors.toList());
+                            "분할선", dto.getFormulation(), dto.getShape(), dto.getColor(), pageable);
         // 모양 '기타'
         else if (dto.getShape().equals("기타"))
             return medicinesRepository.searchNotShape(dto.getName(), dto.getCompanyName(), dto.getMark(),
                             dto.getLine(),dto.getFormulation(), "원형", "타원형", "장방형", "반원형", "삼각형",
-                            "사각형", "마름모형", "오각형","육각형", "팔각형", dto.getColor()).stream()
-                    .map(MedicinesResponseDto::new)
-                    .collect(Collectors.toList());
+                            "사각형", "마름모형", "오각형","육각형", "팔각형", dto.getColor(), pageable);
         else
             return medicinesRepository.searchByMedicines(dto.getName(), dto.getCompanyName(), dto.getMark(),
-                        dto.getLine(), dto.getFormulation(), dto.getShape(), dto.getColor()).stream()
-                .map(MedicinesResponseDto::new)
-                .collect(Collectors.toList());
+                        dto.getLine(), dto.getFormulation(), dto.getShape(), dto.getColor(), pageable);
     }
 
     // 알약 조회
