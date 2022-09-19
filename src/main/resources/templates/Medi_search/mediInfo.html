@@ -10,8 +10,42 @@
     <link href="/css/home.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <style>
-        .table,td,th{
+        .table, td, th {
             padding-left: 10px;
+            font-size: 20px;
+        }
+
+        .table, td {
+            height: auto;
+        }
+        .p,p{
+            margin: 0;
+            font-size: 20px;
+        }
+        p.title{
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        p.indent0{
+            margin-left: 20px;
+        }
+        table.indent{
+            width: 100%;
+        }
+        .indent tbody td{
+            border: 1px solid black;
+        }
+        .indent tbody tr:first-child td p{
+            font-weight: bold;
+        }
+        table.indent0{
+            width: 100%;
+        }
+        .indent0 tbody td{
+            border: 1px solid black;
+        }
+        .indent0 tbody tr:first-child td p{
+            font-weight: bold;
         }
     </style>
 </head>
@@ -19,86 +53,87 @@
 <div th:replace="navbar/navBar2 :: navBar2"/>
 <p class="mainText" th:text="${medicine.getName()}" style="margin-bottom: 40px"></p>
 <div style="width: 1060px;margin: 0 auto;position: relative"><!-- 제일 큰 페이지 박스 -->
-    <div class="row g-3 align-items-center">
+    <div class="row g-3 align-items-center" style="margin-bottom: 40px">
         <!-- 밑에 이미지랑 테이블 담을 div -->
         <div class="col-md-6" style="margin: 0;"> <!-- 이미지 넣을 div -->
             <img style="width: 100%;height: 100%;" th:src="${medicine.getImageUrl()}">
         </div>
         <div class="col-md-6" style="margin: 0;"> <!-- 테이블 넣을 div -->
-            <div style="width: 100%;height: 284px;">
-            <table class="table table-bordered border-secondary" style="vertical-align: middle; text-align: left;height: 100%;">
-                <tbody style="padding-left: 10px">
-                <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
-                <tr>
-                    <th class="table-active">성상</th>
-                    <td th:text="${crawling.getAppearance()}">
-                    </td>
-                </tr>
-                <tr>
-                    <th class="table-active">제형</th>
-                    <td th:text="${medicine.getFormulation()}">
-                    </td>
-                </tr>
-                <tr>
-                    <th class="table-active">모양</th>
-                    <td th:text="${medicine.getShape()}">
-                    </td>
-                </tr>
-                <tr>
-                    <th class="table-active">색깔</th>
-                    <td th:text="${medicine.getColor()}">
-                    </td>
-                </tr>
-                <tr>
-                    <th class="table-active">모양식별 표기</th>
-                    <td>
-                        <p th:text="'(앞) ' + ${medicine.getMarkFront()}" style="margin: 0"></p>
-                        <p th:text="'(뒤) ' +${medicine.getMarkBack()}" style="margin: 0">
-                    </td>
-                </tr>
-                <tr>
-                    <th class="table-active">구분</th>
-                    <td th:text="${medicine.getSBOriginal()}">
-                    </td>
-                </tr>
-                <tr>
-                    <th class="table-active" style="width: 150px;">제조(수입) 업체명</th>
-                    <td th:text="${medicine.getCompanyName()}">
-                    </td>
-                </tr>
+            <div style="width: 538px;height: 284px;display: inline">
+                <table class="table table-bordered border-secondary"
+                       style="vertical-align: middle; text-align: left;height: 100%;">
+                    <tbody style="padding-left: 10px">
+                    <!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+                    <tr>
+                        <th class="table-active">성상</th>
+                        <td th:text="${crawling.getAppearance()}">
 
-                </tbody>
-            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="table-active">제형</th>
+                        <td th:text="${medicine.getFormulation()}">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="table-active">모양</th>
+                        <td th:text="${medicine.getShape()}">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="table-active">색깔</th>
+                        <td th:text="${medicine.getColor()}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="table-active">모양식별 표기</th>
+                        <td>
+                            <p th:text="'(앞) ' + ${medicine.getMarkFront()}" style="margin: 0"></p>
+                            <p th:text="'(뒤) ' +${medicine.getMarkBack()}" style="margin: 0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="table-active">구분</th>
+                        <td th:text="${medicine.getSBOriginal()}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="table-active" style="width: 175px;">제조(수입) 업체명</th>
+                        <td th:text="${medicine.getCompanyName()}">
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
 
-
-<div class="testDiv">
-    <div>
-        <div>[성분정보]</div>
-        <div th:each="ingredient : ${crawling.getIngredient()}">
-            <div th:text="${ingredient}"></div>
-        </div>
+<div style="width: 1060px;height: auto;margin: 0 auto">
+    <p style="font-size: 30px;font-weight: bold">[성분정보]</p>
+    <div th:each="ingredient : ${crawling.getIngredient()}">
+        <p th:text="${ingredient}" style="margin: 0"></p>
     </div>
     <br>
 
     <div>
-        <div>[저장방법]</div>
-        <div th:text="${crawling.getSave()}">저장방법내용</div>
+        <p style="font-size: 30px;font-weight: bold">[저장방법]</p>
+        <p th:text="${crawling.getSave()}">저장방법내용</p>
     </div>
     <br>
 
     <div>
-        <div>[효능효과]</div>
-        <div th:utext="${crawling.getEffect()}">효능효과내용</div>
+        <p style="font-size: 30px;font-weight: bold">[효능효과]</p>
+        <p th:utext="${crawling.getEffect()}">효능효과내용</p>
     </div>
     <br>
 
     <div>
-        <div>[용법용량]</div>
-        <div th:utext="${crawling.getIntake()}">용법용량내용</div>
+        <p style="font-size: 30px;font-weight: bold">[용법용량]</p>
+        <p th:utext="${crawling.getIntake()}">용법용량내용</p>
     </div>
     <br>
 </div>
