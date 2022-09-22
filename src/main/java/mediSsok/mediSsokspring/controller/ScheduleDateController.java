@@ -95,6 +95,17 @@ public class ScheduleDateController {
         return scheduleDateService.alarmFindById(requestDto.getDateInfoId());
     }
 
+    // 가까운 알람 조회(GET)
+    @GetMapping("/api/alarm/get")
+    @ResponseBody
+    public DateInfoResponseDto findNearAlarm(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        LocalDateTime now = LocalDateTime.now();
+
+        System.out.println("현재: " + now);
+
+        return scheduleDateService.alarm(userDetails.getMember().getId(), now);
+    }
+
     // 알람 수정(POST)
     @PostMapping("/api/medi/alarm/update/{id}")
     @ResponseBody

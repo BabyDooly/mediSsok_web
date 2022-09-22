@@ -903,3 +903,13 @@ increment-next {  from {
 .t{
     vertical-align: middle;
 }
+
+.alarmOn {
+    animation: blink 1s step-end infinite;
+}
+
+/* for Chrome, Safari */
+@-webkit-keyframes blink {
+    0% {background-color: red;}
+    50% {background-color: white;}
+}

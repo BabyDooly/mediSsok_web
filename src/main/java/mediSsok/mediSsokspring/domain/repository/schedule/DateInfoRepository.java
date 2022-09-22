@@ -11,5 +11,7 @@ import java.util.List;
 public interface DateInfoRepository extends JpaRepository<DateInfo, Long> {
     List<DateInfo> findByMemberIdAndAlarmDatetimeBetween(Long memberId, LocalDateTime fromDate, LocalDateTime toDate, Sort sort);
 
+    List<DateInfo> findByMemberIdAndAlarmCheckAndAlarmDatetimeGreaterThanEqual(Long memberId, Boolean alarmCheck, LocalDateTime date, Sort sort);
+
     List<DateInfo> findByMemberId(Long userid);
 }

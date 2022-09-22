@@ -33,7 +33,7 @@ public class MedicinesController {
     public String searchDetail(@PageableDefault(size = 20) Pageable pageable, Model model, MedicinesSearchRequestDto dto) {
         // 리스트 생성
         Page<MedicinesResponseDto> list = medicinesService.findByMedicines(dto, pageable);
-        int size = list.getSize();
+        long size = list.getTotalElements();
         int startPage = Math.max(1, list.getPageable().getPageNumber() - 4);
         int endPage = Math.min(list.getPageable().getPageNumber()+4, list.getTotalPages());
 

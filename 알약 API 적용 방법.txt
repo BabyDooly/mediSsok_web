@@ -1,3 +1,4 @@
-C:\spring\my\mediSsok\medicines.csv
-여기다가 csv파일을 넣고
-inputData.sql SQL문을 실행해 주세요
+1) 아래의 명령어를 실행하여 경로를 확인한다.
+  SHOW VARIABLES LIKE 'secure_file%'
+
+2) 그 경로에 medicines.csv 파일을 넣고 inputData.sql을 실행한다

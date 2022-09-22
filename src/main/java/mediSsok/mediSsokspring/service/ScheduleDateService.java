@@ -12,11 +12,8 @@ import mediSsok.mediSsokspring.domain.repository.member.LinkInfoRepository;
 import mediSsok.mediSsokspring.domain.repository.member.MemberRepository;
 import mediSsok.mediSsokspring.domain.repository.schedule.DateInfoRepository;
 import mediSsok.mediSsokspring.domain.repository.schedule.ScheduleDateRepository;
-import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
 import mediSsok.mediSsokspring.dto.member.LinkInfoResponseDto;
 import mediSsok.mediSsokspring.dto.schedule.*;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -148,6 +145,16 @@ public class ScheduleDateService {
         return dateInfoRepository.findByMemberIdAndAlarmDatetimeBetween(memberId, fromDate, toDate, Sort.by(Sort.Direction.ASC, "alarmDatetime")).stream()
                 .map(DateInfoResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    // 가까운 알람
+    @Transactional(readOnly=true)
+    public DateInfoResponseDto alarm(Long memberId, LocalDateTime date){
+        List<DateInfoResponseDto> list =  dateInfoRepository.findByMemberIdAndAlarmCheckAndAlarmDatetimeGreaterThanEqual(memberId, true, date, Sort.by(Sort.Direction.ASC, "alarmDatetime")).stream()
+                .map(DateInfoResponseDto::new)
+                .collect(Collectors.toList());
+
+        return list.get(0);
     }
 
     // 알람 아이디 조회

@@ -3,19 +3,11 @@ package mediSsok.mediSsokspring.service;
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.config.auth.dto.SessionUser;
-import mediSsok.mediSsokspring.domain.entity.medicineBox.MedicineBox;
 import mediSsok.mediSsokspring.domain.entity.member.LinkInfo;
 import mediSsok.mediSsokspring.domain.entity.member.Member;
-import mediSsok.mediSsokspring.domain.entity.schedule.DateInfo;
-import mediSsok.mediSsokspring.domain.entity.schedule.ScheduleDate;
 import mediSsok.mediSsokspring.domain.repository.member.LinkInfoRepository;
 import mediSsok.mediSsokspring.domain.repository.member.MemberRepository;
-import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
 import mediSsok.mediSsokspring.dto.member.*;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto;
-import mediSsok.mediSsokspring.dto.schedule.ScheduleUpdateRequestDto;
-import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,7 +19,6 @@ import org.springframework.validation.FieldError;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor    //final 필드 생성자 생성
