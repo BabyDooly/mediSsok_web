@@ -913,3 +913,29 @@ increment-next {  from {
     0% {background-color: red;}
     50% {background-color: white;}
 }
+/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ clock CSS ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+.clockDate{
+    font-size: 20px;
+    font-weight: bold;
+    color : black;
+}
+.clockTime{
+    font-size: 45px;
+    font-weight: bold;
+    color: cornflowerblue;
+
+}
+ .clockIcon{
+     width: 200px;
+     height: 200px;
+     margin: 0 auto;
+     animation: shake .3s linear infinite both;
+ }
+@keyframes shake{
+    0%{transform: rotate(0deg);}
+    20%{transform: rotate(-15deg);}
+    40%{transform: rotate(15deg);}
+    60%{transform: rotate(-15deg);}
+    80%{transform: rotate(15deg);}
+    100%{transform: rotate(0deg);}
+}
