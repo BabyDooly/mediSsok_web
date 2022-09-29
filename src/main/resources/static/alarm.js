@@ -3,6 +3,7 @@ let timer;
 // 알람 시간 가져와서 체크
 function getTime(){
     let alarmDate;
+    let workAlarms;
 
     if ($(".collapse").hasClass("nav-have")){
         $.ajax({
@@ -13,12 +14,15 @@ function getTime(){
         }).done(function(json) {
             if (json.pushAlarms){
                 alarmDate = json.alarmDatetime;
+                workAlarms = json.workAlarms;
+
                 document.getElementById("alarm-box").innerHTML = json.medicineBoxName;
                 $('#eat-check').val(json.id);
 
                 timer = setInterval(function() {
-                    const now = nowTime();
-                    timeCheck(alarmDate, now);
+                    const date = nowDate();
+                    const time = nowTime()
+                    timeCheck(alarmDate, workAlarms, date, time);
                 }, 1000);
             }
         }).fail(function (error) {
@@ -27,8 +31,8 @@ function getTime(){
     }
 }
 
-// 현재 시간
-function nowTime(){
+// 현재 일정 + 시간
+function nowDate(){
     const dateNow = new Date();
     const year = dateNow.getFullYear();
     const month = dateNow.getMonth() + 1;
@@ -40,16 +44,47 @@ function nowTime(){
     return current;
 }
 
-// 알람시간, 현재 시간 비교
-function timeCheck(alarm, now){
-    console.log("알람시간: " + alarm + " 현재시간: " + now);
+// 현재 시간
+function nowTime(){
+    const dateNow = new Date();
+    const hours = dateNow.getHours();
+    const minutes = dateNow.getMinutes();
+    const current = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:00`;
 
-    if(alarm === now){
+    return current;
+}
+
+// 알람시간, 출근시간, 현재 시간 비교
+function timeCheck(alarmDate, workAlarms, date, time){
+    console.log("알람시간: " + alarmDate + " 출근시간: " + workAlarms + " 현재일정: " + date + " 현재시간: " + time);
+
+    // 알람시간
+    if(alarmDate === date){
+        $("#alarm-box").show();
+        $("#eat-check").show();
+        $("#work-box").hide();
+
         $("#alarmClock").modal('show');
         clearInterval(timer);
 
         $('#alarmClock').on('hidden.bs.modal', function (e) {
              getTime();
+        })
+    }
+
+    // 출근시간
+    if(workAlarms === time){
+        $("#alarm-box").hide();
+        $("#eat-check").hide();
+        $("#work-box").show();
+
+        $("#alarmClock").modal('show');
+        clearInterval(timer);
+
+        $('#alarmClock').on('hidden.bs.modal', function (e) {
+            setTimeout(function() {
+                getTime();
+            }, 60000);
         })
     }
 }
