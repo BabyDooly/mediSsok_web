@@ -913,7 +913,7 @@ increment-next {  from {
 }
 /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ clock CSS ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 .clockDate{
-    font-size: 30px;
+    font-size: 22px;
     font-weight: bold;
     color : black;
 }
@@ -924,10 +924,15 @@ increment-next {  from {
 
 }
  .clockIcon{
-     width: 200px;
-     height: 200px;
+     width: 280px;
+     height: 280px;
      margin: 0 auto;
      animation: shake .3s linear infinite both;
+ }
+ .clockWork {
+     font-size: 30px;
+     margin-bottom: 0px;
+     font-weight: bold;
  }
 @keyframes shake{
     0%{transform: rotate(0deg);}
