@@ -8,6 +8,7 @@ import mediSsok.mediSsokspring.domain.entity.schedule.DateInfo;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import static mediSsok.mediSsokspring.dto.schedule.ScheduleResponseDto.setTime;
 
@@ -26,6 +27,7 @@ public class DateInfoResponseDto {
     private String medicineBoxName;
     private Boolean replenishAlarms;
     private Boolean pushAlarms;
+    private LocalTime workAlarms;
     private int medCount;
 
     public DateInfoResponseDto(DateInfo entity) {
@@ -39,6 +41,7 @@ public class DateInfoResponseDto {
         this.medicineBoxName = entity.getScheduleDate().getMedicineBox().getName();
         this.replenishAlarms = entity.getMember().getReplenishAlarms();
         this.pushAlarms = entity.getMember().getPushAlarms();
+        this.workAlarms = entity.getMember().getWorkAlarms();
         this.medCount = entity.getMedicineBox().getCount();
     }
 }
