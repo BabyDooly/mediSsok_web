@@ -162,6 +162,7 @@
 .mainMidnav{
     justify-content : center;
 }
+
 .midBtn{
     padding-right:40px;
     padding-left:40px;
@@ -904,9 +905,6 @@ increment-next {  from {
     vertical-align: middle;
 }
 
-.alarmOn {
-    animation: blink 1s step-end infinite;
-}
 
 /* for Chrome, Safari */
 @-webkit-keyframes blink {
@@ -915,7 +913,7 @@ increment-next {  from {
 }
 /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ clock CSS ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 .clockDate{
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     color : black;
 }

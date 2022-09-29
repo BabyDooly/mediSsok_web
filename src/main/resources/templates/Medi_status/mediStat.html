@@ -128,6 +128,9 @@ border: 0px;background: #f8f9fa">
     </div><!-- /.container-fluid -->
 </nav>
 
+<div th:replace="clock/alarmClock :: clock"/>
+
+
 <p class="mainText2">복용현황</p>
 <p class="mainSubText">우리 가족 다같이, 건강하게 쏙</p>
 <div class="mediStatDiv">
@@ -227,6 +230,7 @@ border: 0px;background: #f8f9fa">
 <script src="/caljs/etcSetting.js"></script>
 <!-- 알람시계 js -->
 <script src="/js/clock.js"></script>
+
 
 <script>
     const element2 = document.getElementById('edit-color')

@@ -11,6 +11,7 @@ function setClock() {
     document.getElementById("clocktime").innerHTML = hour + ":" + min + ":" + sec;
     document.getElementById("clockdate").innerHTML = year + "년" + month + "월" + date + "일";
 
+    console.log(hour + ":" + min + ":" + sec)
 
         if (alarm.hasAttribute('aria-hidden') == true) {
             audio.pause();
@@ -27,7 +28,7 @@ function modifyNumber(time) {
         return time;
 }
 
-window.onload = function () {
+$(document).ready(function(){
     setClock();
     setInterval(setClock, 1000);
-}
+});

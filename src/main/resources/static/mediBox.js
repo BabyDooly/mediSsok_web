@@ -379,7 +379,3 @@ let mediBox = {
     }
 };
 mediBox.init();
-
-function gd(){
-
-}

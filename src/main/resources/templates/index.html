@@ -15,6 +15,8 @@
 
 <body>
 <div th:replace="navbar/navBar2 :: navBar2"/>
+<div th:replace="clock/alarmClock :: clock"/>
+
 <!-- 연동 수락 -->
 <div class="portfolio-modal modal fade" id="connectAccept" tabindex="-1" aria-labelledby="connectAccept"
      aria-hidden="true">
@@ -107,6 +109,7 @@
 <div style="width: 1400px;margin: 0 auto">
     <img src="/image/d.png" style="height: 700px;width: 1400px">
 </div>
+
 <div style="height: 100px"></div>
 
 <div style="background: #f7f7f7">
@@ -219,10 +222,13 @@
 <!-- bootstrp js 링크 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-<script src="/main.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/main.js"></script>
+<script src="/alarm.js"></script>
+
 <!-- 알람시계 js -->
 <script src="/js/clock.js"></script>
+
 <script>
 
     console.log($('#connectEmail').length > 0);

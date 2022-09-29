@@ -14,6 +14,6 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 public class DateInfoUpdateRequestDto {
-    @JsonFormat(pattern="HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private LocalDateTime alarmDatetime;
 }

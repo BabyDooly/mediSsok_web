@@ -21,12 +21,12 @@
 <body>
 
 <div th:replace="navbar/navBar2 :: navBar2"/>
+<div th:replace="clock/alarmClock :: clock"/>
 
 
 <!--메인 페이지-->
 <p class="mainText" th:text="${member} + '님의 약통'"></p>
 <p class="mainSubText">자주 먹는 약 정보, 내 약통에 쏙</p>
-
 
 <div class="myMediCaseDiv">
     <button onclick="plusbtn"
@@ -233,6 +233,8 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/mediBox.js"></script>
+<script src="/alarm.js"></script>
+
 <!-- 알람시계 js -->
 <script src="/js/clock.js"></script>
 

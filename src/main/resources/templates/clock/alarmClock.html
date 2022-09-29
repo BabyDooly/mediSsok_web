@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:fragment="clock">
-    <div class="portfolio-modal modal fade" id="alarmClock" tabindex="-1" aria-labelledby="alarmClock"
+    <div class="portfolio-modal modal fade alarm-modal" id="alarmClock" tabindex="-1" aria-labelledby="alarmClock"
          aria-hidden="true">
         <div class="modal-dialog" style="max-width: 1000px">
             <div class="modal-content">
@@ -23,17 +23,21 @@
                                     <img src="/image/alarm.png" style="width: 100%;height: 100%">
                                 </div>
 
-                                <div id="clocktime" class="clockTime"></div>
+                                <br>
                                 <div id="clockdate" class="clockDate"></div>
+                                <div id="clocktime" class="clockTime"></div>
 
                                 <audio id="alarmaudio" src="/audio/alarm.mp3" loop>지원 안될때 뜨는 문구</audio>
 
+                                <br>
+                                <div id="alarm-box" class="alarmBox">약통 이름</div>
+
+
                                 <br><br><br>
-                                <button class="btn btn-primary" data-bs-dismiss="modal" onclick="changeImg()"
-                                        style="width: 90px">
-                                    선택
+                                <button id="eat-check" class="btn btn-primary" data-bs-dismiss="modal" style="width: 120px" onclick="eatCheck()">
+                                    먹었어요
                                 </button>
-                                <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px">
+                                <button class="btn btn-primary" data-bs-dismiss="modal" style="width: 90px" aria-label="Close">
                                     취소
                                 </button>
 

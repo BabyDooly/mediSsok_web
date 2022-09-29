@@ -19,6 +19,8 @@
 </head>
 <body>
 <div th:replace="navbar/navBar2 :: navBar2"/>
+<div th:replace="clock/alarmClock :: clock"/>
+
 <p class="myPageText">MY PAGE</p>
 
 <div class="myPage">
@@ -378,8 +380,11 @@
 <script src="/member.js"></script>
 <!-- bootstrp js 링크 -->
 <script src="/js/bootstrap.min.js"></script>
+<script src="/alarm.js"></script>
+
 <!-- 알람시계 js -->
 <script src="/js/clock.js"></script>
+
 
 <script>
     window.onload = isChecked();
