@@ -295,9 +295,9 @@ let main = {
                         success: function (suc) {
                             console.log(suc)
 
-                            if (suc == 1)
+                            if (suc === 1)
                                 alert('이미 연동 신청한 이메일입니다.');
-                            else if (suc == 2)
+                            else if (suc === 2)
                                 alert('자기 자신 입니다.');
                             else {
                                 alert('연동을 신청 했습니다.');

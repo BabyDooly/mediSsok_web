@@ -42,7 +42,7 @@ public class Member extends BaseTimeEntity {
     private String phone;
 
     // 프로필 사진
-    @Column(name = "member_picture", length = 5)
+    @Column(name = "member_picture", length = 10)
     private String picture = "man1";
 
     // 진동모드

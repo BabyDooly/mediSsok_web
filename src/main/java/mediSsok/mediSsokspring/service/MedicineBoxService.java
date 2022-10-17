@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +27,21 @@ public class MedicineBoxService {
 
 
     /*---- 약통 ----*/
-    // 생성
+    // 약통 리스트(페이징o)
+    @Transactional(readOnly=true)
+    public Page<MedicineBoxResponseDto> findByMemberId(Long memberId, Pageable pageable){
+        return medicineBoxRepository.findByMemberId(memberId, pageable);
+    }
+
+    // 약통 리스트(페이징x)
+    @Transactional(readOnly=true)
+    public List<MedicineBoxResponseDto> findByMemberId (Long id){
+        return medicineBoxRepository.findByMemberId(id).stream()
+                .map(MedicineBoxResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    // 약통 생성
     @Transactional
     public Long mediBoxCreate(MedicineBoxSaveRequestDto requestDto) {
         Long boxId = medicineBoxRepository.save(requestDto.toEntity()).getId();
@@ -48,20 +63,6 @@ public class MedicineBoxService {
         return boxId;
     }
 
-    // 약통 리스트(페이징o)
-    @Transactional(readOnly=true)
-    public Page<MedicineBoxResponseDto> findByMemberId(Long memberId, Pageable pageable){
-        return medicineBoxRepository.findByMemberId(memberId, pageable);
-    }
-
-    // 약통 리스트(페이징x)
-    @Transactional(readOnly=true)
-    public List<MedicineBoxResponseDto> findByMemberId (Long id){
-        return medicineBoxRepository.findByMemberId(id).stream()
-                .map(MedicineBoxResponseDto::new)
-                .collect(Collectors.toList());
-    }
-
     // 약통 조회
     public MedicineBoxResponseDto findById (Long id){
         MedicineBox entity = medicineBoxRepository.findById(id)
@@ -77,7 +78,25 @@ public class MedicineBoxService {
                 // 아이디가 없을때
                 .orElseThrow(() -> new IllegalArgumentException("해당 약통이 없습니다. id = " + id));
 
+        List<MedicineList> medicineList = medicineListRepository.findByMedicineBox_Id(id);
+
+
+        for (MedicineList list: medicineList) {
+            medicineListRepository.delete(list);
+        }
+
         medicineBox.update(requestDto.getName(), requestDto.getMemo(), requestDto.getColor(), requestDto.getCount());
+
+        List<String> listDto = requestDto.getMedicineLists();
+
+        for (String list: listDto) {
+            MedicineList dto = MedicineList.builder()
+                    .name(list)
+                    .medicineBox(medicineBox)
+                    .build();
+
+            medicineListRepository.save(dto);
+        }
 
         return id;
     }

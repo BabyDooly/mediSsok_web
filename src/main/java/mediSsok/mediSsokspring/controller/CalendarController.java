@@ -2,22 +2,17 @@ package mediSsok.mediSsokspring.controller;
 
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
-import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
-import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxUpdateRequestDto;
 import mediSsok.mediSsokspring.dto.member.LinkInfoResponseDto;
 import mediSsok.mediSsokspring.dto.member.MemberResponseDto;
-import mediSsok.mediSsokspring.dto.schedule.*;
-import mediSsok.mediSsokspring.service.MedicineBoxService;
+import mediSsok.mediSsokspring.dto.schedule.CalendarResponseDto;
+import mediSsok.mediSsokspring.dto.schedule.CalendarUpdateRequestDto;
 import mediSsok.mediSsokspring.service.MemberService;
 import mediSsok.mediSsokspring.service.ScheduleDateService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller

@@ -3,6 +3,7 @@ package mediSsok.mediSsokspring.controller;
 import lombok.RequiredArgsConstructor;
 import mediSsok.mediSsokspring.config.CustomUserDetails;
 import mediSsok.mediSsokspring.dto.medicineBox.MedicineBoxResponseDto;
+import mediSsok.mediSsokspring.dto.member.LinkInfoResponseDto;
 import mediSsok.mediSsokspring.dto.member.MemberResponseDto;
 import mediSsok.mediSsokspring.dto.schedule.*;
 import mediSsok.mediSsokspring.service.MedicineBoxService;
@@ -103,7 +104,17 @@ public class ScheduleDateController {
 
         System.out.println("현재: " + now);
 
-        return scheduleDateService.alarm(userDetails.getMember().getId(), now);
+
+        // 알람이 없을때
+        if(scheduleDateService.alarm(userDetails.getMember().getId(), now) == null){
+            DateInfoResponseDto dto = DateInfoResponseDto.builder()
+                    .id(0L)
+                    .build();
+            return dto;
+        }
+        else{
+            return scheduleDateService.alarm(userDetails.getMember().getId(), now);
+        }
     }
 
     // 알람 수정(POST)

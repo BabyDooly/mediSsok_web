@@ -21,7 +21,6 @@ public class MedicineBoxResponseDto {
     private String color;
     private int count;
     private Long memberId;
-
     private List<MedicineList> medicineLists;
 
     public MedicineBoxResponseDto(MedicineBox entity) {

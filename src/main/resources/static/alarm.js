@@ -12,18 +12,23 @@ function getTime(){
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
         }).done(function(json) {
-            if (json.pushAlarms){
-                alarmDate = json.alarmDatetime;
-                workAlarms = json.workAlarms;
+            if(json.id === 0){
 
-                document.getElementById("alarm-box").innerHTML = json.medicineBoxName;
-                $('#eat-check').val(json.id);
+            }
+            else{
+                if (json.pushAlarms){
+                    alarmDate = json.alarmDatetime;
+                    workAlarms = json.workAlarms;
 
-                timer = setInterval(function() {
-                    const date = nowDate();
-                    const time = nowTime()
-                    timeCheck(alarmDate, workAlarms, date, time);
-                }, 1000);
+                    document.getElementById("alarm-box").innerHTML = json.medicineBoxName;
+                    $('#eat-check').val(json.id);
+
+                    timer = setInterval(function() {
+                        const date = nowDate();
+                        const time = nowTime()
+                        timeCheck(alarmDate, workAlarms, date, time);
+                    }, 1000);
+                }
             }
         }).fail(function (error) {
             alert(JSON.stringify(error));

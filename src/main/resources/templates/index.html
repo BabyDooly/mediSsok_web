@@ -5,7 +5,8 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>메인 페이지</title>
+    <title>약 쏙</title>
+    <link rel="icon" href="/image/favicon.png" sizes="128x128">
 
     <!-- bootstrap, custom css 링크 -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -103,14 +104,13 @@
         </div>
     </div>
 </div>
-<p class="mainText2" style="margin-top: 100px;margin-bottom: 0px">약과의 시간 약속 약쏙에서<br></p>
-<p class="mainSubText2" style="margin-bottom: 100px">약 복용 현황, 여러 약통의 복용법 및 약 정보 조회와 복용 알람 기능까지<br>모든 기능을 약 쏙에서 찾아보세요.
+<p class="mainText2" style="margin-top: 100px;margin-bottom: 0px">약과의 시간 약속 '약쏙'에서<br></p>
+<p class="mainSubText2" style="margin-bottom: 100px; font-size: 20px;">약 복용 현황, 여러 약통의 복용법 및 약 정보 조회와 복용 알람 기능까지<br>모든 기능을 약 쏙에서 찾아보세요.
 </p>
-<div style="width: 1400px;margin: 0 auto">
-    <img src="/image/d.png" style="height: 700px;width: 1400px">
+<div style="width: 1200px;margin: 0 auto">
+    <img src="/image/d.png" style="height: 600px;width: 1200px">
 </div>
 
-<div style="height: 100px"></div>
 
 <div style="background: #f7f7f7">
 
@@ -144,7 +144,7 @@
                  style="width: 600px;height: 500px;margin-top: 150px;margin-right: 0px;box-shadow: 0px 6px 10px 5px #d6d6d6bd;">
             <p style="font-size: 25px;font-weight: bold;margin-left: 50px;margin-top: 20px;margin-bottom: 5px">
                 자주먹는 약, 나만의 약통으로 관리 기능</p>
-            <p style="font-size: 15px;margin-left: 50px">
+            <p style="font-size: 18px;margin-left: 50px">
                 한눈에 보고, 메모하기! 편하게 알람설정을 도와주는 내 약통</p>
         </div>
 
@@ -153,7 +153,7 @@
                  style="width: 550px;height: 600px;margin-top: 150px;margin-left: 100px;box-shadow: 0px 6px 10px 5px #d6d6d6bd;">
             <p style="font-size: 25px;font-weight: bold;margin-left: 140px;margin-top: 20px;margin-bottom: 5px">
                 지정된 시간에 복용 알람 기능</p>
-            <p style="font-size: 15px;margin-left: 140px">
+            <p style="font-size: 18px;margin-left: 140px">
                 꼭 먹어야하는 약 알람으로 해결하자, 내 약 갯수도 자동으로 파악</p>
         </div>
 
@@ -162,7 +162,7 @@
                  style="width: 550px;height: 700px;margin-top: 200px;margin-right: 0px;box-shadow: 0px 6px 10px 5px #d6d6d6bd;">
             <p style="font-size: 25px;font-weight: bold;margin-left: 50px;margin-top: 20px;margin-bottom: 5px">
                 약 정보를 검색할 수 있는 검색 기능</p>
-            <p style="font-size: 15px;margin-left: 50px">
+            <p style="font-size: 18px;margin-left: 50px">
                 이 약은 무슨 약이지? 이름을 몰라도 카테고리로 검색!</p>
         </div>
 
@@ -171,7 +171,7 @@
                  style="width: 650px;height: 600px;margin-left:60px;margin-top:150px;box-shadow: 0px 6px 10px 5px #d6d6d6bd;">
             <p style="font-size: 25px;font-weight: bold;margin-left: 100px;margin-top: 20px;margin-bottom: 5px">
                 지정된 시간에 복용 알람 기능</p>
-            <p style="font-size: 15px;margin-left: 100px">
+            <p style="font-size: 18px;margin-left: 100px">
                 꼭 먹어야하는 약 알람으로 해결하자, 내 약 갯수도 자동으로 파악</p>
         </div>
     </div>
@@ -185,35 +185,35 @@
 <div style="height: 200px;width: 1400px;margin: 0 auto;">
     <div class="row g-3 align-items-center" style="text-align: center">
         <div class="col-md-4" style="height: 216px">
-            <p style="font-weight: bold;font-size: 20px">Function</p>
-            <p style="font-size: 12px;color: #505050"><a style="padding: 0px;margin-bottom: 16px"
+            <p style="font-weight: bold;font-size: 23px">Function</p>
+            <p style="font-size: 15px;color: #505050"><a style="padding: 0px;margin-bottom: 16px"
                                                          class="nav-link bottomText" aria-current="page"
                                                          th:href="@{/medi/medibox}">내 약통</a></p>
-            <p style="font-size: 12px;color: #505050"><a style="padding: 0px;margin-bottom: 16px"
+            <p style="font-size: 15px;color: #505050"><a style="padding: 0px;margin-bottom: 16px"
                                                          class="nav-link bottomText" th:href="@{/medi/bell}">오늘 알람</a>
             </p>
-            <p style="font-size: 12px;color: #505050"><a style="padding: 0px;margin-bottom: 16px"
+            <p style="font-size: 15px;color: #505050"><a style="padding: 0px;margin-bottom: 16px"
                                                          class="nav-link bottomText" th:href="@{/status}">복용 현황</a></p>
-            <p style="font-size: 12px;color: #505050"><a style="padding: 0px;margin-bottom: 16px"
+            <p style="font-size: 15px;color: #505050"><a style="padding: 0px;margin-bottom: 16px"
                                                          class="nav-link bottomText" th:href="@{/medi/search}">알약 검색</a>
             </p>
         </div>
 
         <div class="col-md-4" style="height: 216px">
-            <p style="font-weight: bold;font-size: 20px">Capstone Project</p>
-            <p style="font-size: 12px;color: #505050">약 쏙</p>
-            <p style="font-size: 12px;color: #505050">2022-05-08</p>
-            <p style="font-size: 12px;color: #505050">~</p>
-            <p style="font-size: 12px;color: #505050">2022-09-16</p>
+            <p style="font-weight: bold;font-size: 23px">Capstone Project</p>
+            <p style="font-size: 15px;color: #505050">약 쏙</p>
+            <p style="font-size: 15px;color: #505050">2022-05-08</p>
+            <p style="font-size: 15px;color: #505050">~</p>
+            <p style="font-size: 15px;color: #505050">2022-09-16</p>
 
         </div>
         <div class="col-md-4" style="height: 216px">
-            <p style="font-weight: bold;font-size: 20px">Made</p>
-            <p style="font-size: 12px;color: #505050">홍 성 주</p>
-            <p style="font-size: 12px;color: #505050">박 유 빈</p>
-            <p style="font-size: 12px;color: #505050">한 성 수</p>
-            <p style="font-size: 12px;color: #505050">이 동 진</p>
-            <p style="font-size: 12px;color: #505050">이 해 든</p>
+            <p style="font-weight: bold;font-size: 23px">Made</p>
+            <p style="font-size: 15px;color: #505050">홍 성 주</p>
+            <p style="font-size: 15px;color: #505050">박 유 빈</p>
+            <p style="font-size: 15px;color: #505050">한 성 수</p>
+            <p style="font-size: 15px;color: #505050">이 동 진</p>
+            <p style="font-size: 15px;color: #505050">이 해 든</p>
         </div>
     </div>
 </div>

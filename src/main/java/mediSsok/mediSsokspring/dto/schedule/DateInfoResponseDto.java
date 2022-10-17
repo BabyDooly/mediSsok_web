@@ -1,6 +1,7 @@
 package mediSsok.mediSsokspring.dto.schedule;
 
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,5 +44,10 @@ public class DateInfoResponseDto {
         this.pushAlarms = entity.getMember().getPushAlarms();
         this.workAlarms = entity.getMember().getWorkAlarms();
         this.medCount = entity.getMedicineBox().getCount();
+    }
+
+    @Builder
+    public DateInfoResponseDto(Long id) {
+        this.id = id;
     }
 }

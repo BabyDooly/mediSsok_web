@@ -4,7 +4,9 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>myPage</title>
+    <title>알약 정보</title>
+    <link rel="icon" href="/image/favicon.png" sizes="128x128">
+
     <!-- bootstrap, custom css 링크 -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/home.css" rel="stylesheet">
@@ -304,7 +306,8 @@
                 <a class="page-link" th:href="@{/medi/searchDetail(page=${medicines.pageable.pageNumber - 1})}" tabindex="-1">Previous</a>
             </li>
             <li class="page-item" th:classappend="${num == medicines.pageable.pageNumber + 1} ? 'active'" th:each="num : ${#numbers.sequence(startPage, endPage)}">
-                <a class="page-link" th:href="@{/medi/searchDetail(page=${num-1})}" th:text="${num}">1</a></li>
+                <a class="page-link" onclick="pageLink(this.id)" th:id="${num}" th:text="${num}">1</a>
+            </li>
 
             <li class="page-item" th:classappend="${endPage == medicines.pageable.pageNumber + 1} ? 'disabled'">
                 <a class="page-link" th:href="@{/medi/searchDetail(page=${medicines.pageable.pageNumber + 1})}">Next</a>
@@ -333,6 +336,23 @@
         return new bootstrap.Popover(popoverTriggerEl)
         trigger: 'focus';
     })
+
+    function pageLink(page){
+        var link ='http://localhost:8080/medi/searchDetail';
+
+        var sch = location.search;
+        sch = decodeURI(decodeURIComponent(sch));
+
+        var params = new URLSearchParams(sch);
+        params.set('page', page - 1);
+
+        var url = params.toString();
+        url = decodeURI(decodeURIComponent(url));
+        url = link + '?'+ url;
+
+
+        location.href=url;
+    }
 </script>
 </body>
 </html>

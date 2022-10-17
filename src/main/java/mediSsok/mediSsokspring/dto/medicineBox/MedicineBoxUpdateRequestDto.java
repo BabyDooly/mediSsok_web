@@ -18,5 +18,5 @@ public class MedicineBoxUpdateRequestDto {
     private String memo;
     private String color;
     private int count;
-    private List<MedicineList> medicineLists;
+    private List<String> medicineLists;
 }

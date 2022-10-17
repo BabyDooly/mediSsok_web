@@ -144,11 +144,25 @@ let mediBox = {
 
     // 약통 수정
     update : function (id) {
+        var ajsonArray = new Array();
+        var ajson = new Object();
+
+        for (let i = 0; i <= 7; i++) {
+            if (document.getElementsByClassName('medList')[i] != undefined && document.getElementsByClassName('medList')[i].value != "" ){
+                console.log(document.getElementsByClassName('medList')[i].value);
+                ajson = document.getElementsByClassName('medList')[i].value;
+                ajsonArray.push(ajson);
+            }
+        }
+
+        console.log(ajsonArray)
+
         let data = {
             name: $('#editMediName').val(),
             memo: $('#editMediMemo').val(),
             color: $('#editcaseColor').val(),
             count: $('#editCount').text(),
+            medicineLists: ajsonArray
         };
 
         $.ajax({

@@ -1,9 +1,6 @@
 package mediSsok.mediSsokspring.domain.entity.medicineBox;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import mediSsok.mediSsokspring.domain.BaseTimeEntity;
 
 import javax.persistence.*;
@@ -11,6 +8,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)  // 기본 생성자 자동 추가
 @Getter
 @Entity
+@ToString
 @Table(name = "medicine_list")
 public class MedicineList extends BaseTimeEntity {
     @Id

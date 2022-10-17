@@ -154,7 +154,13 @@ public class ScheduleDateService {
                 .map(DateInfoResponseDto::new)
                 .collect(Collectors.toList());
 
-        return list.get(0);
+        // 알람이 없을때
+        if (list.size() == 0){
+            return null;
+        }
+        else{
+            return list.get(0);
+        }
     }
 
     // 알람 아이디 조회
