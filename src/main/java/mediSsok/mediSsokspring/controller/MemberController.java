@@ -107,7 +107,7 @@ public class MemberController {
         model.addAttribute("member", memberDto);
         model.addAttribute("linkList", linkListDto);
 
-        return "/myPage/myPage";
+        return "myPage/myPage";
     }
 
 
