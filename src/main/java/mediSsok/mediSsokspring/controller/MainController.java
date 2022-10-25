@@ -31,7 +31,7 @@ public class MainController {
             model.addAttribute("linkList", linkCheckDto);
         }
 
-        return "/index";
+        return "index";
     }
 
     // 연동 허용(POST)

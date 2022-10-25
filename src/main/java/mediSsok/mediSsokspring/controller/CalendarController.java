@@ -46,7 +46,7 @@ public class CalendarController {
         if ((linkId == 0 && userDetails.getMember().getId() == memberId) || memberId == 0 && linkId == 0)
             memberDto = dto;
         else if(linkId == 0)
-            return "/index";
+            return "index";
         else
             memberDto = memberService.linkFindById(linkId);
 
@@ -57,7 +57,7 @@ public class CalendarController {
         if ((linkId == 0 && userDetails.getMember().getId() == memberId))
             return "redirect:/status";
         else
-            return "/Medi_status/mediStat";
+            return "Medi_status/mediStat";
     }
 
 

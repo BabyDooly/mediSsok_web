@@ -26,7 +26,7 @@ public class MedicinesController {
     // 약 검색 페이지(GET)
     @GetMapping("/medi/search")
     public String dispSearch() {
-        return "/Medi_search/mediSearch";
+        return "Medi_search/mediSearch";
     }
 
     @GetMapping("/medi/searchDetail")
@@ -43,7 +43,7 @@ public class MedicinesController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
 
-        return "/Medi_search/mediSearch";
+        return "Medi_search/mediSearch";
     }
 
     @GetMapping("/medi/info")
@@ -56,6 +56,6 @@ public class MedicinesController {
 
         model.addAttribute("medicine", medicine);
         model.addAttribute("crawling", dto);
-        return "/Medi_search/mediInfo";
+        return "Medi_search/mediInfo";
     }
 }

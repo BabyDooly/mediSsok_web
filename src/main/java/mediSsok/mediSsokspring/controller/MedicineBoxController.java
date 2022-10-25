@@ -48,7 +48,7 @@ public class MedicineBoxController {
         model.addAttribute("next", pageable.next().getPageNumber());
         model.addAttribute("hasNext", pageList.hasNext());
         model.addAttribute("hasPrev", pageList.hasPrevious());
-        return "/Medi_box/myMediBox";
+        return "Medi_box/myMediBox";
     }
 
     // 약통 상세정보 페이지(GET)
@@ -61,7 +61,7 @@ public class MedicineBoxController {
         System.out.println("디티오 : " + dto.toString());
 
         model.addAttribute("scheList", scheduleList);
-        return "/Medi_box/BoxInformation";
+        return "Medi_box/BoxInformation";
     }
 
     // 약통 리스트(JSON)

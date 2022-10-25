@@ -28,7 +28,7 @@ public class ScheduleDate extends BaseTimeEntity {
     @Column(name = "sche_startday", nullable = false)
     private LocalDateTime startday;
 
-    // 스케줄 주기 (
+    // 스케줄 주기
     @Column(name = "sche_cycle", length = 20, nullable = false)
     private int cycle;
 

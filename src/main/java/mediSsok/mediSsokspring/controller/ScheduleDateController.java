@@ -53,7 +53,7 @@ public class ScheduleDateController {
         model.addAttribute("mediBoxs", mediboxList);
         model.addAttribute("alarm", alarmList);
 
-        return "/Medi_bell/mediBell";
+        return "Medi_bell/mediBell";
     }
 
     // 스케줄 추가(POST)

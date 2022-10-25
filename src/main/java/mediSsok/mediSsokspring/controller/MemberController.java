@@ -33,7 +33,7 @@ public class MemberController {
     // 회원가입 페이지(GET)
     @GetMapping("/user/signup")
     public String dispSignup() {
-        return "/login/register";
+        return "login/register";
     }
 
     // 로그인 페이지(GET)
@@ -43,7 +43,7 @@ public class MemberController {
                         Model model) {
         model.addAttribute("error", error);
         model.addAttribute("exception", exception);
-        return "/login/login";
+        return "login/login";
     }
 
     // 회원가입 로직검사(POST)
@@ -56,12 +56,12 @@ public class MemberController {
                 model.addAttribute(key, validatorResult.get(key));
             }
             // 회원가입 페이지로 다시 리턴
-            return "/login/register";
+            return "login/register";
         }
         if (!memberDto.getPassword().equals(memberDto.getConfirm_Password())) {
             model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
             // 회원가입 페이지로 다시 리턴
-            return "/login/register";
+            return "login/register";
         } else {
             memberService.memberCreate(memberDto);
         }
@@ -78,7 +78,7 @@ public class MemberController {
     // 비밀번호 찾기 페이지(GET)
     @GetMapping("/user/forgot")
     public String dispForgot() {
-        return "/login/forgot-password";
+        return "login/forgot-password";
     }
 
     // Email이 DB에 존재하는지 체크하는 부분(POST)
